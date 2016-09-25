@@ -1,0 +1,6298 @@
+s.runSiesta: Submission time = 30s21m21h
+s.runSiesta: Job name = q32_b312_s64_n64
+s.runSiesta: Number of ranks = 64
+s.runSiesta: Number of slices = 64
+30s21m21h
+-bintype 3
+-ioptinertia 1
+-ioptleft 2
+-isglobal 0
+-roptleft -2.3
+-roptright 0.
+-writeeigs 1
+-roptbuffer 0.1
+-roptdiff 0.01
+# A chain of identical atoms (instead of an xyz file) can be specified with the following options
+#-N 10 # Number of atoms
+#-Z 8 # Atomic number
+#-c 32 # Maximum number of interactions of an atom
+
+# A petsc matrix (binary) can be given
+#-method file
+#-fA '/Volumes/s/matrices/petscbinary/graphene_xxs_A'
+#-fB '/Volumes/s/matrices/petscbinary/graphene_xxs_B'
+#-scfthresh 1.e-3
+
+#PETSc options
+
+-log_view
+#-mat_mumps_icntl_13 1 #turn off scaLAPACK for matrix inertia
+#-mat_mumps_icntl_24 1 #null pivot row detection for matrix inertia
+#-mat_mumps_icntl_23 0
+-mat_mumps_icntl_28 1
+#-mat_mumps_icntl_28 2
+#-mat_mumps_icntl_29 1 # ptscotch
+#-mat_mumps_icntl_29 2 # parmetis
+#-malloc_info
+#-mat_view ::ascii_info
+#-mat_getrow_uppertriangular 1
+#-st_type sinvert
+#-st_ksp_type preonly
+#-st_pc_type cholesky
+#-st_pc_factor_mat_solver_package mumps
+-st_pc_factor_mat_solver_package mkl_pardiso
+#SLEPc options
+#-eps_view
+#-eps_view_values
+#-eps_krylovschur_partitions 1
+-eps_krylovschur_nev 120
+-eps_interval -2.3,0.
+#-eps_tol  1.e-8
+-eps_krylovschur_detect_zeros 0
+#-eps_purify 1
+SystemName liquid_H2O_32
+SystemLabel H2O_32
+
+UseTreeTimer .true.
+DM.MixingWeight 0.3
+DM.NumberPulay 3
+
+SolutionMethod  slepc1 #slepc0 for the older method
+#SolutionMethod diagon
+#BlockSize 23
+WriteDM .false.
+WriteDM.NetCDF .false.
+WriteDMHS.NetCDF .false.
+LongOutput .false.
+#MaxSCFIterations 1
+##################################################
+# Do not change below this line                  #
+##################################################
+
+%block SuperCell
+1 0 0
+0 1 0
+0 0 1
+%endblock SuperCell
+
+NumberOfAtoms 96
+NumberOfSpecies 2
+#MaxSCFIterations 1
+
+xc.functional GGA
+xc.authors PBE 
+MeshCutoff 150.0 Ry
+
+%block ChemicalSpeciesLabel
+  1   8  O
+  2   1  H  
+%endblock ChemicalSpeciesLabel
+
+#%block AtomicMass
+#  2   2.0
+#%endblock AtomicMass
+
+%block PAO.Basis # qz+tp+dp'
+O 4
+n=2 0 4 E 50.0 8.0
+ 10.0 5.0 3.5 2.0
+n=2 1 4 E 10.0 8.0
+ 10.0 5.0 3.5 2.0
+n=3 2 3 E 40.0 9.0 Q 6.0 0.00
+ 10.0 2.0 3.0
+n=4 3 2 E 50.0 9.0 Q 17.0 0.40
+ 10.0 1.7
+H 3
+n=1 0 4 E 50.0 9.0
+ 10.0 5.0 3.5 2.0
+n=2 1 3 E 50.0 9.0 Q 3.5 0.00
+ 10.0 2.0 4.0
+n=3 2 2 E 50.0 9.0 Q 16.0 0.80
+ 10.0 2.0
+%endblock PAO.Basis
+
+LatticeConstant 9.856391407574419 Ang
+%block LatticeVectors   
+  1.0  0.0  0.0
+  0.0  1.0  0.0
+  0.0  0.0  1.0
+%endblock LatticeVectors   
+
+AtomicCoordinatesFormat NotScaledCartesianAng
+%block AtomicCoordinatesAndAtomicSpecies < coord32.data
+
+Siesta Version: siesta-trunk-492
+Architecture  : x86_64-unknown-linux-gnu--unknown
+Compiler flags: mpif90 -g -O3 -I/home/keceli/lib/petsc/include -I/home/keceli/lib/petsc/arch--gccopt/include -I/home/keceli/lib/slepc/arch-gccopt/include -I/home/keceli/lib/slepc/include -I/soft/mkl/11.1.0.080/mkl/include -I/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-5.3.0/mpich-3.2-wraqufukmp7yzyl6a644pnmda7wkg7w7/include
+PP flags      : -DMPI -DMPI_TIMING -DFC_HAVE_FLUSH -DFC_HAVE_ABORT 
+PARALLEL version
+
+* Running on   64 nodes in parallel
+>> Start of run:  23-SEP-2016  21:21:32
+
+                           ***********************       
+                           *  WELCOME TO SIESTA  *       
+                           ***********************       
+WARNING: Siesta is reading its input from file INPUT_DEBUG
+
+reinit: -----------------------------------------------------------------------
+reinit: System Name: liquid_H2O_32
+reinit: -----------------------------------------------------------------------
+reinit: System Label: H2O_32                                                      
+reinit: -----------------------------------------------------------------------
+
+initatom: Reading input for the pseudopotentials and atomic orbitals ----------
+Species number:   1 Atomic number:    8 Label: O
+Species number:   2 Atomic number:    1 Label: H
+
+Ground state valence configuration:   2s02  2p04
+Reading pseudopotential information in formatted form from O.psf
+
+Valence configuration for pseudopotential generation:
+2s( 2.00) rc: 1.14
+2p( 4.00) rc: 1.14
+3d( 0.00) rc: 1.14
+4f( 0.00) rc: 1.14
+Ground state valence configuration:   1s01
+Reading pseudopotential information in formatted form from H.psf
+
+Valence configuration for pseudopotential generation:
+1s( 0.60) rc: 1.25
+2p( 0.00) rc: 1.25
+3d( 0.00) rc: 1.25
+4f( 0.00) rc: 1.25
+For O, standard SIESTA heuristics set lmxkb to 4
+ (one more than the basis l, including polarization orbitals).
+Use PS.lmax or PS.KBprojectors blocks to override.
+Warning: For O lmxkb would have been set to 4
+Setting it to maximum value of 3 (f projector)
+For H, standard SIESTA heuristics set lmxkb to 3
+ (one more than the basis l, including polarization orbitals).
+Use PS.lmax or PS.KBprojectors blocks to override.
+
+<basis_specs>
+===============================================================================
+O                    Z=   8    Mass=  16.000        Charge= 0.17977+309
+Lmxo=3 Lmxkb= 3    BasisType=split      Semic=F
+L=0  Nsemic=0  Cnfigmx=2
+          n=1  nzeta=4  polorb=0
+            splnorm:   0.15000    
+               vcte:    50.000    
+               rinn:    8.0000    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    10.000      5.0000      3.5000      2.0000    
+            lambdas:    1.0000      1.0000      1.0000      1.0000    
+L=1  Nsemic=0  Cnfigmx=2
+          n=1  nzeta=4  polorb=0
+            splnorm:   0.15000    
+               vcte:    10.000    
+               rinn:    8.0000    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    10.000      5.0000      3.5000      2.0000    
+            lambdas:    1.0000      1.0000      1.0000      1.0000    
+L=2  Nsemic=0  Cnfigmx=3
+          n=1  nzeta=3  polorb=0
+            splnorm:   0.15000    
+               vcte:    40.000    
+               rinn:    9.0000    
+               qcoe:    6.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    10.000      2.0000      3.0000    
+            lambdas:    1.0000      1.0000      1.0000    
+L=3  Nsemic=0  Cnfigmx=4
+          n=1  nzeta=2  polorb=0
+            splnorm:   0.15000    
+               vcte:    50.000    
+               rinn:    9.0000    
+               qcoe:    17.000    
+               qyuk:   0.40000    
+               qwid:   0.10000E-01
+                rcs:    10.000      1.7000    
+            lambdas:    1.0000      1.0000    
+-------------------------------------------------------------------------------
+L=0  Nkbl=1  erefs: 0.17977+309
+L=1  Nkbl=1  erefs: 0.17977+309
+L=2  Nkbl=1  erefs: 0.17977+309
+L=3  Nkbl=1  erefs: 0.17977+309
+===============================================================================
+</basis_specs>
+
+atom: Called for O                     (Z =   8)
+
+read_vps: Pseudopotential generation method:
+read_vps: ATM3      Troullier-Martins                       
+Total valence charge:    6.00000
+
+read_vps: Pseudopotential includes a core correction:
+read_vps: Pseudo-core for xc-correction
+
+xc_check: Exchange-correlation functional:
+xc_check: GGA Perdew, Burke & Ernzerhof 1996
+V l=0 = -2*Zval/r beyond r=  1.1278
+V l=1 = -2*Zval/r beyond r=  1.1278
+V l=2 = -2*Zval/r beyond r=  1.1278
+V l=3 = -2*Zval/r beyond r=  1.1278
+All V_l potentials equal beyond r=  1.1278
+This should be close to max(r_c) in ps generation
+All pots = -2*Zval/r beyond r=  1.1278
+
+VLOCAL1: 99.0% of the norm of Vloc inside     34.126 Ry
+VLOCAL1: 99.9% of the norm of Vloc inside     77.774 Ry
+atom: Maximum radius for 4*pi*r*r*local-pseudopot. charge    1.37759
+atom: Maximum radius for r*vlocal+2*Zval:    1.18566
+GHOST: No ghost state for L =  0
+GHOST: No ghost state for L =  1
+GHOST: No ghost state for L =  2
+GHOST: No ghost state for L =  3
+
+KBgen: Kleinman-Bylander projectors: 
+   l= 0   rc=  1.262145   el= -1.757696   Ekb=  9.253654   kbcos=  0.328369
+   l= 1   rc=  1.262145   el= -0.664256   Ekb= -7.897175   kbcos= -0.393093
+   l= 2   rc=  1.343567   el=  0.002031   Ekb= -1.922379   kbcos= -0.003517
+   l= 3   rc=  1.394919   el=  0.003153   Ekb= -0.738278   kbcos= -0.000358
+
+KBgen: Total number of  Kleinman-Bylander projectors:   16
+atom: -------------------------------------------------------------------------
+
+atom: SANKEY-TYPE ORBITALS:
+atom: Selected multiple-zeta basis: split     
+
+SPLIT: Orbitals with angular momentum L= 0
+
+SPLIT: Basis orbitals for state 2s
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =   10.181049
+                 energy =   -1.757767
+                kinetic =    1.546187
+    potential(screened) =   -3.303954
+       potential(ionic) =  -11.175858
+
+   izeta = 2
+                 rmatch =    5.055603
+              splitnorm =    0.001043
+                 energy =   -1.756217
+* WARNING: effective split_norm is quite small. Orbitals will be very similar.
+                kinetic =    1.590301
+    potential(screened) =   -3.346518
+       potential(ionic) =  -11.267994
+
+   izeta = 3
+                 rmatch =    3.562532
+              splitnorm =    0.023118
+                 energy =   -1.724097
+* WARNING: effective split_norm is quite small. Orbitals will be very similar.
+                kinetic =    1.812689
+    potential(screened) =   -3.536786
+       potential(ionic) =  -11.661476
+
+   izeta = 4
+                 rmatch =    2.004519
+              splitnorm =    0.368983
+                 energy =   -0.954778
+                kinetic =    3.368396
+    potential(screened) =   -4.323174
+       potential(ionic) =  -13.178438
+
+SPLIT: Orbitals with angular momentum L= 1
+
+SPLIT: Basis orbitals for state 2p
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =   10.181049
+                 energy =   -0.664314
+                kinetic =    4.714332
+    potential(screened) =   -5.378647
+       potential(ionic) =  -12.967201
+
+   izeta = 2
+                 rmatch =    5.055603
+              splitnorm =    0.008251
+                 energy =   -0.656950
+* WARNING: effective split_norm is quite small. Orbitals will be very similar.
+                kinetic =    4.990409
+    potential(screened) =   -5.647359
+       potential(ionic) =  -13.410842
+
+   izeta = 3
+                 rmatch =    3.562532
+              splitnorm =    0.055493
+                 energy =   -0.601809
+                kinetic =    5.759592
+    potential(screened) =   -6.361401
+       potential(ionic) =  -14.486952
+
+   izeta = 4
+                 rmatch =    2.004519
+              splitnorm =    0.336744
+                 energy =    0.137909
+                kinetic =    9.626817
+    potential(screened) =   -9.488908
+       potential(ionic) =  -18.577571
+
+SPLIT: Orbitals with angular momentum L= 2
+
+SPLIT: Basis orbitals for state 3d
+Charge confinement: Q:     6.0000
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =   10.181049
+                 energy =    2.007653
+                kinetic =    3.859620
+    potential(screened) =   -1.851967
+       potential(ionic) =   -7.803212
+
+   izeta = 2
+                 rmatch =    2.004519
+              splitnorm =    0.637208
+                 energy =    6.650039
+                kinetic =   11.560126
+    potential(screened) =   -4.910087
+       potential(ionic) =  -13.161977
+
+   izeta = 3
+                 rmatch =    2.990543
+              splitnorm =    0.263953
+                 energy =    3.559882
+                kinetic =    6.528543
+    potential(screened) =   -2.968661
+       potential(ionic) =  -10.107962
+
+SPLIT: Orbitals with angular momentum L= 3
+
+SPLIT: Basis orbitals for state 4f
+Charge confinement: Q:    17.0000
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =   10.181049
+                 energy =    4.609453
+                kinetic =    6.179676
+    potential(screened) =   -1.570223
+       potential(ionic) =   -7.410991
+
+   izeta = 2
+                 rmatch =    1.725262
+              splitnorm =    0.752552
+                 energy =   15.780374
+                kinetic =   20.445907
+    potential(screened) =   -4.665533
+       potential(ionic) =  -12.986389
+atom: Total number of Sankey-type orbitals: 45
+
+atm_pop: Valence configuration (for local Pseudopot. screening):
+ 2s( 2.00)                                                            
+ 2p( 4.00)                                                            
+ 3d( 0.00)                                                            
+ 4f( 0.00)                                                            
+Vna: chval, zval:    6.00000   6.00000
+
+Vna:  Cut-off radius for the neutral-atom potential:  10.181049
+comcore: Pseudo-core radius Rcore=  1.377587
+
+atom: _________________________________________________________________________
+
+<basis_specs>
+===============================================================================
+H                    Z=   1    Mass=  1.0100        Charge= 0.17977+309
+Lmxo=2 Lmxkb= 3    BasisType=split      Semic=F
+L=0  Nsemic=0  Cnfigmx=1
+          n=1  nzeta=4  polorb=0
+            splnorm:   0.15000    
+               vcte:    50.000    
+               rinn:    9.0000    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    10.000      5.0000      3.5000      2.0000    
+            lambdas:    1.0000      1.0000      1.0000      1.0000    
+L=1  Nsemic=0  Cnfigmx=2
+          n=1  nzeta=3  polorb=0
+            splnorm:   0.15000    
+               vcte:    50.000    
+               rinn:    9.0000    
+               qcoe:    3.5000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    10.000      2.0000      4.0000    
+            lambdas:    1.0000      1.0000      1.0000    
+L=2  Nsemic=0  Cnfigmx=3
+          n=1  nzeta=2  polorb=0
+            splnorm:   0.15000    
+               vcte:    50.000    
+               rinn:    9.0000    
+               qcoe:    16.000    
+               qyuk:   0.80000    
+               qwid:   0.10000E-01
+                rcs:    10.000      2.0000    
+            lambdas:    1.0000      1.0000    
+-------------------------------------------------------------------------------
+L=0  Nkbl=1  erefs: 0.17977+309
+L=1  Nkbl=1  erefs: 0.17977+309
+L=2  Nkbl=1  erefs: 0.17977+309
+L=3  Nkbl=1  erefs: 0.17977+309
+===============================================================================
+</basis_specs>
+
+atom: Called for H                     (Z =   1)
+
+read_vps: Pseudopotential generation method:
+read_vps: ATM 3.2.2 Troullier-Martins                       
+Total valence charge:    0.60000
+
+atom: Pseudopotential generated from an ionic configuration
+atom: with net charge 0.40
+
+xc_check: Exchange-correlation functional:
+xc_check: GGA Perdew, Burke & Ernzerhof 1996
+xc_check: WARNING: Pseudopotential generated with GGA revPBE functional
+V l=0 = -2*Zval/r beyond r=  1.2343
+V l=1 = -2*Zval/r beyond r=  1.2189
+V l=2 = -2*Zval/r beyond r=  1.2189
+V l=3 = -2*Zval/r beyond r=  1.2038
+All V_l potentials equal beyond r=  1.2343
+This should be close to max(r_c) in ps generation
+All pots = -2*Zval/r beyond r=  1.2343
+
+VLOCAL1: 99.0% of the norm of Vloc inside     28.493 Ry
+VLOCAL1: 99.9% of the norm of Vloc inside     64.935 Ry
+atom: Maximum radius for 4*pi*r*r*local-pseudopot. charge    1.45251
+atom: Maximum radius for r*vlocal+2*Zval:    1.21892
+GHOST: No ghost state for L =  0
+GHOST: No ghost state for L =  1
+GHOST: No ghost state for L =  2
+GHOST: No ghost state for L =  3
+
+KBgen: Kleinman-Bylander projectors: 
+   l= 0   rc=  1.364359   el= -0.835481   Ekb= -2.050473   kbcos= -0.374935
+   l= 1   rc=  1.434438   el= -0.083696   Ekb= -0.439790   kbcos= -0.040392
+   l= 2   rc=  1.470814   el= -0.018512   Ekb= -0.135383   kbcos= -0.004767
+   l= 3   rc=  1.508111   el= -0.010355   Ekb= -0.058408   kbcos= -0.000784
+
+KBgen: Total number of  Kleinman-Bylander projectors:   16
+atom: -------------------------------------------------------------------------
+
+atom: SANKEY-TYPE ORBITALS:
+atom: Selected multiple-zeta basis: split     
+
+atom: basis set generated from the ionic configuration used
+atom: to generate the pseudopotential
+
+SPLIT: Orbitals with angular momentum L= 0
+
+SPLIT: Basis orbitals for state 1s
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    9.971704
+                 energy =   -0.835496
+                kinetic =    1.039073
+    potential(screened) =   -1.874569
+       potential(ionic) =   -2.037700
+
+   izeta = 2
+                 rmatch =    5.075940
+              splitnorm =    0.029735
+                 energy =   -0.816789
+* WARNING: effective split_norm is quite small. Orbitals will be very similar.
+                kinetic =    1.252128
+    potential(screened) =   -2.068916
+       potential(ionic) =   -2.226196
+
+   izeta = 3
+                 rmatch =    3.487864
+              splitnorm =    0.176430
+                 energy =   -0.691872
+                kinetic =    1.782572
+    potential(screened) =   -2.474444
+       potential(ionic) =   -2.615176
+
+   izeta = 4
+                 rmatch =    2.011274
+              splitnorm =    0.598000
+                 energy =    0.301433
+                kinetic =    3.884637
+    potential(screened) =   -3.583203
+       potential(ionic) =   -3.672637
+
+SPLIT: Orbitals with angular momentum L= 1
+
+SPLIT: Basis orbitals for state 2p
+Charge confinement: Q:     3.5000
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    9.971704
+                 energy =    0.711778
+                kinetic =    1.888566
+    potential(screened) =   -1.176788
+       potential(ionic) =   -1.368090
+
+   izeta = 2
+                 rmatch =    2.011274
+              splitnorm =    0.691729
+                 energy =    4.504307
+                kinetic =    6.792143
+    potential(screened) =   -2.287836
+       potential(ionic) =   -2.425880
+
+   izeta = 3
+                 rmatch =    4.052721
+              splitnorm =    0.089367
+                 energy =    1.150580
+                kinetic =    2.529067
+    potential(screened) =   -1.378487
+       potential(ionic) =   -1.566684
+
+SPLIT: Orbitals with angular momentum L= 2
+
+SPLIT: Basis orbitals for state 3d
+Charge confinement: Q:    16.0000
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    9.971704
+                 energy =    3.555650
+                kinetic =    4.803510
+    potential(screened) =   -1.247860
+       potential(ionic) =   -1.438034
+
+   izeta = 2
+                 rmatch =    2.011274
+              splitnorm =    0.525433
+                 energy =    9.861824
+                kinetic =   11.896576
+    potential(screened) =   -2.034751
+       potential(ionic) =   -2.186933
+atom: Total number of Sankey-type orbitals: 23
+
+atm_pop: Valence configuration (for local Pseudopot. screening):
+ 1s( 1.00)                                                            
+ 2p( 0.00)                                                            
+ 3d( 0.00)                                                            
+Vna: chval, zval:    1.00000   1.00000
+
+Vna:  Cut-off radius for the neutral-atom potential:   9.971704
+
+atom: _________________________________________________________________________
+
+prinput: Basis input ----------------------------------------------------------
+
+PAO.BasisType split     
+
+%block ChemicalSpeciesLabel
+    1    8 O                       # Species index, atomic number, species label
+    2    1 H                       # Species index, atomic number, species label
+%endblock ChemicalSpeciesLabel
+
+%block PAO.Basis                 # Define Basis set
+O                     4                    # Species label, number of l-shells
+ n=2   0   4                         # n, l, Nzeta 
+  10.181      5.056      3.563      2.005   
+   1.000      1.000      1.000      1.000   
+ n=2   1   4                         # n, l, Nzeta 
+  10.181      5.056      3.563      2.005   
+   1.000      1.000      1.000      1.000   
+ n=3   2   3                         # n, l, Nzeta 
+  10.181      2.005      2.991   
+   1.000      1.000      1.000   
+ n=4   3   2                         # n, l, Nzeta 
+  10.181      1.725   
+   1.000      1.000   
+H                     3   0.400            # Label, l-shells, ionic net charge
+ n=1   0   4                         # n, l, Nzeta 
+   9.972      5.076      3.488      2.011   
+   1.000      1.000      1.000      1.000   
+ n=2   1   3                         # n, l, Nzeta 
+   9.972      2.011      4.053   
+   1.000      1.000      1.000   
+ n=3   2   2                         # n, l, Nzeta 
+   9.972      2.011   
+   1.000      1.000   
+%endblock PAO.Basis
+
+prinput: ----------------------------------------------------------------------
+
+coor:   Atomic-coordinates input format  =     Cartesian coordinates
+coor:                                          (in Angstroms)
+
+siesta: Atomic coordinates (Bohr) and species
+siesta:      3.11805   4.32747  14.55090  1        1
+siesta:      2.19208   4.72432  16.06268  2        2
+siesta:      1.88973   3.53379  13.47375  2        3
+siesta:      9.78879  17.85792  16.42173  1        4
+siesta:      8.31480  18.12248  15.40127  2        5
+siesta:      9.69430  16.11937  16.91306  2        6
+siesta:     12.94463   8.91951   5.14006  1        7
+siesta:     12.90683   8.35259   3.42041  2        8
+siesta:     14.45641   8.20141   5.82036  2        9
+siesta:     10.58247   7.14317  18.42484  1       10
+siesta:      9.95886   7.06758  16.72408  2       11
+siesta:      9.08959   7.23765  19.42639  2       12
+siesta:      0.66140   8.93841  13.68162  1       13
+siesta:     -0.98266   9.67540  13.66273  2       14
+siesta:      0.49133   7.46442  14.70208  2       15
+siesta:      5.74477   0.49133  12.62338  1       16
+siesta:      7.23765   0.73699  11.62182  2       17
+siesta:      5.27234   2.15429  13.15250  2       18
+siesta:      1.37950  17.76343  18.16028  1       19
+siesta:     -0.05669  16.70519  17.85792  2       20
+siesta:      1.09604  18.48153  19.78544  2       21
+siesta:     11.50844  13.81390   5.53690  1       22
+siesta:      9.76989  13.62493   5.02667  2       23
+siesta:     12.01866  12.15094   6.00933  2       24
+siesta:     12.98242  15.26899  10.31791  1       25
+siesta:     13.88949  13.88949  11.01711  2       26
+siesta:     12.43440  14.66428   8.69274  2       27
+siesta:      2.57003   6.84081   9.41084  1       28
+siesta:      4.19519   6.31169  10.01555  2       29
+siesta:      1.68186   7.36993  10.90372  2       30
+siesta:      5.38572   1.02045   3.25033  1       31
+siesta:      4.95108   1.54958   1.56847  2       32
+siesta:      3.77945   0.86927   4.10071  2       33
+siesta:      5.76367  14.32413   3.81725  1       34
+siesta:      5.99043  16.10047   3.49599  2       35
+siesta:      5.63139  14.19185   5.61249  2       36
+siesta:      5.82036   9.78879  15.51466  1       37
+siesta:      5.17785  10.37460  17.10203  2       38
+siesta:      4.36527   9.75099  14.41862  2       39
+siesta:     12.11315   4.72432  12.98242  1       40
+siesta:     12.03756   2.92908  13.26588  2       41
+siesta:     13.85170   5.06447  12.60448  2       42
+siesta:     14.47531   0.00000   4.08181  1       43
+siesta:     12.79345  -0.37795   4.62983  2       44
+siesta:     14.22964   1.02045   2.60782  2       45
+siesta:      9.22187  10.69585  11.69741  1       46
+siesta:      8.18252  10.26122  13.11470  2       47
+siesta:      9.54312   9.10848  10.86593  2       48
+siesta:      2.92908  11.11159   1.28501  1       49
+siesta:      3.83615  12.39661   2.15429  2       50
+siesta:      1.19053  11.58403   1.45509  2       51
+siesta:      2.70231  15.11782  14.17295  1       52
+siesta:      1.75745  13.88949  15.09892  2       53
+siesta:      2.55113  16.62960  15.17451  2       54
+siesta:     15.28789  14.17295  17.02644  1       55
+siesta:     15.81701  13.88949  18.72719  2       56
+siesta:     13.85170  15.25010  17.17762  2       57
+siesta:     17.49887   5.10226  -0.26456  1       58
+siesta:     17.57446   5.29124   1.53068  2       59
+siesta:     15.94929   4.19519  -0.54802  2       60
+siesta:      6.55735   7.21876   2.79680  1       61
+siesta:      5.55580   8.73054   2.85349  2       62
+siesta:      5.36682   5.87705   3.11805  2       63
+siesta:      0.03779   7.19986   4.72432  1       64
+siesta:      0.64251   7.42663   6.40617  2       65
+siesta:      1.36060   7.88016   3.68497  2       66
+siesta:     17.23431   2.66451  11.28167  1       67
+siesta:     17.76343   0.94486  11.01711  2       68
+siesta:     17.04534   3.34482   9.59981  2       69
+siesta:      7.95575   5.68808  10.16673  1       70
+siesta:      9.31635   5.31013  11.30057  2       71
+siesta:      8.01244   4.36527   8.93841  2       72
+siesta:     16.83747  13.54934   3.55269  1       73
+siesta:     15.23120  13.47375   4.38417  2       74
+siesta:     17.85792  14.56979   4.62983  2       75
+siesta:     17.97130  16.00599   9.92107  1       76
+siesta:     18.95396  15.68473  11.39505  2       77
+siesta:     16.25165  15.94929  10.50688  2       78
+siesta:     14.17295  10.84703  13.00132  1       79
+siesta:     14.39972  12.20764  14.17295  2       80
+siesta:     12.39661  10.82814  12.68007  2       81
+siesta:      9.01400   0.69920   6.78412  1       82
+siesta:      8.42818  -0.83148   7.54001  2       83
+siesta:      8.08803   0.83148   5.23454  2       84
+siesta:      6.02823  14.58869   9.16518  1       85
+siesta:      7.14317  13.22809   9.63761  2       86
+siesta:      5.78256  15.51466  10.69585  2       87
+siesta:      0.77479  18.50043   5.53690  1       88
+siesta:      0.56692  17.82012   7.19986  2       89
+siesta:     -0.90707  18.65160   4.89439  2       90
+siesta:     13.03912   2.70231  18.31145  1       91
+siesta:     11.98087   4.15740  18.27366  2       92
+siesta:     11.99977   1.34171  17.72564  2       93
+siesta:      9.63761  12.92573  17.66895  1       94
+siesta:      8.18252  12.26433  16.83747  2       95
+siesta:     10.48798  11.45174  18.31145  2       96
+
+siesta: System type = bulk      
+
+initatomlists: Number of atoms, orbitals, and projectors:     96  2912  1536
+
+siesta: ******************** Simulation parameters ****************************
+siesta:
+siesta: The following are some of the parameters of the simulation.
+siesta: A complete list of the parameters used, including default values,
+siesta: can be found in file out.fdf
+siesta:
+redata: Non-Collinear-spin run           =     F
+redata: SpinPolarized (Up/Down) run      =     F
+redata: Number of spin components        =     1
+redata: Long output                      =     F
+redata: Number of Atomic Species         =        2
+redata: Charge density info will appear in .RHO file
+redata: Write Mulliken Pop.              =     NO
+redata: Mesh Cutoff                      =   150.0000  Ry
+redata: Net charge of the system         =     0.0000 |e|
+redata: Min. number of SCF Iter          =        0
+redata: Max. number of SCF Iter          =       50
+redata: Mix DM or H after convergence    =     F
+redata: Recompute H after scf cycle      =     F
+redata: Performing Pulay mixing using    =     3 iterations
+redata: Mix DM in first SCF step ?       =     F
+redata: Write Pulay info on disk?        =     F
+redata: Discard 1st Pulay DM after  kick =     F
+redata: New DM Mixing Weight             =     0.3000
+redata: New DM Occupancy tolerance       = 0.000000000001
+redata: No kicks to SCF
+redata: DM Mixing Weight for Kicks       =     0.5000
+redata: DM Tolerance for SCF             =     0.000100
+redata: Require (free) Energy convergence in SCF =     F
+redata: DM (free)Energy tolerance for SCF =     0.000010 eV
+redata: Require Harris convergence for SCF =     F
+redata: DM Harris energy tolerance for SCF =     0.000010 eV
+redata: Using Saved Data (generic)   =     F
+redata: Use continuation files for DM    =     F
+redata: Neglect nonoverlap interactions  =     F
+redata: Method of Calculation            =     old SLEPc
+redata: Fix the spin of the system       =     F
+redata: Dynamics option                  =     Single-point calculation
+redata: ***********************************************************************
+Total number of electrons:   256.000000
+Total ionic charge:   256.000000
+
+* ProcessorY, Blocksize:    8  46
+
+
+* Orbital distribution balance (max,min):    46    14
+
+ Kpoints in:            1 . Kpoints trimmed:            1
+
+siesta: k-grid: Number of k-points =     1
+siesta: k-grid: Cutoff (effective) =     4.928 Ang
+siesta: k-grid: Supercell and displacements
+siesta: k-grid:    1   0   0      0.000
+siesta: k-grid:    0   1   0      0.000
+siesta: k-grid:    0   0   1      0.000
+
+                     ====================================
+                        Single-point calculation
+                     ====================================
+
+outcell: Unit cell vectors (Ang):
+        9.856391    0.000000    0.000000
+        0.000000    9.856391    0.000000
+        0.000000    0.000000    9.856391
+
+outcell: Cell vector modules (Ang)   :    9.856391    9.856391    9.856391
+outcell: Cell angles (23,13,12) (deg):     90.0000     90.0000     90.0000
+outcell: Cell volume (Ang**3)        :    957.5332
+ Folding of H and S is implicitly performed
+New_DM. Step:     1
+Initializing Density Matrix...
+New grid distribution:   1
+           1       1:   40    1:    5    1:    5
+           2       1:   40    1:    5    6:   10
+           3       1:   40    1:    5   11:   15
+           4       1:   40    1:    5   16:   20
+           5       1:   40    1:    5   21:   25
+           6       1:   40    1:    5   26:   30
+           7       1:   40    1:    5   31:   35
+           8       1:   40    1:    5   36:   40
+           9       1:   40    6:   10    1:    5
+          10       1:   40    6:   10    6:   10
+          11       1:   40    6:   10   11:   15
+          12       1:   40    6:   10   16:   20
+          13       1:   40    6:   10   21:   25
+          14       1:   40    6:   10   26:   30
+          15       1:   40    6:   10   31:   35
+          16       1:   40    6:   10   36:   40
+          17       1:   40   11:   15    1:    5
+          18       1:   40   11:   15    6:   10
+          19       1:   40   11:   15   11:   15
+          20       1:   40   11:   15   16:   20
+          21       1:   40   11:   15   21:   25
+          22       1:   40   11:   15   26:   30
+          23       1:   40   11:   15   31:   35
+          24       1:   40   11:   15   36:   40
+          25       1:   40   16:   20    1:    5
+          26       1:   40   16:   20    6:   10
+          27       1:   40   16:   20   11:   15
+          28       1:   40   16:   20   16:   20
+          29       1:   40   16:   20   21:   25
+          30       1:   40   16:   20   26:   30
+          31       1:   40   16:   20   31:   35
+          32       1:   40   16:   20   36:   40
+          33       1:   40   21:   25    1:    5
+          34       1:   40   21:   25    6:   10
+          35       1:   40   21:   25   11:   15
+          36       1:   40   21:   25   16:   20
+          37       1:   40   21:   25   21:   25
+          38       1:   40   21:   25   26:   30
+          39       1:   40   21:   25   31:   35
+          40       1:   40   21:   25   36:   40
+          41       1:   40   26:   30    1:    5
+          42       1:   40   26:   30    6:   10
+          43       1:   40   26:   30   11:   15
+          44       1:   40   26:   30   16:   20
+          45       1:   40   26:   30   21:   25
+          46       1:   40   26:   30   26:   30
+          47       1:   40   26:   30   31:   35
+          48       1:   40   26:   30   36:   40
+          49       1:   40   31:   35    1:    5
+          50       1:   40   31:   35    6:   10
+          51       1:   40   31:   35   11:   15
+          52       1:   40   31:   35   16:   20
+          53       1:   40   31:   35   21:   25
+          54       1:   40   31:   35   26:   30
+          55       1:   40   31:   35   31:   35
+          56       1:   40   31:   35   36:   40
+          57       1:   40   36:   40    1:    5
+          58       1:   40   36:   40    6:   10
+          59       1:   40   36:   40   11:   15
+          60       1:   40   36:   40   16:   20
+          61       1:   40   36:   40   21:   25
+          62       1:   40   36:   40   26:   30
+          63       1:   40   36:   40   31:   35
+          64       1:   40   36:   40   36:   40
+
+InitMesh: MESH =    80 x    80 x    80 =      512000
+InitMesh: (bp) =    40 x    40 x    40 =       64000
+InitMesh: Mesh cutoff (required, used) =   150.000   182.073 Ry
+ExtMesh (bp) on 0 =   128 x    93 x    93 =     1107072
+New grid distribution:   2
+           1      11:   20   11:   21   21:   30
+           2      11:   20    1:   10   21:   30
+           3      21:   30    1:   10    1:   10
+           4      21:   29   31:   40   31:   40
+           5       1:   10   11:   21   31:   40
+           6      31:   40    1:   10    1:   10
+           7      11:   20    1:   10   31:   40
+           8      21:   30   22:   30   21:   30
+           9       1:   10   11:   21   21:   30
+          10       1:   10    1:   10   21:   30
+          11      31:   40    1:   10   11:   20
+          12      31:   40   22:   30   21:   30
+          13      21:   30   11:   21   21:   30
+          14      21:   30    1:   10   11:   20
+          15       1:   10    1:   10   31:   40
+          16      21:   30   22:   30    1:   10
+          17      21:   30   11:   21    1:   10
+          18      31:   40   22:   30    1:   10
+          19      31:   40   11:   21   11:   20
+          20      11:   20   12:   21   11:   20
+          21      21:   30    1:   10   31:   40
+          22      31:   40   31:   40    1:   10
+          23      21:   30   11:   21   31:   40
+          24      21:   30   32:   40   11:   20
+          25      31:   40   11:   21    1:   10
+          26      11:   20   22:   31   31:   40
+          27       1:   10   12:   21   11:   20
+          28       1:   10   32:   40    1:   10
+          29      31:   40   11:   21   21:   30
+          30      31:   40    1:   10   31:   40
+          31      21:   30   22:   31   11:   20
+          32      11:   20   32:   40   21:   30
+          33      31:   40    1:   10   21:   30
+          34       1:   10   22:   31    1:   10
+          35      21:   30   11:   21   11:   20
+          36       1:   10   32:   40   11:   20
+          37       1:   10   22:   31   21:   30
+          38      21:   30   31:   40    1:   10
+          39      31:   40   11:   21   31:   40
+          40      21:   30   22:   30   31:   40
+          41      11:   20   11:   21   31:   40
+          42      21:   30    1:   10   21:   30
+          43       1:   10   22:   31   11:   20
+          44      11:   20   32:   40    1:   10
+          45       1:   10    1:   11   11:   20
+          46      11:   20   22:   31   21:   30
+          47       1:   10    1:   10    1:   10
+          48      31:   40   22:   30   31:   40
+          49      11:   20   11:   21    1:   10
+          50       1:   10   22:   31   31:   40
+          51      11:   20   22:   31   11:   20
+          52      31:   40   32:   40   11:   20
+          53      11:   20    1:   11   11:   20
+          54      31:   40   31:   40   21:   30
+          55      31:   40   22:   31   11:   20
+          56      11:   20   32:   40   31:   40
+          57       1:   10   11:   21    1:   10
+          58      11:   20   22:   31    1:   10
+          59      11:   20    1:   10    1:   10
+          60      11:   20   32:   40   11:   20
+          61      21:   30   31:   40   21:   30
+          62       1:   10   32:   40   21:   30
+          63      30:   40   31:   40   31:   40
+          64       1:   10   32:   40   31:   40
+New grid distribution:   3
+           1      21:   30   11:   20   31:   40
+           2      21:   30   31:   40   31:   40
+           3      21:   30   11:   20    1:   10
+           4      21:   30   31:   40    1:   10
+           5      21:   30    1:   10   21:   30
+           6      31:   40   31:   40   31:   40
+           7      31:   40   11:   20    1:   10
+           8      31:   40   31:   40    1:   10
+           9      31:   40   11:   20   31:   40
+          10      21:   30   21:   30   31:   40
+          11      21:   30    1:   10    1:   10
+          12      21:   30   21:   30    1:   10
+          13      31:   40    1:   10   21:   30
+          14      31:   40   21:   30   31:   40
+          15      31:   40    1:   10    1:   10
+          16      31:   40   21:   30    1:   10
+          17      21:   30    1:   10   31:   40
+          18       1:   10   31:   40   21:   30
+          19      21:   30   11:   20   11:   20
+          20       1:   10   31:   40    1:   10
+          21      21:   30   11:   20   21:   30
+          22      11:   20   31:   40   21:   30
+          23      21:   30    1:   10   11:   20
+          24      11:   20   31:   40    1:   10
+          25      31:   40    1:   10   31:   40
+          26       1:   10   21:   30   21:   30
+          27      31:   40   11:   20   11:   20
+          28       1:   10   21:   30    1:   10
+          29      31:   40   11:   20   21:   30
+          30      11:   20   21:   30   21:   30
+          31      31:   40    1:   10   11:   20
+          32      11:   20   21:   30    1:   10
+          33       1:   10   11:   20   21:   30
+          34       1:   10   31:   40   31:   40
+          35       1:   10   11:   20    1:   10
+          36      21:   30   21:   30   11:   20
+          37      11:   20   11:   20   21:   30
+          38      21:   30   21:   30   21:   30
+          39      11:   20   11:   20    1:   10
+          40       1:   10   31:   40   11:   20
+          41       1:   10    1:   10   21:   30
+          42      11:   20   31:   40   31:   40
+          43       1:   10    1:   10    1:   10
+          44      31:   40   21:   30   11:   20
+          45      11:   20    1:   10   21:   30
+          46      31:   40   21:   30   21:   30
+          47      11:   20    1:   10    1:   10
+          48      11:   20   31:   40   11:   20
+          49       1:   10   11:   20   31:   40
+          50       1:   10   21:   30   31:   40
+          51       1:   10   11:   20   11:   20
+          52      21:   30   31:   40   11:   20
+          53      11:   20   11:   20   31:   40
+          54      21:   30   31:   40   21:   30
+          55      11:   20   11:   20   11:   20
+          56       1:   10   21:   30   11:   20
+          57       1:   10    1:   10   31:   40
+          58      11:   20   21:   30   31:   40
+          59       1:   10    1:   10   11:   20
+          60      31:   40   31:   40   11:   20
+          61      11:   20    1:   10   31:   40
+          62      31:   40   31:   40   21:   30
+          63      11:   20    1:   10   11:   20
+          64      11:   20   21:   30   11:   20
+Setting up quadratic distribution...
+ExtMesh (bp) on 0 =    98 x    99 x    98 =      950796
+PhiOnMesh: Number of (b)points on node 0 =                 1100
+PhiOnMesh: nlist on node 0 =               866383
+ QETSC: Update                =1609221156
+QETSC: Number of ranks       =          64
+QETSC: Number of slices      =          64
+QETSC: Number of ranks/slice =           1
+QETSC: Number of evals/slice =   2.00
+QETSC: Number of req. evals  =         128
+QETSC: Number of rows (all)  =        2912
+QETSC: Number of rows (max)  =          46
+QETSC: Number of rows (min)  =          14
+QETSC: Number of nonzeros    =     5568584
+QETSC: Nonzero % (all)       =  65.67
+QETSC: Nonzero % (max)       =  69.02
+QETSC: Nonzero % (min)       =  62.15
+QETSC: Global evecs          =      F
+QETSC: Bin type given        =           0
+QETSC: Bin buffer            =   0.10
+QETSC: Diff thresh           =   0.01
+QETSC: Infinity type         =           2
+QETSC: Inertia type          =           1
+ QETSC: Estimated eigenvalues         =
+-2.1904761904761902E+00
+-2.1876678876678874E+00
+-2.1848595848595846E+00
+-2.1820512820512818E+00
+-2.1792429792429791E+00
+-2.1764346764346763E+00
+-2.1736263736263735E+00
+-2.1708180708180707E+00
+-2.1680097680097679E+00
+-2.1652014652014651E+00
+-2.1623931623931623E+00
+-2.1595848595848595E+00
+-2.1567765567765567E+00
+-2.1539682539682539E+00
+-2.1520467836257309E+00
+-2.1501253132832079E+00
+-2.1482038429406849E+00
+-2.1462823725981619E+00
+-2.1443609022556389E+00
+-2.1424394319131159E+00
+-2.1405179615705929E+00
+-2.1385964912280699E+00
+-2.1366750208855469E+00
+-2.1347535505430244E+00
+-2.1328320802005014E+00
+-2.1309106098579784E+00
+-2.1289891395154554E+00
+-2.1270676691729324E+00
+-2.1251461988304094E+00
+-2.1232247284878865E+00
+-2.1213032581453635E+00
+-2.1193817878028405E+00
+-1.2777777777777777E+00
+-1.2716931216931215E+00
+-1.2656084656084656E+00
+-1.2595238095238095E+00
+-1.2534391534391534E+00
+-1.2473544973544974E+00
+-1.2412698412698413E+00
+-1.2391223155929039E+00
+-1.2369747899159664E+00
+-1.2348272642390290E+00
+-1.2326797385620916E+00
+-1.2305322128851541E+00
+-1.2283846872082167E+00
+-1.2262371615312793E+00
+-1.2240896358543418E+00
+-1.2219421101774042E+00
+-1.2197945845004667E+00
+-1.2176470588235293E+00
+-1.2154995331465919E+00
+-1.2133520074696544E+00
+-1.2112044817927170E+00
+-1.2090569561157796E+00
+-1.2069094304388421E+00
+-1.2047619047619047E+00
+-1.2007054673721340E+00
+-1.1966490299823633E+00
+-1.1925925925925926E+00
+-1.1885361552028220E+00
+-1.1844797178130511E+00
+-1.1804232804232804E+00
+-1.1763668430335097E+00
+-1.1723104056437390E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0535147392290249E+00
+-1.0482993197278911E+00
+-1.0430839002267573E+00
+-1.0378684807256235E+00
+-1.0326530612244897E+00
+-1.0274376417233559E+00
+-1.0222222222222221E+00
+-1.0185714285714285E+00
+-1.0149206349206348E+00
+-1.0112698412698413E+00
+-1.0076190476190476E+00
+-1.0039682539682540E+00
+-1.0003174603174603E+00
+-9.9666666666666670E-01
+-9.9301587301587302E-01
+-9.8936507936507945E-01
+-9.8571428571428577E-01
+-9.8206349206349208E-01
+-9.7841269841269840E-01
+-9.7476190476190483E-01
+-9.7111111111111115E-01
+-9.6746031746031746E-01
+-9.6380952380952378E-01
+-9.6015873015873010E-01
+-9.5650793650793653E-01
+-9.5285714285714285E-01
+-9.4920634920634916E-01
+-9.4007936507936507E-01
+-9.3095238095238098E-01
+-9.2182539682539688E-01
+-8.7619047619047619E-01
+-8.7390873015873016E-01
+-8.7162698412698414E-01
+-8.6934523809523812E-01
+-8.6706349206349209E-01
+-8.6478174603174607E-01
+-8.6250000000000004E-01
+-8.6021825396825402E-01
+-8.5793650793650800E-01
+-8.5565476190476197E-01
+-8.5337301587301595E-01
+-8.5109126984126993E-01
+-8.4880952380952390E-01
+-8.4652777777777788E-01
+-8.4424603174603186E-01
+-8.4196428571428583E-01
+-8.3968253968253981E-01
+-8.3740079365079378E-01
+-8.3511904761904776E-01
+-8.3283730158730174E-01
+-8.3055555555555571E-01
+-8.2827380952380958E-01
+-8.2599206349206356E-01
+-8.2371031746031753E-01
+-8.2142857142857151E-01
+-8.1914682539682548E-01
+-8.1686507936507946E-01
+-8.1458333333333344E-01
+-8.1230158730158730E-01
+-8.1001984126984128E-01
+-8.0773809523809526E-01
+ 0.0000000000000000E+00
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            1
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 0.00000000000E+00
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =           1
+ QETSC: Eigenvalues         =
+-2.1843076548021614E+00
+-2.1783975041508365E+00
+-2.1738264624671526E+00
+-2.1721071224529860E+00
+-2.1692347582294760E+00
+-2.1651877128682151E+00
+-2.1629752939529032E+00
+-2.1624359808562028E+00
+-2.1610263367950542E+00
+-2.1601360630024313E+00
+-2.1581973084095813E+00
+-2.1571353009773593E+00
+-2.1553714281501501E+00
+-2.1538511078197708E+00
+-2.1504736447780517E+00
+-2.1470198883939271E+00
+-2.1467443808627227E+00
+-2.1450908481608173E+00
+-2.1424264073311590E+00
+-2.1419573590199956E+00
+-2.1387564317801138E+00
+-2.1380673764969496E+00
+-2.1366860044713434E+00
+-2.1364504924472247E+00
+-2.1343574820414006E+00
+-2.1327466252330964E+00
+-2.1309939017273480E+00
+-2.1293670752189215E+00
+-2.1274639937968942E+00
+-2.1270364853407959E+00
+-2.1262398580900270E+00
+-2.1240387371898382E+00
+-1.2570253557683231E+00
+-1.2557529000591712E+00
+-1.2537014317470079E+00
+-1.2495780985168308E+00
+-1.2484004370934652E+00
+-1.2441286155555147E+00
+-1.2383015883880744E+00
+-1.2377379945121565E+00
+-1.2361694960173575E+00
+-1.2356115443379274E+00
+-1.2331165657200454E+00
+-1.2309437717209279E+00
+-1.2276871124832858E+00
+-1.2254419185407059E+00
+-1.2234799797008353E+00
+-1.2221372733422307E+00
+-1.2169969724523861E+00
+-1.2150915358165162E+00
+-1.2129468298025414E+00
+-1.2101429801026362E+00
+-1.2089203745932395E+00
+-1.2056936438868966E+00
+-1.2054530919990951E+00
+-1.2021423647241538E+00
+-1.2003565832001826E+00
+-1.1999270431321423E+00
+-1.1989765947137507E+00
+-1.1962461969958662E+00
+-1.1941953606362479E+00
+-1.1904993183541857E+00
+-1.1836490330504215E+00
+-1.1807869775114543E+00
+-1.0630256089500076E+00
+-1.0533201253648821E+00
+-1.0455055453347464E+00
+-1.0400577905034964E+00
+-1.0374106305038562E+00
+-1.0285122925773444E+00
+-1.0275894406692092E+00
+-1.0225177647113810E+00
+-1.0205002277765018E+00
+-1.0167752936898393E+00
+-1.0162372507015549E+00
+-1.0055960692574184E+00
+-1.0046947339751129E+00
+-1.0018594866512991E+00
+-9.9566908472095084E-01
+-9.9314589950290078E-01
+-9.8837760673345032E-01
+-9.8573771012281408E-01
+-9.8293075240284922E-01
+-9.7562210733096255E-01
+-9.7370105155837505E-01
+-9.6996263896530299E-01
+-9.6657638777694810E-01
+-9.6241478636030153E-01
+-9.6065552795638731E-01
+-9.5776734060576174E-01
+-9.5491132299037718E-01
+-9.5160801956685059E-01
+-9.4813047777950377E-01
+-9.3924642608517028E-01
+-9.3517844096675673E-01
+-9.2821465995783115E-01
+-8.6491694020078624E-01
+-8.6310863585706965E-01
+-8.6007052840862830E-01
+-8.5937028120269521E-01
+-8.5685849111210377E-01
+-8.5596908377502512E-01
+-8.5486310839273139E-01
+-8.5160166148751015E-01
+-8.4919703759012666E-01
+-8.4745215474055613E-01
+-8.4704043611231450E-01
+-8.4652950982430264E-01
+-8.4593322399312665E-01
+-8.4393299597762073E-01
+-8.4348272753142706E-01
+-8.4113614958321092E-01
+-8.3900444245251515E-01
+-8.3803613339453165E-01
+-8.3624327134436471E-01
+-8.3520124602167256E-01
+-8.3376030877969853E-01
+-8.3276620129245482E-01
+-8.3126900316606711E-01
+-8.3049324823748161E-01
+-8.2947019225514818E-01
+-8.2852345982892417E-01
+-8.2650987379621454E-01
+-8.2606998676812227E-01
+-8.2363370911617073E-01
+-8.2222838403296117E-01
+-8.1953160325585550E-01
+-8.1872301551209414E-01
+QETSC: Iter time (min)       =  19.01
+QETSC: Iter time (max)       =  28.55
+QETSC: Iter time (avg)       =  24.96
+QETSC: Num. of conv. evals   =         146
+QETSC: Eigenvalue (1)        =-2.18430765480E+00
+QETSC: Eigenvalue (nocc)     =-8.18723015512E-01
+QETSC: Max differrence       = 2.18430765480E+00
+QETSC: Safe iteration        =      F
+QETSC: Finished iter            1
+ *****************************************************************
+
+siesta: Program's energy decomposition (eV):
+siesta: Ebs     =     -4529.853161
+siesta: Eions   =     26107.343333
+siesta: Ena     =      5853.795051
+siesta: Ekin    =     10461.560592
+siesta: Enl     =     -1536.356393
+siesta: DEna    =        -0.000008
+siesta: DUscf   =         0.000000
+siesta: DUext   =         0.000000
+siesta: Exc     =     -3633.754362
+siesta: eta*DQ  =         0.000000
+siesta: Emadel  =         0.000000
+siesta: Emeta   =         0.000000
+siesta: Emolmec =         0.000000
+siesta: Ekinion =         0.000000
+siesta: Eharris =    -15105.127527
+siesta: Etot    =    -14962.098453
+siesta: FreeEng =    -14962.098453
+timer: Routine,Calls,Time,% =    IterSCF     1      77.141  52.83
+             Section          Calls    Walltime % sect.
+ IterSCF                          1      77.434  100.00
+  setup_H                         1      43.754   56.51
+  compute_dm                      1      33.566   43.35
+  MPI_ALLREDUCE                   3       0.089    0.11
+  MIXER                           1       0.017    0.02
+ QETSC: Estimated eigenvalues         =
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7341269841269842E+00
+-1.7158730158730158E+00
+-1.7106575963718820E+00
+-1.7054421768707482E+00
+-1.7002267573696144E+00
+-1.6950113378684806E+00
+-1.6897959183673468E+00
+-1.6845804988662130E+00
+-1.6793650793650792E+00
+-1.6748015873015871E+00
+-1.6702380952380951E+00
+-1.6656746031746030E+00
+-1.6611111111111110E+00
+-1.6565476190476189E+00
+-1.6519841269841269E+00
+-1.6474206349206348E+00
+-1.6428571428571428E+00
+-1.6388007054673721E+00
+-1.6347442680776014E+00
+-1.6306878306878307E+00
+-1.6266313932980601E+00
+-1.6225749559082892E+00
+-1.6185185185185185E+00
+-1.6144620811287478E+00
+-1.6104056437389771E+00
+-1.6063492063492064E+00
+-1.5972222222222223E+00
+-1.5880952380952382E+00
+-1.5789682539682539E+00
+-1.5333333333333332E+00
+-9.4920634920634916E-01
+-9.3703703703703700E-01
+-9.2486772486772495E-01
+-9.1269841269841279E-01
+-9.0539682539682542E-01
+-8.9809523809523817E-01
+-8.9079365079365080E-01
+-8.8349206349206355E-01
+-8.7619047619047619E-01
+-8.7213403880070550E-01
+-8.6807760141093482E-01
+-8.6402116402116402E-01
+-8.5996472663139334E-01
+-8.5590828924162266E-01
+-8.5185185185185197E-01
+-8.4779541446208118E-01
+-8.4373897707231049E-01
+-8.3968253968253981E-01
+-8.3511904761904776E-01
+-8.3055555555555571E-01
+-8.2599206349206356E-01
+-8.2142857142857151E-01
+-8.1686507936507946E-01
+-8.1230158730158730E-01
+-8.0773809523809526E-01
+-8.0317460317460321E-01
+-7.9708994708994707E-01
+-7.9100529100529104E-01
+-7.8492063492063491E-01
+-7.7883597883597877E-01
+-7.7275132275132274E-01
+-7.6666666666666661E-01
+-6.5714285714285725E-01
+-6.3888888888888895E-01
+-6.2063492063492065E-01
+-6.0846560846560849E-01
+-5.9629629629629644E-01
+-5.8412698412698427E-01
+-5.7804232804232814E-01
+-5.7195767195767211E-01
+-5.6587301587301597E-01
+-5.5978835978835984E-01
+-5.5370370370370381E-01
+-5.4761904761904767E-01
+-5.3849206349206358E-01
+-5.2936507936507937E-01
+-5.2023809523809517E-01
+-5.1111111111111107E-01
+-5.0380952380952382E-01
+-4.9650793650793651E-01
+-4.8920634920634926E-01
+-4.8190476190476195E-01
+-4.7460317460317469E-01
+-4.6938775510204089E-01
+-4.6417233560090709E-01
+-4.5895691609977329E-01
+-4.5374149659863949E-01
+-4.4852607709750569E-01
+-4.4331065759637189E-01
+-4.3809523809523809E-01
+-4.2896825396825400E-01
+-4.1984126984126990E-01
+-4.1071428571428581E-01
+-4.0158730158730171E-01
+-3.9702380952380967E-01
+-3.9246031746031756E-01
+-3.8789682539682546E-01
+-3.8333333333333341E-01
+-3.7876984126984137E-01
+-3.7420634920634926E-01
+-3.6964285714285716E-01
+-3.6507936507936511E-01
+-3.6102292768959443E-01
+-3.5696649029982369E-01
+-3.5291005291005301E-01
+-3.4885361552028227E-01
+-3.4479717813051158E-01
+-3.4074074074074084E-01
+-3.3668430335097016E-01
+-3.3262786596119942E-01
+-3.2857142857142874E-01
+-3.2492063492063511E-01
+-3.2126984126984148E-01
+-3.1761904761904780E-01
+-3.1396825396825417E-01
+-3.1031746031746055E-01
+-3.0666666666666692E-01
+-3.0301587301587329E-01
+-2.9936507936507961E-01
+-2.9571428571428598E-01
+-2.9206349206349236E-01
+-2.8476190476190499E-01
+-2.7746031746031763E-01
+-2.7015873015873026E-01
+-2.6285714285714290E-01
+ 0.0000000000000000E+00
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            2
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 0.00000000000E+00
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =           1
+ QETSC: Eigenvalues         =
+-1.7571024231394929E+00
+-1.7242732810536625E+00
+-1.7171894727066808E+00
+-1.7040032222084074E+00
+-1.7030053155061020E+00
+-1.7012517385944212E+00
+-1.6960171886541351E+00
+-1.6918877749252743E+00
+-1.6903135847978843E+00
+-1.6813780928847466E+00
+-1.6777023081107307E+00
+-1.6715667043912135E+00
+-1.6709351273251589E+00
+-1.6669650762583610E+00
+-1.6590410690163195E+00
+-1.6567838789403488E+00
+-1.6519401448704205E+00
+-1.6450943537605307E+00
+-1.6420610468784769E+00
+-1.6383447509713569E+00
+-1.6360454588252442E+00
+-1.6330004087716259E+00
+-1.6283834980282308E+00
+-1.6205520905560662E+00
+-1.6183510826552741E+00
+-1.6101609087626303E+00
+-1.6096665061099096E+00
+-1.6053977171797866E+00
+-1.5972883247793010E+00
+-1.5883938792925649E+00
+-1.5876599435020604E+00
+-1.5289971970119298E+00
+-9.2427436300863530E-01
+-9.2065641888436756E-01
+-9.1338780186533419E-01
+-8.9947395751952952E-01
+-8.9563638538908596E-01
+-8.9081883289854413E-01
+-8.8375448731321093E-01
+-8.8024484367268363E-01
+-8.7487648538929030E-01
+-8.7123256131818749E-01
+-8.6194396218801439E-01
+-8.5989358467751043E-01
+-8.5662489396122954E-01
+-8.5312420079871520E-01
+-8.4888053902124194E-01
+-8.4596458178575418E-01
+-8.4174004545153724E-01
+-8.3630931928998908E-01
+-8.3360107384589832E-01
+-8.2650234544595402E-01
+-8.2129596097959312E-01
+-8.1884552403381350E-01
+-8.1555623003519118E-01
+-8.0633969710294118E-01
+-8.0455080044749117E-01
+-8.0073832073452400E-01
+-7.9554646342075386E-01
+-7.9014304577115768E-01
+-7.7841937061820055E-01
+-7.7180575648336902E-01
+-7.6790851133097759E-01
+-7.3429309935494180E-01
+-6.4050844114339556E-01
+-6.2089325016449248E-01
+-6.0304711884813644E-01
+-5.9290596244733518E-01
+-5.8795828680368134E-01
+-5.7777602110591864E-01
+-5.7376178018263668E-01
+-5.7061163392010406E-01
+-5.6490869272348621E-01
+-5.6327837502036349E-01
+-5.5880515657752661E-01
+-5.3153361674114796E-01
+-5.2829843281659794E-01
+-5.2446631451744719E-01
+-5.2087407278237907E-01
+-5.0912235293104191E-01
+-5.0185063548560238E-01
+-4.9622422808330252E-01
+-4.9310371118021240E-01
+-4.8402542645282409E-01
+-4.7224442834779601E-01
+-4.6922662283642541E-01
+-4.6531012145517447E-01
+-4.6138108898222407E-01
+-4.5158455337675824E-01
+-4.4566567486603298E-01
+-4.4008611197728453E-01
+-4.3437910909114447E-01
+-4.2572502515494209E-01
+-4.1526847419616891E-01
+-4.0785009559194640E-01
+-3.9916354128187465E-01
+-3.9539584152148494E-01
+-3.9207054765163440E-01
+-3.8662626358332308E-01
+-3.7954287415352594E-01
+-3.7506241711150762E-01
+-3.7203784003941004E-01
+-3.7010291874181050E-01
+-3.6455783774814920E-01
+-3.5867884511349590E-01
+-3.5206225031443655E-01
+-3.5036495069667350E-01
+-3.4220029111617517E-01
+-3.4166692690863287E-01
+-3.3630101977911081E-01
+-3.3581096430189405E-01
+-3.3290912541598788E-01
+-3.2683840307847722E-01
+-3.2364194848676114E-01
+-3.1819023850694284E-01
+-3.1355831446148907E-01
+-3.0819721147367202E-01
+-3.0335075947568407E-01
+-3.0034661462381634E-01
+-2.9809253102060174E-01
+-2.9599449779351117E-01
+-2.9325311969768664E-01
+-2.8800470121901789E-01
+-2.8227033178354599E-01
+-2.7520360833768942E-01
+-2.6551590989731905E-01
+-2.5901217394276316E-01
+-2.2013751630902476E-01
+QETSC: Iter time (min)       =  12.19
+QETSC: Iter time (max)       =  19.19
+QETSC: Iter time (avg)       =  16.79
+QETSC: Num. of conv. evals   =         132
+QETSC: Eigenvalue (1)        =-1.75710242314E+00
+QETSC: Eigenvalue (nocc)     =-2.20137516309E-01
+QETSC: Max differrence       = 5.98585499203E-01
+QETSC: Safe iteration        =      F
+QETSC: Finished iter            2
+ *****************************************************************
+ QETSC: Estimated eigenvalues         =
+-2.0444444444444443E+00
+-2.0322751322751320E+00
+-2.0201058201058202E+00
+-2.0079365079365079E+00
+-2.0055026455026455E+00
+-2.0030687830687830E+00
+-2.0006349206349205E+00
+-1.9982010582010581E+00
+-1.9957671957671956E+00
+-1.9933333333333332E+00
+-1.9908994708994707E+00
+-1.9884656084656085E+00
+-1.9860317460317460E+00
+-1.9835978835978836E+00
+-1.9811640211640211E+00
+-1.9787301587301587E+00
+-1.9762962962962962E+00
+-1.9738624338624338E+00
+-1.9714285714285713E+00
+-1.9686202686202685E+00
+-1.9658119658119657E+00
+-1.9630036630036629E+00
+-1.9601953601953601E+00
+-1.9573870573870573E+00
+-1.9545787545787545E+00
+-1.9517704517704515E+00
+-1.9489621489621487E+00
+-1.9461538461538459E+00
+-1.9433455433455431E+00
+-1.9405372405372403E+00
+-1.9377289377289375E+00
+-1.9349206349206347E+00
+-1.1317460317460317E+00
+-1.1287037037037038E+00
+-1.1256613756613756E+00
+-1.1226190476190476E+00
+-1.1195767195767194E+00
+-1.1165343915343915E+00
+-1.1134920634920635E+00
+-1.1104497354497354E+00
+-1.1074074074074074E+00
+-1.1043650793650792E+00
+-1.1013227513227513E+00
+-1.0982804232804231E+00
+-1.0952380952380951E+00
+-1.0924297924297923E+00
+-1.0896214896214895E+00
+-1.0868131868131867E+00
+-1.0840048840048839E+00
+-1.0811965811965811E+00
+-1.0783882783882783E+00
+-1.0755799755799755E+00
+-1.0727716727716727E+00
+-1.0699633699633699E+00
+-1.0671550671550671E+00
+-1.0643467643467643E+00
+-1.0615384615384615E+00
+-1.0587301587301587E+00
+-1.0535147392290249E+00
+-1.0482993197278911E+00
+-1.0430839002267573E+00
+-1.0378684807256235E+00
+-1.0326530612244897E+00
+-1.0274376417233559E+00
+-9.1269841269841279E-01
+-9.0357142857142869E-01
+-8.9444444444444449E-01
+-8.8531746031746028E-01
+-8.7619047619047619E-01
+-8.7097505668934239E-01
+-8.6575963718820870E-01
+-8.6054421768707490E-01
+-8.5532879818594110E-01
+-8.5011337868480730E-01
+-8.4489795918367361E-01
+-8.3968253968253981E-01
+-8.3511904761904776E-01
+-8.3055555555555571E-01
+-8.2599206349206356E-01
+-8.2142857142857151E-01
+-8.1686507936507946E-01
+-8.1230158730158730E-01
+-8.0773809523809526E-01
+-8.0317460317460321E-01
+-7.9911816578483252E-01
+-7.9506172839506173E-01
+-7.9100529100529104E-01
+-7.8694885361552025E-01
+-7.8289241622574957E-01
+-7.7883597883597877E-01
+-7.7477954144620809E-01
+-7.7072310405643729E-01
+-7.6666666666666661E-01
+-7.5753968253968251E-01
+-7.4841269841269842E-01
+-7.3928571428571432E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.9136904761904761E-01
+-6.8908730158730158E-01
+-6.8680555555555556E-01
+-6.8452380952380953E-01
+-6.8224206349206351E-01
+-6.7996031746031749E-01
+-6.7767857142857146E-01
+-6.7539682539682544E-01
+-6.7311507936507942E-01
+-6.7083333333333339E-01
+-6.6855158730158737E-01
+-6.6626984126984135E-01
+-6.6398809523809532E-01
+-6.6170634920634930E-01
+-6.5942460317460327E-01
+-6.5714285714285725E-01
+-6.5453514739229035E-01
+-6.5192743764172345E-01
+-6.4931972789115655E-01
+-6.4671201814058965E-01
+-6.4410430839002275E-01
+-6.4149659863945585E-01
+-6.3888888888888895E-01
+-6.3628117913832205E-01
+-6.3367346938775515E-01
+-6.3106575963718825E-01
+-6.2845804988662135E-01
+-6.2585034013605445E-01
+-6.2324263038548755E-01
+ 0.0000000000000000E+00
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            3
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 0.00000000000E+00
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =           1
+ QETSC: Eigenvalues         =
+-2.0238880668735622E+00
+-2.0161953454497685E+00
+-2.0117887168766044E+00
+-2.0074072583894398E+00
+-2.0060142093337787E+00
+-2.0037898620792558E+00
+-2.0009121094183824E+00
+-1.9985660126673939E+00
+-1.9962245139468868E+00
+-1.9954688499707878E+00
+-1.9929892212013842E+00
+-1.9896289138120382E+00
+-1.9875172992408643E+00
+-1.9853056509536935E+00
+-1.9786913239492494E+00
+-1.9773668288988893E+00
+-1.9741969370562393E+00
+-1.9729814468082909E+00
+-1.9708187387792180E+00
+-1.9701240227868402E+00
+-1.9681564594568943E+00
+-1.9646306526587307E+00
+-1.9624471958554985E+00
+-1.9619715058307277E+00
+-1.9590859563722554E+00
+-1.9580198247826783E+00
+-1.9553121807877871E+00
+-1.9523077577533923E+00
+-1.9512407464561228E+00
+-1.9435167173265033E+00
+-1.9418674846304897E+00
+-1.9293820231457375E+00
+-1.1278081752373719E+00
+-1.1253750596197403E+00
+-1.1248612014366970E+00
+-1.1161167545614197E+00
+-1.1145933141791264E+00
+-1.1119506406825999E+00
+-1.1098948614982060E+00
+-1.1082477381056981E+00
+-1.1051601535535072E+00
+-1.1024052774147473E+00
+-1.0996737272978088E+00
+-1.0960600337573279E+00
+-1.0924478704370086E+00
+-1.0908124499961924E+00
+-1.0889777610011326E+00
+-1.0867981644824307E+00
+-1.0830572913307404E+00
+-1.0766177539012634E+00
+-1.0759604982546738E+00
+-1.0729327166610012E+00
+-1.0692696985418162E+00
+-1.0667966713857218E+00
+-1.0650879683688819E+00
+-1.0618784726855297E+00
+-1.0601361435329171E+00
+-1.0580586998918231E+00
+-1.0554285869841342E+00
+-1.0455370689555865E+00
+-1.0440348945543789E+00
+-1.0419344855012289E+00
+-1.0381595013863318E+00
+-1.0317702573276228E+00
+-9.0902612233406788E-01
+-8.9519533964510944E-01
+-8.8909103844486503E-01
+-8.7972371290716800E-01
+-8.7286159304221500E-01
+-8.6716251816671663E-01
+-8.6543269816155488E-01
+-8.6045096614823258E-01
+-8.5765458796920591E-01
+-8.5513749852769660E-01
+-8.5452622548212476E-01
+-8.3669010639304309E-01
+-8.3486149921725972E-01
+-8.3094109489183887E-01
+-8.2755697848345122E-01
+-8.1539617146933996E-01
+-8.1440668399615246E-01
+-8.1120979797784987E-01
+-8.0607490886136246E-01
+-8.0151632291985109E-01
+-7.9907634453051768E-01
+-7.9258485116110000E-01
+-7.8851939975555663E-01
+-7.8636669853186614E-01
+-7.8193078860018395E-01
+-7.7722773202015494E-01
+-7.7444730884693469E-01
+-7.6672830207426013E-01
+-7.6408139001873909E-01
+-7.5262090316848607E-01
+-7.4871833305639957E-01
+-7.3729994482213446E-01
+-7.0253068566267529E-01
+-6.9361765097487560E-01
+-6.9046483763202915E-01
+-6.8627547004168865E-01
+-6.8402340777625192E-01
+-6.8116324489889368E-01
+-6.7915498367828708E-01
+-6.7404392472481411E-01
+-6.7311129925135393E-01
+-6.7106837864314350E-01
+-6.6935836164365969E-01
+-6.6826504967360523E-01
+-6.6648147790480128E-01
+-6.6570013969032305E-01
+-6.6182565996025444E-01
+-6.6128900696779802E-01
+-6.6025960650503746E-01
+-6.5570029812578112E-01
+-6.5268022060237896E-01
+-6.4973705572860441E-01
+-6.4827012059401956E-01
+-6.4613073315044756E-01
+-6.4424487996872315E-01
+-6.4270406678459602E-01
+-6.4133628339308724E-01
+-6.4000781567733800E-01
+-6.3808859157938258E-01
+-6.3426108863011976E-01
+-6.3177382548039440E-01
+-6.2806291052231400E-01
+-6.2450566207269032E-01
+-6.0988991678048088E-01
+QETSC: Iter time (min)       =  13.24
+QETSC: Iter time (max)       =  20.69
+QETSC: Iter time (avg)       =  18.11
+QETSC: Num. of conv. evals   =         138
+QETSC: Eigenvalue (1)        =-2.02388806687E+00
+QETSC: Eigenvalue (nocc)     =-6.09889916780E-01
+QETSC: Max differrence       = 4.00384826134E-01
+QETSC: Safe iteration        =      F
+QETSC: Finished iter            3
+ *****************************************************************
+ QETSC: Estimated eigenvalues         =
+-2.0079365079365079E+00
+-2.0018518518518520E+00
+-1.9957671957671956E+00
+-1.9896825396825397E+00
+-1.9835978835978836E+00
+-1.9775132275132274E+00
+-1.9714285714285713E+00
+-1.9686202686202685E+00
+-1.9658119658119657E+00
+-1.9630036630036629E+00
+-1.9601953601953601E+00
+-1.9573870573870573E+00
+-1.9545787545787545E+00
+-1.9517704517704515E+00
+-1.9489621489621487E+00
+-1.9461538461538459E+00
+-1.9433455433455431E+00
+-1.9405372405372403E+00
+-1.9377289377289375E+00
+-1.9349206349206347E+00
+-1.9318783068783068E+00
+-1.9288359788359786E+00
+-1.9257936507936506E+00
+-1.9227513227513227E+00
+-1.9197089947089945E+00
+-1.9166666666666665E+00
+-1.9136243386243386E+00
+-1.9105820105820104E+00
+-1.9075396825396824E+00
+-1.9044973544973545E+00
+-1.9014550264550263E+00
+-1.8984126984126983E+00
+-1.1317460317460317E+00
+-1.1195767195767194E+00
+-1.1074074074074074E+00
+-1.0952380952380951E+00
+-1.0921957671957672E+00
+-1.0891534391534390E+00
+-1.0861111111111110E+00
+-1.0830687830687831E+00
+-1.0800264550264549E+00
+-1.0769841269841269E+00
+-1.0739417989417990E+00
+-1.0708994708994708E+00
+-1.0678571428571428E+00
+-1.0648148148148149E+00
+-1.0617724867724867E+00
+-1.0587301587301587E+00
+-1.0556878306878308E+00
+-1.0526455026455026E+00
+-1.0496031746031746E+00
+-1.0465608465608465E+00
+-1.0435185185185185E+00
+-1.0404761904761903E+00
+-1.0374338624338624E+00
+-1.0343915343915344E+00
+-1.0313492063492062E+00
+-1.0283068783068783E+00
+-1.0252645502645501E+00
+-1.0222222222222221E+00
+-1.0149206349206348E+00
+-1.0076190476190476E+00
+-1.0003174603174603E+00
+-9.9301587301587302E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.6706349206349209E-01
+-8.5793650793650800E-01
+-8.4880952380952390E-01
+-8.3968253968253981E-01
+-8.3446712018140601E-01
+-8.2925170068027221E-01
+-8.2403628117913841E-01
+-8.1882086167800461E-01
+-8.1360544217687081E-01
+-8.0839002267573701E-01
+-8.0317460317460321E-01
+-7.9795918367346941E-01
+-7.9274376417233561E-01
+-7.8752834467120181E-01
+-7.8231292517006801E-01
+-7.7709750566893421E-01
+-7.7188208616780041E-01
+-7.6666666666666661E-01
+-7.6210317460317456E-01
+-7.5753968253968251E-01
+-7.5297619047619047E-01
+-7.4841269841269842E-01
+-7.4384920634920637E-01
+-7.3928571428571432E-01
+-7.3472222222222228E-01
+-7.3015873015873023E-01
+-7.2285714285714286E-01
+-7.1555555555555561E-01
+-7.0825396825396825E-01
+-7.0095238095238099E-01
+-6.9365079365079363E-01
+-6.8148148148148147E-01
+-6.6931216931216941E-01
+-6.5714285714285725E-01
+-6.5453514739229035E-01
+-6.5192743764172345E-01
+-6.4931972789115655E-01
+-6.4671201814058965E-01
+-6.4410430839002275E-01
+-6.4149659863945585E-01
+-6.3888888888888895E-01
+-6.3628117913832205E-01
+-6.3367346938775515E-01
+-6.3106575963718825E-01
+-6.2845804988662135E-01
+-6.2585034013605445E-01
+-6.2324263038548755E-01
+-6.2063492063492065E-01
+-6.1759259259259258E-01
+-6.1455026455026462E-01
+-6.1150793650793656E-01
+-6.0846560846560849E-01
+-6.0542328042328053E-01
+-6.0238095238095246E-01
+-5.9933862433862439E-01
+-5.9629629629629644E-01
+-5.9325396825396837E-01
+-5.9021164021164030E-01
+-5.8716931216931234E-01
+-5.8412698412698427E-01
+-5.7195767195767211E-01
+ 0.0000000000000000E+00
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            4
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 0.00000000000E+00
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =           1
+ QETSC: Eigenvalues         =
+-1.9987243971665611E+00
+-1.9885256212993201E+00
+-1.9827139795981334E+00
+-1.9769874591983534E+00
+-1.9754344778180055E+00
+-1.9722913257728427E+00
+-1.9707784368143115E+00
+-1.9682221968219868E+00
+-1.9666436350016845E+00
+-1.9635526528296292E+00
+-1.9588992279702806E+00
+-1.9570764129718967E+00
+-1.9547167144024786E+00
+-1.9519699075469223E+00
+-1.9460889197818456E+00
+-1.9444127458156526E+00
+-1.9409511010585974E+00
+-1.9397537202044235E+00
+-1.9371382250287035E+00
+-1.9338265123747804E+00
+-1.9326148270661900E+00
+-1.9301035150616808E+00
+-1.9272875375039316E+00
+-1.9255550074467100E+00
+-1.9240621166664806E+00
+-1.9219153788583787E+00
+-1.9188039139160009E+00
+-1.9149828571433849E+00
+-1.9113520381985127E+00
+-1.9014463175935112E+00
+-1.9000130431817530E+00
+-1.8782514500534897E+00
+-1.1053275580300916E+00
+-1.1033689157050333E+00
+-1.0997121290779537E+00
+-1.0951371162433998E+00
+-1.0910483692500952E+00
+-1.0868149687964159E+00
+-1.0856828395046074E+00
+-1.0820833494726143E+00
+-1.0814885224530442E+00
+-1.0787670186439993E+00
+-1.0708746661183728E+00
+-1.0687510915571721E+00
+-1.0668167694596820E+00
+-1.0639211112129723E+00
+-1.0612875085406543E+00
+-1.0581039018723997E+00
+-1.0570702728216921E+00
+-1.0531556487497724E+00
+-1.0475328609703669E+00
+-1.0446222300835333E+00
+-1.0420576843072329E+00
+-1.0397747377073665E+00
+-1.0380326959098123E+00
+-1.0323716805809862E+00
+-1.0316045384822272E+00
+-1.0288277671678656E+00
+-1.0229852198516960E+00
+-1.0175238738471517E+00
+-1.0115595272659976E+00
+-1.0082387075853574E+00
+-1.0043443839026385E+00
+-9.9345495380873905E-01
+-8.8017704566068311E-01
+-8.6543672052508525E-01
+-8.5696543428626804E-01
+-8.4747379221528618E-01
+-8.4124905190310195E-01
+-8.3714198413285323E-01
+-8.3329730157848525E-01
+-8.2898929922091158E-01
+-8.2691669687845293E-01
+-8.2520396318171085E-01
+-8.2373435760356950E-01
+-8.0371203316904538E-01
+-8.0144424233803768E-01
+-7.9684867547615779E-01
+-7.9371064947838132E-01
+-7.8193966377492419E-01
+-7.7841389377279246E-01
+-7.7469049292328218E-01
+-7.7262707106444417E-01
+-7.6308647216295822E-01
+-7.6224228672165439E-01
+-7.5768724867402659E-01
+-7.5401806293200102E-01
+-7.5031228125674121E-01
+-7.4641976115618669E-01
+-7.4159726723161468E-01
+-7.3843971190179991E-01
+-7.2962497006455118E-01
+-7.2777695644141283E-01
+-7.1405071649093210E-01
+-7.0814788842633458E-01
+-6.9639160210660966E-01
+-6.7668621255540118E-01
+-6.6251929472329685E-01
+-6.6009991979001004E-01
+-6.5357796695806636E-01
+-6.5127059785857033E-01
+-6.4847294362159669E-01
+-6.4575528922154135E-01
+-6.4153323053414724E-01
+-6.4052018874586880E-01
+-6.3896539124346341E-01
+-6.3573615350259394E-01
+-6.3405910789565512E-01
+-6.3326487994398173E-01
+-6.2900360673044853E-01
+-6.2724512805511745E-01
+-6.2586571405922398E-01
+-6.2414261452101061E-01
+-6.1838082642040815E-01
+-6.1559632752003457E-01
+-6.1410026990847499E-01
+-6.1035604033139612E-01
+-6.0802136256140060E-01
+-6.0734726804267380E-01
+-6.0516425065000345E-01
+-6.0370454445416133E-01
+-6.0064454393009103E-01
+-5.9936194857738523E-01
+-5.9570120689540940E-01
+-5.8949513992550284E-01
+-5.8376945519313728E-01
+-5.8221047847685847E-01
+-5.5854921350598652E-01
+QETSC: Iter time (min)       =  13.65
+QETSC: Iter time (max)       =  20.22
+QETSC: Iter time (avg)       =  17.66
+QETSC: Num. of conv. evals   =         136
+QETSC: Eigenvalue (1)        =-1.99872439717E+00
+QETSC: Eigenvalue (nocc)     =-5.58549213506E-01
+QETSC: Max differrence       = 5.13407032745E-02
+QETSC: Safe iteration        =      F
+QETSC: Finished iter            4
+ *****************************************************************
+ QETSC: Estimated eigenvalues         =
+-2.0079365079365079E+00
+-1.9957671957671956E+00
+-1.9835978835978836E+00
+-1.9714285714285713E+00
+-1.9681096681096679E+00
+-1.9647907647907648E+00
+-1.9614718614718614E+00
+-1.9581529581529580E+00
+-1.9548340548340546E+00
+-1.9515151515151514E+00
+-1.9481962481962480E+00
+-1.9448773448773446E+00
+-1.9415584415584413E+00
+-1.9382395382395381E+00
+-1.9349206349206347E+00
+-1.9321123321123319E+00
+-1.9293040293040291E+00
+-1.9264957264957263E+00
+-1.9236874236874235E+00
+-1.9208791208791207E+00
+-1.9180708180708179E+00
+-1.9152625152625151E+00
+-1.9124542124542123E+00
+-1.9096459096459095E+00
+-1.9068376068376067E+00
+-1.9040293040293039E+00
+-1.9012210012210011E+00
+-1.8984126984126983E+00
+-1.8892857142857142E+00
+-1.8801587301587301E+00
+-1.8710317460317458E+00
+-1.8619047619047617E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0911816578483244E+00
+-1.0871252204585538E+00
+-1.0830687830687831E+00
+-1.0790123456790124E+00
+-1.0749559082892415E+00
+-1.0708994708994708E+00
+-1.0668430335097001E+00
+-1.0627865961199294E+00
+-1.0587301587301587E+00
+-1.0556878306878308E+00
+-1.0526455026455026E+00
+-1.0496031746031746E+00
+-1.0465608465608465E+00
+-1.0435185185185185E+00
+-1.0404761904761903E+00
+-1.0374338624338624E+00
+-1.0343915343915344E+00
+-1.0313492063492062E+00
+-1.0283068783068783E+00
+-1.0252645502645501E+00
+-1.0222222222222221E+00
+-1.0170068027210883E+00
+-1.0117913832199545E+00
+-1.0065759637188207E+00
+-1.0013605442176872E+00
+-9.9614512471655325E-01
+-9.9092970521541957E-01
+-9.8571428571428577E-01
+-9.7354497354497360E-01
+-9.6137566137566133E-01
+-8.7619047619047619E-01
+-8.6402116402116402E-01
+-8.5185185185185197E-01
+-8.3968253968253981E-01
+-8.3511904761904776E-01
+-8.3055555555555571E-01
+-8.2599206349206356E-01
+-8.2142857142857151E-01
+-8.1686507936507946E-01
+-8.1230158730158730E-01
+-8.0773809523809526E-01
+-8.0317460317460321E-01
+-7.9404761904761911E-01
+-7.8492063492063491E-01
+-7.7579365079365070E-01
+-7.6666666666666661E-01
+-7.6261022927689592E-01
+-7.5855379188712524E-01
+-7.5449735449735444E-01
+-7.5044091710758376E-01
+-7.4638447971781308E-01
+-7.4232804232804239E-01
+-7.3827160493827160E-01
+-7.3421516754850091E-01
+-7.3015873015873023E-01
+-7.2407407407407409E-01
+-7.1798941798941807E-01
+-7.1190476190476193E-01
+-7.0582010582010579E-01
+-6.9973544973544977E-01
+-6.9365079365079363E-01
+-6.8148148148148147E-01
+-6.6931216931216941E-01
+-6.5714285714285725E-01
+-6.5349206349206357E-01
+-6.4984126984126989E-01
+-6.4619047619047632E-01
+-6.4253968253968263E-01
+-6.3888888888888895E-01
+-6.3523809523809527E-01
+-6.3158730158730159E-01
+-6.2793650793650801E-01
+-6.2428571428571433E-01
+-6.2063492063492065E-01
+-6.1802721088435375E-01
+-6.1541950113378685E-01
+-6.1281179138321995E-01
+-6.1020408163265316E-01
+-6.0759637188208626E-01
+-6.0498866213151936E-01
+-6.0238095238095246E-01
+-5.9977324263038556E-01
+-5.9716553287981866E-01
+-5.9455782312925176E-01
+-5.9195011337868497E-01
+-5.8934240362811807E-01
+-5.8673469387755117E-01
+-5.8412698412698427E-01
+-5.7804232804232814E-01
+-5.7195767195767211E-01
+-5.6587301587301597E-01
+-5.5978835978835984E-01
+-5.5370370370370381E-01
+ 0.0000000000000000E+00
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            5
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 0.00000000000E+00
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =           1
+ QETSC: Eigenvalues         =
+-1.9928309724657189E+00
+-1.9776939681415950E+00
+-1.9716137283343524E+00
+-1.9638948936658067E+00
+-1.9620724810196102E+00
+-1.9592194678605097E+00
+-1.9573955354644463E+00
+-1.9551313939092929E+00
+-1.9534575120240421E+00
+-1.9479823131905167E+00
+-1.9428450851338599E+00
+-1.9409371997916667E+00
+-1.9389476995727459E+00
+-1.9360875296986269E+00
+-1.9309618825868196E+00
+-1.9283009540577771E+00
+-1.9259330035012603E+00
+-1.9231794544328811E+00
+-1.9201242631036395E+00
+-1.9145407702393920E+00
+-1.9123211536437563E+00
+-1.9117853176157267E+00
+-1.9089177216329407E+00
+-1.9072853381919797E+00
+-1.9053087801003474E+00
+-1.9028384336497064E+00
+-1.8997115809021596E+00
+-1.8960559794319694E+00
+-1.8867972077697746E+00
+-1.8767864420856601E+00
+-1.8744335106485792E+00
+-1.8449041016219132E+00
+-1.0956020100426158E+00
+-1.0943394291282020E+00
+-1.0898256582441688E+00
+-1.0851388594039288E+00
+-1.0791226521224346E+00
+-1.0746454452661029E+00
+-1.0741711176056012E+00
+-1.0702866556994384E+00
+-1.0690092505050510E+00
+-1.0672441525159109E+00
+-1.0576436786151340E+00
+-1.0542249279592233E+00
+-1.0510478868128981E+00
+-1.0485296458433562E+00
+-1.0452684912025778E+00
+-1.0434841861747395E+00
+-1.0409193624561894E+00
+-1.0390296596939312E+00
+-1.0315697098478791E+00
+-1.0286690887873187E+00
+-1.0268729468929167E+00
+-1.0241738389115027E+00
+-1.0221494800957922E+00
+-1.0166782707213902E+00
+-1.0155581484414964E+00
+-1.0113562729969592E+00
+-1.0036980739916659E+00
+-1.0004454233528171E+00
+-9.9544783642483303E-01
+-9.8482285136564773E-01
+-9.8088348816565485E-01
+-9.6483401758868348E-01
+-8.6779200321981742E-01
+-8.5257376672527330E-01
+-8.4110400845952260E-01
+-8.3064599540852679E-01
+-8.2706925912738705E-01
+-8.2284088949096490E-01
+-8.1625035273319702E-01
+-8.1309882103761000E-01
+-8.1232296172019247E-01
+-8.1166432439751424E-01
+-8.0897445955843694E-01
+-7.8787172500261826E-01
+-7.8441109026885913E-01
+-7.8002118276683952E-01
+-7.7542003504419099E-01
+-7.6522251523050033E-01
+-7.6136170556105420E-01
+-7.5819472748825500E-01
+-7.5227391168713342E-01
+-7.4459148688307519E-01
+-7.4261554954586906E-01
+-7.4116555694328001E-01
+-7.3573233073247779E-01
+-7.3146990271206136E-01
+-7.2742993322444238E-01
+-7.2370291151302235E-01
+-7.1999935755807210E-01
+-7.1145807874473488E-01
+-7.0915155132724750E-01
+-6.9539795542223848E-01
+-6.8550288277475502E-01
+-6.7472503761642622E-01
+-6.6942997860271680E-01
+-6.4965211901035491E-01
+-6.4745821080776289E-01
+-6.3929672476967936E-01
+-6.3663281883617495E-01
+-6.3479736944249932E-01
+-6.3198306840012097E-01
+-6.2833717805614764E-01
+-6.2567642663429368E-01
+-6.2505352824213822E-01
+-6.2104454615676286E-01
+-6.1905970748751127E-01
+-6.1525199188465074E-01
+-6.1317717014550355E-01
+-6.0949681100159536E-01
+-6.0822907093030709E-01
+-6.0598391046381983E-01
+-5.9975827350005384E-01
+-5.9727482953882305E-01
+-5.9639110477122259E-01
+-5.9118720301622918E-01
+-5.8926038323927388E-01
+-5.8797243280773825E-01
+-5.8635995456823098E-01
+-5.8539656067639456E-01
+-5.7997961507091900E-01
+-5.7966552841630237E-01
+-5.7634657935354783E-01
+-5.6540120640418445E-01
+-5.5893148809338944E-01
+-5.5654879372514809E-01
+-5.2614699911861762E-01
+QETSC: Iter time (min)       =  13.96
+QETSC: Iter time (max)       =  20.60
+QETSC: Iter time (avg)       =  18.01
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99283097247E+00
+QETSC: Eigenvalue (nocc)     =-5.26146999119E-01
+QETSC: Max differrence       = 3.33473484316E-02
+QETSC: Safe iteration        =      F
+QETSC: Finished iter            5
+ *****************************************************************
+ QETSC: Estimated eigenvalues         =
+-2.0079365079365079E+00
+-1.9957671957671956E+00
+-1.9835978835978836E+00
+-1.9714285714285713E+00
+-1.9683862433862434E+00
+-1.9653439153439152E+00
+-1.9623015873015872E+00
+-1.9592592592592590E+00
+-1.9562169312169311E+00
+-1.9531746031746029E+00
+-1.9501322751322749E+00
+-1.9470899470899470E+00
+-1.9440476190476188E+00
+-1.9410052910052908E+00
+-1.9379629629629627E+00
+-1.9349206349206347E+00
+-1.9321123321123319E+00
+-1.9293040293040291E+00
+-1.9264957264957263E+00
+-1.9236874236874235E+00
+-1.9208791208791207E+00
+-1.9180708180708179E+00
+-1.9152625152625151E+00
+-1.9124542124542123E+00
+-1.9096459096459095E+00
+-1.9068376068376067E+00
+-1.9040293040293039E+00
+-1.9012210012210011E+00
+-1.8984126984126983E+00
+-1.8862433862433861E+00
+-1.8740740740740740E+00
+-1.8619047619047617E+00
+-1.1317460317460317E+00
+-1.1134920634920635E+00
+-1.0952380952380951E+00
+-1.0915873015873014E+00
+-1.0879365079365078E+00
+-1.0842857142857143E+00
+-1.0806349206349206E+00
+-1.0769841269841269E+00
+-1.0733333333333333E+00
+-1.0696825396825396E+00
+-1.0660317460317461E+00
+-1.0623809523809524E+00
+-1.0587301587301587E+00
+-1.0554112554112554E+00
+-1.0520923520923522E+00
+-1.0487734487734488E+00
+-1.0454545454545454E+00
+-1.0421356421356420E+00
+-1.0388167388167389E+00
+-1.0354978354978355E+00
+-1.0321789321789321E+00
+-1.0288600288600287E+00
+-1.0255411255411255E+00
+-1.0222222222222221E+00
+-1.0176587301587301E+00
+-1.0130952380952380E+00
+-1.0085317460317460E+00
+-1.0039682539682540E+00
+-9.9940476190476191E-01
+-9.9484126984126986E-01
+-9.9027777777777781E-01
+-9.8571428571428577E-01
+-8.7619047619047619E-01
+-8.6402116402116402E-01
+-8.5185185185185197E-01
+-8.3968253968253981E-01
+-8.3511904761904776E-01
+-8.3055555555555571E-01
+-8.2599206349206356E-01
+-8.2142857142857151E-01
+-8.1686507936507946E-01
+-8.1230158730158730E-01
+-8.0773809523809526E-01
+-8.0317460317460321E-01
+-7.9708994708994707E-01
+-7.9100529100529104E-01
+-7.8492063492063491E-01
+-7.7883597883597877E-01
+-7.7275132275132274E-01
+-7.6666666666666661E-01
+-7.6261022927689592E-01
+-7.5855379188712524E-01
+-7.5449735449735444E-01
+-7.5044091710758376E-01
+-7.4638447971781308E-01
+-7.4232804232804239E-01
+-7.3827160493827160E-01
+-7.3421516754850091E-01
+-7.3015873015873023E-01
+-7.2285714285714286E-01
+-7.1555555555555561E-01
+-7.0825396825396825E-01
+-7.0095238095238099E-01
+-6.9365079365079363E-01
+-6.7539682539682544E-01
+-6.5714285714285725E-01
+-6.5410052910052918E-01
+-6.5105820105820111E-01
+-6.4801587301587316E-01
+-6.4497354497354509E-01
+-6.4193121693121702E-01
+-6.3888888888888895E-01
+-6.3584656084656088E-01
+-6.3280423280423281E-01
+-6.2976190476190474E-01
+-6.2671957671957679E-01
+-6.2367724867724872E-01
+-6.2063492063492065E-01
+-6.1820105820105820E-01
+-6.1576719576719585E-01
+-6.1333333333333340E-01
+-6.1089947089947094E-01
+-6.0846560846560849E-01
+-6.0603174603174614E-01
+-6.0359788359788369E-01
+-6.0116402116402123E-01
+-5.9873015873015878E-01
+-5.9629629629629644E-01
+-5.9386243386243398E-01
+-5.9142857142857153E-01
+-5.8899470899470907E-01
+-5.8656084656084673E-01
+-5.8412698412698427E-01
+-5.7195767195767211E-01
+-5.5978835978835984E-01
+ 0.0000000000000000E+00
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            6
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 0.00000000000E+00
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =           1
+ QETSC: Eigenvalues         =
+-1.9952600336251718E+00
+-1.9821872614041234E+00
+-1.9761909570618177E+00
+-1.9690433966265024E+00
+-1.9673257798142076E+00
+-1.9639274364955377E+00
+-1.9625072283493770E+00
+-1.9601959232684834E+00
+-1.9589485029621765E+00
+-1.9541746595687051E+00
+-1.9486206168794129E+00
+-1.9469688502281381E+00
+-1.9462084171182905E+00
+-1.9422865562899174E+00
+-1.9371693909690642E+00
+-1.9349002853574653E+00
+-1.9323155994300787E+00
+-1.9301626157003646E+00
+-1.9266490486762822E+00
+-1.9222816748932803E+00
+-1.9199172216061573E+00
+-1.9189941520780556E+00
+-1.9159195416067438E+00
+-1.9147368312452044E+00
+-1.9128683414416190E+00
+-1.9107438799487395E+00
+-1.9077542297691228E+00
+-1.9036790024466521E+00
+-1.8964196118553649E+00
+-1.8866216624738112E+00
+-1.8844519757444138E+00
+-1.8584436091623355E+00
+-1.0990508089132998E+00
+-1.0969288382539646E+00
+-1.0921207437747347E+00
+-1.0900921310246847E+00
+-1.0831623872912508E+00
+-1.0790346054671898E+00
+-1.0783372231478081E+00
+-1.0744541830251939E+00
+-1.0727332184179419E+00
+-1.0724043911433430E+00
+-1.0625022914351554E+00
+-1.0588647031227822E+00
+-1.0556394654571852E+00
+-1.0550285446747596E+00
+-1.0514669476968095E+00
+-1.0489210751055760E+00
+-1.0470192776296210E+00
+-1.0448142448773201E+00
+-1.0372518749274147E+00
+-1.0344112104908953E+00
+-1.0324783601046523E+00
+-1.0301463500336745E+00
+-1.0279582282269755E+00
+-1.0221997455329204E+00
+-1.0216868830244303E+00
+-1.0177729685485379E+00
+-1.0096210569531912E+00
+-1.0078964069837475E+00
+-1.0013193849350519E+00
+-9.9311815761886757E-01
+-9.8921848006017676E-01
+-9.7547078552524491E-01
+-8.7285320107403486E-01
+-8.5765256280259716E-01
+-8.4766002433913168E-01
+-8.3734712486001128E-01
+-8.3282325283625447E-01
+-8.2879101314416748E-01
+-8.2305979426715536E-01
+-8.1932385067946734E-01
+-8.1809310684415826E-01
+-8.1748369710873803E-01
+-8.1466225260485958E-01
+-7.9434563379788869E-01
+-7.9115524409196103E-01
+-7.8676262147293530E-01
+-7.8239702996699045E-01
+-7.7186408573551535E-01
+-7.6822145708940126E-01
+-7.6471872297839394E-01
+-7.6079157679198695E-01
+-7.5177215732188829E-01
+-7.5058469764062674E-01
+-7.4833409862670386E-01
+-7.4350011800308624E-01
+-7.3890278570064150E-01
+-7.3552584849000846E-01
+-7.3112156510704585E-01
+-7.2771277647215904E-01
+-7.1909520400169535E-01
+-7.1702782395889175E-01
+-7.0336891219334619E-01
+-6.9511230587276174E-01
+-6.8401568910676469E-01
+-6.7297236255420700E-01
+-6.5526227935005088E-01
+-6.5276082531897839E-01
+-6.4504566854327328E-01
+-6.4280656159740412E-01
+-6.4034081387110131E-01
+-6.3812410638459016E-01
+-6.3411364681258331E-01
+-6.3169780271838072E-01
+-6.3091021092741140E-01
+-6.2738052532618227E-01
+-6.2569085770705879E-01
+-6.2278297332190491E-01
+-6.1993337970517415E-01
+-6.1683151285640281E-01
+-6.1600796151389670E-01
+-6.1347830740412646E-01
+-6.0730604386065346E-01
+-6.0508964895392758E-01
+-6.0323800824001761E-01
+-5.9884879517584388E-01
+-5.9695405581082372E-01
+-5.9653786897912986E-01
+-5.9427763738768502E-01
+-5.9310092336837705E-01
+-5.8844786391387005E-01
+-5.8797381380279523E-01
+-5.8466270164060330E-01
+-5.7493130612397236E-01
+-5.6867584225878609E-01
+-5.6702218158901907E-01
+-5.3937866729088280E-01
+QETSC: Iter time (min)       =  13.17
+QETSC: Iter time (max)       =  19.96
+QETSC: Iter time (avg)       =  17.45
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99526003363E+00
+QETSC: Eigenvalue (nocc)     =-5.39378667291E-01
+QETSC: Max differrence       = 1.35395075404E-02
+QETSC: Safe iteration        =      F
+QETSC: Finished iter            6
+ *****************************************************************
+ QETSC: Estimated eigenvalues         =
+-2.0079365079365079E+00
+-1.9957671957671956E+00
+-1.9835978835978836E+00
+-1.9714285714285713E+00
+-1.9683862433862434E+00
+-1.9653439153439152E+00
+-1.9623015873015872E+00
+-1.9592592592592590E+00
+-1.9562169312169311E+00
+-1.9531746031746029E+00
+-1.9501322751322749E+00
+-1.9470899470899470E+00
+-1.9440476190476188E+00
+-1.9410052910052908E+00
+-1.9379629629629627E+00
+-1.9349206349206347E+00
+-1.9321123321123319E+00
+-1.9293040293040291E+00
+-1.9264957264957263E+00
+-1.9236874236874235E+00
+-1.9208791208791207E+00
+-1.9180708180708179E+00
+-1.9152625152625151E+00
+-1.9124542124542123E+00
+-1.9096459096459095E+00
+-1.9068376068376067E+00
+-1.9040293040293039E+00
+-1.9012210012210011E+00
+-1.8984126984126983E+00
+-1.8862433862433861E+00
+-1.8740740740740740E+00
+-1.8619047619047617E+00
+-1.1317460317460317E+00
+-1.1134920634920635E+00
+-1.0952380952380951E+00
+-1.0911816578483244E+00
+-1.0871252204585538E+00
+-1.0830687830687831E+00
+-1.0790123456790124E+00
+-1.0749559082892415E+00
+-1.0708994708994708E+00
+-1.0668430335097001E+00
+-1.0627865961199294E+00
+-1.0587301587301587E+00
+-1.0556878306878308E+00
+-1.0526455026455026E+00
+-1.0496031746031746E+00
+-1.0465608465608465E+00
+-1.0435185185185185E+00
+-1.0404761904761903E+00
+-1.0374338624338624E+00
+-1.0343915343915344E+00
+-1.0313492063492062E+00
+-1.0283068783068783E+00
+-1.0252645502645501E+00
+-1.0222222222222221E+00
+-1.0176587301587301E+00
+-1.0130952380952380E+00
+-1.0085317460317460E+00
+-1.0039682539682540E+00
+-9.9940476190476191E-01
+-9.9484126984126986E-01
+-9.9027777777777781E-01
+-9.8571428571428577E-01
+-8.7619047619047619E-01
+-8.6402116402116402E-01
+-8.5185185185185197E-01
+-8.3968253968253981E-01
+-8.3511904761904776E-01
+-8.3055555555555571E-01
+-8.2599206349206356E-01
+-8.2142857142857151E-01
+-8.1686507936507946E-01
+-8.1230158730158730E-01
+-8.0773809523809526E-01
+-8.0317460317460321E-01
+-7.9708994708994707E-01
+-7.9100529100529104E-01
+-7.8492063492063491E-01
+-7.7883597883597877E-01
+-7.7275132275132274E-01
+-7.6666666666666661E-01
+-7.6261022927689592E-01
+-7.5855379188712524E-01
+-7.5449735449735444E-01
+-7.5044091710758376E-01
+-7.4638447971781308E-01
+-7.4232804232804239E-01
+-7.3827160493827160E-01
+-7.3421516754850091E-01
+-7.3015873015873023E-01
+-7.2285714285714286E-01
+-7.1555555555555561E-01
+-7.0825396825396825E-01
+-7.0095238095238099E-01
+-6.9365079365079363E-01
+-6.7539682539682544E-01
+-6.5714285714285725E-01
+-6.5410052910052918E-01
+-6.5105820105820111E-01
+-6.4801587301587316E-01
+-6.4497354497354509E-01
+-6.4193121693121702E-01
+-6.3888888888888895E-01
+-6.3584656084656088E-01
+-6.3280423280423281E-01
+-6.2976190476190474E-01
+-6.2671957671957679E-01
+-6.2367724867724872E-01
+-6.2063492063492065E-01
+-6.1820105820105820E-01
+-6.1576719576719585E-01
+-6.1333333333333340E-01
+-6.1089947089947094E-01
+-6.0846560846560849E-01
+-6.0603174603174614E-01
+-6.0359788359788369E-01
+-6.0116402116402123E-01
+-5.9873015873015878E-01
+-5.9629629629629644E-01
+-5.9386243386243398E-01
+-5.9142857142857153E-01
+-5.8899470899470907E-01
+-5.8656084656084673E-01
+-5.8412698412698427E-01
+-5.7195767195767211E-01
+-5.5978835978835984E-01
+ 0.0000000000000000E+00
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            7
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 0.00000000000E+00
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =           1
+ QETSC: Eigenvalues         =
+-1.9933046804949510E+00
+-1.9811436994044080E+00
+-1.9752335107916519E+00
+-1.9683007639522676E+00
+-1.9666454104054365E+00
+-1.9629126417608045E+00
+-1.9617745119053278E+00
+-1.9593731693759631E+00
+-1.9582864098271324E+00
+-1.9538160412824690E+00
+-1.9482260120062516E+00
+-1.9467154527034318E+00
+-1.9459707278795244E+00
+-1.9419298803243266E+00
+-1.9367559361695137E+00
+-1.9345371861138698E+00
+-1.9317966588901403E+00
+-1.9298872928035800E+00
+-1.9263902511982789E+00
+-1.9223335888949675E+00
+-1.9197191133692615E+00
+-1.9189089053713657E+00
+-1.9157123346129437E+00
+-1.9147327431860259E+00
+-1.9127232063455466E+00
+-1.9108791918892980E+00
+-1.9077551811679869E+00
+-1.9037022914093413E+00
+-1.8969263215494205E+00
+-1.8869894464718640E+00
+-1.8852731343951818E+00
+-1.8600854360187611E+00
+-1.0982541972229081E+00
+-1.0957539982993143E+00
+-1.0904985751518506E+00
+-1.0900411663783378E+00
+-1.0825492883996781E+00
+-1.0786443384342534E+00
+-1.0777553239870010E+00
+-1.0739027490451014E+00
+-1.0724201324131835E+00
+-1.0718930585999040E+00
+-1.0621990257866809E+00
+-1.0585099493725700E+00
+-1.0556236386010582E+00
+-1.0547900619576887E+00
+-1.0512985996762121E+00
+-1.0485912152797761E+00
+-1.0471667700814624E+00
+-1.0445690496730040E+00
+-1.0373136321432734E+00
+-1.0343908288538477E+00
+-1.0323300379319451E+00
+-1.0299536655355501E+00
+-1.0280109414975336E+00
+-1.0221629813642497E+00
+-1.0216719381062191E+00
+-1.0180912469757770E+00
+-1.0098552214814194E+00
+-1.0080601120240142E+00
+-1.0014361892338886E+00
+-9.9386829032639323E-01
+-9.8991323235512696E-01
+-9.7687654164326476E-01
+-8.7242404080051350E-01
+-8.5725898313976812E-01
+-8.4763234802620113E-01
+-8.3754835261398974E-01
+-8.3271895140647667E-01
+-8.2855598924906748E-01
+-8.2325546535295691E-01
+-8.1933085355855528E-01
+-8.1794628668234592E-01
+-8.1717401883441310E-01
+-8.1431700455443312E-01
+-7.9432757050233849E-01
+-7.9134322284849157E-01
+-7.8691643096083275E-01
+-7.8246499969396810E-01
+-7.7202997300169152E-01
+-7.6833470192285380E-01
+-7.6473427755842072E-01
+-7.6139499506854857E-01
+-7.5199072263120714E-01
+-7.5087037761913644E-01
+-7.4833160327885617E-01
+-7.4375602993215373E-01
+-7.3908388750043919E-01
+-7.3589442049684861E-01
+-7.3129342579656531E-01
+-7.2792670098876555E-01
+-7.1933324286868416E-01
+-7.1725072024329817E-01
+-7.0355953644314184E-01
+-6.9572920192866383E-01
+-6.8447794550973495E-01
+-6.7157498256034343E-01
+-6.5491635391748326E-01
+-6.5219868294421568E-01
+-6.4467819664668946E-01
+-6.4252862703167923E-01
+-6.3980751661079183E-01
+-6.3780892101674413E-01
+-6.3365602823280986E-01
+-6.3129554813574484E-01
+-6.3026253313203617E-01
+-6.2710488814280918E-01
+-6.2559873585858572E-01
+-6.2295244627019997E-01
+-6.1991758267221464E-01
+-6.1691959136299879E-01
+-6.1637330973007443E-01
+-6.1361943651526785E-01
+-6.0749784912597127E-01
+-6.0529469895737253E-01
+-6.0316164947612505E-01
+-5.9891922932573050E-01
+-5.9716603613718744E-01
+-5.9690307063016701E-01
+-5.9430094943974177E-01
+-5.9324195347856234E-01
+-5.8874852591803351E-01
+-5.8803511260101049E-01
+-5.8478869090242669E-01
+-5.7510401636943165E-01
+-5.6943263147777456E-01
+-5.6784570296828540E-01
+-5.4083661686750562E-01
+QETSC: Iter time (min)       =  13.71
+QETSC: Iter time (max)       =  20.32
+QETSC: Iter time (avg)       =  17.79
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99330468049E+00
+QETSC: Eigenvalue (nocc)     =-5.40836616868E-01
+QETSC: Max differrence       = 1.95535313022E-03
+QETSC: Safe iteration        =      T
+QETSC: Finished iter            7
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            8
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =           0
+ QETSC: Eigenvalues         =
+-1.9917567319560354E+00
+-1.9793261848633694E+00
+-1.9733955837366759E+00
+-1.9662942633817178E+00
+-1.9645882008485525E+00
+-1.9609879867389035E+00
+-1.9597552054503804E+00
+-1.9574190318660216E+00
+-1.9562731437997940E+00
+-1.9516122986979072E+00
+-1.9461708393603643E+00
+-1.9443512019195488E+00
+-1.9437218311775140E+00
+-1.9396438001585401E+00
+-1.9345083494830089E+00
+-1.9321919469653177E+00
+-1.9295533390184507E+00
+-1.9274645760081002E+00
+-1.9242471215471944E+00
+-1.9197183831777711E+00
+-1.9172990138454800E+00
+-1.9165114974352131E+00
+-1.9134515163186467E+00
+-1.9123462048846669E+00
+-1.9104263937591142E+00
+-1.9084364447763398E+00
+-1.9052776322386660E+00
+-1.9012600378943316E+00
+-1.8939684184619974E+00
+-1.8840357562698660E+00
+-1.8821079055318648E+00
+-1.8566250767801198E+00
+-1.0968224068213710E+00
+-1.0943849657504576E+00
+-1.0892784444296169E+00
+-1.0884097591183062E+00
+-1.0809741657868861E+00
+-1.0769836647826905E+00
+-1.0762077705769610E+00
+-1.0722857077107382E+00
+-1.0706900941971451E+00
+-1.0703753856023084E+00
+-1.0604829795935213E+00
+-1.0567075922097766E+00
+-1.0534894243289692E+00
+-1.0529948722706106E+00
+-1.0494119912332984E+00
+-1.0468132713320986E+00
+-1.0450867591881474E+00
+-1.0427287385295421E+00
+-1.0355301266086396E+00
+-1.0325722591059314E+00
+-1.0304223454774217E+00
+-1.0280086086737339E+00
+-1.0261538769174936E+00
+-1.0203121556713126E+00
+-1.0199278963084992E+00
+-1.0160229247938239E+00
+-1.0076597726298087E+00
+-1.0059237170257327E+00
+-9.9963951975449317E-01
+-9.9139016715684647E-01
+-9.8743045501967519E-01
+-9.7416218747426564E-01
+-8.7049216503448179E-01
+-8.5533980925393416E-01
+-8.4543160253722882E-01
+-8.3527898441974968E-01
+-8.3068527085169752E-01
+-8.2653604099796540E-01
+-8.2098710550271770E-01
+-8.1715196340802032E-01
+-8.1597607090843771E-01
+-8.1514211345828236E-01
+-8.1235513829804351E-01
+-7.9210997204187461E-01
+-7.8911914409018269E-01
+-7.8461999648010716E-01
+-7.8015814145675599E-01
+-7.6983116183347056E-01
+-7.6606358982518064E-01
+-7.6244762807186262E-01
+-7.5871723695938098E-01
+-7.4954220890982903E-01
+-7.4842928426352162E-01
+-7.4602149673614615E-01
+-7.4123469935471242E-01
+-7.3665338335913477E-01
+-7.3332112829281271E-01
+-7.2890132045504963E-01
+-7.2552428470101804E-01
+-7.1683551167367809E-01
+-7.1487486172590375E-01
+-7.0097674666542120E-01
+-6.9284459126823961E-01
+-6.8166354035889853E-01
+-6.6983060732963484E-01
+-6.5285696570441720E-01
+-6.5021066623451029E-01
+-6.4253346716039617E-01
+-6.4035752555034131E-01
+-6.3769615870672569E-01
+-6.3563236322560734E-01
+-6.3153536574035851E-01
+-6.2915656071639969E-01
+-6.2821550848417673E-01
+-6.2492458032389664E-01
+-6.2335710099596231E-01
+-6.2048954323125094E-01
+-6.1774431027283716E-01
+-6.1441228171113682E-01
+-6.1382238096277497E-01
+-6.1115357509765678E-01
+-6.0504577250073355E-01
+-6.0276071188360569E-01
+-6.0077688452723343E-01
+-5.9649883386195002E-01
+-5.9462510017054204E-01
+-5.9433461647179386E-01
+-5.9177174391559340E-01
+-5.9095466046364975E-01
+-5.8607580825013650E-01
+-5.8528251384090602E-01
+-5.8212579123232344E-01
+-5.7239605559763962E-01
+-5.6628370856548405E-01
+-5.6465788332706413E-01
+-5.3742134055984447E-01
+QETSC: Iter time (min)       =  13.54
+QETSC: Iter time (max)       =  20.28
+QETSC: Iter time (avg)       =  17.73
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99175673196E+00
+QETSC: Eigenvalue (nocc)     =-5.37421340560E-01
+QETSC: Max differrence       = 3.46035923864E-03
+QETSC: Safe iteration        =      T
+QETSC: Finished iter            8
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter            9
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -1
+ QETSC: Eigenvalues         =
+-1.9918125629184491E+00
+-1.9790821494846849E+00
+-1.9730740507076641E+00
+-1.9658868284967694E+00
+-1.9641343492543384E+00
+-1.9606440273493533E+00
+-1.9593297183041831E+00
+-1.9570322897389640E+00
+-1.9558561435711501E+00
+-1.9510736582215695E+00
+-1.9457284480746821E+00
+-1.9437522237497271E+00
+-1.9429763163647111E+00
+-1.9390015559941089E+00
+-1.9339163708725056E+00
+-1.9315956618733467E+00
+-1.9290001027405634E+00
+-1.9267773403276582E+00
+-1.9236838042258899E+00
+-1.9188328392102982E+00
+-1.9166005546942326E+00
+-1.9157642979423712E+00
+-1.9128481444978049E+00
+-1.9116309058075545E+00
+-1.9097926896405528E+00
+-1.9076620707660414E+00
+-1.9045666845852611E+00
+-1.9005144769304241E+00
+-1.8928563608093683E+00
+-1.8830541134412326E+00
+-1.8808119036654511E+00
+-1.8552267475184685E+00
+-1.0965967007000783E+00
+-1.0942364312066157E+00
+-1.0893284965279617E+00
+-1.0879505590902709E+00
+-1.0806432912461337E+00
+-1.0765651044445528E+00
+-1.0759174174818273E+00
+-1.0719568014624421E+00
+-1.0702954631985446E+00
+-1.0699968030247897E+00
+-1.0600669607693014E+00
+-1.0562349141770186E+00
+-1.0529777815384302E+00
+-1.0523244795397699E+00
+-1.0487912430266690E+00
+-1.0463571890962085E+00
+-1.0443794350637072E+00
+-1.0421904057363272E+00
+-1.0349343490645424E+00
+-1.0320131790898581E+00
+-1.0298340133065731E+00
+-1.0274483723323808E+00
+-1.0255155292387015E+00
+-1.0198306501826584E+00
+-1.0193592401914535E+00
+-1.0152839722782432E+00
+-1.0069397728436733E+00
+-1.0051169341311610E+00
+-9.9910290772029475E-01
+-9.9036089191285481E-01
+-9.8639969620685808E-01
+-9.7297904980559768E-01
+-8.6998245239202421E-01
+-8.5483935976857073E-01
+-8.4480405634651723E-01
+-8.3447967755168539E-01
+-8.3006459168513436E-01
+-8.2596754139901674E-01
+-8.2022611981897298E-01
+-8.1644444384623238E-01
+-8.1535767746302379E-01
+-8.1458687733193613E-01
+-8.1179604574204778E-01
+-7.9143661906464535E-01
+-7.8837853336844688E-01
+-7.8382941194016087E-01
+-7.7939887820674103E-01
+-7.6905384364879426E-01
+-7.6530387878291672E-01
+-7.6170415610060072E-01
+-7.5767196754708521E-01
+-7.4872926472781132E-01
+-7.4762146080346348E-01
+-7.4527046915263817E-01
+-7.4034570874267758E-01
+-7.3581650567159962E-01
+-7.3236331552086786E-01
+-7.2812426941990860E-01
+-7.2472166613235200E-01
+-7.1598724974622885E-01
+-7.1407049177002391E-01
+-7.0010880155907917E-01
+-6.9184234854008930E-01
+-6.8073295915860910E-01
+-6.6966375498534703E-01
+-6.5230361224351896E-01
+-6.4973444119680568E-01
+-6.4194558236390364E-01
+-6.3978672590322283E-01
+-6.3717475953158031E-01
+-6.3509759792965703E-01
+-6.3104700738360853E-01
+-6.2860908577820951E-01
+-6.2768589177852108E-01
+-6.2430913600985638E-01
+-6.2274415240632419E-01
+-6.1973691616048565E-01
+-6.1714353183513493E-01
+-6.1367158996652238E-01
+-6.1288070986800758E-01
+-6.1034241179537163E-01
+-6.0422033421798516E-01
+-6.0194989001488253E-01
+-6.0004862858791486E-01
+-5.9575774117851221E-01
+-5.9387043815664342E-01
+-5.9339008151173056E-01
+-5.9097188513471077E-01
+-5.9027566617104665E-01
+-5.8519209755689772E-01
+-5.8438443970444420E-01
+-5.8129260734859245E-01
+-5.7155150595561988E-01
+-5.6502089064205219E-01
+-5.6334677557626944E-01
+-5.3607816736504876E-01
+QETSC: Iter time (min)       =  13.80
+QETSC: Iter time (max)       =  20.35
+QETSC: Iter time (avg)       =  17.79
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99181256292E+00
+QETSC: Eigenvalue (nocc)     =-5.36078167365E-01
+QETSC: Max differrence       = 1.39832926165E-03
+QETSC: Safe iteration        =      T
+QETSC: Finished iter            9
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           10
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -2
+ QETSC: Eigenvalues         =
+-1.9921777187712510E+00
+-1.9794527665966284E+00
+-1.9734381338185827E+00
+-1.9662825285952963E+00
+-1.9645318098907729E+00
+-1.9610163053613121E+00
+-1.9597237598442938E+00
+-1.9574241207447791E+00
+-1.9562537786157761E+00
+-1.9514905527137718E+00
+-1.9461193734698925E+00
+-1.9441633923683721E+00
+-1.9433962022131415E+00
+-1.9394177694120405E+00
+-1.9343270811789863E+00
+-1.9320248001846778E+00
+-1.9294262358997276E+00
+-1.9272183251082227E+00
+-1.9240770114033214E+00
+-1.9192676201889858E+00
+-1.9170010503008756E+00
+-1.9161750400189179E+00
+-1.9132428492034561E+00
+-1.9120526133993330E+00
+-1.9101974845241241E+00
+-1.9080887757866001E+00
+-1.9050033064294212E+00
+-1.9009457633237705E+00
+-1.8933076182597646E+00
+-1.8835296621944295E+00
+-1.8813076127128683E+00
+-1.8557277572722566E+00
+-1.0968974563779024E+00
+-1.0945271557494458E+00
+-1.0896279585430464E+00
+-1.0882645946646547E+00
+-1.0809530020210223E+00
+-1.0768930552357345E+00
+-1.0762264265713160E+00
+-1.0722786175482424E+00
+-1.0706139056583341E+00
+-1.0703296601384400E+00
+-1.0604075549363263E+00
+-1.0565719313926758E+00
+-1.0533104173263848E+00
+-1.0526659668113174E+00
+-1.0491310700180490E+00
+-1.0466794636618735E+00
+-1.0447341495290048E+00
+-1.0425282857314118E+00
+-1.0352403905626695E+00
+-1.0323349364847718E+00
+-1.0301706927857845E+00
+-1.0277893820987898E+00
+-1.0258330581267807E+00
+-1.0201526328556874E+00
+-1.0196914997315789E+00
+-1.0156442114159270E+00
+-1.0073055550628416E+00
+-1.0054786603926966E+00
+-9.9943518834819922E-01
+-9.9073532940583831E-01
+-9.8677414344598335E-01
+-9.7336826545745525E-01
+-8.7033097967877349E-01
+-8.5518990131502537E-01
+-8.4518775401252011E-01
+-8.3485745536103673E-01
+-8.3042006713716132E-01
+-8.2632030014141633E-01
+-8.2061093169028743E-01
+-8.1681122668042450E-01
+-8.1569419452556757E-01
+-8.1494487978686525E-01
+-8.1213183360075480E-01
+-7.9182389200278736E-01
+-7.8875637959153599E-01
+-7.8421374125086951E-01
+-7.7977078193173188E-01
+-7.6940876157529281E-01
+-7.6566926500409205E-01
+-7.6209727479453571E-01
+-7.5808378060009352E-01
+-7.4912409432502114E-01
+-7.4801341671972699E-01
+-7.4565740846457318E-01
+-7.4075139426562642E-01
+-7.3620243407984653E-01
+-7.3277876287882437E-01
+-7.2852525588579631E-01
+-7.2511183999679674E-01
+-7.1640248943854834E-01
+-7.1445001069883451E-01
+-7.0052409164139384E-01
+-6.9229888997808520E-01
+-6.8118417669009734E-01
+-6.7002947018848036E-01
+-6.5267620391895920E-01
+-6.5009666767249641E-01
+-6.4232367899512988E-01
+-6.4017942436112452E-01
+-6.3755701560725253E-01
+-6.3550110251362713E-01
+-6.3143851157495923E-01
+-6.2897488201774243E-01
+-6.2805278157843925E-01
+-6.2469325036696866E-01
+-6.2315111904733578E-01
+-6.2016640150143443E-01
+-6.1753749301426031E-01
+-6.1411303243097659E-01
+-6.1329050751990077E-01
+-6.1075979424281102E-01
+-6.0462145850022286E-01
+-6.0238018136054006E-01
+-6.0046633248581738E-01
+-5.9615838807452792E-01
+-5.9428429192606869E-01
+-5.9382755718526226E-01
+-5.9139289068927015E-01
+-5.9066450654169755E-01
+-5.8563207422565933E-01
+-5.8482584602543708E-01
+-5.8174274793470659E-01
+-5.7197016422654123E-01
+-5.6548948795894349E-01
+-5.6383187866370021E-01
+-5.3656871086669644E-01
+QETSC: Iter time (min)       =  13.96
+QETSC: Iter time (max)       =  20.44
+QETSC: Iter time (avg)       =  17.89
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99217771877E+00
+QETSC: Eigenvalue (nocc)     =-5.36568710867E-01
+QETSC: Max differrence       = 5.01009753788E-04
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           10
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           11
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -3
+ QETSC: Eigenvalues         =
+-1.9922322553761405E+00
+-1.9795643664390374E+00
+-1.9735644740149916E+00
+-1.9664261857284389E+00
+-1.9646836808346972E+00
+-1.9611524267499514E+00
+-1.9598740109830963E+00
+-1.9575683049048731E+00
+-1.9564026539026471E+00
+-1.9516627116811349E+00
+-1.9462739599489229E+00
+-1.9443350279183447E+00
+-1.9436089077971672E+00
+-1.9396039717109790E+00
+-1.9345059894721863E+00
+-1.9322032635335011E+00
+-1.9296003825314088E+00
+-1.9274103751693104E+00
+-1.9242567105244093E+00
+-1.9194939266708586E+00
+-1.9171966691339113E+00
+-1.9163819272228657E+00
+-1.9134276406664514E+00
+-1.9122612600600326E+00
+-1.9103913130054599E+00
+-1.9083051335108376E+00
+-1.9052059519753228E+00
+-1.9011592084129965E+00
+-1.8935700868700351E+00
+-1.8837726187435706E+00
+-1.8816148814414415E+00
+-1.8560567211532131E+00
+-1.0970052072999845E+00
+-1.0946196504017776E+00
+-1.0896853001386502E+00
+-1.0884235032824241E+00
+-1.0810797276889115E+00
+-1.0770376796712058E+00
+-1.0763446489537432E+00
+-1.0724044081608095E+00
+-1.0707517156121704E+00
+-1.0704779109742277E+00
+-1.0605541254376831E+00
+-1.0567248881976681E+00
+-1.0534570318721845E+00
+-1.0528578186488844E+00
+-1.0493116270898146E+00
+-1.0468306952717730E+00
+-1.0449268717621385E+00
+-1.0426966941581171E+00
+-1.0354181931207866E+00
+-1.0325087818848164E+00
+-1.0303436081076620E+00
+-1.0279562929263191E+00
+-1.0260173821855665E+00
+-1.0203124147056986E+00
+-1.0198745179021327E+00
+-1.0158494671297744E+00
+-1.0074975641510133E+00
+-1.0056921916953272E+00
+-9.9961229182257327E-01
+-9.9098716098986295E-01
+-9.8702436171773833E-01
+-9.7365331482170536E-01
+-8.7047747736547598E-01
+-8.5533669390101918E-01
+-8.4535628431971477E-01
+-8.3505804013151974E-01
+-8.3058978962293284E-01
+-8.2648167040821852E-01
+-8.2080640058046317E-01
+-8.1699673793565242E-01
+-8.1586499622925268E-01
+-8.1510065171083101E-01
+-8.1229254524263961E-01
+-7.9200567566811386E-01
+-7.8895169619921990E-01
+-7.8441461201471463E-01
+-7.7996070342760015E-01
+-7.6960413691564378E-01
+-7.6585998131934030E-01
+-7.6228980056914930E-01
+-7.5832539331016136E-01
+-7.4932639088371833E-01
+-7.4821529979340962E-01
+-7.4584970794743932E-01
+-7.4096844322172117E-01
+-7.3641168814038960E-01
+-7.3301281013697017E-01
+-7.2872669528068568E-01
+-7.2531858541781502E-01
+-7.1661428807635852E-01
+-7.1465848699479273E-01
+-7.0073455361869685E-01
+-6.9253470691496688E-01
+-6.8140607242626894E-01
+-6.7011142357302178E-01
+-6.5283126880844711E-01
+-6.5023763136436152E-01
+-6.4248591885030104E-01
+-6.4034272300532447E-01
+-6.3770906842346509E-01
+-6.3565392068521431E-01
+-6.3158228771189195E-01
+-6.2913043265152979E-01
+-6.2820933457696448E-01
+-6.2486348399875968E-01
+-6.2332409190333149E-01
+-6.2036109586902655E-01
+-6.1771214059135870E-01
+-6.1430690031753810E-01
+-6.1351756485555287E-01
+-6.1096460023451982E-01
+-6.0483220251104453E-01
+-6.0258973410175021E-01
+-6.0066230934375808E-01
+-5.9635688804389142E-01
+-5.9448639221220367E-01
+-5.9406194311643812E-01
+-5.9159865559260372E-01
+-5.9085720508361550E-01
+-5.8585132600306400E-01
+-5.8504185000141762E-01
+-5.8195246790645550E-01
+-5.7218362268097422E-01
+-5.6577392443747287E-01
+-5.6412776052644897E-01
+-5.3688000710533768E-01
+QETSC: Iter time (min)       =  13.62
+QETSC: Iter time (max)       =  20.06
+QETSC: Iter time (avg)       =  17.56
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99223225538E+00
+QETSC: Eigenvalue (nocc)     =-5.36880007105E-01
+QETSC: Max differrence       = 3.28963880956E-04
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           11
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           12
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -4
+ QETSC: Eigenvalues         =
+-1.9921875702568559E+00
+-1.9795517170559287E+00
+-1.9735575306952955E+00
+-1.9664227708300395E+00
+-1.9646832363447153E+00
+-1.9611524100136923E+00
+-1.9598732239741423E+00
+-1.9575641430630504E+00
+-1.9564042087000246E+00
+-1.9516706948127656E+00
+-1.9462817171849771E+00
+-1.9443435861677840E+00
+-1.9436328519840003E+00
+-1.9396152263445683E+00
+-1.9345165637471169E+00
+-1.9322118611143690E+00
+-1.9296056730215332E+00
+-1.9274213630883139E+00
+-1.9242779238423748E+00
+-1.9195226199644111E+00
+-1.9172316191706158E+00
+-1.9164104047091868E+00
+-1.9134540782687688E+00
+-1.9122893940384806E+00
+-1.9104193943477121E+00
+-1.9083349568454304E+00
+-1.9052300886604805E+00
+-1.9011868942291581E+00
+-1.8936233067186456E+00
+-1.8838148744765078E+00
+-1.8816712693992610E+00
+-1.8561463507577143E+00
+-1.0970043054892282E+00
+-1.0946120573763132E+00
+-1.0896559211724139E+00
+-1.0884491104615623E+00
+-1.0810872312782023E+00
+-1.0770475133135351E+00
+-1.0763489986437733E+00
+-1.0724079277463268E+00
+-1.0707604349850786E+00
+-1.0704897834147484E+00
+-1.0605649366598195E+00
+-1.0567377429763547E+00
+-1.0534755861983827E+00
+-1.0528925331065613E+00
+-1.0493411869459628E+00
+-1.0468527546762958E+00
+-1.0449574331875584E+00
+-1.0427204961970118E+00
+-1.0354541327642375E+00
+-1.0325409375161778E+00
+-1.0303695208533030E+00
+-1.0279838195296860E+00
+-1.0260530388791331E+00
+-1.0203384341189832E+00
+-1.0199086766723424E+00
+-1.0158854467785461E+00
+-1.0075278096418392E+00
+-1.0057363816909792E+00
+-9.9964386036292008E-01
+-9.9105114685335172E-01
+-9.8708803717854710E-01
+-9.7374156747222362E-01
+-8.7048405099373594E-01
+-8.5534436757286680E-01
+-8.4537207710938855E-01
+-8.3508689959606930E-01
+-8.3060673954854236E-01
+-8.2649954647352986E-01
+-8.2083328480405426E-01
+-8.1702258102299652E-01
+-8.1588835953915917E-01
+-8.1511284353893720E-01
+-8.1231480188214955E-01
+-7.9202448828869265E-01
+-7.8898110561798795E-01
+-7.8444240322255676E-01
+-7.7999323549689936E-01
+-7.6963709360358890E-01
+-7.6589034537085843E-01
+-7.6230955972683012E-01
+-7.5837141240424455E-01
+-7.4935661682728694E-01
+-7.4824819190388903E-01
+-7.4587468922906019E-01
+-7.4100221220273110E-01
+-7.3644765466844331E-01
+-7.3305174542647200E-01
+-7.2875584682668959E-01
+-7.2535334618578740E-01
+-7.1664290433435329E-01
+-7.1469791094038104E-01
+-7.0076397373666421E-01
+-6.9257449449903852E-01
+-6.8144028077408170E-01
+-6.7007884826761466E-01
+-6.5283498037226528E-01
+-6.5024032786293084E-01
+-6.4249528639615350E-01
+-6.4035031215631966E-01
+-6.3771260970386601E-01
+-6.3565342661869817E-01
+-6.3157969239937151E-01
+-6.2914260339052552E-01
+-6.2822311096151451E-01
+-6.2487674844910013E-01
+-6.2333278476650600E-01
+-6.2038124996227584E-01
+-6.1772678752782828E-01
+-6.1431859601230643E-01
+-6.1355168730717069E-01
+-6.1098915545547705E-01
+-6.0486375563309291E-01
+-6.0261306062867448E-01
+-6.0068384241613448E-01
+-5.9638821606849413E-01
+-5.9451227083873104E-01
+-5.9409678234532559E-01
+-5.9162560507639761E-01
+-5.9088835387539973E-01
+-5.8587993800737215E-01
+-5.8507177528040721E-01
+-5.8197668215823062E-01
+-5.7222948772718663E-01
+-5.6582850430333165E-01
+-5.6418383141121697E-01
+-5.3696347945382839E-01
+QETSC: Iter time (min)       =  14.37
+QETSC: Iter time (max)       =  20.86
+QETSC: Iter time (avg)       =  18.26
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99218757026E+00
+QETSC: Eigenvalue (nocc)     =-5.36963479454E-01
+QETSC: Max differrence       = 8.96296045012E-05
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           12
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           13
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -5
+ QETSC: Eigenvalues         =
+-1.9921857264150749E+00
+-1.9795585342605981E+00
+-1.9735617505282850E+00
+-1.9664308471234180E+00
+-1.9646908677948567E+00
+-1.9611608331772927E+00
+-1.9598793821192495E+00
+-1.9575692431701843E+00
+-1.9564149279861958E+00
+-1.9516811744338649E+00
+-1.9462934980709121E+00
+-1.9443531108610004E+00
+-1.9436437678961165E+00
+-1.9396236795922430E+00
+-1.9345253320898537E+00
+-1.9322220745509693E+00
+-1.9296138311897688E+00
+-1.9274320653526429E+00
+-1.9242929808091098E+00
+-1.9195346564678022E+00
+-1.9172543594490243E+00
+-1.9164251583733358E+00
+-1.9134718127633870E+00
+-1.9123036222622820E+00
+-1.9104365211721344E+00
+-1.9083490080069030E+00
+-1.9052461851771032E+00
+-1.9012012794886946E+00
+-1.8936481393934272E+00
+-1.8838411520427520E+00
+-1.8816883676003235E+00
+-1.8561836094380881E+00
+-1.0970116676335830E+00
+-1.0946161184062413E+00
+-1.0896554436572998E+00
+-1.0884631099815585E+00
+-1.0810961209952616E+00
+-1.0770554664670708E+00
+-1.0763581230725205E+00
+-1.0724158192725568E+00
+-1.0707671695260041E+00
+-1.0704988651559892E+00
+-1.0605753631002404E+00
+-1.0567463101457812E+00
+-1.0534916744570209E+00
+-1.0529071380193658E+00
+-1.0493556705174500E+00
+-1.0468672161997361E+00
+-1.0449704111756644E+00
+-1.0427326315515999E+00
+-1.0354682667257178E+00
+-1.0325560363399509E+00
+-1.0303826194325025E+00
+-1.0280013635968019E+00
+-1.0260668062708111E+00
+-1.0203528459260016E+00
+-1.0199234756871201E+00
+-1.0158996081766558E+00
+-1.0075432916678859E+00
+-1.0057571324247043E+00
+-9.9965796261478435E-01
+-9.9107650415952342E-01
+-9.8711421280902467E-01
+-9.7377763472038714E-01
+-8.7049229298899000E-01
+-8.5535476429336144E-01
+-8.4538691359201790E-01
+-8.3510080372036699E-01
+-8.3061649457313425E-01
+-8.2651217201241090E-01
+-8.2084826794435528E-01
+-8.1703679371827120E-01
+-8.1590000529636741E-01
+-8.1512397018601102E-01
+-8.1232912188215523E-01
+-7.9203727064206142E-01
+-7.8899662360009826E-01
+-7.8445589561712037E-01
+-7.8001344913622916E-01
+-7.6965196770429167E-01
+-7.6590657803383699E-01
+-7.6232066963427436E-01
+-7.5839101416704990E-01
+-7.4937340659192186E-01
+-7.4826648482241720E-01
+-7.4588902622504860E-01
+-7.4101858356728800E-01
+-7.3646416588761787E-01
+-7.3306760219187073E-01
+-7.2877252409267623E-01
+-7.2537063087739206E-01
+-7.1665819536116726E-01
+-7.1471625816000417E-01
+-7.0078017905865608E-01
+-6.9259809984576104E-01
+-6.8146345489980154E-01
+-6.7007891817125553E-01
+-6.5284147978023288E-01
+-6.5025010802435035E-01
+-6.4250567533871594E-01
+-6.4036019569793112E-01
+-6.3772230276542408E-01
+-6.3566300622736727E-01
+-6.3158795887887675E-01
+-6.2915488119484630E-01
+-6.2823733747792299E-01
+-6.2488816017169169E-01
+-6.2334307894498386E-01
+-6.2039875589852977E-01
+-6.1773871638612454E-01
+-6.1432959732214720E-01
+-6.1356515912815157E-01
+-6.1100389339485484E-01
+-6.0487825673038420E-01
+-6.0262612095603096E-01
+-6.0069935848249878E-01
+-5.9640731470596231E-01
+-5.9452727421509255E-01
+-5.9411209888810923E-01
+-5.9164142895494198E-01
+-5.9090660444411469E-01
+-5.8589599551101879E-01
+-5.8509163478344117E-01
+-5.8199415749047201E-01
+-5.7226027535722279E-01
+-5.6584985068859306E-01
+-5.6420459785532528E-01
+-5.3700119138320601E-01
+QETSC: Iter time (min)       =  13.56
+QETSC: Iter time (max)       =  20.25
+QETSC: Iter time (avg)       =  17.70
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99218572642E+00
+QETSC: Eigenvalue (nocc)     =-5.37001191383E-01
+QETSC: Max differrence       = 3.77119293776E-05
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           13
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           14
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -6
+ QETSC: Eigenvalues         =
+-1.9922016767299457E+00
+-1.9795713476231773E+00
+-1.9735723428034559E+00
+-1.9664430399061876E+00
+-1.9647024036594687E+00
+-1.9611722641902043E+00
+-1.9598904349912167E+00
+-1.9575806788607708E+00
+-1.9564272689337465E+00
+-1.9516925901171003E+00
+-1.9463050375884152E+00
+-1.9443635140088196E+00
+-1.9436521101406807E+00
+-1.9396334590624320E+00
+-1.9345350824289431E+00
+-1.9322329502246349E+00
+-1.9296246158217749E+00
+-1.9274429501362120E+00
+-1.9243032454526257E+00
+-1.9195423143596151E+00
+-1.9172640674720387E+00
+-1.9164338817485445E+00
+-1.9134819571742248E+00
+-1.9123125276688888E+00
+-1.9104464264543715E+00
+-1.9083574888217287E+00
+-1.9052565817944414E+00
+-1.9012106908407345E+00
+-1.8936556981927728E+00
+-1.8838520243758876E+00
+-1.8816937732700609E+00
+-1.8561890809035726E+00
+-1.0970213554397841E+00
+-1.0946257692634480E+00
+-1.0896678093333529E+00
+-1.0884708954799533E+00
+-1.0811048429295149E+00
+-1.0770638870923077E+00
+-1.0763673385758399E+00
+-1.0724251220215348E+00
+-1.0707754789884043E+00
+-1.0705078969137007E+00
+-1.0605849344370426E+00
+-1.0567543970910509E+00
+-1.0535010609805762E+00
+-1.0529129849704004E+00
+-1.0493625410427561E+00
+-1.0468752610060423E+00
+-1.0449769027347335E+00
+-1.0427396074841131E+00
+-1.0354737068809765E+00
+-1.0325629065420392E+00
+-1.0303898174516224E+00
+-1.0280096150952593E+00
+-1.0260723427142209E+00
+-1.0203607088497579E+00
+-1.0199300911664906E+00
+-1.0159059078455521E+00
+-1.0075510177344933E+00
+-1.0057639212890126E+00
+-9.9966490359858973E-01
+-9.9108151802492406E-01
+-9.8711939490140910E-01
+-9.7378172224328330E-01
+-8.7050116830057267E-01
+-8.5536446126535537E-01
+-8.4539690615999130E-01
+-8.3510813807162942E-01
+-8.3062408508223617E-01
+-8.2652026082452923E-01
+-8.2085641907129736E-01
+-8.1704456979525175E-01
+-8.1590690804489185E-01
+-8.1513274525158730E-01
+-8.1233713230284510E-01
+-7.9204627635246272E-01
+-7.8900446819511050E-01
+-7.8446341480438220E-01
+-7.8002188470618739E-01
+-7.6965834347984452E-01
+-7.6591399452768394E-01
+-7.6232901937527708E-01
+-7.5839731734051175E-01
+-7.4938159943688643E-01
+-7.4827465272028237E-01
+-7.4589703779005057E-01
+-7.4102608819271809E-01
+-7.3647080143345434E-01
+-7.3307417793562624E-01
+-7.2878104511332809E-01
+-7.2537814928702660E-01
+-7.1666660515335445E-01
+-7.1472311023492263E-01
+-7.0078846523898664E-01
+-6.9260771812220212E-01
+-6.8147392470602464E-01
+-6.7009285016131903E-01
+-6.5285092099491449E-01
+-6.5026090732656061E-01
+-6.4251581303116123E-01
+-6.4037039761994430E-01
+-6.3773333924972964E-01
+-6.3567490000042925E-01
+-6.3159938604607557E-01
+-6.2916464060969057E-01
+-6.2824766782310881E-01
+-6.2489788285277381E-01
+-6.2335385222201078E-01
+-6.2041012323120159E-01
+-6.1774889626812990E-01
+-6.1434054265522708E-01
+-6.1357195608386983E-01
+-6.1101316563629082E-01
+-6.0488575843037384E-01
+-6.0263526452362948E-01
+-6.0070968351687448E-01
+-5.9641682605622726E-01
+-5.9453650524837764E-01
+-5.9412007417240276E-01
+-5.9165049014692128E-01
+-5.9091577123421790E-01
+-5.8590523468664668E-01
+-5.8510168542338303E-01
+-5.8200488850007592E-01
+-5.7227121426045646E-01
+-5.6585632140657915E-01
+-5.6421083981879372E-01
+-5.3700804024768267E-01
+QETSC: Iter time (min)       =  14.05
+QETSC: Iter time (max)       =  20.69
+QETSC: Iter time (avg)       =  18.11
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99220167673E+00
+QETSC: Eigenvalue (nocc)     =-5.37008040248E-01
+QETSC: Max differrence       = 1.59503148709E-05
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           14
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           15
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -7
+ QETSC: Eigenvalues         =
+-1.9922083888345199E+00
+-1.9795734813459565E+00
+-1.9735742991468210E+00
+-1.9664440596395241E+00
+-1.9647033003266690E+00
+-1.9611736112415763E+00
+-1.9598919030870503E+00
+-1.9575828442427932E+00
+-1.9564277676787600E+00
+-1.9516925654648021E+00
+-1.9463053607436309E+00
+-1.9443630299988068E+00
+-1.9436498361162717E+00
+-1.9396326605544447E+00
+-1.9345345075554277E+00
+-1.9322323674670796E+00
+-1.9296247149430179E+00
+-1.9274415982101138E+00
+-1.9243018359875301E+00
+-1.9195388184593420E+00
+-1.9172595023118668E+00
+-1.9164310012535939E+00
+-1.9134796714944793E+00
+-1.9123104258966692E+00
+-1.9104442302199582E+00
+-1.9083548650335966E+00
+-1.9052542085966127E+00
+-1.9012085130134269E+00
+-1.8936475158363864E+00
+-1.8838453696645523E+00
+-1.8816867055339597E+00
+-1.8561767048537818E+00
+-1.0970224636497428E+00
+-1.0946282824469682E+00
+-1.0896730667255976E+00
+-1.0884693700115526E+00
+-1.0811049008635805E+00
+-1.0770637437676229E+00
+-1.0763675757205566E+00
+-1.0724256209369782E+00
+-1.0707762247588311E+00
+-1.0705082578795653E+00
+-1.0605847220965599E+00
+-1.0567537776674669E+00
+-1.0534986467430034E+00
+-1.0529090352301176E+00
+-1.0493592394070104E+00
+-1.0468732962367131E+00
+-1.0449736495863029E+00
+-1.0427374484057059E+00
+-1.0354708108704747E+00
+-1.0325603351648731E+00
+-1.0303873033963613E+00
+-1.0280062425140200E+00
+-1.0260692832293112E+00
+-1.0203590602406516E+00
+-1.0199275636543081E+00
+-1.0159024019679661E+00
+-1.0075474158923590E+00
+-1.0057578740992863E+00
+-9.9966309130819353E-01
+-9.9107324882792669E-01
+-9.8711074032318180E-01
+-9.7376994637927472E-01
+-8.7050044098717039E-01
+-8.5536337718386990E-01
+-8.4539428759746627E-01
+-8.3510427179455504E-01
+-8.3062220838826151E-01
+-8.2651795827653141E-01
+-8.2085275220774112E-01
+-8.1704128383737051E-01
+-8.1590458396261856E-01
+-8.1513097828993297E-01
+-8.1233455457358261E-01
+-7.9204390175016948E-01
+-7.8900087104613370E-01
+-7.8445988010468382E-01
+-7.8001675257114178E-01
+-7.6965416236998330E-01
+-7.6590972176913519E-01
+-7.6232641562792081E-01
+-7.5839053844607185E-01
+-7.4937720074141068E-01
+-7.4827003500559319E-01
+-7.4589338384331694E-01
+-7.4102122669077919E-01
+-7.3646604506707303E-01
+-7.3306904199171552E-01
+-7.2877713458180449E-01
+-7.2537378129706498E-01
+-7.1666260897427936E-01
+-7.1471841140454229E-01
+-7.0078399934030566E-01
+-6.9260123675173069E-01
+-6.8146805845251324E-01
+-6.7009734838641322E-01
+-6.5285086088933386E-01
+-6.5026071140380692E-01
+-6.4251500490114621E-01
+-6.4036970248911895E-01
+-6.3773308779144322E-01
+-6.3567478550793777E-01
+-6.3159968040792447E-01
+-6.2916323238648031E-01
+-6.2824599036833684E-01
+-6.2489650592090118E-01
+-6.2335323448597946E-01
+-6.2040703070336911E-01
+-6.1774807015192046E-01
+-6.1433925736411110E-01
+-6.1356779967744002E-01
+-6.1100994228506644E-01
+-6.0488222123491842E-01
+-6.0263264101807323E-01
+-6.0070695711964883E-01
+-5.9641333730187118E-01
+-5.9453388780253635E-01
+-5.9411595221358016E-01
+-5.9164706241425413E-01
+-5.9091281520750172E-01
+-5.8590149809156999E-01
+-5.8509666235034752E-01
+-5.8200143744282151E-01
+-5.7226424141977350E-01
+-5.6584818323224317E-01
+-5.6420268648434568E-01
+-5.3699624240815624E-01
+QETSC: Iter time (min)       =  12.67
+QETSC: Iter time (max)       =  18.76
+QETSC: Iter time (avg)       =  16.40
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99220838883E+00
+QETSC: Eigenvalue (nocc)     =-5.36996242408E-01
+QETSC: Max differrence       = 1.23760497908E-05
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           15
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           16
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -8
+ QETSC: Eigenvalues         =
+-1.9922065986355695E+00
+-1.9795713543416320E+00
+-1.9735726577409367E+00
+-1.9664417315103071E+00
+-1.9647011031305068E+00
+-1.9611715926747415E+00
+-1.9598900224866813E+00
+-1.9575810930826418E+00
+-1.9564253073943363E+00
+-1.9516902225602848E+00
+-1.9463031864197387E+00
+-1.9443607289471718E+00
+-1.9436474782165429E+00
+-1.9396303576882468E+00
+-1.9345323584898650E+00
+-1.9322299802453546E+00
+-1.9296225290681297E+00
+-1.9274388590856530E+00
+-1.9242994481065936E+00
+-1.9195362226162949E+00
+-1.9172563036097903E+00
+-1.9164284340569606E+00
+-1.9134770603611904E+00
+-1.9123082575113994E+00
+-1.9104417153351663E+00
+-1.9083525760295352E+00
+-1.9052514828497056E+00
+-1.9012061019006079E+00
+-1.8936435566276579E+00
+-1.8838411148864753E+00
+-1.8816836220221813E+00
+-1.8561725378352876E+00
+-1.0970209537255533E+00
+-1.0946270563350033E+00
+-1.0896719013248679E+00
+-1.0884677097168103E+00
+-1.0811032579486379E+00
+-1.0770621113922458E+00
+-1.0763659185666674E+00
+-1.0724239910792615E+00
+-1.0707749785105234E+00
+-1.0705066868993960E+00
+-1.0605828409098348E+00
+-1.0567520881914341E+00
+-1.0534961173003443E+00
+-1.0529068702315241E+00
+-1.0493570412447897E+00
+-1.0468713473017504E+00
+-1.0449715573079006E+00
+-1.0427356870896034E+00
+-1.0354692130945811E+00
+-1.0325584932961742E+00
+-1.0303852668809117E+00
+-1.0280037404793254E+00
+-1.0260675465982201E+00
+-1.0203572877202025E+00
+-1.0199258943933469E+00
+-1.0159004017368689E+00
+-1.0075449042386309E+00
+-1.0057548226849731E+00
+-9.9966166172683080E-01
+-9.9107004094282403E-01
+-9.8710733414354312E-01
+-9.7376620381231049E-01
+-8.7049840907925125E-01
+-8.5536104893717502E-01
+-8.4539146720557001E-01
+-8.3510167772530108E-01
+-8.3062022776902189E-01
+-8.2651582457209993E-01
+-8.2085007956145473E-01
+-8.1703881599672235E-01
+-8.1590269007716210E-01
+-8.1512871249720353E-01
+-8.1233227670514097E-01
+-7.9204143143190309E-01
+-7.8899839976425845E-01
+-7.8445737350666067E-01
+-7.8001353304431253E-01
+-7.6965176333577201E-01
+-7.6590701274197714E-01
+-7.6232394104600198E-01
+-7.5838727594492372E-01
+-7.4937426381331762E-01
+-7.4826710616630387E-01
+-7.4589070093279186E-01
+-7.4101829010690679E-01
+-7.3646348612309909E-01
+-7.3306631601329320E-01
+-7.2877437632871700E-01
+-7.2537115359184812E-01
+-7.1665974974775948E-01
+-7.1471592300935527E-01
+-7.0078096103047816E-01
+-6.9259732089719150E-01
+-6.8146409663426077E-01
+-6.7009539881793889E-01
+-6.5284884376409713E-01
+-6.5025832384752846E-01
+-6.4251258372391440E-01
+-6.4036742233967692E-01
+-6.3773059922166375E-01
+-6.3567217421422961E-01
+-6.3159731997149249E-01
+-6.2916079766961819E-01
+-6.2824329365977927E-01
+-6.2489409754254832E-01
+-6.2335083213806552E-01
+-6.2040368575538329E-01
+-6.1774588271731723E-01
+-6.1433654993969122E-01
+-6.1356517462164750E-01
+-6.1100704447331267E-01
+-6.0487979218338273E-01
+-6.0263007274998215E-01
+-6.0070403446078957E-01
+-5.9641050142038532E-01
+-5.9453138933365646E-01
+-5.9411320980344950E-01
+-5.9164425943160392E-01
+-5.9091031924101700E-01
+-5.8589853170777495E-01
+-5.8509293492703940E-01
+-5.8199816827081019E-01
+-5.7225997744479884E-01
+-5.6584438665050452E-01
+-5.6419896900328392E-01
+-5.3699178957798555E-01
+QETSC: Iter time (min)       =  12.86
+QETSC: Iter time (max)       =  19.01
+QETSC: Iter time (avg)       =  16.62
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99220659864E+00
+QETSC: Eigenvalue (nocc)     =-5.36991789578E-01
+QETSC: Max differrence       = 4.45283017070E-06
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           16
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           17
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =          -9
+ QETSC: Eigenvalues         =
+-1.9922049240338346E+00
+-1.9795714319269322E+00
+-1.9735730055067646E+00
+-1.9664422643824955E+00
+-1.9647017322710667E+00
+-1.9611719119030651E+00
+-1.9598905252032712E+00
+-1.9575813785459628E+00
+-1.9564259312028915E+00
+-1.9516912147744878E+00
+-1.9463039621299105E+00
+-1.9443618891451004E+00
+-1.9436493363324525E+00
+-1.9396317195984860E+00
+-1.9345336413910861E+00
+-1.9322312093179792E+00
+-1.9296235875649999E+00
+-1.9274403077924263E+00
+-1.9243007411753599E+00
+-1.9195385164595935E+00
+-1.9172583327448678E+00
+-1.9164303061005776E+00
+-1.9134785384681894E+00
+-1.9123101084915251E+00
+-1.9104432494181109E+00
+-1.9083546023653255E+00
+-1.9052531431039512E+00
+-1.9012078920254154E+00
+-1.8936469715093622E+00
+-1.8838437683095308E+00
+-1.8816873164950858E+00
+-1.8561774436922360E+00
+-1.0970215809210251E+00
+-1.0946270661439890E+00
+-1.0896709104371871E+00
+-1.0884692434192427E+00
+-1.0811041439973157E+00
+-1.0770632238077682E+00
+-1.0763667513812762E+00
+-1.0724248093075002E+00
+-1.0707758888119761E+00
+-1.0705075944916300E+00
+-1.0605838752337666E+00
+-1.0567534032642294E+00
+-1.0534975722445079E+00
+-1.0529091531656349E+00
+-1.0493590487576474E+00
+-1.0468728768484252E+00
+-1.0449737134508355E+00
+-1.0427375143616144E+00
+-1.0354711851622735E+00
+-1.0325602888135088E+00
+-1.0303870383426836E+00
+-1.0280055618230834E+00
+-1.0260695650398224E+00
+-1.0203587698506391E+00
+-1.0199278612393685E+00
+-1.0159027760829988E+00
+-1.0075470380648561E+00
+-1.0057575711794309E+00
+-9.9966347891618013E-01
+-9.9107352571377505E-01
+-9.8711087161225697E-01
+-9.7377071049769581E-01
+-8.7049958385568793E-01
+-8.5536225864310578E-01
+-8.4539303779984376E-01
+-8.3510390105709575E-01
+-8.3062192547826275E-01
+-8.2651755377421732E-01
+-8.2085217325343696E-01
+-8.1704076857709540E-01
+-8.1590446376831105E-01
+-8.1513017646579544E-01
+-8.1233389296695768E-01
+-7.9204316072076797E-01
+-7.8900054877774217E-01
+-7.8445951776257727E-01
+-7.8001574059192857E-01
+-7.6965402810730799E-01
+-7.6590917781370926E-01
+-7.6232583858438263E-01
+-7.5839029252542034E-01
+-7.4937651212906242E-01
+-7.4826939183205787E-01
+-7.4589275796350263E-01
+-7.4102076911352543E-01
+-7.3646601828592317E-01
+-7.3306907210148720E-01
+-7.2877655091588278E-01
+-7.2537351329815980E-01
+-7.1666200060950658E-01
+-7.1471842820734000E-01
+-7.0078321871531668E-01
+-6.9259995784318185E-01
+-6.8146644953780811E-01
+-6.7009452193218200E-01
+-6.5284982545431258E-01
+-6.5025908964162404E-01
+-6.4251357065706471E-01
+-6.4036857692300542E-01
+-6.3773141079699969E-01
+-6.3567299454533310E-01
+-6.3159803877962595E-01
+-6.2916199174794507E-01
+-6.2824438532113658E-01
+-6.2489539822261841E-01
+-6.2335197261612951E-01
+-6.2040526490838621E-01
+-6.1774713776785706E-01
+-6.1433790236089592E-01
+-6.1356745494595044E-01
+-6.1100888548887833E-01
+-6.0488194364373371E-01
+-6.0263197585161832E-01
+-6.0070572260838828E-01
+-5.9641232994860338E-01
+-5.9453320784826369E-01
+-5.9411564239223424E-01
+-5.9164624158159351E-01
+-5.9091210639576552E-01
+-5.8590063370588563E-01
+-5.8509503960416809E-01
+-5.8199996849863578E-01
+-5.7226238412403108E-01
+-5.6584792787466343E-01
+-5.6420263146557592E-01
+-5.3699620306769213E-01
+QETSC: Iter time (min)       =  12.72
+QETSC: Iter time (max)       =  19.13
+QETSC: Iter time (avg)       =  16.72
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99220492403E+00
+QETSC: Eigenvalue (nocc)     =-5.36996203068E-01
+QETSC: Max differrence       = 4.90585694846E-06
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           17
+ *****************************************************************
+ QETSC: Bins             =
+              -Infinity
+-2.2999999999999998E+00
+-2.2634920634920634E+00
+-2.2269841269841266E+00
+-2.1904761904761902E+00
+-2.1539682539682539E+00
+-2.1174603174603175E+00
+-2.0809523809523807E+00
+-2.0444444444444443E+00
+-2.0079365079365079E+00
+-1.9714285714285713E+00
+-1.9349206349206347E+00
+-1.8984126984126983E+00
+-1.8619047619047617E+00
+-1.8253968253968254E+00
+-1.7888888888888888E+00
+-1.7523809523809524E+00
+-1.7158730158730158E+00
+-1.6793650793650792E+00
+-1.6428571428571428E+00
+-1.6063492063492064E+00
+-1.5698412698412698E+00
+-1.5333333333333332E+00
+-1.4968253968253968E+00
+-1.4603174603174602E+00
+-1.4238095238095236E+00
+-1.3873015873015873E+00
+-1.3507936507936509E+00
+-1.3142857142857143E+00
+-1.2777777777777777E+00
+-1.2412698412698413E+00
+-1.2047619047619047E+00
+-1.1682539682539683E+00
+-1.1317460317460317E+00
+-1.0952380952380951E+00
+-1.0587301587301587E+00
+-1.0222222222222221E+00
+-9.8571428571428577E-01
+-9.4920634920634916E-01
+-9.1269841269841279E-01
+-8.7619047619047619E-01
+-8.3968253968253981E-01
+-8.0317460317460321E-01
+-7.6666666666666661E-01
+-7.3015873015873023E-01
+-6.9365079365079363E-01
+-6.5714285714285725E-01
+-6.2063492063492065E-01
+-5.8412698412698427E-01
+-5.4761904761904767E-01
+-5.1111111111111107E-01
+-4.7460317460317469E-01
+-4.3809523809523809E-01
+-4.0158730158730171E-01
+-3.6507936507936511E-01
+-3.2857142857142874E-01
+-2.9206349206349236E-01
+-2.5555555555555554E-01
+-2.1904761904761916E-01
+-1.8253968253968278E-01
+-1.4603174603174596E-01
+-1.0952380952380958E-01
+-7.3015873015873201E-02
+-3.6507936507936822E-02
+ 0.0000000000000000E+00
+QETSC: Started iter           18
+QETSC: Bin type used         =           0
+QETSC: Buffer used           = 1.00000000000E-01
+QETSC: EPS interval          = -Infinity,     0.000
+QETSC: Inertia type          =         -10
+ QETSC: Eigenvalues         =
+-1.9922061397586330E+00
+-1.9795731743772538E+00
+-1.9735745873580495E+00
+-1.9664442248018736E+00
+-1.9647036676214857E+00
+-1.9611737329420087E+00
+-1.9598923086619227E+00
+-1.9575830678645418E+00
+-1.9564280045573437E+00
+-1.9516933356384587E+00
+-1.9463059716406013E+00
+-1.9443639907389469E+00
+-1.9436516294157618E+00
+-1.9396338651023604E+00
+-1.9345357015240092E+00
+-1.9322333695150757E+00
+-1.9296256250905333E+00
+-1.9274426586422133E+00
+-1.9243029866932744E+00
+-1.9195409938894994E+00
+-1.9172610784960282E+00
+-1.9164327217223469E+00
+-1.9134809352787536E+00
+-1.9123123871457892E+00
+-1.9104456275300996E+00
+-1.9083569450801512E+00
+-1.9052555989095579E+00
+-1.9012102718657420E+00
+-1.8936503169933621E+00
+-1.8838471098520169E+00
+-1.8816903883325176E+00
+-1.8561813007967598E+00
+-1.0970231141302365E+00
+-1.0946283580712799E+00
+-1.0896719479450205E+00
+-1.0884711384093282E+00
+-1.0811058089962027E+00
+-1.0770649359198903E+00
+-1.0763683875644079E+00
+-1.0724264433022528E+00
+-1.0707774310157290E+00
+-1.0705093007752742E+00
+-1.0605857200921209E+00
+-1.0567552112247556E+00
+-1.0534997694227213E+00
+-1.0529113777194192E+00
+-1.0493612294603709E+00
+-1.0468748578129727E+00
+-1.0449758801964324E+00
+-1.0427394653906135E+00
+-1.0354731218465765E+00
+-1.0325623166887079E+00
+-1.0303891023874041E+00
+-1.0280078460724797E+00
+-1.0260715710931940E+00
+-1.0203607122959697E+00
+-1.0199298687178433E+00
+-1.0159049850465105E+00
+-1.0075494033728527E+00
+-1.0057603037092355E+00
+-9.9966536795165972E-01
+-9.9107653443389543E-01
+-9.8711396415899721E-01
+-9.7377421912252249E-01
+-8.7050142929390728E-01
+-8.5536424894040919E-01
+-8.4539533534163602E-01
+-8.3510626194386295E-01
+-8.3062386954904821E-01
+-8.2651958195234254E-01
+-8.2085454512816924E-01
+-8.1704302339192203E-01
+-8.1590641983021439E-01
+-8.1513218766694884E-01
+-8.1233599306952198E-01
+-7.9204536891535082E-01
+-7.8900287137749925E-01
+-7.8446183465804808E-01
+-7.8001837037456856E-01
+-7.6965629886728815E-01
+-7.6591156247011871E-01
+-7.6232807413079939E-01
+-7.5839313475841963E-01
+-7.4937903979428122E-01
+-7.4827193343084164E-01
+-7.4589511027061262E-01
+-7.4102335393284291E-01
+-7.3646845641942571E-01
+-7.3307164744917541E-01
+-7.2877901223182029E-01
+-7.2537597005529664E-01
+-7.1666451286397093E-01
+-7.1472086780627331E-01
+-7.0078579683336184E-01
+-6.9260303800223011E-01
+-6.8146947779274603E-01
+-6.7009587815621185E-01
+-6.5285162190511248E-01
+-6.5026102275282838E-01
+-6.4251559748361364E-01
+-6.4037057142661236E-01
+-6.3773343332772559E-01
+-6.3567503945297166E-01
+-6.3159993930393443E-01
+-6.2916407346207082E-01
+-6.2824658409714973E-01
+-6.2489749384012838E-01
+-6.2335404608434519E-01
+-6.2040786481156762E-01
+-6.1774917589631351E-01
+-6.1434017044972489E-01
+-6.1356986565267135E-01
+-6.1101133849699119E-01
+-6.0488427430140812E-01
+-6.0263431459394712E-01
+-6.0070819197382874E-01
+-5.9641482543647462E-01
+-5.9453552822630662E-01
+-5.9411819153565693E-01
+-5.9164871024952259E-01
+-5.9091445003422205E-01
+-5.8590319639375765E-01
+-5.8509792656501269E-01
+-5.8200261075144999E-01
+-5.7226564902836063E-01
+-5.6585118543277124E-01
+-5.6420589444961389E-01
+-5.3700005476882051E-01
+QETSC: Iter time (min)       =  12.61
+QETSC: Iter time (max)       =  19.07
+QETSC: Iter time (avg)       =  16.67
+QETSC: Num. of conv. evals   =         135
+QETSC: Eigenvalue (1)        =-1.99220613976E+00
+QETSC: Eigenvalue (nocc)     =-5.37000054769E-01
+QETSC: Max differrence       = 3.85710452377E-06
+QETSC: Safe iteration        =      T
+QETSC: Finished iter           18
+ *****************************************************************
+
+SCF Convergence by dMax criterion
+max |DM_out - DM_in|:     0.00008697
+SCF cycle converged after   18 iterations
+
+Using DM_out to compute the final energy and forces
+
+siesta: E_KS(eV) =           -15058.7541
+
+siesta: E_KS - E_eggbox =    -15058.7541
+
+siesta: Atomic forces (eV/Ang):
+----------------------------------------
+   Tot    0.074784    0.062854   -0.035388
+----------------------------------------
+   Max    1.680224
+   Res    0.642735    sqrt( Sum f_i^2 / 3N )
+----------------------------------------
+   Max    1.680224    constrained
+
+Stress-tensor-Voigt (kbar):      -39.09      -39.83      -38.84        1.14       -0.07       -3.02
+(Free)E + p*V (eV/cell)   -15035.2957
+Target enthalpy (eV/cell)   -15058.7541
+
+siesta: Program's energy decomposition (eV):
+siesta: Ebs     =     -3795.407592
+siesta: Eions   =     26107.343333
+siesta: Ena     =      5853.795051
+siesta: Ekin    =     11263.757226
+siesta: Enl     =     -1953.319329
+siesta: DEna    =      -357.830606
+siesta: DUscf   =        34.323996
+siesta: DUext   =         0.000000
+siesta: Exc     =     -3792.137137
+siesta: eta*DQ  =         0.000000
+siesta: Emadel  =         0.000000
+siesta: Emeta   =         0.000000
+siesta: Emolmec =         0.000000
+siesta: Ekinion =         0.000000
+siesta: Eharris =    -15058.754133
+siesta: Etot    =    -15058.754133
+siesta: FreeEng =    -15058.754133
+
+siesta: Final energy (eV):
+siesta:  Band Struct. =   -3795.407592
+siesta:       Kinetic =   11263.757226
+siesta:       Hartree =    7290.948918
+siesta:    Ext. field =       0.000000
+siesta:   Exch.-corr. =   -3792.137137
+siesta:  Ion-electron =  -24809.120678
+siesta:       Ion-ion =   -5012.202462
+siesta:       Ekinion =       0.000000
+siesta:         Total =  -15058.754133
+
+siesta: Atomic forces (eV/Ang):
+siesta:      1    0.667040    0.204798   -0.062599
+siesta:      2   -0.320116   -0.287067    0.737672
+siesta:      3   -0.788711   -0.180514   -0.470685
+siesta:      4    0.583001    0.911610    0.118407
+siesta:      5   -0.719469    0.297792   -0.575072
+siesta:      6    0.052415   -1.133754    0.411389
+siesta:      7   -0.513404    0.286059    0.504967
+siesta:      8   -0.066017   -0.158226   -0.570103
+siesta:      9    0.724825   -0.235298    0.071922
+siesta:     10    1.407111    0.226727   -0.538715
+siesta:     11    0.008732    0.078485   -0.622927
+siesta:     12   -1.429927   -0.175765    1.087221
+siesta:     13    0.863097    0.463553   -0.287427
+siesta:     14   -1.178633    0.433959   -0.227036
+siesta:     15   -0.126887   -0.593329    0.620326
+siesta:     16    0.665422   -1.167069   -0.088620
+siesta:     17    0.262317    0.134353   -0.432075
+siesta:     18   -0.390504    1.004279    0.551549
+siesta:     19    0.522907    0.153966   -0.431183
+siesta:     20   -0.797925   -0.310439   -0.037864
+siesta:     21   -0.201895    0.238717    0.701571
+siesta:     22    0.106275    1.153441    0.131639
+siesta:     23   -0.458740    0.094931   -0.321475
+siesta:     24    0.205434   -1.548274   -0.156766
+siesta:     25   -0.180897    1.479678    0.465141
+siesta:     26    0.123256   -1.454389    0.561994
+siesta:     27   -0.391058    0.091826   -0.826314
+siesta:     28   -0.358036   -0.102990   -1.126553
+siesta:     29    0.766878   -0.126378    0.044153
+siesta:     30   -0.325133    0.487138    0.648515
+siesta:     31    0.585218    0.286754   -0.382820
+siesta:     32    0.175933   -0.066793   -0.537934
+siesta:     33   -0.946306   -0.186247    0.777094
+siesta:     34    0.474826   -0.792129   -0.645311
+siesta:     35   -0.143935    0.726399   -0.353830
+siesta:     36   -0.336796    0.079033    1.320934
+siesta:     37    1.017867   -0.222086   -0.509920
+siesta:     38   -0.835540    0.094040    0.797259
+siesta:     39   -0.590863   -0.033986   -0.201559
+siesta:     40   -0.811129    0.252602    0.191024
+siesta:     41    0.256130   -0.312678    0.102407
+siesta:     42    0.558093   -0.060705   -0.112416
+siesta:     43    0.767526   -0.176239    0.235130
+siesta:     44   -0.581595   -0.176746    0.607837
+siesta:     45   -0.305976    0.748707   -0.831358
+siesta:     46    0.822136    0.632688   -0.684364
+siesta:     47   -0.745659   -0.136508    0.839270
+siesta:     48   -0.379077   -0.482434   -0.536517
+siesta:     49   -0.181002   -1.604178   -0.967890
+siesta:     50    0.954996    1.530757    0.950779
+siesta:     51   -0.744792    0.071620    0.178742
+siesta:     52    0.023147   -0.206367   -1.054748
+siesta:     53   -0.220345   -0.594934    0.321860
+siesta:     54    0.276321    0.418873    0.349401
+siesta:     55    0.532883    0.074717   -1.191982
+siesta:     56    0.295349   -0.327119    1.395611
+siesta:     57   -0.656600    0.464342   -0.019368
+siesta:     58    1.095443    0.475790   -0.668109
+siesta:     59    0.140792    0.282841    0.820130
+siesta:     60   -0.751175   -0.620792   -0.313838
+siesta:     61    0.278781   -0.265253    0.134827
+siesta:     62   -0.426960    0.497199   -0.082647
+siesta:     63    0.065727   -0.303881    0.119344
+siesta:     64   -0.856712   -0.401479   -0.986396
+siesta:     65    0.779980   -0.179008    1.303549
+siesta:     66    0.163102    0.512662   -0.268275
+siesta:     67   -0.156973    0.854907    0.520367
+siesta:     68    0.006795   -0.796513   -0.303001
+siesta:     69    0.230370    0.006123   -0.172103
+siesta:     70   -1.096250    0.691373   -0.131975
+siesta:     71    0.989083   -0.305712    0.586496
+siesta:     72    0.224333   -0.583916   -0.800559
+siesta:     73    0.307227   -0.787108   -0.985772
+siesta:     74   -0.697255    0.031441    0.097188
+siesta:     75    0.575574    0.667188    0.425018
+siesta:     76    0.475537    0.594201   -0.769665
+siesta:     77    1.285115   -0.450157    0.998408
+siesta:     78   -1.146743    0.191927   -0.398378
+siesta:     79    1.680224   -0.347054   -0.389546
+siesta:     80    0.156831    0.393199    1.077816
+siesta:     81   -1.526781   -0.132458   -0.245656
+siesta:     82    1.025398    0.674901    0.601957
+siesta:     83   -0.275782   -0.834606    0.377637
+siesta:     84   -0.623210    0.265625   -0.627659
+siesta:     85    0.180870    0.026491   -1.039916
+siesta:     86    0.400574   -0.554368    0.376810
+siesta:     87   -0.523996    0.421574    0.696599
+siesta:     88    1.506309    0.309908   -0.877279
+siesta:     89   -0.099602   -0.516957    1.041133
+siesta:     90   -1.405210    0.219757   -0.166673
+siesta:     91    1.550981   -0.668514    0.544253
+siesta:     92   -0.798369    1.374097    0.241483
+siesta:     93   -0.747264   -0.880884   -0.567540
+siesta:     94    0.487038    0.588744    0.409695
+siesta:     95   -0.709233   -0.330786   -0.627259
+siesta:     96    0.338045   -0.326849    0.095772
+siesta: ----------------------------------------
+siesta:    Tot    0.074784    0.062854   -0.035388
+
+siesta: Stress tensor (static) (eV/Ang**3):
+siesta:    -0.024400    0.000709   -0.001885
+siesta:     0.000709   -0.024857   -0.000043
+siesta:    -0.001885   -0.000043   -0.024239
+
+siesta: Cell volume =        957.533163 Ang**3
+
+siesta: Pressure (static):
+siesta:                Solid            Molecule  Units
+siesta:           0.00026682          0.00000283  Ry/Bohr**3
+siesta:           0.02449885          0.00025960  eV/Ang**3
+siesta:          39.25190793          0.41592990  kBar
+(Free)E+ p_basis*V_orbitals  =      -14783.442724
+(Free)Eharris+ p_basis*V_orbitals  =      -14783.442724
+
+             Section          Calls    Walltime       %
+ global_section                   1    1647.299  100.00
+  siesta                          1    1646.067   99.93
+   Setup                          1       0.396    0.02
+    MPI_BCAST                   261       0.004    0.00
+    MPI_COMM_RANK                 1       0.000    0.00
+    bands                         1       0.000    0.00
+    writewave                     1       0.000    0.00
+    KSV_init                      1       0.000    0.00
+   IterGeom                       1    1645.472   99.89
+    state_init                    1      15.668    0.95
+     hsparse                      1       0.283    0.02
+     MPI_ALLREDUCE                2       6.640    0.40
+     overlap                      1       8.726    0.53
+    Setup_H0                      1      53.007    3.22
+     naefs                        1       0.020    0.00
+     MolMec                       1       0.000    0.00
+     kinefsm                      1       8.669    0.53
+     nlefsm                       1      16.407    1.00
+     DHSCF_Init                   1      27.902    1.69
+      DHSCF1                      1       0.076    0.00
+       INITMESH                   1       0.000    0.00
+      DHSCF2                      1      27.825    1.69
+       REMESH                     1      17.256    1.05
+        INITMESH                  2      16.892    1.03
+         SPLOAD                   2      16.890    1.03
+          MPI_RECV              278      15.731    0.95
+          MPI_BCAST             126       1.159    0.07
+          MPI_SEND                6       0.000    0.00
+       REORD                      2       0.000    0.00
+       MPI_RECV                 195       4.537    0.28
+       MPI_SEND                 319       1.941    0.12
+       PHION                      1       2.153    0.13
+       MPI_GATHER                 1       1.328    0.08
+       COMM_BSC                   1       0.100    0.01
+        MPI_SEND                  6       0.000    0.00
+        MPI_RECV                  4       0.100    0.01
+       POISON                     1       0.308    0.02
+        fft                       2       0.308    0.02
+         MPI_COMM_SPLIT           2       0.135    0.01
+         MPI_COMM_RANK            2       0.000    0.00
+         MPI_COMM_SIZE            2       0.000    0.00
+         MPI_IRECV               56       0.000    0.00
+         MPI_ISEND               56       0.003    0.00
+         MPI_WAIT               112       0.168    0.01
+    IterSCF                      18    1469.436   89.20
+     setup_H                     18    1012.459   61.46
+      MPI_ALLREDUCE              36       1.045    0.06
+      DHSCF                      18    1011.406   61.40
+       DHSCF3                    18    1011.406   61.40
+        rhoofd                   18     469.445   28.50
+         MPI_SEND              1134     159.240    9.67
+         MPI_RECV              1134     197.094   11.96
+        COMM_BSC                 36      73.171    4.44
+         MPI_SEND               180       0.002    0.00
+         MPI_RECV               180      73.166    4.44
+        POISON                   18      21.975    1.33
+         fft                     36      21.972    1.33
+          MPI_IRECV            1008       0.001    0.00
+          MPI_ISEND            1008       0.008    0.00
+          MPI_WAIT             2016      21.949    1.33
+        MPI_ALLGATHER            76       2.497    0.15
+        MPI_ALLREDUCE            33       3.711    0.23
+        MPI_SEND                458       0.002    0.00
+        MPI_RECV                458       2.258    0.14
+        vmat                     18     437.395   26.55
+         MPI_RECV              1134     237.813   14.44
+         MPI_SEND              1134     147.046    8.93
+     compute_dm                  18     454.065   27.56
+      MPI_ALLREDUCE              18       0.001    0.00
+     MPI_ALLREDUCE               54       1.361    0.08
+     MIXER                       17       1.535    0.09
+      MPI_ALLREDUCE              64       1.477    0.09
+    PostSCF                       1     107.348    6.52
+     naefs                        1       0.022    0.00
+     kinefsm                      1       0.237    0.01
+     MPI_ALLREDUCE                4      10.006    0.61
+     nlefsm                       1       3.856    0.23
+     DHSCF                        1      92.983    5.64
+      DHSCF3                      1      63.333    3.84
+       rhoofd                     1      31.482    1.91
+        MPI_SEND                 63      13.848    0.84
+        MPI_RECV                 63      11.312    0.69
+       COMM_BSC                   2       3.895    0.24
+        MPI_SEND                 10       0.000    0.00
+        MPI_RECV                 10       3.895    0.24
+       POISON                     1       1.363    0.08
+        fft                       2       1.363    0.08
+         MPI_IRECV               56       0.000    0.00
+         MPI_ISEND               56       0.000    0.00
+         MPI_WAIT               112       1.362    0.08
+       MPI_ALLGATHER              1       0.071    0.00
+       MPI_SEND                  18       0.000    0.00
+       MPI_RECV                  18       0.090    0.01
+       vmat                       1      26.199    1.59
+        MPI_RECV                 63      15.638    0.95
+        MPI_SEND                 63       7.642    0.46
+       MPI_ALLREDUCE              1       0.162    0.01
+      DHSCF4                      1      29.650    1.80
+       REORD                     10       0.000    0.00
+       COMM_BSC                   2       0.178    0.01
+        MPI_RECV                 12       0.178    0.01
+        MPI_SEND                  8       0.000    0.00
+       dfscf                      1      29.376    1.78
+        MPI_SEND                 63       9.202    0.56
+        MPI_RECV                 63      11.233    0.68
+     overfsm                      1       0.230    0.01
+     MolMec                       1       0.000    0.00
+    state_analysis                1       0.013    0.00
+    siesta_move                   1       0.000    0.00
+   optical                        1       0.000    0.00
+   MPI_BCAST                      3       0.000    0.00
+   MPI_ALLGATHER                  2       0.044    0.00
+   MPI_BARRIER                    2       0.145    0.01
+  MPI_ALLGATHER                  56       1.224    0.07
+  MPI_BCAST                       2       0.000    0.00
+  MPI_RECV                        4       0.009    0.00
+>> End of run:  23-SEP-2016  21:48:59
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+/home/keceli/lib/siesta-qetsc/Obj/siesta on a arch-gccopt named b444 with 64 processors, by keceli Fri Sep 23 21:48:59 2016
+Using Petsc Development GIT revision: v3.7.3-1320-g04d0fa7  GIT Date: 2016-09-01 18:08:27 -0500
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           1.648e+03      1.00004   1.648e+03
+Objects:              6.680e+02      1.53917   5.171e+02
+Flops:                1.477e+11   1560.41496   5.334e+10  3.414e+12
+Flops/sec:            8.966e+07   1560.42192   3.238e+07  2.072e+09
+MPI Messages:         1.760e+02      1.16556   1.752e+02  1.121e+04
+MPI Message Lengths:  1.208e+04      1.53885   6.806e+01  7.632e+05
+MPI Reductions:       3.760e+02      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 8.6061e-03   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 1:     siesta_init: 5.6884e-01   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 2:   siesta_forces: 1.1241e+02   6.8%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 3:    siesta_solve: 7.2546e-03   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 4:    siesta2qetsc: 3.3362e+00   0.2%  0.0000e+00   0.0%  8.064e+03  71.9%  6.637e+01       97.5%  8.500e+01  22.6% 
+ 5: qetsc_setup_eps: 5.9333e+01   3.6%  6.0586e+09   0.2%  0.000e+00   0.0%  0.000e+00        0.0%  6.800e+01  18.1% 
+ 6: qetsc_solve_eps: 3.0592e+02  18.6%  3.4080e+12  99.8%  3.150e+03  28.1%  1.685e+00        2.5%  1.860e+02  49.5% 
+ 7:   qetsc_eigvals: 1.5944e-03   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 8:   qetsc_density: 8.0410e+01   4.9%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  3.600e+01   9.6% 
+10:     siesta_misc: 1.0840e+03  65.8%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+11:     siesta_move: 5.5273e-04   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+12: siesta_analysis: 6.0164e-03   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+13:      siesta_end: 1.4770e+00   0.1%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %F - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %F %M %L %R  %T %F %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+
+--- Event Stage 1: siesta_init
+
+
+--- Event Stage 2: siesta_forces
+
+
+--- Event Stage 3: siesta_solve
+
+
+--- Event Stage 4: siesta2qetsc
+
+MatConvert            18 1.0 5.3550e-02 7.7 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   1  0  0  0  0     0
+MatAssemblyBegin      19 1.0 1.5650e+00 1.7 0.00e+00 0.0 0.0e+00 0.0e+00 3.8e+01  0  0  0  0 10  37  0  0  0 45     0
+MatAssemblyEnd        19 1.0 1.3977e+00 1.1 0.00e+00 0.0 8.1e+03 9.2e+01 4.5e+01  0  0 72 98 12  40  0100100 53     0
+VecSet                19 1.0 7.4458e-03110.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+
+--- Event Stage 5: qetsc_setup_eps
+
+MatConvert            17 1.0 8.2803e-01 1.9 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   1  0  0  0  0     0
+MatScale              34 1.0 2.6674e-01 2.9 9.47e+07 1.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0100  0  0  0 22714
+MatAssemblyBegin      17 1.0 8.5831e-06 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatAssemblyEnd        17 1.0 9.2692e-02 1.7 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatGetSubMatrice      17 1.0 5.9289e+01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 6.8e+01  4  0  0  0 18  98  0  0  0100     0
+MatAXPY               17 1.0 3.0002e-01 2.1 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatRedundantMat       17 1.0 5.9974e+01 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 6.8e+01  4  0  0  0 18  99  0  0  0100     0
+
+--- Event Stage 6: qetsc_solve_eps
+
+MatMult            12267 0.0 1.6629e+02 0.0 1.37e+11 0.0 0.0e+00 0.0e+00 0.0e+00  3 92  0  0  0  16 92  0  0  0 18956
+MatSolve            4489 0.0 6.5968e+01 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   6  0  0  0  0     0
+MatCholFctrSym         1 1.0 2.7088e+00 2.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   1  0  0  0  0     0
+MatCholFctrNum        18 1.0 9.8244e+00 1.5 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   3  0  0  0  0     0
+MatCopy               17 1.0 6.5887e+00 1.7 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   2  0  0  0  0     0
+MatConvert             3 1.0 1.7254e-01 2.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatAssemblyBegin      37 1.0 1.0490e-05 8.8 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatAssemblyEnd        37 1.0 1.7044e-01 1.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatGetRow         154336 1.0 4.2409e-02 3.8 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatGetRowIJ            1 1.0 1.4067e-05 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatGetSubMatrice       2 1.0 9.6659e+00 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  2   3  0  0  0  4     0
+MatGetOrdering         1 1.0 9.2030e-05 1.9 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatZeroEntries        17 1.0 1.3221e-01 1.8 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+MatAXPY               18 1.0 1.2146e+01 2.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   2  0  0  0  0     0
+MatRedundantMat        2 1.0 9.7438e+00 1.0 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  1  0  0  0  2   3  0  0  0  4     0
+VecDot               225 0.0 2.4080e-03 0.0 1.31e+06 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  5905
+VecCopy               18 0.0 4.1008e-05 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSet              465859.0 8.0411e-0236.4 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSetRandom          18 0.0 1.2209e-02 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+EPSSetUp              25 1.0 4.8346e+01 1.1 0.00e+00 0.0 3.2e+03 6.0e+00 7.8e+01  3  0 28  2 21  15  0100100 42     0
+EPSSolve              18 1.0 2.8174e+02 1.0 1.48e+11 0.0 2.3e+03 6.0e+00 1.4e+02 17100 20  2 38  92100 72 72 77 12096
+STSetUp               43 1.0 3.0077e+01 1.7 0.00e+00 0.0 0.0e+00 0.0e+00 2.0e+00  1  0  0  0  1   7  0  0  0  1     0
+STApply             4489 0.0 1.2123e+02 0.0 5.00e+10 0.0 0.0e+00 0.0e+00 0.0e+00  2 33  0  0  0  12 33  0  0  0  9278
+STMatSolve          4489 0.0 6.6182e+01 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   6  0  0  0  0     0
+KSPSetUp              18 1.0 2.3365e-0512.2 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+KSPSolve            4489 0.0 6.6068e+01 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   6  0  0  0  0     0
+PCSetUp               18 1.0 1.2370e+01 1.6 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   3  0  0  0  0     0
+PCApply             4489 0.0 6.5977e+01 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  1  0  0  0  0   6  0  0  0  0     0
+BVCreate              4010.0 1.9259e-01 1.7 0.00e+00 0.0 0.0e+00 0.0e+00 8.0e+00  0  0  0  0  2   0  0  0  0  4     0
+BVCopy                18 0.0 5.8174e-05 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+BVMultVec           7725 0.0 2.8591e+00 0.0 5.43e+09 0.0 0.0e+00 0.0e+00 0.0e+00  0  4  0  0  0   0  4  0  0  0 43898
+BVMultInPlace         18 0.0 7.7711e-02 0.0 3.14e+08 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0 43923
+BVDotVec            7725 0.0 1.1098e+02 0.0 9.12e+10 0.0 0.0e+00 0.0e+00 0.0e+00  2 62  0  0  0  11 62  0  0  0 19164
+BVOrthogonalizeV    4338 0.0 1.1296e+02 0.0 9.64e+10 0.0 0.0e+00 0.0e+00 0.0e+00  2 66  0  0  0  11 66  0  0  0 19940
+BVScale             4489 0.0 3.7920e-02 0.0 1.31e+07 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0  7757
+BVNormVec            225 0.0 2.6132e+00 0.0 2.51e+09 0.0 0.0e+00 0.0e+00 0.0e+00  0  1  0  0  0   0  1  0  0  0 10410
+BVSetRandom           18 0.0 1.5171e-02 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+DSSolve               18 0.0 2.1656e-01 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+DSVectors           4320 0.0 1.3454e-03 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+DSOther               18 0.0 2.4013e-02 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+
+--- Event Stage 7: qetsc_eigvals
+
+
+--- Event Stage 8: qetsc_density
+
+MatConvert            36 1.0 1.4238e+00 1.3 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   1  0  0  0  0     0
+MatGetValues        1656 3.3 2.7249e-01 4.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecCopy              225 0.0 1.2431e-02 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+VecSet                18 1.0 1.0610e-04 1.8 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+BVCopy               225 0.0 1.2893e-02 0.0 0.00e+00 0.0 0.0e+00 0.0e+00 0.0e+00  0  0  0  0  0   0  0  0  0  0     0
+
+--- Event Stage 9: Unknown
+
+
+--- Event Stage 10: siesta_misc
+
+
+--- Event Stage 11: siesta_move
+
+
+--- Event Stage 12: siesta_analysis
+
+
+--- Event Stage 13: siesta_end
+
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+
+--- Event Stage 1: siesta_init
+
+
+--- Event Stage 2: siesta_forces
+
+
+--- Event Stage 3: siesta_solve
+
+
+--- Event Stage 4: siesta2qetsc
+
+              Matrix    57              0            0     0.
+              Vector    20              1         1648     0.
+      Vector Scatter    19              0            0     0.
+           Index Set     2              2        12760     0.
+
+--- Event Stage 5: qetsc_setup_eps
+
+              Matrix    34             51     18126012     0.
+              Vector     0             17       406504     0.
+      Vector Scatter     0             17        18224     0.
+           Index Set    34              0            0     0.
+          EPS Solver     1              0            0     0.
+  Spectral Transform     1              0            0     0.
+       Krylov Solver     1              0            0     0.
+      Preconditioner     1              0            0     0.
+       Basis Vectors     1              0            0     0.
+         PetscRandom     1              0            0     0.
+              Region     1              0            0     0.
+       Direct Solver     1              0            0     0.
+
+--- Event Stage 6: qetsc_solve_eps
+
+              Matrix    24             18   1203708892     0.
+              Vector   141            124      2071872     0.
+           Index Set     8              3        18224     0.
+          EPS Solver     1              0            0     0.
+  Spectral Transform     1              0            0     0.
+       Krylov Solver     1              0            0     0.
+      Preconditioner     1              0            0     0.
+       Basis Vectors    26             24        25344     0.
+              Region     1              0            0     0.
+       Direct Solver     1              0            0     0.
+
+--- Event Stage 7: qetsc_eigvals
+
+
+--- Event Stage 8: qetsc_density
+
+              Matrix    36             36   2407417920     0.
+              Vector    18             18       446832     0.
+
+--- Event Stage 9: Unknown
+
+
+--- Event Stage 10: siesta_misc
+
+
+--- Event Stage 11: siesta_move
+
+
+--- Event Stage 12: siesta_analysis
+
+
+--- Event Stage 13: siesta_end
+
+              Viewer     1              0            0     0.
+========================================================================================================================
+Average time to get PetscTime(): 0.
+Average time for MPI_Barrier(): 0.022797
+Average time for zero size MPI_Send(): 0.000643484
+#PETSc Option Table entries:
+-bintype 3
+-eps_interval -2.3,0.
+-eps_krylovschur_detect_zeros 0
+-eps_krylovschur_nev 120
+-eps_krylovschur_partitions 64
+-ioptinertia 1
+-ioptleft 2
+-isglobal 0
+-log_view
+-mat_mumps_cntl_3 1e-12
+-mat_mumps_icntl_13 1
+-mat_mumps_icntl_24 1
+-mat_mumps_icntl_28 1
+-roptbuffer 0.1
+-roptdiff 0.01
+-roptleft -2.3
+-roptright 0.
+-st_pc_factor_mat_solver_package mkl_pardiso
+-writeeigs 1
+#End of PETSc Option Table entries
+Compiled without FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure options: --download-metis=1 --download-mumps=1 --download-parmetis=1 --download-ptscotch=1 --download-scalapack=1 --with-blas-lapack-dir=/soft/mkl/11.1.0.080/mkl/ --with-debugging=0 --with-mkl_pardiso-dir=/soft/mkl/11.1.0.080/mkl/ --with-shared-libraries=0 -COPTFLAGS="-O3 -g" -CXXOPTFLAGS="-O3 -g" -FOPTFLAGS="-O3 -g" CC=mpicc CXX=mpicxx FC=mpif90 PETSC_ARCH=arch-gccopt
+-----------------------------------------
+Libraries compiled on Fri Sep 23 14:58:29 2016 on blogin3 
+Machine characteristics: Linux-2.6.32-642.1.1.el6.x86_64-x86_64-with-centos-6.7-Final
+Using PETSc directory: /home/keceli/lib/petsc
+Using PETSc arch: arch-gccopt
+-----------------------------------------
+
+Using C compiler: mpicc   -Wall -Wwrite-strings -Wno-strict-aliasing -Wno-unknown-pragmas -fvisibility=hidden -O3 -g  ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: mpif90  -Wall -ffree-line-length-0 -Wno-unused-dummy-argument -O3 -g   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/home/keceli/lib/petsc/arch-gccopt/include -I/home/keceli/lib/petsc/include -I/home/keceli/lib/petsc/include -I/home/keceli/lib/petsc/arch-gccopt/include -I/soft/mkl/11.1.0.080/mkl/include -I/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-5.3.0/mpich-3.2-wraqufukmp7yzyl6a644pnmda7wkg7w7/include
+-----------------------------------------
+
+Using C linker: mpicc
+Using Fortran linker: mpif90
+Using libraries: -Wl,-rpath,/home/keceli/lib/petsc/arch-gccopt/lib -L/home/keceli/lib/petsc/arch-gccopt/lib -lpetsc -Wl,-rpath,/home/keceli/lib/petsc/arch-gccopt/lib -L/home/keceli/lib/petsc/arch-gccopt/lib -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -lscalapack -Wl,-rpath,/soft/mkl/11.1.0.080/mkl/lib/intel64 -L/soft/mkl/11.1.0.080/mkl/lib/intel64 -lmkl_intel_lp64 -lmkl_core -lmkl_intel_thread -liomp5 -ldl -lpthread -lm -lparmetis -lmetis -lptesmumps -lptscotch -lptscotcherr -lscotch -lscotcherr -lX11 -lhwloc -lpthread -lssl -lcrypto -lm -L/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib64 -L/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-5.3.0/mpich-3.2-wraqufukmp7yzyl6a644pnmda7wkg7w7/lib -L/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib64/gcc/x86_64-unknown-linux-gnu/5.3.0 -L/soft/intel/13.1.3/lib/intel64 -L/soft/intel/13.1.3/ipp/lib/intel64 -L/soft/intel/13.1.3/tbb/lib/intel64/gcc4.4 -L/soft/lcrc/lib -lmpifort -lgfortran -lm -Wl,-rpath,/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib:/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib64 -Wl,-rpath,/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-5.3.0/mpich-3.2-wraqufukmp7yzyl6a644pnmda7wkg7w7/lib -lgfortran -lm -lquadmath -lm -lmpicxx -lstdc++ -lrt -lm -lpthread -lz -Wl,-rpath,/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib:/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib64 -L/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-5.3.0/mpich-3.2-wraqufukmp7yzyl6a644pnmda7wkg7w7/lib -L/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib64/gcc/x86_64-unknown-linux-gnu/5.3.0 -L/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib64 -L/soft/intel/13.1.3/lib/intel64 -L/soft/intel/13.1.3/ipp/lib/intel64 -L/soft/intel/13.1.3/tbb/lib/intel64/gcc4.4 -L/soft/lcrc/lib -L/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-4.4.7/gcc-5.3.0-fygfl7rvyuiteto27dlhmilp5cstw2o2/lib64 -ldl -Wl,-rpath,/blues/gpfs/home/software/spack/opt/spack/linux-x86_64/gcc-5.3.0/mpich-3.2-wraqufukmp7yzyl6a644pnmda7wkg7w7/lib -lmpi -lgcc_s -ldl 
+-----------------------------------------
+
