@@ -1,0 +1,38 @@
+SystemName          Glu-Ala
+SystemLabel         GA
+NumberOfAtoms       834
+NumberOfSpecies     4
+DM.MixingWeight 0.25
+DM.NumberPulay 3
+
+#SolutionMethod  slepc1 #slepc0 for the older method
+SolutionMethod diagon
+#BlockSize 182
+#BlockSize 273
+WriteDM .false.
+WriteDM.NetCDF .false.
+WriteDMHS.NetCDF .false.
+LongOutput .false.
+#MaxSCFIterations 1
+
+%block ChemicalSpeciesLabel
+ 1  6  C
+ 2  1  H
+ 3  7  N
+ 4  8  O
+%endblock ChemicalSpeciesLabel
+
+PAO.BasisType split
+PAO.BasisSize DZP
+
+LatticeConstant 1.0 Ang
+%block LatticeVectors < 0032_box.data
+
+%block kgrid_Monkhorst_Pack
+1 0 0 0.0
+0 1 0 0.0
+0 0 1 0.0
+%endblock kgrid_Monkhorst_Pack
+
+AtomicCoordinatesFormat NotScaledCartesianAng
+%block AtomicCoordinatesAndAtomicSpecies < 0032_atoms.data
