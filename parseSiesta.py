@@ -1,4 +1,3 @@
-# %load parseSiesta4.py
 #!/usr/bin/env python
 import numpy as np
 import logging
@@ -863,7 +862,24 @@ def main():
     initializeLog(args.debug)        
     if args.input is not None:
         logfile=args.input
-        
+        titers=getMaxIterTimes(logfile)
+        tbins = getBinTimes(logfile)
+        nbin   = getNumberofBins(logfile)
+        niter  = getNumberofIters(logfile)
+        bins  = getBins(logfile)
+        evals = getEigenvalues(logfile)
+        iterno = 6
+        binno = 4
+        print 'tbins:',tbins[iterno,:],titers[iterno]
+        maxtbin = np.argmax(tbins[iterno,:])
+        print 'nevals:',getNumberofEvalsPerBin(evals,bins)[iterno,:]
+        print 'max bin:', maxtbin, bins[iterno,maxtbin],bins[iterno,maxtbin+1]
+        print 'evals', evals[iterno,(evals[iterno,:]>bins[iterno,maxtbin]) & (evals[iterno,:]<bins[iterno,maxtbin+1])]
+        print 'evals', getEvalsInBin(evals,bins,iterno,binno)
+        maxt  = np.max(tbins[iterno,:])
+        width = 0.1 + 0.2*tbins[iterno,:]/maxt
+        print width
+        plotEvalsAndBinsAndTimes(niter,evals,bins,tbins)
     else:
         readLogDirectory()
         
