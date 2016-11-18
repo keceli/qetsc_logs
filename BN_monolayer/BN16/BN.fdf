@@ -1,0 +1,37 @@
+SystemName          BN
+SystemLabel         BN
+NumberOfAtoms       2
+NumberOfSpecies     2
+
+%block ChemicalSpeciesLabel
+ 1  5  B
+ 2  7  N
+%endblock ChemicalSpeciesLabel
+
+PAO.BasisType split
+PAO.BasisSize DZP
+
+LatticeConstant 1.00 Ang
+%block LatticeVectors
+20.000000000000000        0.0000000000000000        0.0000000000000000        
+0.0000000000000000        2.1385199999999998        1.2346750976673984        
+0.0000000000000000        2.1385199999999998       -1.2346750976673984        
+%endblock LatticeVectors
+
+%block kgrid_Monkhorst_Pack
+1 0 0 0.0
+0 1 0 0.0
+0 0 1 0.0
+%endblock kgrid_Monkhorst_Pack
+
+%block SuperCell
+1 0 0
+0 16 0
+0 0 16
+%endblock SuperCell
+
+AtomicCoordinatesFormat Ang
+%block AtomicCoordinatesAndAtomicSpecies
+ 0.0000000000000000 1.4256799999999998 0.0000000000000000 1
+ 0.0000000000000000 2.8513599999999997 0.0000000000000000 2
+%endblock AtomicCoordinatesAndAtomicSpecies
