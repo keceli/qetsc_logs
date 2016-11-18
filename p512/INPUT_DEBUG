@@ -1,0 +1,51 @@
+SystemName          polyethylene
+SystemLabel         polyethylene
+NumberOfAtoms       6
+NumberOfSpecies     2
+
+%block ChemicalSpeciesLabel
+ 1  6  C
+ 2  1  H
+%endblock ChemicalSpeciesLabel
+
+DM.MixingWeight 0.3
+DM.NumberPulay 3
+BlockSize 23
+SolutionMethod  slepc1
+WriteDM .false.
+WriteDM.NetCDF .false.
+WriteDMHS.NetCDF .false.
+LongOutput .false.
+#MaxSCFIterations 1
+
+PAO.BasisType split
+PAO.BasisSize DZP
+
+LatticeConstant 1.00 Ang
+%block LatticeVectors
+20.000  0.000  0.000
+ 0.000 20.000  0.000
+ 0.000  0.000  2.572
+%endblock LatticeVectors
+
+%block kgrid_Monkhorst_Pack
+1 0 0 0.0
+0 1 0 0.0
+0 0 1 0.0
+%endblock kgrid_Monkhorst_Pack
+
+%block SuperCell
+1 0 0
+0 1 0
+0 0 512
+%endblock SuperCell
+
+AtomicCoordinatesFormat Ang
+%block AtomicCoordinatesAndAtomicSpecies
+  0.31237500000000001       0.28138740000000001       0.64300000000000002     1
+   1.3964999999999999        7.3970400000000006E-002  0.64300000000000002     2
+  0.21462000000000001        1.3794480000000002       0.64300000000000002     2
+ -0.31237500000000001      -0.28138740000000001      -0.64300000000000002     1
+  -1.3964999999999999       -7.3970400000000006E-002 -0.64300000000000002     2
+ -0.21462000000000001       -1.3794480000000002      -0.64300000000000002     2
+%endblock AtomicCoordinatesAndAtomicSpecies
