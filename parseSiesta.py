@@ -41,10 +41,10 @@ def readQETSc(myfile):
     tsols[3]  = float(getValue(kw,myfile))
     tsol  = max(tsols)
     tup =  float(getValue(kwup,myfile))
-    if tsols.index(tsol) == 3 : 
+    if tsols.index(tsol) == 3 :
         qetsc = False
         tden=tmax=tmin=tave=tsym=tnum= 0.
-    else:    
+    else:
         tsym,tnum  = getFactTimes(myfile)
         tmax,tmin,tave =getIterTimes(myfile)
         tden = float(getValue(' 8:   qetsc_density:',myfile))
@@ -56,14 +56,14 @@ def getIterTimes(logfile):
     titers = [0.]*120
     keyword ='QETSC: Iter time'
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             elif line.startswith(keyword):
                 titers[i]=float(line.split()[5])
-                i += 1            
-    return max(titers),min(titers[0:i]),sum(titers)/i    
+                i += 1
+    return max(titers),min(titers[0:i]),sum(titers)/i
 
 def getMaxIterTimes(logfile):
     logging.debug("Reading file {0}".format(logfile))
@@ -71,13 +71,13 @@ def getMaxIterTimes(logfile):
     titers = [0.]*120
     keyword ='QETSC: Iter time (max)       ='
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             elif line.startswith(keyword):
                 titers[i]=float(line.split()[6])
-                i += 1            
+                i += 1
     return titers[0:i]
 
 def getNumberofIters(logfile):
@@ -96,20 +96,20 @@ def getBinTimes(logfile):
     tbins = np.zeros((niter,nbin))
     keyword ='SLEPc: EPSSolve time ='
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             elif line.startswith(keyword):
                 while line.startswith(keyword):
                     binno=int(line.split()[-2])
                     tbins[iterno,binno] = float(line.split()[-1])
                     line=f.readline()
-                iterno += 1            
+                iterno += 1
     return tbins
 
 def getEvalsInBin(evals,bins,iterno,binno):
-    return evals[iterno,(evals[iterno,:]>bins[iterno,binno]) 
+    return evals[iterno,(evals[iterno,:]>bins[iterno,binno])
           & (evals[iterno,:]<bins[iterno,binno+1])]
 
 def getNumberofEvalsPerBin(evals,bins):
@@ -126,11 +126,11 @@ def getFactTimes(logfile):
     logging.debug("Reading file {0}".format(logfile))
     kwnum='MatCholFctrNum'
     kwsym='MatCholFctrSym'
-    
+
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             elif line.startswith(kwnum):
                 n = int(line.split()[1])
@@ -154,16 +154,16 @@ def getValue(keyword,logfile,pos=0,pickfirst=False):
     value = 0.
     found = False
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             elif line.startswith(keyword):
                 value=line.replace(keyword,'').split()[pos]
                 found = True
             elif found and pickfirst:
                 break
-    return value     
+    return value
 
 def getValues(logfile):
     keywords=[
@@ -175,35 +175,35 @@ def getValues(logfile):
     values=[0.0]*len(keywords)
     logging.debug("Reading file {0}".format(logfile))
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             else:
                 for i in range(len(keys)):
                     if line.startswith(keys[i]):
                         a=line.replace(keys[i],'').split()
                         values[i]=a[0]
-        print logfile, list2Str(values)        
-           
-    return values     
-    
+        print logfile, list2Str(values)
+
+    return values
+
 def getBins(logfile):
     nbin   = 1 + getNumberofBins(logfile)
     niter  = getNumberofIters(logfile)
     bins   = np.zeros([niter,nbin])
     eiter  = 0
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             elif line.startswith(" QETSC: Bins             ="):
                 for i in range(nbin):
                     line = f.readline()
                     bins[eiter,i] = float(line.split()[0])
                 eiter += 1
-    return bins                
+    return bins
 
 def getEigenvalues(logfile):
     neval   = int(getValue("QETSC: Number of req. evals  =",logfile))
@@ -211,42 +211,42 @@ def getEigenvalues(logfile):
     evals   = np.zeros([niter,neval])
     eiter  = 0
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             elif line.startswith(" QETSC: Eigenvalues         ="):
                 for i in range(neval):
                     line = f.readline()
                     evals[eiter,i] = float(line.split()[0])
                 eiter += 1
-    return evals                
+    return evals
 
 
 def readLogFile(logfile):
     import socket
     errorCode="OK"
     values=[0.0]*len(keys)
-    
+
     logging.debug("Reading file {0}".format(logfile))
     with open(logfile) as f:
-        while True:          
+        while True:
             line = f.readline()
-            if not line: 
+            if not line:
                 break
             else:
                 for i in range(len(keys)):
                     if line.startswith(keys[i]):
                         a=line.replace(keys[i],'').split()
-                        values[i]=a[0] 
-        print logfile, list2Str(values)        
-           
-    return 0     
-    
+                        values[i]=a[0]
+        print logfile, list2Str(values)
+
+    return 0
+
 def plotIterTimes(logfile0,logfile2,logfile3,savefile=None):
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
         return
     titers0 = getMaxIterTimes(logfile0)
@@ -270,7 +270,7 @@ def plotIterTimes(logfile0,logfile2,logfile3,savefile=None):
     axes.axhline(tnum,color='b')
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, 1.05),
           ncol=3, fancybox=True, shadow=True)
-    
+
     if savefile:
         plt.savefig(savefile)
     plt.show()
@@ -279,7 +279,7 @@ def plotIterTimes(logfile0,logfile2,logfile3,savefile=None):
 def plotStrong(savefile=None):
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
         return
     ms=8
@@ -301,13 +301,13 @@ def plotStrong(savefile=None):
     if savefile:
         plt.savefig(savefile)
     plt.show()
-        
+
     return
 
-def plotEvalsAndBins(maxiter,evals,bins,savefile=None):
+def plotEvalsBins(maxiter,evals,bins,savefile=None):
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
         return
     mineval = np.min(np.min(evals,axis=1))
@@ -331,16 +331,16 @@ def plotEvalsAndBins(maxiter,evals,bins,savefile=None):
     plt.show()
     return
 
-def plotEvalsAndBinsAndTimes(maxiter,evals,bins,tbins,savefile=None):
+
+def plotEvalsBinsTimes(maxiter,evals,bins,tbins,savefile=None):
     try:
         import matplotlib.pyplot as plt
-    except: 
-        Print("Requires matplotlib")
+    except:
+        print("Requires matplotlib")
         return
-    mineval = np.min(np.min(evals,axis=1))
-    maxeval = np.max(np.max(evals,axis=1))
-    maxt    = np.max(np.max(tbins,axis=1))
-    erange  = maxeval - mineval
+    mineval = np.min(np.min(evals, axis=1))
+    maxeval = np.max(np.max(evals, axis=1))
+    maxt = np.max(np.max(tbins, axis=1))
     fig, axes = plt.subplots(nrows=1, ncols=1)
     myyrange = [mineval-0.2, maxeval + 0.2]
     myxrange = [0,maxiter+1]
@@ -355,10 +355,16 @@ def plotEvalsAndBinsAndTimes(maxiter,evals,bins,tbins,savefile=None):
     for i in range(maxiter):
         # Different widths for slices does not look nice
         maxtbin = np.max(tbins[i,:])
+        mintbin = np.min(tbins[i,:])
         # width   = 0.1 + 0.15*tbins[i,:]/maxtbin
         # plt.hlines(y=bins[i,:],xmin=i+1-width,xmax=i+1+width,color='r')
-        plt.plot(np.zeros_like(evals[i,:])+i+1,evals[i,:],ls='none',marker='_',color='k',ms=6)
-        plt.hlines(y=bins[i,1:],xmin=i+0.75,xmax=i+1.25,color=mycolors(tbins[i,:]/maxtbin),linewidth=1)
+        plt.plot(np.zeros_like(evals[i,:])+i+1,evals[i,:],ls='none',
+                 marker='_',color='k',ms=6)
+        plt.hlines(y=bins[i,1:],xmin=i+0.75,xmax=i+1.25,
+                   color=mycolors(tbins[i,:]/maxtbin),linewidth=1)
+        boxcolor = mycolors(maxtbin/maxt)
+        plt.text(i+0.92, maxeval+0.1, '{0:3.1f}'.format(maxtbin), color= 'k',
+                 bbox={'facecolor': boxcolor, 'alpha': 0.5, 'pad': 10})
     axes.axhline(mineval, color='k',lw=0.1)
     axes.axhline(maxeval, color='k',lw=0.1)
     if savefile:
@@ -369,7 +375,7 @@ def plotEvalsAndBinsAndTimes(maxiter,evals,bins,tbins,savefile=None):
 def plotEvals(maxiter,evals,nslice=None,savefile=None):
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
         return
     mineval = np.min(np.min(evals,axis=1))
@@ -399,7 +405,7 @@ def plotEvals(maxiter,evals,nslice=None,savefile=None):
 def plotBins(x,binedges,savefile=None,myc='r'):
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
         return
     fig, axes = plt.subplots(figsize=[3,5],nrows=1, ncols=1)
@@ -415,15 +421,15 @@ def plotBins(x,binedges,savefile=None,myc='r'):
     plt.title(savefile)
     if savefile:
         plt.savefig('plotBins'+savefile+'.png')
-    plt.show()    
-    return  
+    plt.show()
+    return
 
 def plotVBins(x,binedges):
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
-        return     
+        return
     fig, axes = plt.subplots(figsize=[12,2],nrows=1, ncols=1)
     myxrange = [-2.5,0.25]
     plt.xlim(myxrange)
@@ -432,13 +438,13 @@ def plotVBins(x,binedges):
     #plt.xlim([min(x)-0.2,max(x)+0.2])
     for edge in binedges:
         axes.axvline(edge)
-    plt.show()    
-    return  
+    plt.show()
+    return
 
 def plotIterTimes(logfile0,logfile2,logfile3):
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
         return
     titers0 = getMaxIterTimes(logfile0)
@@ -465,9 +471,9 @@ def plotIterTimes(logfile0,logfile2,logfile3):
 def plotEvalsHor(maxiter,evals):
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
-        return     
+        return
     fig, axes = plt.subplots(figsize=[16,8],nrows=1, ncols=1)
     #plt.setp(axes, xlim=myxrange, ylim=myyrange)
     myxrange = [min(evals[:,0])-0.1,max(evals[:,-1])+0.1]
@@ -483,7 +489,7 @@ def plotEvalsHor(maxiter,evals):
 def getDensityOfStates(eigs,width=0.1,npoint=200):
     """
     Computes density of states (dos) by representing
-    `eigs` (eigenvalues) as gaussians of given `width`. 
+    `eigs` (eigenvalues) as gaussians of given `width`.
     Parameters
     ----------
     eigs   : Array of floats
@@ -496,16 +502,16 @@ def getDensityOfStates(eigs,width=0.1,npoint=200):
     Returns
     -------
     energies : Array of floats
-               Energies for which DOS is computed.     
+               Energies for which DOS is computed.
     dos      : Array of floats
-               len(dos) = len(energies) = npoints 
+               len(dos) = len(energies) = npoints
                Density of states computed at energies.
                dos has the inverse of the units of energies.
     Notes
     -----
     The mathematical definition of density of states is:
     $D(x) = \frac{1}{N}\sum\limits_n \delta(x-x_n)$,
-    where $x_n$ is the $n$th eigenvalue and $N$ is 
+    where $x_n$ is the $n$th eigenvalue and $N$ is
     the total number of eigenvalues.
     Here, delta function is represented by a gaussian,i.e.
     $\delta(x) = \frac{1}{a\sqrt{\pi}}\exp(-\frac{x^2}{a^2})$
@@ -517,7 +523,7 @@ def getDensityOfStates(eigs,width=0.1,npoint=200):
     tmp = np.zeros(len(energies))
     for eig in eigs:
         tmp += np.exp(-(energies-eig)**2 / w2)
-    dos = tmp / (np.sqrt(np.pi) * width * N)    
+    dos = tmp / (np.sqrt(np.pi) * width * N)
     return energies, dos
 
 def plotDensityOfStates(energies,dos,units='Hartree',title='DOS'):
@@ -526,17 +532,17 @@ def plotDensityOfStates(energies,dos,units='Hartree',title='DOS'):
     Parameters
     ---------
     energies : Array of floats
-               Energies for which DOS is computed.     
+               Energies for which DOS is computed.
     dos      : Array of floats
-               len(dos) = len(energies) 
+               len(dos) = len(energies)
                Density of states computed at energies.
                dos has the inverse of the units of energies
     """
     try:
         import matplotlib.pyplot as plt
-    except: 
+    except:
         Print("Requires matplotlib")
-        return     
+        return
     assert len(energies) == len(dos), "energies and dos should have the same length"
     plt.figure()
     plt.plot(energies,dos)
@@ -588,12 +594,12 @@ def getBinEdges0(x,nbin,binbuffer=0.001):
 
 def getBinEdges1(x, nbin, rangebuffer=0.1,interval=[0],cthresh=1.e-6):
     """
-    Given a list of eigenvalues, (x) and number of subintervals (nbin), 
+    Given a list of eigenvalues, (x) and number of subintervals (nbin),
     returns the boundaries for subintervals such that each subinterval has an average number of eigenvalues.
     Doesn't skip gaps, SLEPc doesn't support it, yet.
     range of x * rangebuffer gives a rangebuffer zone for leftmost and rightmost boundaries.
     """
-    x, mults = getClusters(x,cthresh) 
+    x, mults = getClusters(x,cthresh)
     nx = len(x)
     mean = nx / nbin
     remainder = nx % nbin
@@ -639,7 +645,7 @@ def getBinEdges2(x,nbin,binbuffer=0.001):
         ncluster = len(clusters)
         if ncluster > nbin:
             crange = crange * 1.1
-        elif ncluster < nbin:    
+        elif ncluster < nbin:
             crange = crange * 0.9
         else:
             break
@@ -650,7 +656,7 @@ def getBinEdges2(x,nbin,binbuffer=0.001):
     else:
         for i in range(nbin):
             b[i] = clusters[i] - binbuffer
-        b[nbin] = max(x) + binbuffer    
+        b[nbin] = max(x) + binbuffer
     return b
 
 def getBinEdges3(x,nbin,binbuffer=0.001):
@@ -670,7 +676,7 @@ def getBinEdges3(x,nbin,binbuffer=0.001):
     Using k-means for 1d arrays is considered to be an overkill.
     However, it seems to me as a practical solution for the binning problem.
     """
-    try: 
+    try:
         from sklearn.cluster import KMeans
     except:
         Print("sklearn.cluster not found.")
@@ -684,7 +690,7 @@ def getBinEdges3(x,nbin,binbuffer=0.001):
     uniqueids  = np.array([clusterids[i+1]-clusterids[i]!=0 for i in range(n-1)],dtype=bool)
     b[1:-1]    = x[1:][uniqueids] - binbuffer
     b[-1]      = x[-1] + binbuffer
-    return b                     
+    return b
 
 def getBinEdges4(x,nbin,binbuffer=0.001):
     """
@@ -733,7 +739,7 @@ def getBinEdges5(x,nbin,ngap=1,binbuffer=0.001):
         bins[i+1] = x[idx+1] - (dx[idx] * binbuffer)
     bins[nbin]    = x[-1] + binbuffer
     return bins
-    
+
 def getBinEdges(x, nbin,bintype=2,binbuffer=0.001,rangebuffer=0.1,rangetype=0,A=None,interval=[0]):
     """
     Given an array of numbers (x) and number
@@ -746,7 +752,7 @@ def getBinEdges(x, nbin,bintype=2,binbuffer=0.001,rangebuffer=0.1,rangetype=0,A=
     bintype = 2 :
         Bin edges are adjusted to minimize distance from left edge.
     bintype = 3 :
-        Bin edges are adjusted based on k-means clustering.    
+        Bin edges are adjusted based on k-means clustering.
     Input:
     x       - numpy array (dtype='float64')
     nbin    - int
@@ -758,51 +764,51 @@ def getBinEdges(x, nbin,bintype=2,binbuffer=0.001,rangebuffer=0.1,rangetype=0,A=
     """
     if len(interval)==2:
         a, b = interval[0], interval[1]
-    else: 
+    else:
         Print("A tuple or list of two values is required to define the interval")
-        return interval 
-    
+        return interval
+
     nx = len(x)
     if nx > 1:
         dx   = x[1:] - x[:-1]
         Print("Min seperation of eigenvalues: {0:5.3e}".format(min(dx)))
         Print("Max seperation of eigenvalues: {0:5.3f}".format(max(dx)))
-         
+
     if (nx < nbin or bintype == 0):
         Print("Uniform bins")
         bins = np.array([a,b])
     elif bintype == 1:
         Print("Adjust bin edges to have a uniform number of eigenvalues in each bin")
-        bins = getBinEdges1(x,nbin)[0]   
+        bins = getBinEdges1(x,nbin)[0]
     elif bintype == 2:
         Print("Adjust bin edges to minimize distance of values from the left edge of each bin")
-        bins = getBinEdges2(x,nbin,binbuffer=binbuffer) 
+        bins = getBinEdges2(x,nbin,binbuffer=binbuffer)
     elif bintype == 3:
         Print("Adjust bin edges based on k-means clustering of eigenvalues")
-        bins = getBinEdges3(x,nbin,binbuffer=binbuffer)  
-                            
+        bins = getBinEdges3(x,nbin,binbuffer=binbuffer)
+
     if rangetype == 0:
         Print("Interval is set to: {0:5.3f}, {1:5.3f}".format(a,b))
     elif rangetype == 1 and nx > 1:
         Print("Interval is set to min & max of prior evals: {0:5.3f},{1:5.3f}".format(a,b))
         a = x[0]  - rangebuffer
         b = x[-1] + rangebuffer
-    elif rangetype == 2: 
+    elif rangetype == 2:
         diag   = A.getDiagonal()
         a = diag.min()[1]  - rangebuffer
         b = diag.max()[1]  + rangebuffer
         Print("Interval based on min & max of F diagonal: {0:5.3f},{1:5.3f}".format(a,b))
     elif rangetype == 3:
         diag   = A.getDiagonal()
-        a = getLowerBound(A)                                                                                                        
-        b = diag.max()[1]      + rangebuffer 
-        Print("Interval based on min eval & max F diagonal: {0:5.3f},{1:5.3f}".format(a,b)) 
+        a = getLowerBound(A)
+        b = diag.max()[1]      + rangebuffer
+        Print("Interval based on min eval & max F diagonal: {0:5.3f},{1:5.3f}".format(a,b))
     elif rangetype == 4:
         a = getLowerBound(A)  - rangebuffer
         b = getUpperBound(A)  + rangebuffer
-        Print("Interval based on min & max evals: {0:5.3f},{1:5.3f}".format(a,b))    
+        Print("Interval based on min & max evals: {0:5.3f},{1:5.3f}".format(a,b))
     bins[0]  = a
-    bins[-1] = b           
+    bins[-1] = b
     return np.sort(bins)
 
 def getBinningScore(b,x):
@@ -811,15 +817,15 @@ def getBinningScore(b,x):
     bin_edges (b), and values (x)
     1) Find the eigenvalues within each slice
     Within a slice:
-        2) Compute the sum of distances of eigenvalues from the closest 
+        2) Compute the sum of distances of eigenvalues from the closest
            neigbor on the left.
-        3) Add this sum to the distance of the leftmost eigenvalue from the 
+        3) Add this sum to the distance of the leftmost eigenvalue from the
            left boundary.
     Returns the max sum for each slice.
     """
     nbin   = len(b)-1
     scores = np.zeros(nbin)
-    nempty = 0 
+    nempty = 0
     for i in range(nbin):
         xloc=x[(x>b[i]) & (x<b[i+1])] #1
         if len(xloc) > 1:
@@ -840,7 +846,7 @@ def initializeLog(debug):
     ch = logging.StreamHandler(sys.stdout)
     ch.setLevel(logLevel)
 
-    logging.debug("Start in debug mode:") 
+    logging.debug("Start in debug mode:")
 
 def getArgs():
     import argparse
@@ -848,18 +854,18 @@ def getArgs():
     """
     Aug 24, 2016
     Murat Keceli
-    This code parses siesta-qetsc log files, log.*. 
+    This code parses siesta-qetsc log files, log.*.
     """
     )
     parser.add_argument('input', metavar='FILE', type=str, nargs='?',
         help='Log file to be parsed. All log files (any file with "log" in the filename) will be read if a log file is not specified.')
     parser.add_argument('-d', '--debug', action='store_true', help='Print debug information.')
 
-    return parser.parse_args()  
-          
+    return parser.parse_args()
+
 def main():
     args=getArgs()
-    initializeLog(args.debug)        
+    initializeLog(args.debug)
     if args.input is not None:
         logfile=args.input
         titers=getMaxIterTimes(logfile)
@@ -879,10 +885,10 @@ def main():
         maxt  = np.max(tbins[iterno,:])
         width = 0.1 + 0.2*tbins[iterno,:]/maxt
         print width
-        plotEvalsAndBinsAndTimes(niter,evals,bins,tbins)
+        plotEvalsBinsTimes(niter,evals,bins,tbins)
     else:
         readLogDirectory()
-        
+
 
 if __name__ == "__main__":
     main()
