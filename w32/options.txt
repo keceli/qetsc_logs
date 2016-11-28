@@ -1,0 +1,41 @@
+-ioptbin 7
+-ioptdensity 0
+-ioptinertia 1
+-ioptleft 2
+-roptleft -2.3
+-roptright 0.
+-writeeigs 1
+-roptbuffer 0.1
+-roptdiff 0.1
+
+#PETSc options
+-mat_type mpisbaij
+#-mat_block_size 46
+-log_view
+-memory_view
+-malloc_log
+#-start_in_debugger noxterm
+
+#-mat_mumps_icntl_13 1 #turn off scaLAPACK for matrix inertia
+#-mat_mumps_icntl_24 1 #null pivot row detection for matrix inertia
+#-mat_mumps_icntl_23 0
+-mat_mumps_icntl_28 1
+#-mat_mumps_icntl_28 2
+#-mat_mumps_icntl_29 1 # ptscotch
+-mat_mumps_icntl_29 2 # parmetis
+-mat_mumps_icntl_7 5
+#-malloc_info
+#-mat_view ::ascii_info
+#-mat_getrow_uppertriangular 1
+
+#-st_pc_factor_mat_solver_package mkl_pardiso
+
+#SLEPc options
+#-eps_view
+#-eps_view_values
+#-eps_krylovschur_partitions 1
+#-eps_krylovschur_nev 120
+-eps_interval -2.3,0.0
+#-eps_tol  1.e-12
+-eps_krylovschur_detect_zeros 0
+#-eps_purify 1
