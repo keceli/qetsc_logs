@@ -39,44 +39,59 @@ def readQETSc(myfile):
     tsols[2]  = float(getValue(kw,myfile))
     kw    = ' 3:    siesta_solve:'
     tsols[3]  = float(getValue(kw,myfile))
-    tsol  = max(tsols)
-    tup =  float(getValue(kwup,myfile))
+    tsol = max(tsols)
+    tup = float(getValue(kwup, myfile))
     if tsols.index(tsol) == 3 :
-        qetsc = False
-        tden=tmax=tmin=tave=tsym=tnum= 0.
+        tden = tmax = tmin = tave = tsym = tnum = 0.
     else:
-        tsym,tnum  = getFactTimes(myfile)
-        tmax,tmin,tave =getIterTimes(myfile)
-        tden = float(getValue(' 8:   qetsc_density:',myfile))
-    return myfile.split('/')[-1],nrank,tall,tsol,tforce,npmat,tden,tmax,tmin,tave,tsym,tnum
+        tsym, tnum  = getFactTimes(myfile)
+        tmax, tmin, tave = getIterTimes(myfile)
+        tden = float(getValue(' 8:   qetsc_density:', myfile))
+    return myfile.split('/')[-1], nrank, tall, tsol, tforce, npmat, tden, tmax,
+    tmin, tave, tsym, tnum
+
+
+def getWarnings(logfile):
+    logging.debug("Reading file {0}".format(logfile))
+    keyword = 'WARNING'
+    with open(logfile) as f:
+        while True:
+            line = f.readline()
+            if not line:
+                break
+            elif keyword in line.uppercase:
+                print line
+    return
+
 
 def getIterTimes(logfile):
     logging.debug("Reading file {0}".format(logfile))
     i = 0
     titers = [0.]*120
-    keyword ='QETSC: Iter time'
+    keyword = 'QETSC: Iter time'
     with open(logfile) as f:
         while True:
             line = f.readline()
             if not line:
                 break
             elif line.startswith(keyword):
-                titers[i]=float(line.split()[5])
+                titers[i] = float(line.split()[5])
                 i += 1
-    return max(titers),min(titers[0:i]),sum(titers)/i
+    return max(titers), min(titers[0:i]), sum(titers)/i
+
 
 def getMaxIterTimes(logfile):
     logging.debug("Reading file {0}".format(logfile))
     i = 0
     titers = [0.]*120
-    keyword ='QETSC: Iter time (max)       ='
+    keyword = 'QETSC: Iter time (max)       ='
     with open(logfile) as f:
         while True:
             line = f.readline()
             if not line:
                 break
             elif line.startswith(keyword):
-                titers[i]=float(line.split()[6])
+                titers[i] = float(line.split()[6])
                 i += 1
     return titers[0:i]
 
@@ -222,7 +237,6 @@ def getEigenvalues(logfile):
                 eiter += 1
     return evals
 
-
 def readLogFile(logfile):
     import socket
     errorCode="OK"
@@ -331,7 +345,6 @@ def plotEvalsBins(maxiter,evals,bins,savefile=None):
     plt.show()
     return
 
-
 def plotEvalsBinsTimes(maxiter,evals,bins,tbins,savefile=None):
     try:
         import matplotlib.pyplot as plt
@@ -397,6 +410,63 @@ def plotEvals(maxiter,evals,nslice=None,savefile=None):
         binsize=erange/nslice
         for i in range(nslice+1):
             axes.axhline(mineval + i*binsize,color='r',lw=0.3)
+    if savefile:
+        plt.savefig(savefile)
+    plt.show()
+    return
+
+
+def compareEvals(evals1,evals2):
+    ndim1 = len(evals1.shape)
+    ndim2 = len(evals2.shape)
+    assert ndim1*ndim2 == 4, "Requires 1D arrays, given: {0}, {1}".format(ndim1,ndim2)
+    niter, neval   = evals1.shape
+    niter2, neval2 = evals2.shape
+    assert neval == neval2, "Number of evals do not match, given: {0}, {1}".format(neval,neval2)
+    assert niter == niter2, "Number of iters do not match, given: {0}, {1}".format(niter,niter2)
+    diff = np.abs(evals1 - evals2)
+    print("Number of evals = {0}".format(neval))
+    print("Number of iters = {0}".format(niter))
+    for i in range(niter):
+        diffmax = np.max(diff[i,:])
+        diffave = np.sum(diff[i,:])/neval
+        print "Iter {0:2d}: Avereage and Max diff: {1:10.3g}, {2:10.3g}".format(i,diffave,diffmax)
+    return
+
+
+def plotDeltaEvals(evals,iterno=0,savefile=None):
+    try:
+        import matplotlib.pyplot as plt
+    except:
+        Print("Requires matplotlib")
+        return
+    dims = len(evals.shape)
+    if dims == 2:
+        neval,niter =evals.shape
+        evals = evals[iterno,:]
+    elif dims == 1:
+        neval = len(evals)
+    else:
+        print("An array is required for evals")
+        return
+    deltas = [evals[j] - evals[j-1] for j in  range(1,neval)]
+    mindelta = np.min(deltas)
+    maxdelta = np.max(deltas)
+    mineval = np.min(evals)
+    maxeval = np.max(evals)
+    s =  "       n={0} \n".format(neval)
+    s += " mineval={0:.3f} \n".format(mineval)
+    s += " maxeval={0:.3f} \n".format(maxeval)
+    s += "mindelta={0:.3g}\n".format(mindelta)
+    s += "mindelta={0:.3g}\n".format(maxdelta)
+    fig, axes = plt.subplots(nrows=1, ncols=1)
+    plt.hist(deltas, bins = 10 ** np.linspace(np.log10(mindelta), np.log10(maxdelta), 50),log=True)
+    plt.xlabel("Eigenvalue seperation")
+    plt.ylabel("Count")
+    plt.title("Multiplicity Histogram")
+    plt.text(0.001,100,s,fontsize=10)
+    plt.gca().set_xscale("log")
+    plt.ylim([0.5,neval])
     if savefile:
         plt.savefig(savefile)
     plt.show()
@@ -858,28 +928,25 @@ def getArgs():
     """
     )
     parser.add_argument('input', metavar='FILE', type=str, nargs='?',
-        help='Log file to be parsed. All log files (any file with "log" in the filename) will be read if a log file is not specified.')
+        help='Log file(s) to be parsed.')
     parser.add_argument('-d', '--debug', action='store_true', help='Print debug information.')
 
     return parser.parse_args()
 
+
 def main():
-    args=getArgs()
+    args = getArgs()
+    inputfiles = args.input
     initializeLog(args.debug)
-    if args.input is not None:
-        logfile=args.input
-        titers=getMaxIterTimes(logfile)
+    if len(inputfiles) == 1:
+        logfile = inputfiles[0]
+        titers = getMaxIterTimes(logfile)
         tbins = getBinTimes(logfile)
         nbin   = getNumberofBins(logfile)
         niter  = getNumberofIters(logfile)
         bins  = getBins(logfile)
         evals = getEigenvalues(logfile)
-        iterno = 6
-        binno = 4
-        print 'tbins:',tbins[iterno,:],titers[iterno]
         maxtbin = np.argmax(tbins[iterno,:])
-        print 'nevals:',getNumberofEvalsPerBin(evals,bins)[iterno,:]
-        print 'max bin:', maxtbin, bins[iterno,maxtbin],bins[iterno,maxtbin+1]
         print 'evals', evals[iterno,(evals[iterno,:]>bins[iterno,maxtbin]) & (evals[iterno,:]<bins[iterno,maxtbin+1])]
         print 'evals', getEvalsInBin(evals,bins,iterno,binno)
         maxt  = np.max(tbins[iterno,:])
