@@ -1,0 +1,40 @@
+-ioptbin 7 #Binning/slicing method (0: uniform, 1-7 nonuniform methods)
+-ioptdensity 0 #
+-ioptinertia 1 # Compute inertia to rearrange bins
+-ioptleft 2  #
+-ioptmat 0  # 1: Write matrices in binary format to disk
+-writeeigs 1 # Write eigenvalues and binedged to output file
+-roptbuffer 0.1 # Buffer used for end points
+-roptdiff 0.1  # Therhold for inertia calculations based on difference between eigenvalues
+
+#PETSc options
+-mat_type mpisbaij
+#-mat_block_size 46
+#-mat_view ::ascii_info
+#-mat_getrow_uppertriangular 1
+-log_view
+#-memory_view
+#-malloc_log
+#-malloc_info
+#-start_in_debugger noxterm
+
+#-mat_mumps_icntl_13 1 #turn off scaLAPACK for matrix inertia
+#-mat_mumps_icntl_24 1 #null pivot row detection for matrix inertia
+#-mat_mumps_icntl_23 0
+#-mat_mumps_icntl_28 1
+#-mat_mumps_icntl_28 2
+#-mat_mumps_icntl_29 1 # ptscotch
+#-mat_mumps_icntl_29 2 # parmetis
+-mat_mumps_icntl_7 5
+
+#-st_pc_factor_mat_solver_package mkl_pardiso
+
+#SLEPc options
+#-eps_view
+#-eps_view_values
+#-eps_krylovschur_partitions 1
+#-eps_krylovschur_nev 120
+-eps_interval -2.3,0.0
+#-eps_tol  1.e-12
+-eps_krylovschur_detect_zeros 0
+#-eps_purify 1
