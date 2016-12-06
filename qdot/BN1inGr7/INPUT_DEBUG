@@ -1,0 +1,48 @@
+SystemName          BN
+SystemLabel         BN
+NumberOfSpecies     3
+#UseTreeTimer .true.
+DM.MixingWeight 0.3
+DM.NumberPulay 3
+
+SolutionMethod  slepc1 #slepc0 for the older method
+#SolutionMethod diagon
+#BlockSize 182
+#BlockSize 273
+WriteDM .false.
+WriteDM.NetCDF .false.
+WriteDMHS.NetCDF .false.
+LongOutput .false.
+#MaxSCFIterations 1
+#
+%block ChemicalSpeciesLabel
+ 1  5  B
+ 2  6  C
+ 3  7  N
+%endblock ChemicalSpeciesLabel
+
+PAO.BasisType split
+PAO.BasisSize DZP
+
+LatticeConstant 1.00 Ang
+%block LatticeVectors
+        8.6362967714      -14.9585047973        0.0000000000
+        8.6362967714       14.9585047973        0.0000000000
+        0.0000000000        0.0000000000       15.0000000000
+%endblock LatticeVectors
+
+%block kgrid_Monkhorst_Pack
+1 0 0 0.0
+0 1 0 0.0
+0 0 1 0.0
+%endblock kgrid_Monkhorst_Pack
+
+%block SuperCell
+1 0 0
+0 1 0
+0 0 1
+%endblock SuperCell
+
+AtomicCoordinatesFormat NotScaledCartesianAng
+%block AtomicCoordinatesAndAtomicSpecies < siesta_coords.txt
+
