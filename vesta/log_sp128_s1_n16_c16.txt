@@ -1,0 +1,3101 @@
+s.subSiesta: Submission time = 26s49m11h
+s.subSiesta: Job name = sp128_s1_n16_c16
+s.subSiesta: Number of nodes = 16
+s.subSiesta: Number of cores = 256
+s.subSiesta: Number of cores/node = 16
+s.subSiesta: Number of slices = 1
+s.subSiesta: Mapping = ABCDET
+26s49m11h
+#QETSc options
+-ioptbin 7
+-ioptdensity 0
+-ioptinertia 1
+-ioptleft 2
+-roptbuffer 0.01
+-roptdiff 0.02
+-writeeigs 1
+
+#PETSc options
+-mat_type mpisbaij
+-log_view
+#-mat_view
+#-memory_view
+#-mat_mumps_icntl_13 1 #turn off scaLAPACK for matrix inertia
+#-mat_mumps_icntl_24 1 #null pivot row detection for matrix inertia
+-mat_mumps_icntl_23 0
+#-mat_mumps_icntl_28 1 # serial analysis
+#-mat_mumps_icntl_28 2 #parallel analysis
+#-mat_mumps_icntl_29 1 #ptscotch
+#-mat_mumps_icntl_29 2 #parmetis
+-mat_mumps_icntl_7 5 #metis
+#-malloc_info 
+#-mat_view ::ascii_info 
+#-mat_getrow_uppertriangular 1
+#-st_type sinvert 
+#-st_ksp_type preonly 
+#-st_pc_type cholesky 
+#-st_pc_factor_mat_solver_package mumps 
+
+#SLEPc options
+
+#-eps_krylovschur_partitions 1  
+-eps_interval -2.3,0.
+#-eps_tol  1.e-8
+-eps_krylovschur_detect_zeros 0
+#-eps_purify 1
+SystemName          polyethylene
+SystemLabel         polyethylene
+NumberOfAtoms       6
+NumberOfSpecies     2
+
+%block ChemicalSpeciesLabel
+ 1  6  C
+ 2  1  H
+%endblock ChemicalSpeciesLabel
+
+DM.MixingWeight 0.3
+DM.NumberPulay 3
+#BlockSize 23
+#SolutionMethod  slepc1
+WriteDM .false.
+WriteDM.NetCDF .false.
+WriteDMHS.NetCDF .false.
+LongOutput .false.
+#MaxSCFIterations 1
+
+PAO.BasisType split
+PAO.BasisSize DZP
+
+LatticeConstant 1.00 Ang
+%block LatticeVectors
+20.000  0.000  0.000
+ 0.000 20.000  0.000
+ 0.000  0.000  2.572
+%endblock LatticeVectors
+
+%block kgrid_Monkhorst_Pack
+1 0 0 0.0
+0 1 0 0.0
+0 0 1 0.0
+%endblock kgrid_Monkhorst_Pack
+
+%block SuperCell
+1 0 0
+0 1 0
+0 0 128
+%endblock SuperCell
+
+AtomicCoordinatesFormat Ang
+%block AtomicCoordinatesAndAtomicSpecies
+  0.31237500000000001       0.28138740000000001       0.64300000000000002     1
+   1.3964999999999999        7.3970400000000006E-002  0.64300000000000002     2
+  0.21462000000000001        1.3794480000000002       0.64300000000000002     2
+ -0.31237500000000001      -0.28138740000000001      -0.64300000000000002     1
+  -1.3964999999999999       -7.3970400000000006E-002 -0.64300000000000002     2
+ -0.21462000000000001       -1.3794480000000002      -0.64300000000000002     2
+%endblock AtomicCoordinatesAndAtomicSpecies
+Siesta Version: siesta-trunk-492
+Architecture  : powerpc64-unknown-linux-gnu--Xlf
+Compiler flags: mpixlf90_r -I/home/keceli/scratch2/petsc/include -I/home/keceli/scratch2/petssc/arch-xl/include -I/bgsys/drivers/V1R2M4/ppc64/comm/include -I/bgsys/drivers/V1R2M4/ppc64/comm/lib/xl -I/bgsys/drivers/V1R2M4/ppc64 -I/bgsys/drivers/V1R2M4/ppc64/comm/sys/include -I/bgsys/drivers/V1R2M4/ppc64/spi/include -I/bgsys/drivers/V1R2M4/ppc64/spi/include/kernel/cnk -I/home/keceli/scratch2/slepcfork/include -I/home/keceli/scratch2/slepcfork/arch-xl/include
+PP flags      : -WF,-DMPI -WF,-DFC_HAVE_ABORT -WF,-DBSC_CELLXC -WF,-DMPI_TIMING 
+PARALLEL version
+
+* Running on  256 nodes in parallel
+>> Start of run:   8-DEC-2016  11:50:26
+
+                           ***********************       
+                           *  WELCOME TO SIESTA  *       
+                           ***********************       
+WARNING: Siesta is reading its input from file INPUT_DEBUG
+
+reinit: -----------------------------------------------------------------------
+reinit: System Name: polyethylene
+reinit: -----------------------------------------------------------------------
+reinit: System Label: polyethylene                                                
+reinit: -----------------------------------------------------------------------
+
+initatom: Reading input for the pseudopotentials and atomic orbitals ----------
+Species number:   1 Atomic number:    6 Label: C
+Species number:   2 Atomic number:    1 Label: H
+ 
+Ground state valence configuration:   2s02  2p02
+Reading pseudopotential information in formatted form from C.psf
+
+Valence configuration for pseudopotential generation:
+2s( 2.00) rc: 1.54
+2p( 2.00) rc: 1.54
+3d( 0.00) rc: 1.54
+4f( 0.00) rc: 1.54
+Ground state valence configuration:   1s01
+Reading pseudopotential information in formatted form from H.psf
+
+Valence configuration for pseudopotential generation:
+1s( 1.00) rc: 1.31
+2p( 0.00) rc: 1.31
+3d( 0.00) rc: 0.37
+4f( 0.00) rc: 1.31
+For C, standard SIESTA heuristics set lmxkb to 3
+ (one more than the basis l, including polarization orbitals).
+Use PS.lmax or PS.KBprojectors blocks to override.
+For H, standard SIESTA heuristics set lmxkb to 2
+ (one more than the basis l, including polarization orbitals).
+Use PS.lmax or PS.KBprojectors blocks to override.
+
+<basis_specs>
+===============================================================================
+C                    Z=   6    Mass=  12.010        Charge= 0.17977+309
+Lmxo=1 Lmxkb= 3    BasisType=split      Semic=F
+L=0  Nsemic=0  Cnfigmx=2
+          n=1  nzeta=2  polorb=0
+            splnorm:   0.15000    
+               vcte:    0.0000    
+               rinn:    0.0000    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    0.0000      0.0000    
+            lambdas:    1.0000      1.0000    
+L=1  Nsemic=0  Cnfigmx=2
+          n=1  nzeta=2  polorb=1
+            splnorm:   0.15000    
+               vcte:    0.0000    
+               rinn:    0.0000    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    0.0000      0.0000    
+            lambdas:    1.0000      1.0000    
+-------------------------------------------------------------------------------
+L=0  Nkbl=1  erefs: 0.17977+309
+L=1  Nkbl=1  erefs: 0.17977+309
+L=2  Nkbl=1  erefs: 0.17977+309
+L=3  Nkbl=1  erefs: 0.17977+309
+===============================================================================
+</basis_specs>
+
+atom: Called for C                     (Z =   6)
+
+read_vps: Pseudopotential generation method:
+read_vps: ATM3      Troullier-Martins                       
+Total valence charge:    4.00000
+
+xc_check: Exchange-correlation functional:
+xc_check: Ceperley-Alder
+V l=0 = -2*Zval/r beyond r=  1.5227
+V l=1 = -2*Zval/r beyond r=  1.5227
+V l=2 = -2*Zval/r beyond r=  1.5227
+V l=3 = -2*Zval/r beyond r=  1.5038
+All V_l potentials equal beyond r=  1.5227
+This should be close to max(r_c) in ps generation
+All pots = -2*Zval/r beyond r=  1.5227
+
+VLOCAL1: 99.0% of the norm of Vloc inside     18.722 Ry
+VLOCAL1: 99.9% of the norm of Vloc inside     42.668 Ry
+atom: Maximum radius for 4*pi*r*r*local-pseudopot. charge    1.83678
+atom: Maximum radius for r*vlocal+2*Zval:    1.58088
+GHOST: No ghost state for L =  0
+GHOST: No ghost state for L =  1
+GHOST: No ghost state for L =  2
+GHOST: No ghost state for L =  3
+
+KBgen: Kleinman-Bylander projectors: 
+   l= 0   rc=  1.747182   el= -1.001948   Ekb=  4.950286   kbcos=  0.319819
+   l= 1   rc=  1.747182   el= -0.398598   Ekb= -4.108613   kbcos= -0.367053
+   l= 2   rc=  1.930978   el=  0.002326   Ekb= -1.042946   kbcos= -0.009366
+   l= 3   rc=  2.055542   el=  0.003420   Ekb= -0.408633   kbcos= -0.001262
+
+KBgen: Total number of  Kleinman-Bylander projectors:   16
+atom: -------------------------------------------------------------------------
+
+atom: SANKEY-TYPE ORBITALS:
+atom: Selected multiple-zeta basis: split     
+
+SPLIT: Orbitals with angular momentum L= 0
+
+SPLIT: Basis orbitals for state 2s
+
+SPLIT: PAO cut-off radius determined from an
+SPLIT: energy shift=  0.020000 Ry
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    4.191849
+                 energy =   -0.983897
+                kinetic =    0.880927
+    potential(screened) =   -1.864824
+       potential(ionic) =   -5.475687
+
+   izeta = 2
+                 rmatch =    3.431921
+              splitnorm =    0.150000
+                 energy =   -0.853083
+                kinetic =    1.298222
+    potential(screened) =   -2.151305
+       potential(ionic) =   -5.995890
+
+SPLIT: Orbitals with angular momentum L= 1
+
+SPLIT: Basis orbitals for state 2p
+
+SPLIT: PAO cut-off radius determined from an
+SPLIT: energy shift=  0.020000 Ry
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    4.870301
+                 energy =   -0.379093
+                kinetic =    2.540023
+    potential(screened) =   -2.919116
+       potential(ionic) =   -6.427960
+
+   izeta = 2
+                 rmatch =    3.475094
+              splitnorm =    0.150000
+                 energy =   -0.215057
+                kinetic =    3.814571
+    potential(screened) =   -4.029628
+       potential(ionic) =   -7.920250
+
+POLgen: Perturbative polarization orbital with L=  2
+
+POLgen: Polarization orbital for state 2p
+
+   izeta = 1
+                     rc =    4.870301
+                 energy =    1.280996
+                kinetic =    2.631310
+    potential(screened) =   -1.350314
+       potential(ionic) =   -4.295640
+atom: Total number of Sankey-type orbitals: 13
+
+atm_pop: Valence configuration (for local Pseudopot. screening):
+ 2s( 2.00)                                                            
+ 2p( 2.00)                                                            
+Vna: chval, zval:    4.00000   4.00000
+
+Vna:  Cut-off radius for the neutral-atom potential:   4.870301
+
+atom: _________________________________________________________________________
+
+<basis_specs>
+===============================================================================
+H                    Z=   1    Mass=  1.0100        Charge= 0.17977+309
+Lmxo=0 Lmxkb= 2    BasisType=split      Semic=F
+L=0  Nsemic=0  Cnfigmx=1
+          n=1  nzeta=2  polorb=1
+            splnorm:   0.15000    
+               vcte:    0.0000    
+               rinn:    0.0000    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    0.0000      0.0000    
+            lambdas:    1.0000      1.0000    
+-------------------------------------------------------------------------------
+L=0  Nkbl=1  erefs: 0.17977+309
+L=1  Nkbl=1  erefs: 0.17977+309
+L=2  Nkbl=1  erefs: 0.17977+309
+===============================================================================
+</basis_specs>
+
+atom: Called for H                     (Z =   1)
+
+read_vps: Pseudopotential generation method:
+read_vps: ATM3      Troullier-Martins                       
+Total valence charge:    1.00000
+
+xc_check: Exchange-correlation functional:
+xc_check: Ceperley-Alder
+V l=0 = -2*Zval/r beyond r=  1.2977
+V l=1 = -2*Zval/r beyond r=  1.2815
+V l=2 = -2*Zval/r beyond r=  1.1307
+All V_l potentials equal beyond r=  1.2977
+This should be close to max(r_c) in ps generation
+All pots = -2*Zval/r beyond r=  1.2977
+
+VLOCAL1: 99.0% of the norm of Vloc inside     25.776 Ry
+VLOCAL1: 99.9% of the norm of Vloc inside     58.745 Ry
+atom: Maximum radius for 4*pi*r*r*local-pseudopot. charge    1.52711
+atom: Maximum radius for r*vlocal+2*Zval:    1.28155
+GHOST: No ghost state for L =  0
+GHOST: No ghost state for L =  1
+GHOST: No ghost state for L =  2
+
+KBgen: Kleinman-Bylander projectors: 
+   l= 0   rc=  1.434438   el= -0.467325   Ekb= -1.940326   kbcos= -0.353040
+   l= 1   rc=  1.508111   el=  0.001430   Ekb= -0.480826   kbcos= -0.024144
+   l= 2   rc=  1.527112   el=  0.002365   Ekb= -0.479392   kbcos= -0.001656
+
+KBgen: Total number of  Kleinman-Bylander projectors:    9
+atom: -------------------------------------------------------------------------
+
+atom: SANKEY-TYPE ORBITALS:
+atom: Selected multiple-zeta basis: split     
+
+SPLIT: Orbitals with angular momentum L= 0
+
+SPLIT: Basis orbitals for state 1s
+
+SPLIT: PAO cut-off radius determined from an
+SPLIT: energy shift=  0.020000 Ry
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    4.828263
+                 energy =   -0.449375
+                kinetic =    0.925762
+    potential(screened) =   -1.375137
+       potential(ionic) =   -1.911235
+
+   izeta = 2
+                 rmatch =    3.854947
+              splitnorm =    0.150000
+                 energy =   -0.336149
+                kinetic =    1.498089
+    potential(screened) =   -1.834238
+       potential(ionic) =   -2.406110
+
+POLgen: Perturbative polarization orbital with L=  1
+
+POLgen: Polarization orbital for state 1s
+
+   izeta = 1
+                     rc =    4.828263
+                 energy =    0.707053
+                kinetic =    1.398668
+    potential(screened) =   -0.691614
+       potential(ionic) =   -1.171973
+atom: Total number of Sankey-type orbitals:  5
+
+atm_pop: Valence configuration (for local Pseudopot. screening):
+ 1s( 1.00)                                                            
+Vna: chval, zval:    1.00000   1.00000
+
+Vna:  Cut-off radius for the neutral-atom potential:   4.828263
+
+atom: _________________________________________________________________________
+
+prinput: Basis input ----------------------------------------------------------
+
+PAO.BasisType split     
+
+%block ChemicalSpeciesLabel
+    1    6 C                       # Species index, atomic number, species label
+    2    1 H                       # Species index, atomic number, species label
+%endblock ChemicalSpeciesLabel
+
+%block PAO.Basis                 # Define Basis set
+C                     2                    # Species label, number of l-shells
+ n=2   0   2                         # n, l, Nzeta 
+   4.192      3.432   
+   1.000      1.000   
+ n=2   1   2 P   1                   # n, l, Nzeta, Polarization, NzetaPol
+   4.870      3.475   
+   1.000      1.000   
+H                     1                    # Species label, number of l-shells
+ n=1   0   2 P   1                   # n, l, Nzeta, Polarization, NzetaPol
+   4.828      3.855   
+   1.000      1.000   
+%endblock PAO.Basis
+
+prinput: ----------------------------------------------------------------------
+
+coor:   Atomic-coordinates input format  =     Cartesian coordinates
+coor:                                          (in Angstroms)
+
+siesta: Atomic coordinates (Bohr) and species
+siesta:      0.59030   0.53175   1.21509  1        1
+siesta:      2.63900   0.13978   1.21509  2        2
+siesta:      0.40557   2.60678   1.21509  2        3
+siesta:     -0.59030  -0.53175  -1.21509  1        4
+siesta:     -2.63900  -0.13978  -1.21509  2        5
+siesta:     -0.40557  -2.60678  -1.21509  2        6
+siesta:      0.59030   0.53175   6.07547  1        7
+siesta:      2.63900   0.13978   6.07547  2        8
+siesta:      0.40557   2.60678   6.07547  2        9
+siesta:     -0.59030  -0.53175   3.64528  1       10
+siesta:     -2.63900  -0.13978   3.64528  2       11
+siesta:     -0.40557  -2.60678   3.64528  2       12
+siesta:      0.59030   0.53175  10.93585  1       13
+siesta:      2.63900   0.13978  10.93585  2       14
+siesta:      0.40557   2.60678  10.93585  2       15
+siesta:     -0.59030  -0.53175   8.50566  1       16
+siesta:     -2.63900  -0.13978   8.50566  2       17
+siesta:     -0.40557  -2.60678   8.50566  2       18
+siesta:      0.59030   0.53175  15.79623  1       19
+siesta:      2.63900   0.13978  15.79623  2       20
+siesta:      0.40557   2.60678  15.79623  2       21
+siesta:     -0.59030  -0.53175  13.36604  1       22
+siesta:     -2.63900  -0.13978  13.36604  2       23
+siesta:     -0.40557  -2.60678  13.36604  2       24
+siesta:      0.59030   0.53175  20.65660  1       25
+siesta:      2.63900   0.13978  20.65660  2       26
+siesta:      0.40557   2.60678  20.65660  2       27
+siesta:     -0.59030  -0.53175  18.22642  1       28
+siesta:     -2.63900  -0.13978  18.22642  2       29
+siesta:     -0.40557  -2.60678  18.22642  2       30
+siesta:      0.59030   0.53175  25.51698  1       31
+siesta:      2.63900   0.13978  25.51698  2       32
+siesta:      0.40557   2.60678  25.51698  2       33
+siesta:     -0.59030  -0.53175  23.08679  1       34
+siesta:     -2.63900  -0.13978  23.08679  2       35
+siesta:     -0.40557  -2.60678  23.08679  2       36
+siesta:      0.59030   0.53175  30.37736  1       37
+siesta:      2.63900   0.13978  30.37736  2       38
+siesta:      0.40557   2.60678  30.37736  2       39
+siesta:     -0.59030  -0.53175  27.94717  1       40
+siesta:     -2.63900  -0.13978  27.94717  2       41
+siesta:     -0.40557  -2.60678  27.94717  2       42
+siesta:      0.59030   0.53175  35.23774  1       43
+siesta:      2.63900   0.13978  35.23774  2       44
+siesta:      0.40557   2.60678  35.23774  2       45
+siesta:     -0.59030  -0.53175  32.80755  1       46
+siesta:     -2.63900  -0.13978  32.80755  2       47
+siesta:     -0.40557  -2.60678  32.80755  2       48
+siesta:      0.59030   0.53175  40.09811  1       49
+siesta:      2.63900   0.13978  40.09811  2       50
+siesta:      0.40557   2.60678  40.09811  2       51
+siesta:     -0.59030  -0.53175  37.66793  1       52
+siesta:     -2.63900  -0.13978  37.66793  2       53
+siesta:     -0.40557  -2.60678  37.66793  2       54
+siesta:      0.59030   0.53175  44.95849  1       55
+siesta:      2.63900   0.13978  44.95849  2       56
+siesta:      0.40557   2.60678  44.95849  2       57
+siesta:     -0.59030  -0.53175  42.52830  1       58
+siesta:     -2.63900  -0.13978  42.52830  2       59
+siesta:     -0.40557  -2.60678  42.52830  2       60
+siesta:      0.59030   0.53175  49.81887  1       61
+siesta:      2.63900   0.13978  49.81887  2       62
+siesta:      0.40557   2.60678  49.81887  2       63
+siesta:     -0.59030  -0.53175  47.38868  1       64
+siesta:     -2.63900  -0.13978  47.38868  2       65
+siesta:     -0.40557  -2.60678  47.38868  2       66
+siesta:      0.59030   0.53175  54.67925  1       67
+siesta:      2.63900   0.13978  54.67925  2       68
+siesta:      0.40557   2.60678  54.67925  2       69
+siesta:     -0.59030  -0.53175  52.24906  1       70
+siesta:     -2.63900  -0.13978  52.24906  2       71
+siesta:     -0.40557  -2.60678  52.24906  2       72
+siesta:      0.59030   0.53175  59.53962  1       73
+siesta:      2.63900   0.13978  59.53962  2       74
+siesta:      0.40557   2.60678  59.53962  2       75
+siesta:     -0.59030  -0.53175  57.10944  1       76
+siesta:     -2.63900  -0.13978  57.10944  2       77
+siesta:     -0.40557  -2.60678  57.10944  2       78
+siesta:      0.59030   0.53175  64.40000  1       79
+siesta:      2.63900   0.13978  64.40000  2       80
+siesta:      0.40557   2.60678  64.40000  2       81
+siesta:     -0.59030  -0.53175  61.96981  1       82
+siesta:     -2.63900  -0.13978  61.96981  2       83
+siesta:     -0.40557  -2.60678  61.96981  2       84
+siesta:      0.59030   0.53175  69.26038  1       85
+siesta:      2.63900   0.13978  69.26038  2       86
+siesta:      0.40557   2.60678  69.26038  2       87
+siesta:     -0.59030  -0.53175  66.83019  1       88
+siesta:     -2.63900  -0.13978  66.83019  2       89
+siesta:     -0.40557  -2.60678  66.83019  2       90
+siesta:      0.59030   0.53175  74.12076  1       91
+siesta:      2.63900   0.13978  74.12076  2       92
+siesta:      0.40557   2.60678  74.12076  2       93
+siesta:     -0.59030  -0.53175  71.69057  1       94
+siesta:     -2.63900  -0.13978  71.69057  2       95
+siesta:     -0.40557  -2.60678  71.69057  2       96
+siesta:      0.59030   0.53175  78.98113  1       97
+siesta:      2.63900   0.13978  78.98113  2       98
+siesta:      0.40557   2.60678  78.98113  2       99
+siesta:     -0.59030  -0.53175  76.55095  1      100
+siesta:     -2.63900  -0.13978  76.55095  2      101
+siesta:     -0.40557  -2.60678  76.55095  2      102
+siesta:      0.59030   0.53175  83.84151  1      103
+siesta:      2.63900   0.13978  83.84151  2      104
+siesta:      0.40557   2.60678  83.84151  2      105
+siesta:     -0.59030  -0.53175  81.41132  1      106
+siesta:     -2.63900  -0.13978  81.41132  2      107
+siesta:     -0.40557  -2.60678  81.41132  2      108
+siesta:      0.59030   0.53175  88.70189  1      109
+siesta:      2.63900   0.13978  88.70189  2      110
+siesta:      0.40557   2.60678  88.70189  2      111
+siesta:     -0.59030  -0.53175  86.27170  1      112
+siesta:     -2.63900  -0.13978  86.27170  2      113
+siesta:     -0.40557  -2.60678  86.27170  2      114
+siesta:      0.59030   0.53175  93.56227  1      115
+siesta:      2.63900   0.13978  93.56227  2      116
+siesta:      0.40557   2.60678  93.56227  2      117
+siesta:     -0.59030  -0.53175  91.13208  1      118
+siesta:     -2.63900  -0.13978  91.13208  2      119
+siesta:     -0.40557  -2.60678  91.13208  2      120
+siesta:      0.59030   0.53175  98.42264  1      121
+siesta:      2.63900   0.13978  98.42264  2      122
+siesta:      0.40557   2.60678  98.42264  2      123
+siesta:     -0.59030  -0.53175  95.99246  1      124
+siesta:     -2.63900  -0.13978  95.99246  2      125
+siesta:     -0.40557  -2.60678  95.99246  2      126
+siesta:      0.59030   0.53175 103.28302  1      127
+siesta:      2.63900   0.13978 103.28302  2      128
+siesta:      0.40557   2.60678 103.28302  2      129
+siesta:     -0.59030  -0.53175 100.85283  1      130
+siesta:     -2.63900  -0.13978 100.85283  2      131
+siesta:     -0.40557  -2.60678 100.85283  2      132
+siesta:      0.59030   0.53175 108.14340  1      133
+siesta:      2.63900   0.13978 108.14340  2      134
+siesta:      0.40557   2.60678 108.14340  2      135
+siesta:     -0.59030  -0.53175 105.71321  1      136
+siesta:     -2.63900  -0.13978 105.71321  2      137
+siesta:     -0.40557  -2.60678 105.71321  2      138
+siesta:      0.59030   0.53175 113.00378  1      139
+siesta:      2.63900   0.13978 113.00378  2      140
+siesta:      0.40557   2.60678 113.00378  2      141
+siesta:     -0.59030  -0.53175 110.57359  1      142
+siesta:     -2.63900  -0.13978 110.57359  2      143
+siesta:     -0.40557  -2.60678 110.57359  2      144
+siesta:      0.59030   0.53175 117.86416  1      145
+siesta:      2.63900   0.13978 117.86416  2      146
+siesta:      0.40557   2.60678 117.86416  2      147
+siesta:     -0.59030  -0.53175 115.43397  1      148
+siesta:     -2.63900  -0.13978 115.43397  2      149
+siesta:     -0.40557  -2.60678 115.43397  2      150
+siesta:      0.59030   0.53175 122.72453  1      151
+siesta:      2.63900   0.13978 122.72453  2      152
+siesta:      0.40557   2.60678 122.72453  2      153
+siesta:     -0.59030  -0.53175 120.29434  1      154
+siesta:     -2.63900  -0.13978 120.29434  2      155
+siesta:     -0.40557  -2.60678 120.29434  2      156
+siesta:      0.59030   0.53175 127.58491  1      157
+siesta:      2.63900   0.13978 127.58491  2      158
+siesta:      0.40557   2.60678 127.58491  2      159
+siesta:     -0.59030  -0.53175 125.15472  1      160
+siesta:     -2.63900  -0.13978 125.15472  2      161
+siesta:     -0.40557  -2.60678 125.15472  2      162
+siesta:      0.59030   0.53175 132.44529  1      163
+siesta:      2.63900   0.13978 132.44529  2      164
+siesta:      0.40557   2.60678 132.44529  2      165
+siesta:     -0.59030  -0.53175 130.01510  1      166
+siesta:     -2.63900  -0.13978 130.01510  2      167
+siesta:     -0.40557  -2.60678 130.01510  2      168
+siesta:      0.59030   0.53175 137.30567  1      169
+siesta:      2.63900   0.13978 137.30567  2      170
+siesta:      0.40557   2.60678 137.30567  2      171
+siesta:     -0.59030  -0.53175 134.87548  1      172
+siesta:     -2.63900  -0.13978 134.87548  2      173
+siesta:     -0.40557  -2.60678 134.87548  2      174
+siesta:      0.59030   0.53175 142.16604  1      175
+siesta:      2.63900   0.13978 142.16604  2      176
+siesta:      0.40557   2.60678 142.16604  2      177
+siesta:     -0.59030  -0.53175 139.73585  1      178
+siesta:     -2.63900  -0.13978 139.73585  2      179
+siesta:     -0.40557  -2.60678 139.73585  2      180
+siesta:      0.59030   0.53175 147.02642  1      181
+siesta:      2.63900   0.13978 147.02642  2      182
+siesta:      0.40557   2.60678 147.02642  2      183
+siesta:     -0.59030  -0.53175 144.59623  1      184
+siesta:     -2.63900  -0.13978 144.59623  2      185
+siesta:     -0.40557  -2.60678 144.59623  2      186
+siesta:      0.59030   0.53175 151.88680  1      187
+siesta:      2.63900   0.13978 151.88680  2      188
+siesta:      0.40557   2.60678 151.88680  2      189
+siesta:     -0.59030  -0.53175 149.45661  1      190
+siesta:     -2.63900  -0.13978 149.45661  2      191
+siesta:     -0.40557  -2.60678 149.45661  2      192
+siesta:      0.59030   0.53175 156.74718  1      193
+siesta:      2.63900   0.13978 156.74718  2      194
+siesta:      0.40557   2.60678 156.74718  2      195
+siesta:     -0.59030  -0.53175 154.31699  1      196
+siesta:     -2.63900  -0.13978 154.31699  2      197
+siesta:     -0.40557  -2.60678 154.31699  2      198
+siesta:      0.59030   0.53175 161.60755  1      199
+siesta:      2.63900   0.13978 161.60755  2      200
+siesta:      0.40557   2.60678 161.60755  2      201
+siesta:     -0.59030  -0.53175 159.17736  1      202
+siesta:     -2.63900  -0.13978 159.17736  2      203
+siesta:     -0.40557  -2.60678 159.17736  2      204
+siesta:      0.59030   0.53175 166.46793  1      205
+siesta:      2.63900   0.13978 166.46793  2      206
+siesta:      0.40557   2.60678 166.46793  2      207
+siesta:     -0.59030  -0.53175 164.03774  1      208
+siesta:     -2.63900  -0.13978 164.03774  2      209
+siesta:     -0.40557  -2.60678 164.03774  2      210
+siesta:      0.59030   0.53175 171.32831  1      211
+siesta:      2.63900   0.13978 171.32831  2      212
+siesta:      0.40557   2.60678 171.32831  2      213
+siesta:     -0.59030  -0.53175 168.89812  1      214
+siesta:     -2.63900  -0.13978 168.89812  2      215
+siesta:     -0.40557  -2.60678 168.89812  2      216
+siesta:      0.59030   0.53175 176.18869  1      217
+siesta:      2.63900   0.13978 176.18869  2      218
+siesta:      0.40557   2.60678 176.18869  2      219
+siesta:     -0.59030  -0.53175 173.75850  1      220
+siesta:     -2.63900  -0.13978 173.75850  2      221
+siesta:     -0.40557  -2.60678 173.75850  2      222
+siesta:      0.59030   0.53175 181.04906  1      223
+siesta:      2.63900   0.13978 181.04906  2      224
+siesta:      0.40557   2.60678 181.04906  2      225
+siesta:     -0.59030  -0.53175 178.61887  1      226
+siesta:     -2.63900  -0.13978 178.61887  2      227
+siesta:     -0.40557  -2.60678 178.61887  2      228
+siesta:      0.59030   0.53175 185.90944  1      229
+siesta:      2.63900   0.13978 185.90944  2      230
+siesta:      0.40557   2.60678 185.90944  2      231
+siesta:     -0.59030  -0.53175 183.47925  1      232
+siesta:     -2.63900  -0.13978 183.47925  2      233
+siesta:     -0.40557  -2.60678 183.47925  2      234
+siesta:      0.59030   0.53175 190.76982  1      235
+siesta:      2.63900   0.13978 190.76982  2      236
+siesta:      0.40557   2.60678 190.76982  2      237
+siesta:     -0.59030  -0.53175 188.33963  1      238
+siesta:     -2.63900  -0.13978 188.33963  2      239
+siesta:     -0.40557  -2.60678 188.33963  2      240
+siesta:      0.59030   0.53175 195.63020  1      241
+siesta:      2.63900   0.13978 195.63020  2      242
+siesta:      0.40557   2.60678 195.63020  2      243
+siesta:     -0.59030  -0.53175 193.20001  1      244
+siesta:     -2.63900  -0.13978 193.20001  2      245
+siesta:     -0.40557  -2.60678 193.20001  2      246
+siesta:      0.59030   0.53175 200.49057  1      247
+siesta:      2.63900   0.13978 200.49057  2      248
+siesta:      0.40557   2.60678 200.49057  2      249
+siesta:     -0.59030  -0.53175 198.06038  1      250
+siesta:     -2.63900  -0.13978 198.06038  2      251
+siesta:     -0.40557  -2.60678 198.06038  2      252
+siesta:      0.59030   0.53175 205.35095  1      253
+siesta:      2.63900   0.13978 205.35095  2      254
+siesta:      0.40557   2.60678 205.35095  2      255
+siesta:     -0.59030  -0.53175 202.92076  1      256
+siesta:     -2.63900  -0.13978 202.92076  2      257
+siesta:     -0.40557  -2.60678 202.92076  2      258
+siesta:      0.59030   0.53175 210.21133  1      259
+siesta:      2.63900   0.13978 210.21133  2      260
+siesta:      0.40557   2.60678 210.21133  2      261
+siesta:     -0.59030  -0.53175 207.78114  1      262
+siesta:     -2.63900  -0.13978 207.78114  2      263
+siesta:     -0.40557  -2.60678 207.78114  2      264
+siesta:      0.59030   0.53175 215.07171  1      265
+siesta:      2.63900   0.13978 215.07171  2      266
+siesta:      0.40557   2.60678 215.07171  2      267
+siesta:     -0.59030  -0.53175 212.64152  1      268
+siesta:     -2.63900  -0.13978 212.64152  2      269
+siesta:     -0.40557  -2.60678 212.64152  2      270
+siesta:      0.59030   0.53175 219.93208  1      271
+siesta:      2.63900   0.13978 219.93208  2      272
+siesta:      0.40557   2.60678 219.93208  2      273
+siesta:     -0.59030  -0.53175 217.50189  1      274
+siesta:     -2.63900  -0.13978 217.50189  2      275
+siesta:     -0.40557  -2.60678 217.50189  2      276
+siesta:      0.59030   0.53175 224.79246  1      277
+siesta:      2.63900   0.13978 224.79246  2      278
+siesta:      0.40557   2.60678 224.79246  2      279
+siesta:     -0.59030  -0.53175 222.36227  1      280
+siesta:     -2.63900  -0.13978 222.36227  2      281
+siesta:     -0.40557  -2.60678 222.36227  2      282
+siesta:      0.59030   0.53175 229.65284  1      283
+siesta:      2.63900   0.13978 229.65284  2      284
+siesta:      0.40557   2.60678 229.65284  2      285
+siesta:     -0.59030  -0.53175 227.22265  1      286
+siesta:     -2.63900  -0.13978 227.22265  2      287
+siesta:     -0.40557  -2.60678 227.22265  2      288
+siesta:      0.59030   0.53175 234.51322  1      289
+siesta:      2.63900   0.13978 234.51322  2      290
+siesta:      0.40557   2.60678 234.51322  2      291
+siesta:     -0.59030  -0.53175 232.08303  1      292
+siesta:     -2.63900  -0.13978 232.08303  2      293
+siesta:     -0.40557  -2.60678 232.08303  2      294
+siesta:      0.59030   0.53175 239.37359  1      295
+siesta:      2.63900   0.13978 239.37359  2      296
+siesta:      0.40557   2.60678 239.37359  2      297
+siesta:     -0.59030  -0.53175 236.94340  1      298
+siesta:     -2.63900  -0.13978 236.94340  2      299
+siesta:     -0.40557  -2.60678 236.94340  2      300
+siesta:      0.59030   0.53175 244.23397  1      301
+siesta:      2.63900   0.13978 244.23397  2      302
+siesta:      0.40557   2.60678 244.23397  2      303
+siesta:     -0.59030  -0.53175 241.80378  1      304
+siesta:     -2.63900  -0.13978 241.80378  2      305
+siesta:     -0.40557  -2.60678 241.80378  2      306
+siesta:      0.59030   0.53175 249.09435  1      307
+siesta:      2.63900   0.13978 249.09435  2      308
+siesta:      0.40557   2.60678 249.09435  2      309
+siesta:     -0.59030  -0.53175 246.66416  1      310
+siesta:     -2.63900  -0.13978 246.66416  2      311
+siesta:     -0.40557  -2.60678 246.66416  2      312
+siesta:      0.59030   0.53175 253.95473  1      313
+siesta:      2.63900   0.13978 253.95473  2      314
+siesta:      0.40557   2.60678 253.95473  2      315
+siesta:     -0.59030  -0.53175 251.52454  1      316
+siesta:     -2.63900  -0.13978 251.52454  2      317
+siesta:     -0.40557  -2.60678 251.52454  2      318
+siesta:      0.59030   0.53175 258.81510  1      319
+siesta:      2.63900   0.13978 258.81510  2      320
+siesta:      0.40557   2.60678 258.81510  2      321
+siesta:     -0.59030  -0.53175 256.38491  1      322
+siesta:     -2.63900  -0.13978 256.38491  2      323
+siesta:     -0.40557  -2.60678 256.38491  2      324
+siesta:      0.59030   0.53175 263.67548  1      325
+siesta:      2.63900   0.13978 263.67548  2      326
+siesta:      0.40557   2.60678 263.67548  2      327
+siesta:     -0.59030  -0.53175 261.24529  1      328
+siesta:     -2.63900  -0.13978 261.24529  2      329
+siesta:     -0.40557  -2.60678 261.24529  2      330
+siesta:      0.59030   0.53175 268.53586  1      331
+siesta:      2.63900   0.13978 268.53586  2      332
+siesta:      0.40557   2.60678 268.53586  2      333
+siesta:     -0.59030  -0.53175 266.10567  1      334
+siesta:     -2.63900  -0.13978 266.10567  2      335
+siesta:     -0.40557  -2.60678 266.10567  2      336
+siesta:      0.59030   0.53175 273.39624  1      337
+siesta:      2.63900   0.13978 273.39624  2      338
+siesta:      0.40557   2.60678 273.39624  2      339
+siesta:     -0.59030  -0.53175 270.96605  1      340
+siesta:     -2.63900  -0.13978 270.96605  2      341
+siesta:     -0.40557  -2.60678 270.96605  2      342
+siesta:      0.59030   0.53175 278.25661  1      343
+siesta:      2.63900   0.13978 278.25661  2      344
+siesta:      0.40557   2.60678 278.25661  2      345
+siesta:     -0.59030  -0.53175 275.82642  1      346
+siesta:     -2.63900  -0.13978 275.82642  2      347
+siesta:     -0.40557  -2.60678 275.82642  2      348
+siesta:      0.59030   0.53175 283.11699  1      349
+siesta:      2.63900   0.13978 283.11699  2      350
+siesta:      0.40557   2.60678 283.11699  2      351
+siesta:     -0.59030  -0.53175 280.68680  1      352
+siesta:     -2.63900  -0.13978 280.68680  2      353
+siesta:     -0.40557  -2.60678 280.68680  2      354
+siesta:      0.59030   0.53175 287.97737  1      355
+siesta:      2.63900   0.13978 287.97737  2      356
+siesta:      0.40557   2.60678 287.97737  2      357
+siesta:     -0.59030  -0.53175 285.54718  1      358
+siesta:     -2.63900  -0.13978 285.54718  2      359
+siesta:     -0.40557  -2.60678 285.54718  2      360
+siesta:      0.59030   0.53175 292.83775  1      361
+siesta:      2.63900   0.13978 292.83775  2      362
+siesta:      0.40557   2.60678 292.83775  2      363
+siesta:     -0.59030  -0.53175 290.40756  1      364
+siesta:     -2.63900  -0.13978 290.40756  2      365
+siesta:     -0.40557  -2.60678 290.40756  2      366
+siesta:      0.59030   0.53175 297.69812  1      367
+siesta:      2.63900   0.13978 297.69812  2      368
+siesta:      0.40557   2.60678 297.69812  2      369
+siesta:     -0.59030  -0.53175 295.26793  1      370
+siesta:     -2.63900  -0.13978 295.26793  2      371
+siesta:     -0.40557  -2.60678 295.26793  2      372
+siesta:      0.59030   0.53175 302.55850  1      373
+siesta:      2.63900   0.13978 302.55850  2      374
+siesta:      0.40557   2.60678 302.55850  2      375
+siesta:     -0.59030  -0.53175 300.12831  1      376
+siesta:     -2.63900  -0.13978 300.12831  2      377
+siesta:     -0.40557  -2.60678 300.12831  2      378
+siesta:      0.59030   0.53175 307.41888  1      379
+siesta:      2.63900   0.13978 307.41888  2      380
+siesta:      0.40557   2.60678 307.41888  2      381
+siesta:     -0.59030  -0.53175 304.98869  1      382
+siesta:     -2.63900  -0.13978 304.98869  2      383
+siesta:     -0.40557  -2.60678 304.98869  2      384
+siesta:      0.59030   0.53175 312.27926  1      385
+siesta:      2.63900   0.13978 312.27926  2      386
+siesta:      0.40557   2.60678 312.27926  2      387
+siesta:     -0.59030  -0.53175 309.84907  1      388
+siesta:     -2.63900  -0.13978 309.84907  2      389
+siesta:     -0.40557  -2.60678 309.84907  2      390
+siesta:      0.59030   0.53175 317.13963  1      391
+siesta:      2.63900   0.13978 317.13963  2      392
+siesta:      0.40557   2.60678 317.13963  2      393
+siesta:     -0.59030  -0.53175 314.70945  1      394
+siesta:     -2.63900  -0.13978 314.70945  2      395
+siesta:     -0.40557  -2.60678 314.70945  2      396
+siesta:      0.59030   0.53175 322.00001  1      397
+siesta:      2.63900   0.13978 322.00001  2      398
+siesta:      0.40557   2.60678 322.00001  2      399
+siesta:     -0.59030  -0.53175 319.56982  1      400
+siesta:     -2.63900  -0.13978 319.56982  2      401
+siesta:     -0.40557  -2.60678 319.56982  2      402
+siesta:      0.59030   0.53175 326.86039  1      403
+siesta:      2.63900   0.13978 326.86039  2      404
+siesta:      0.40557   2.60678 326.86039  2      405
+siesta:     -0.59030  -0.53175 324.43020  1      406
+siesta:     -2.63900  -0.13978 324.43020  2      407
+siesta:     -0.40557  -2.60678 324.43020  2      408
+siesta:      0.59030   0.53175 331.72077  1      409
+siesta:      2.63900   0.13978 331.72077  2      410
+siesta:      0.40557   2.60678 331.72077  2      411
+siesta:     -0.59030  -0.53175 329.29058  1      412
+siesta:     -2.63900  -0.13978 329.29058  2      413
+siesta:     -0.40557  -2.60678 329.29058  2      414
+siesta:      0.59030   0.53175 336.58114  1      415
+siesta:      2.63900   0.13978 336.58114  2      416
+siesta:      0.40557   2.60678 336.58114  2      417
+siesta:     -0.59030  -0.53175 334.15096  1      418
+siesta:     -2.63900  -0.13978 334.15096  2      419
+siesta:     -0.40557  -2.60678 334.15096  2      420
+siesta:      0.59030   0.53175 341.44152  1      421
+siesta:      2.63900   0.13978 341.44152  2      422
+siesta:      0.40557   2.60678 341.44152  2      423
+siesta:     -0.59030  -0.53175 339.01133  1      424
+siesta:     -2.63900  -0.13978 339.01133  2      425
+siesta:     -0.40557  -2.60678 339.01133  2      426
+siesta:      0.59030   0.53175 346.30190  1      427
+siesta:      2.63900   0.13978 346.30190  2      428
+siesta:      0.40557   2.60678 346.30190  2      429
+siesta:     -0.59030  -0.53175 343.87171  1      430
+siesta:     -2.63900  -0.13978 343.87171  2      431
+siesta:     -0.40557  -2.60678 343.87171  2      432
+siesta:      0.59030   0.53175 351.16228  1      433
+siesta:      2.63900   0.13978 351.16228  2      434
+siesta:      0.40557   2.60678 351.16228  2      435
+siesta:     -0.59030  -0.53175 348.73209  1      436
+siesta:     -2.63900  -0.13978 348.73209  2      437
+siesta:     -0.40557  -2.60678 348.73209  2      438
+siesta:      0.59030   0.53175 356.02265  1      439
+siesta:      2.63900   0.13978 356.02265  2      440
+siesta:      0.40557   2.60678 356.02265  2      441
+siesta:     -0.59030  -0.53175 353.59247  1      442
+siesta:     -2.63900  -0.13978 353.59247  2      443
+siesta:     -0.40557  -2.60678 353.59247  2      444
+siesta:      0.59030   0.53175 360.88303  1      445
+siesta:      2.63900   0.13978 360.88303  2      446
+siesta:      0.40557   2.60678 360.88303  2      447
+siesta:     -0.59030  -0.53175 358.45284  1      448
+siesta:     -2.63900  -0.13978 358.45284  2      449
+siesta:     -0.40557  -2.60678 358.45284  2      450
+siesta:      0.59030   0.53175 365.74341  1      451
+siesta:      2.63900   0.13978 365.74341  2      452
+siesta:      0.40557   2.60678 365.74341  2      453
+siesta:     -0.59030  -0.53175 363.31322  1      454
+siesta:     -2.63900  -0.13978 363.31322  2      455
+siesta:     -0.40557  -2.60678 363.31322  2      456
+siesta:      0.59030   0.53175 370.60379  1      457
+siesta:      2.63900   0.13978 370.60379  2      458
+siesta:      0.40557   2.60678 370.60379  2      459
+siesta:     -0.59030  -0.53175 368.17360  1      460
+siesta:     -2.63900  -0.13978 368.17360  2      461
+siesta:     -0.40557  -2.60678 368.17360  2      462
+siesta:      0.59030   0.53175 375.46416  1      463
+siesta:      2.63900   0.13978 375.46416  2      464
+siesta:      0.40557   2.60678 375.46416  2      465
+siesta:     -0.59030  -0.53175 373.03398  1      466
+siesta:     -2.63900  -0.13978 373.03398  2      467
+siesta:     -0.40557  -2.60678 373.03398  2      468
+siesta:      0.59030   0.53175 380.32454  1      469
+siesta:      2.63900   0.13978 380.32454  2      470
+siesta:      0.40557   2.60678 380.32454  2      471
+siesta:     -0.59030  -0.53175 377.89435  1      472
+siesta:     -2.63900  -0.13978 377.89435  2      473
+siesta:     -0.40557  -2.60678 377.89435  2      474
+siesta:      0.59030   0.53175 385.18492  1      475
+siesta:      2.63900   0.13978 385.18492  2      476
+siesta:      0.40557   2.60678 385.18492  2      477
+siesta:     -0.59030  -0.53175 382.75473  1      478
+siesta:     -2.63900  -0.13978 382.75473  2      479
+siesta:     -0.40557  -2.60678 382.75473  2      480
+siesta:      0.59030   0.53175 390.04530  1      481
+siesta:      2.63900   0.13978 390.04530  2      482
+siesta:      0.40557   2.60678 390.04530  2      483
+siesta:     -0.59030  -0.53175 387.61511  1      484
+siesta:     -2.63900  -0.13978 387.61511  2      485
+siesta:     -0.40557  -2.60678 387.61511  2      486
+siesta:      0.59030   0.53175 394.90567  1      487
+siesta:      2.63900   0.13978 394.90567  2      488
+siesta:      0.40557   2.60678 394.90567  2      489
+siesta:     -0.59030  -0.53175 392.47549  1      490
+siesta:     -2.63900  -0.13978 392.47549  2      491
+siesta:     -0.40557  -2.60678 392.47549  2      492
+siesta:      0.59030   0.53175 399.76605  1      493
+siesta:      2.63900   0.13978 399.76605  2      494
+siesta:      0.40557   2.60678 399.76605  2      495
+siesta:     -0.59030  -0.53175 397.33586  1      496
+siesta:     -2.63900  -0.13978 397.33586  2      497
+siesta:     -0.40557  -2.60678 397.33586  2      498
+siesta:      0.59030   0.53175 404.62643  1      499
+siesta:      2.63900   0.13978 404.62643  2      500
+siesta:      0.40557   2.60678 404.62643  2      501
+siesta:     -0.59030  -0.53175 402.19624  1      502
+siesta:     -2.63900  -0.13978 402.19624  2      503
+siesta:     -0.40557  -2.60678 402.19624  2      504
+siesta:      0.59030   0.53175 409.48681  1      505
+siesta:      2.63900   0.13978 409.48681  2      506
+siesta:      0.40557   2.60678 409.48681  2      507
+siesta:     -0.59030  -0.53175 407.05662  1      508
+siesta:     -2.63900  -0.13978 407.05662  2      509
+siesta:     -0.40557  -2.60678 407.05662  2      510
+siesta:      0.59030   0.53175 414.34718  1      511
+siesta:      2.63900   0.13978 414.34718  2      512
+siesta:      0.40557   2.60678 414.34718  2      513
+siesta:     -0.59030  -0.53175 411.91700  1      514
+siesta:     -2.63900  -0.13978 411.91700  2      515
+siesta:     -0.40557  -2.60678 411.91700  2      516
+siesta:      0.59030   0.53175 419.20756  1      517
+siesta:      2.63900   0.13978 419.20756  2      518
+siesta:      0.40557   2.60678 419.20756  2      519
+siesta:     -0.59030  -0.53175 416.77737  1      520
+siesta:     -2.63900  -0.13978 416.77737  2      521
+siesta:     -0.40557  -2.60678 416.77737  2      522
+siesta:      0.59030   0.53175 424.06794  1      523
+siesta:      2.63900   0.13978 424.06794  2      524
+siesta:      0.40557   2.60678 424.06794  2      525
+siesta:     -0.59030  -0.53175 421.63775  1      526
+siesta:     -2.63900  -0.13978 421.63775  2      527
+siesta:     -0.40557  -2.60678 421.63775  2      528
+siesta:      0.59030   0.53175 428.92832  1      529
+siesta:      2.63900   0.13978 428.92832  2      530
+siesta:      0.40557   2.60678 428.92832  2      531
+siesta:     -0.59030  -0.53175 426.49813  1      532
+siesta:     -2.63900  -0.13978 426.49813  2      533
+siesta:     -0.40557  -2.60678 426.49813  2      534
+siesta:      0.59030   0.53175 433.78869  1      535
+siesta:      2.63900   0.13978 433.78869  2      536
+siesta:      0.40557   2.60678 433.78869  2      537
+siesta:     -0.59030  -0.53175 431.35851  1      538
+siesta:     -2.63900  -0.13978 431.35851  2      539
+siesta:     -0.40557  -2.60678 431.35851  2      540
+siesta:      0.59030   0.53175 438.64907  1      541
+siesta:      2.63900   0.13978 438.64907  2      542
+siesta:      0.40557   2.60678 438.64907  2      543
+siesta:     -0.59030  -0.53175 436.21888  1      544
+siesta:     -2.63900  -0.13978 436.21888  2      545
+siesta:     -0.40557  -2.60678 436.21888  2      546
+siesta:      0.59030   0.53175 443.50945  1      547
+siesta:      2.63900   0.13978 443.50945  2      548
+siesta:      0.40557   2.60678 443.50945  2      549
+siesta:     -0.59030  -0.53175 441.07926  1      550
+siesta:     -2.63900  -0.13978 441.07926  2      551
+siesta:     -0.40557  -2.60678 441.07926  2      552
+siesta:      0.59030   0.53175 448.36983  1      553
+siesta:      2.63900   0.13978 448.36983  2      554
+siesta:      0.40557   2.60678 448.36983  2      555
+siesta:     -0.59030  -0.53175 445.93964  1      556
+siesta:     -2.63900  -0.13978 445.93964  2      557
+siesta:     -0.40557  -2.60678 445.93964  2      558
+siesta:      0.59030   0.53175 453.23020  1      559
+siesta:      2.63900   0.13978 453.23020  2      560
+siesta:      0.40557   2.60678 453.23020  2      561
+siesta:     -0.59030  -0.53175 450.80002  1      562
+siesta:     -2.63900  -0.13978 450.80002  2      563
+siesta:     -0.40557  -2.60678 450.80002  2      564
+siesta:      0.59030   0.53175 458.09058  1      565
+siesta:      2.63900   0.13978 458.09058  2      566
+siesta:      0.40557   2.60678 458.09058  2      567
+siesta:     -0.59030  -0.53175 455.66039  1      568
+siesta:     -2.63900  -0.13978 455.66039  2      569
+siesta:     -0.40557  -2.60678 455.66039  2      570
+siesta:      0.59030   0.53175 462.95096  1      571
+siesta:      2.63900   0.13978 462.95096  2      572
+siesta:      0.40557   2.60678 462.95096  2      573
+siesta:     -0.59030  -0.53175 460.52077  1      574
+siesta:     -2.63900  -0.13978 460.52077  2      575
+siesta:     -0.40557  -2.60678 460.52077  2      576
+siesta:      0.59030   0.53175 467.81134  1      577
+siesta:      2.63900   0.13978 467.81134  2      578
+siesta:      0.40557   2.60678 467.81134  2      579
+siesta:     -0.59030  -0.53175 465.38115  1      580
+siesta:     -2.63900  -0.13978 465.38115  2      581
+siesta:     -0.40557  -2.60678 465.38115  2      582
+siesta:      0.59030   0.53175 472.67171  1      583
+siesta:      2.63900   0.13978 472.67171  2      584
+siesta:      0.40557   2.60678 472.67171  2      585
+siesta:     -0.59030  -0.53175 470.24153  1      586
+siesta:     -2.63900  -0.13978 470.24153  2      587
+siesta:     -0.40557  -2.60678 470.24153  2      588
+siesta:      0.59030   0.53175 477.53209  1      589
+siesta:      2.63900   0.13978 477.53209  2      590
+siesta:      0.40557   2.60678 477.53209  2      591
+siesta:     -0.59030  -0.53175 475.10190  1      592
+siesta:     -2.63900  -0.13978 475.10190  2      593
+siesta:     -0.40557  -2.60678 475.10190  2      594
+siesta:      0.59030   0.53175 482.39247  1      595
+siesta:      2.63900   0.13978 482.39247  2      596
+siesta:      0.40557   2.60678 482.39247  2      597
+siesta:     -0.59030  -0.53175 479.96228  1      598
+siesta:     -2.63900  -0.13978 479.96228  2      599
+siesta:     -0.40557  -2.60678 479.96228  2      600
+siesta:      0.59030   0.53175 487.25285  1      601
+siesta:      2.63900   0.13978 487.25285  2      602
+siesta:      0.40557   2.60678 487.25285  2      603
+siesta:     -0.59030  -0.53175 484.82266  1      604
+siesta:     -2.63900  -0.13978 484.82266  2      605
+siesta:     -0.40557  -2.60678 484.82266  2      606
+siesta:      0.59030   0.53175 492.11322  1      607
+siesta:      2.63900   0.13978 492.11322  2      608
+siesta:      0.40557   2.60678 492.11322  2      609
+siesta:     -0.59030  -0.53175 489.68304  1      610
+siesta:     -2.63900  -0.13978 489.68304  2      611
+siesta:     -0.40557  -2.60678 489.68304  2      612
+siesta:      0.59030   0.53175 496.97360  1      613
+siesta:      2.63900   0.13978 496.97360  2      614
+siesta:      0.40557   2.60678 496.97360  2      615
+siesta:     -0.59030  -0.53175 494.54341  1      616
+siesta:     -2.63900  -0.13978 494.54341  2      617
+siesta:     -0.40557  -2.60678 494.54341  2      618
+siesta:      0.59030   0.53175 501.83398  1      619
+siesta:      2.63900   0.13978 501.83398  2      620
+siesta:      0.40557   2.60678 501.83398  2      621
+siesta:     -0.59030  -0.53175 499.40379  1      622
+siesta:     -2.63900  -0.13978 499.40379  2      623
+siesta:     -0.40557  -2.60678 499.40379  2      624
+siesta:      0.59030   0.53175 506.69436  1      625
+siesta:      2.63900   0.13978 506.69436  2      626
+siesta:      0.40557   2.60678 506.69436  2      627
+siesta:     -0.59030  -0.53175 504.26417  1      628
+siesta:     -2.63900  -0.13978 504.26417  2      629
+siesta:     -0.40557  -2.60678 504.26417  2      630
+siesta:      0.59030   0.53175 511.55473  1      631
+siesta:      2.63900   0.13978 511.55473  2      632
+siesta:      0.40557   2.60678 511.55473  2      633
+siesta:     -0.59030  -0.53175 509.12455  1      634
+siesta:     -2.63900  -0.13978 509.12455  2      635
+siesta:     -0.40557  -2.60678 509.12455  2      636
+siesta:      0.59030   0.53175 516.41511  1      637
+siesta:      2.63900   0.13978 516.41511  2      638
+siesta:      0.40557   2.60678 516.41511  2      639
+siesta:     -0.59030  -0.53175 513.98492  1      640
+siesta:     -2.63900  -0.13978 513.98492  2      641
+siesta:     -0.40557  -2.60678 513.98492  2      642
+siesta:      0.59030   0.53175 521.27549  1      643
+siesta:      2.63900   0.13978 521.27549  2      644
+siesta:      0.40557   2.60678 521.27549  2      645
+siesta:     -0.59030  -0.53175 518.84530  1      646
+siesta:     -2.63900  -0.13978 518.84530  2      647
+siesta:     -0.40557  -2.60678 518.84530  2      648
+siesta:      0.59030   0.53175 526.13587  1      649
+siesta:      2.63900   0.13978 526.13587  2      650
+siesta:      0.40557   2.60678 526.13587  2      651
+siesta:     -0.59030  -0.53175 523.70568  1      652
+siesta:     -2.63900  -0.13978 523.70568  2      653
+siesta:     -0.40557  -2.60678 523.70568  2      654
+siesta:      0.59030   0.53175 530.99625  1      655
+siesta:      2.63900   0.13978 530.99625  2      656
+siesta:      0.40557   2.60678 530.99625  2      657
+siesta:     -0.59030  -0.53175 528.56606  1      658
+siesta:     -2.63900  -0.13978 528.56606  2      659
+siesta:     -0.40557  -2.60678 528.56606  2      660
+siesta:      0.59030   0.53175 535.85662  1      661
+siesta:      2.63900   0.13978 535.85662  2      662
+siesta:      0.40557   2.60678 535.85662  2      663
+siesta:     -0.59030  -0.53175 533.42643  1      664
+siesta:     -2.63900  -0.13978 533.42643  2      665
+siesta:     -0.40557  -2.60678 533.42643  2      666
+siesta:      0.59030   0.53175 540.71700  1      667
+siesta:      2.63900   0.13978 540.71700  2      668
+siesta:      0.40557   2.60678 540.71700  2      669
+siesta:     -0.59030  -0.53175 538.28681  1      670
+siesta:     -2.63900  -0.13978 538.28681  2      671
+siesta:     -0.40557  -2.60678 538.28681  2      672
+siesta:      0.59030   0.53175 545.57738  1      673
+siesta:      2.63900   0.13978 545.57738  2      674
+siesta:      0.40557   2.60678 545.57738  2      675
+siesta:     -0.59030  -0.53175 543.14719  1      676
+siesta:     -2.63900  -0.13978 543.14719  2      677
+siesta:     -0.40557  -2.60678 543.14719  2      678
+siesta:      0.59030   0.53175 550.43776  1      679
+siesta:      2.63900   0.13978 550.43776  2      680
+siesta:      0.40557   2.60678 550.43776  2      681
+siesta:     -0.59030  -0.53175 548.00757  1      682
+siesta:     -2.63900  -0.13978 548.00757  2      683
+siesta:     -0.40557  -2.60678 548.00757  2      684
+siesta:      0.59030   0.53175 555.29813  1      685
+siesta:      2.63900   0.13978 555.29813  2      686
+siesta:      0.40557   2.60678 555.29813  2      687
+siesta:     -0.59030  -0.53175 552.86794  1      688
+siesta:     -2.63900  -0.13978 552.86794  2      689
+siesta:     -0.40557  -2.60678 552.86794  2      690
+siesta:      0.59030   0.53175 560.15851  1      691
+siesta:      2.63900   0.13978 560.15851  2      692
+siesta:      0.40557   2.60678 560.15851  2      693
+siesta:     -0.59030  -0.53175 557.72832  1      694
+siesta:     -2.63900  -0.13978 557.72832  2      695
+siesta:     -0.40557  -2.60678 557.72832  2      696
+siesta:      0.59030   0.53175 565.01889  1      697
+siesta:      2.63900   0.13978 565.01889  2      698
+siesta:      0.40557   2.60678 565.01889  2      699
+siesta:     -0.59030  -0.53175 562.58870  1      700
+siesta:     -2.63900  -0.13978 562.58870  2      701
+siesta:     -0.40557  -2.60678 562.58870  2      702
+siesta:      0.59030   0.53175 569.87927  1      703
+siesta:      2.63900   0.13978 569.87927  2      704
+siesta:      0.40557   2.60678 569.87927  2      705
+siesta:     -0.59030  -0.53175 567.44908  1      706
+siesta:     -2.63900  -0.13978 567.44908  2      707
+siesta:     -0.40557  -2.60678 567.44908  2      708
+siesta:      0.59030   0.53175 574.73964  1      709
+siesta:      2.63900   0.13978 574.73964  2      710
+siesta:      0.40557   2.60678 574.73964  2      711
+siesta:     -0.59030  -0.53175 572.30945  1      712
+siesta:     -2.63900  -0.13978 572.30945  2      713
+siesta:     -0.40557  -2.60678 572.30945  2      714
+siesta:      0.59030   0.53175 579.60002  1      715
+siesta:      2.63900   0.13978 579.60002  2      716
+siesta:      0.40557   2.60678 579.60002  2      717
+siesta:     -0.59030  -0.53175 577.16983  1      718
+siesta:     -2.63900  -0.13978 577.16983  2      719
+siesta:     -0.40557  -2.60678 577.16983  2      720
+siesta:      0.59030   0.53175 584.46040  1      721
+siesta:      2.63900   0.13978 584.46040  2      722
+siesta:      0.40557   2.60678 584.46040  2      723
+siesta:     -0.59030  -0.53175 582.03021  1      724
+siesta:     -2.63900  -0.13978 582.03021  2      725
+siesta:     -0.40557  -2.60678 582.03021  2      726
+siesta:      0.59030   0.53175 589.32078  1      727
+siesta:      2.63900   0.13978 589.32078  2      728
+siesta:      0.40557   2.60678 589.32078  2      729
+siesta:     -0.59030  -0.53175 586.89059  1      730
+siesta:     -2.63900  -0.13978 586.89059  2      731
+siesta:     -0.40557  -2.60678 586.89059  2      732
+siesta:      0.59030   0.53175 594.18115  1      733
+siesta:      2.63900   0.13978 594.18115  2      734
+siesta:      0.40557   2.60678 594.18115  2      735
+siesta:     -0.59030  -0.53175 591.75096  1      736
+siesta:     -2.63900  -0.13978 591.75096  2      737
+siesta:     -0.40557  -2.60678 591.75096  2      738
+siesta:      0.59030   0.53175 599.04153  1      739
+siesta:      2.63900   0.13978 599.04153  2      740
+siesta:      0.40557   2.60678 599.04153  2      741
+siesta:     -0.59030  -0.53175 596.61134  1      742
+siesta:     -2.63900  -0.13978 596.61134  2      743
+siesta:     -0.40557  -2.60678 596.61134  2      744
+siesta:      0.59030   0.53175 603.90191  1      745
+siesta:      2.63900   0.13978 603.90191  2      746
+siesta:      0.40557   2.60678 603.90191  2      747
+siesta:     -0.59030  -0.53175 601.47172  1      748
+siesta:     -2.63900  -0.13978 601.47172  2      749
+siesta:     -0.40557  -2.60678 601.47172  2      750
+siesta:      0.59030   0.53175 608.76229  1      751
+siesta:      2.63900   0.13978 608.76229  2      752
+siesta:      0.40557   2.60678 608.76229  2      753
+siesta:     -0.59030  -0.53175 606.33210  1      754
+siesta:     -2.63900  -0.13978 606.33210  2      755
+siesta:     -0.40557  -2.60678 606.33210  2      756
+siesta:      0.59030   0.53175 613.62266  1      757
+siesta:      2.63900   0.13978 613.62266  2      758
+siesta:      0.40557   2.60678 613.62266  2      759
+siesta:     -0.59030  -0.53175 611.19247  1      760
+siesta:     -2.63900  -0.13978 611.19247  2      761
+siesta:     -0.40557  -2.60678 611.19247  2      762
+siesta:      0.59030   0.53175 618.48304  1      763
+siesta:      2.63900   0.13978 618.48304  2      764
+siesta:      0.40557   2.60678 618.48304  2      765
+siesta:     -0.59030  -0.53175 616.05285  1      766
+siesta:     -2.63900  -0.13978 616.05285  2      767
+siesta:     -0.40557  -2.60678 616.05285  2      768
+
+siesta: System type = chain     
+
+initatomlists: Number of atoms, orbitals, and projectors:    768  5888  8704
+
+siesta: ******************** Simulation parameters ****************************
+siesta:
+siesta: The following are some of the parameters of the simulation.
+siesta: A complete list of the parameters used, including default values,
+siesta: can be found in file out.fdf
+siesta:
+redata: Non-Collinear-spin run           =     F
+redata: SpinPolarized (Up/Down) run      =     F
+redata: Number of spin components        =     1
+redata: Long output                      =     F
+redata: Number of Atomic Species         =        2
+redata: Charge density info will appear in .RHO file
+redata: Write Mulliken Pop.              =     NO
+redata: Mesh Cutoff                      =   100.0000  Ry
+redata: Net charge of the system         =     0.0000 |e|
+redata: Min. number of SCF Iter          =        0
+redata: Max. number of SCF Iter          =       50
+redata: Mix DM or H after convergence    =     F
+redata: Recompute H after scf cycle      =     F
+redata: Performing Pulay mixing using    =     3 iterations
+redata: Mix DM in first SCF step ?       =     F
+redata: Write Pulay info on disk?        =     F
+redata: Discard 1st Pulay DM after  kick =     F
+redata: New DM Mixing Weight             =     0.3000
+redata: New DM Occupancy tolerance       = 0.000000000001
+redata: No kicks to SCF
+redata: DM Mixing Weight for Kicks       =     0.5000
+redata: DM Tolerance for SCF             =     0.000100
+redata: Require (free) Energy convergence in SCF =     F
+redata: DM (free)Energy tolerance for SCF =     0.000010 eV
+redata: Require Harris convergence for SCF =     F
+redata: DM Harris energy tolerance for SCF =     0.000010 eV
+redata: Using Saved Data (generic)   =     F
+redata: Use continuation files for DM    =     F
+redata: Neglect nonoverlap interactions  =     F
+redata: Method of Calculation            =     Diagonalization
+redata: Divide and Conquer               =     T
+redata: Electronic Temperature           =     0.0019  Ry
+redata: Fix the spin of the system       =     F
+redata: Dynamics option                  =     Single-point calculation
+redata: ***********************************************************************
+Total number of electrons:  1536.000000
+Total ionic charge:  1536.000000
+
+* ProcessorY, Blocksize:   16  23
+
+
+* Orbital distribution balance (max,min):    23    23
+
+ Kpoints in:  1 . Kpoints trimmed:  1
+
+siesta: k-grid: Number of k-points =     1
+siesta: k-grid: Cutoff (effective) =    10.000 Ang
+siesta: k-grid: Supercell and displacements
+siesta: k-grid:    1   0   0      0.000
+siesta: k-grid:    0   1   0      0.000
+siesta: k-grid:    0   0   1      0.000
+
+                     ====================================
+                        Single-point calculation
+                     ====================================
+
+outcell: Unit cell vectors (Ang):
+       20.000000    0.000000    0.000000
+        0.000000   20.000000    0.000000
+        0.000000    0.000000  329.216000
+
+outcell: Cell vector modules (Ang)   :   20.000000   20.000000  329.216000
+outcell: Cell angles (23,13,12) (deg):     90.0000     90.0000     90.0000
+outcell: Cell volume (Ang**3)        : 131686.4000
+New_DM. Step:     1
+Initializing Density Matrix...
+New grid distribution:   1
+           1       1:   64    1:    4    1:   63
+           2       1:   64    1:    4   64:  126
+           3       1:   64    1:    4  127:  189
+           4       1:   64    1:    4  190:  252
+           5       1:   64    1:    4  253:  315
+           6       1:   64    1:    4  316:  378
+           7       1:   64    1:    4  379:  441
+           8       1:   64    1:    4  442:  504
+           9       1:   64    1:    4  505:  566
+          10       1:   64    1:    4  567:  628
+          11       1:   64    1:    4  629:  690
+          12       1:   64    1:    4  691:  752
+          13       1:   64    1:    4  753:  814
+          14       1:   64    1:    4  815:  876
+          15       1:   64    1:    4  877:  938
+          16       1:   64    1:    4  939: 1000
+          17       1:   64    5:    8    1:   63
+          18       1:   64    5:    8   64:  126
+          19       1:   64    5:    8  127:  189
+          20       1:   64    5:    8  190:  252
+          21       1:   64    5:    8  253:  315
+          22       1:   64    5:    8  316:  378
+          23       1:   64    5:    8  379:  441
+          24       1:   64    5:    8  442:  504
+          25       1:   64    5:    8  505:  566
+          26       1:   64    5:    8  567:  628
+          27       1:   64    5:    8  629:  690
+          28       1:   64    5:    8  691:  752
+          29       1:   64    5:    8  753:  814
+          30       1:   64    5:    8  815:  876
+          31       1:   64    5:    8  877:  938
+          32       1:   64    5:    8  939: 1000
+          33       1:   64    9:   12    1:   63
+          34       1:   64    9:   12   64:  126
+          35       1:   64    9:   12  127:  189
+          36       1:   64    9:   12  190:  252
+          37       1:   64    9:   12  253:  315
+          38       1:   64    9:   12  316:  378
+          39       1:   64    9:   12  379:  441
+          40       1:   64    9:   12  442:  504
+          41       1:   64    9:   12  505:  566
+          42       1:   64    9:   12  567:  628
+          43       1:   64    9:   12  629:  690
+          44       1:   64    9:   12  691:  752
+          45       1:   64    9:   12  753:  814
+          46       1:   64    9:   12  815:  876
+          47       1:   64    9:   12  877:  938
+          48       1:   64    9:   12  939: 1000
+          49       1:   64   13:   16    1:   63
+          50       1:   64   13:   16   64:  126
+          51       1:   64   13:   16  127:  189
+          52       1:   64   13:   16  190:  252
+          53       1:   64   13:   16  253:  315
+          54       1:   64   13:   16  316:  378
+          55       1:   64   13:   16  379:  441
+          56       1:   64   13:   16  442:  504
+          57       1:   64   13:   16  505:  566
+          58       1:   64   13:   16  567:  628
+          59       1:   64   13:   16  629:  690
+          60       1:   64   13:   16  691:  752
+          61       1:   64   13:   16  753:  814
+          62       1:   64   13:   16  815:  876
+          63       1:   64   13:   16  877:  938
+          64       1:   64   13:   16  939: 1000
+          65       1:   64   17:   20    1:   63
+          66       1:   64   17:   20   64:  126
+          67       1:   64   17:   20  127:  189
+          68       1:   64   17:   20  190:  252
+          69       1:   64   17:   20  253:  315
+          70       1:   64   17:   20  316:  378
+          71       1:   64   17:   20  379:  441
+          72       1:   64   17:   20  442:  504
+          73       1:   64   17:   20  505:  566
+          74       1:   64   17:   20  567:  628
+          75       1:   64   17:   20  629:  690
+          76       1:   64   17:   20  691:  752
+          77       1:   64   17:   20  753:  814
+          78       1:   64   17:   20  815:  876
+          79       1:   64   17:   20  877:  938
+          80       1:   64   17:   20  939: 1000
+          81       1:   64   21:   24    1:   63
+          82       1:   64   21:   24   64:  126
+          83       1:   64   21:   24  127:  189
+          84       1:   64   21:   24  190:  252
+          85       1:   64   21:   24  253:  315
+          86       1:   64   21:   24  316:  378
+          87       1:   64   21:   24  379:  441
+          88       1:   64   21:   24  442:  504
+          89       1:   64   21:   24  505:  566
+          90       1:   64   21:   24  567:  628
+          91       1:   64   21:   24  629:  690
+          92       1:   64   21:   24  691:  752
+          93       1:   64   21:   24  753:  814
+          94       1:   64   21:   24  815:  876
+          95       1:   64   21:   24  877:  938
+          96       1:   64   21:   24  939: 1000
+          97       1:   64   25:   28    1:   63
+          98       1:   64   25:   28   64:  126
+          99       1:   64   25:   28  127:  189
+         100       1:   64   25:   28  190:  252
+         101       1:   64   25:   28  253:  315
+         102       1:   64   25:   28  316:  378
+         103       1:   64   25:   28  379:  441
+         104       1:   64   25:   28  442:  504
+         105       1:   64   25:   28  505:  566
+         106       1:   64   25:   28  567:  628
+         107       1:   64   25:   28  629:  690
+         108       1:   64   25:   28  691:  752
+         109       1:   64   25:   28  753:  814
+         110       1:   64   25:   28  815:  876
+         111       1:   64   25:   28  877:  938
+         112       1:   64   25:   28  939: 1000
+         113       1:   64   29:   32    1:   63
+         114       1:   64   29:   32   64:  126
+         115       1:   64   29:   32  127:  189
+         116       1:   64   29:   32  190:  252
+         117       1:   64   29:   32  253:  315
+         118       1:   64   29:   32  316:  378
+         119       1:   64   29:   32  379:  441
+         120       1:   64   29:   32  442:  504
+         121       1:   64   29:   32  505:  566
+         122       1:   64   29:   32  567:  628
+         123       1:   64   29:   32  629:  690
+         124       1:   64   29:   32  691:  752
+         125       1:   64   29:   32  753:  814
+         126       1:   64   29:   32  815:  876
+         127       1:   64   29:   32  877:  938
+         128       1:   64   29:   32  939: 1000
+         129       1:   64   33:   36    1:   63
+         130       1:   64   33:   36   64:  126
+         131       1:   64   33:   36  127:  189
+         132       1:   64   33:   36  190:  252
+         133       1:   64   33:   36  253:  315
+         134       1:   64   33:   36  316:  378
+         135       1:   64   33:   36  379:  441
+         136       1:   64   33:   36  442:  504
+         137       1:   64   33:   36  505:  566
+         138       1:   64   33:   36  567:  628
+         139       1:   64   33:   36  629:  690
+         140       1:   64   33:   36  691:  752
+         141       1:   64   33:   36  753:  814
+         142       1:   64   33:   36  815:  876
+         143       1:   64   33:   36  877:  938
+         144       1:   64   33:   36  939: 1000
+         145       1:   64   37:   40    1:   63
+         146       1:   64   37:   40   64:  126
+         147       1:   64   37:   40  127:  189
+         148       1:   64   37:   40  190:  252
+         149       1:   64   37:   40  253:  315
+         150       1:   64   37:   40  316:  378
+         151       1:   64   37:   40  379:  441
+         152       1:   64   37:   40  442:  504
+         153       1:   64   37:   40  505:  566
+         154       1:   64   37:   40  567:  628
+         155       1:   64   37:   40  629:  690
+         156       1:   64   37:   40  691:  752
+         157       1:   64   37:   40  753:  814
+         158       1:   64   37:   40  815:  876
+         159       1:   64   37:   40  877:  938
+         160       1:   64   37:   40  939: 1000
+         161       1:   64   41:   44    1:   63
+         162       1:   64   41:   44   64:  126
+         163       1:   64   41:   44  127:  189
+         164       1:   64   41:   44  190:  252
+         165       1:   64   41:   44  253:  315
+         166       1:   64   41:   44  316:  378
+         167       1:   64   41:   44  379:  441
+         168       1:   64   41:   44  442:  504
+         169       1:   64   41:   44  505:  566
+         170       1:   64   41:   44  567:  628
+         171       1:   64   41:   44  629:  690
+         172       1:   64   41:   44  691:  752
+         173       1:   64   41:   44  753:  814
+         174       1:   64   41:   44  815:  876
+         175       1:   64   41:   44  877:  938
+         176       1:   64   41:   44  939: 1000
+         177       1:   64   45:   48    1:   63
+         178       1:   64   45:   48   64:  126
+         179       1:   64   45:   48  127:  189
+         180       1:   64   45:   48  190:  252
+         181       1:   64   45:   48  253:  315
+         182       1:   64   45:   48  316:  378
+         183       1:   64   45:   48  379:  441
+         184       1:   64   45:   48  442:  504
+         185       1:   64   45:   48  505:  566
+         186       1:   64   45:   48  567:  628
+         187       1:   64   45:   48  629:  690
+         188       1:   64   45:   48  691:  752
+         189       1:   64   45:   48  753:  814
+         190       1:   64   45:   48  815:  876
+         191       1:   64   45:   48  877:  938
+         192       1:   64   45:   48  939: 1000
+         193       1:   64   49:   52    1:   63
+         194       1:   64   49:   52   64:  126
+         195       1:   64   49:   52  127:  189
+         196       1:   64   49:   52  190:  252
+         197       1:   64   49:   52  253:  315
+         198       1:   64   49:   52  316:  378
+         199       1:   64   49:   52  379:  441
+         200       1:   64   49:   52  442:  504
+         201       1:   64   49:   52  505:  566
+         202       1:   64   49:   52  567:  628
+         203       1:   64   49:   52  629:  690
+         204       1:   64   49:   52  691:  752
+         205       1:   64   49:   52  753:  814
+         206       1:   64   49:   52  815:  876
+         207       1:   64   49:   52  877:  938
+         208       1:   64   49:   52  939: 1000
+         209       1:   64   53:   56    1:   63
+         210       1:   64   53:   56   64:  126
+         211       1:   64   53:   56  127:  189
+         212       1:   64   53:   56  190:  252
+         213       1:   64   53:   56  253:  315
+         214       1:   64   53:   56  316:  378
+         215       1:   64   53:   56  379:  441
+         216       1:   64   53:   56  442:  504
+         217       1:   64   53:   56  505:  566
+         218       1:   64   53:   56  567:  628
+         219       1:   64   53:   56  629:  690
+         220       1:   64   53:   56  691:  752
+         221       1:   64   53:   56  753:  814
+         222       1:   64   53:   56  815:  876
+         223       1:   64   53:   56  877:  938
+         224       1:   64   53:   56  939: 1000
+         225       1:   64   57:   60    1:   63
+         226       1:   64   57:   60   64:  126
+         227       1:   64   57:   60  127:  189
+         228       1:   64   57:   60  190:  252
+         229       1:   64   57:   60  253:  315
+         230       1:   64   57:   60  316:  378
+         231       1:   64   57:   60  379:  441
+         232       1:   64   57:   60  442:  504
+         233       1:   64   57:   60  505:  566
+         234       1:   64   57:   60  567:  628
+         235       1:   64   57:   60  629:  690
+         236       1:   64   57:   60  691:  752
+         237       1:   64   57:   60  753:  814
+         238       1:   64   57:   60  815:  876
+         239       1:   64   57:   60  877:  938
+         240       1:   64   57:   60  939: 1000
+         241       1:   64   61:   64    1:   63
+         242       1:   64   61:   64   64:  126
+         243       1:   64   61:   64  127:  189
+         244       1:   64   61:   64  190:  252
+         245       1:   64   61:   64  253:  315
+         246       1:   64   61:   64  316:  378
+         247       1:   64   61:   64  379:  441
+         248       1:   64   61:   64  442:  504
+         249       1:   64   61:   64  505:  566
+         250       1:   64   61:   64  567:  628
+         251       1:   64   61:   64  629:  690
+         252       1:   64   61:   64  691:  752
+         253       1:   64   61:   64  753:  814
+         254       1:   64   61:   64  815:  876
+         255       1:   64   61:   64  877:  938
+         256       1:   64   61:   64  939: 1000
+
+InitMesh: MESH =   128 x   128 x  2000 =    32768000
+InitMesh: (bp) =    64 x    64 x  1000 =     4096000
+InitMesh: Mesh cutoff (required, used) =   100.000   102.000 Ry
+ExtMesh (bp) on 0 =   100 x    40 x    95 =      380000
+New grid distribution:   2
+           1       8:   64    8:   64  736:  750
+           2       8:   64    1:    7  423:  438
+           3       8:   64    1:    7  735:  750
+           4       1:    7    1:    7  892:  907
+           5       8:   64    8:   64  439:  453
+           6       1:    7    1:    7  970:  985
+           7       8:   64    1:    7  392:  407
+           8       8:   64    1:    7  485:  500
+           9       8:   64    8:   64  939:  953
+          10       8:   64    1:    7  610:  625
+          11       1:    7    1:    7  829:  844
+          12       8:   64    1:    7  689:  704
+          13       8:   64    8:   64  111:  125
+          14       8:   64    1:    7  360:  375
+          15       1:    7    1:    7  876:  891
+          16       8:   64    1:    7  985: 1000
+          17       8:   64    1:    7   48:   63
+          18       8:   64    8:   64   64:   78
+          19       8:   64    1:    7  314:  329
+          20       1:    7    1:    7  845:  860
+          21       1:    7    1:    7  954:  969
+          22       8:   64    1:    7  376:  391
+          23       8:   64    1:    7  439:  454
+          24       8:   64    8:   64  486:  500
+          25       8:   64    1:    7   17:   32
+          26       8:   64    1:    7  564:  579
+          27       1:    7    1:    7  345:  360
+          28       8:   64    8:   64  689:  703
+          29       8:   64    1:    7  126:  141
+          30       8:   64    1:    7  720:  734
+          31       1:    7    1:    7  923:  938
+          32       8:   64    8:   64  986: 1000
+          33       1:    7    8:   64   32:   47
+          34       8:   64    8:   64   79:   94
+          35       1:    7    8:   64  157:  172
+          36       1:    7    1:    7  329:  344
+          37       8:   64    8:   64  251:  266
+          38       1:    7    8:   64  314:  329
+          39       1:    7    1:    7  376:  391
+          40       1:    7    8:   64  485:  500
+          41       8:   64    8:   64  548:  563
+          42       8:   64    1:    7  142:  157
+          43       1:    7    1:    7  267:  282
+          44       1:    7    8:   64  689:  704
+          45       1:    7    8:   64  798:  813
+          46       1:    7    1:    7  251:  266
+          47       8:   64    8:   64  923:  938
+          48       1:    7    8:   64  939:  954
+          49       1:    7    8:   64   16:   31
+          50       8:   64    1:    7  783:  797
+          51       8:   64    8:   64  157:  172
+          52       1:    7    1:    7  298:  313
+          53       1:    7    1:    7  470:  485
+          54       1:    7    8:   64  360:  375
+          55       1:    7    8:   64  423:  438
+          56       8:   64    8:   64  470:  485
+          57       8:   64    8:   64  532:  547
+          58       8:   64    1:    7  939:  954
+          59       1:    7    1:    7  454:  469
+          60       1:    7    8:   64  735:  750
+          61       1:    7    8:   64  751:  765
+          62       1:    7    1:    7  501:  516
+          63       8:   64    8:   64  876:  891
+          64       1:    7    8:   64  985: 1000
+          65       1:    7    8:   64   48:   63
+          66       8:   64    8:   64   95:  110
+          67       1:    7    8:   64  141:  156
+          68       1:    7    1:    7  392:  407
+          69       8:   64    1:    7  658:  672
+          70       1:    7    1:    7  423:  438
+          71       1:    7    8:   64  407:  422
+          72       8:   64    8:   64  454:  469
+          73       8:   64    8:   64  501:  516
+          74       8:   64    1:    7  626:  641
+          75       1:    7    1:    7   79:   94
+          76       1:    7    8:   64  705:  719
+          77       1:    7    1:    7   48:   63
+          78       1:    7    8:   64  814:  829
+          79       8:   64    8:   64  907:  922
+          80       1:    7    8:   64  955:  969
+          81       1:    7    8:   64    1:   15
+          82       1:    7    8:   64   64:   79
+          83       8:   64    8:   64  173:  188
+          84       1:    7    1:    7   95:  110
+          85       8:   64    1:    7  705:  719
+          86       1:    7    1:    7    1:   16
+          87       8:   64    8:   64  407:  422
+          88       1:    7    8:   64  439:  454
+          89       1:    7    8:   64  548:  563
+          90       1:    7    8:   64  610:  625
+          91       8:   64    8:   64  673:  688
+          92       1:    7    1:    7   17:   32
+          93       8:   64    1:    7  860:  875
+          94       8:   64    8:   64  829:  844
+          95       1:    7    1:    7  204:  219
+          96       1:    7    8:   64  970:  984
+          97       8:   64    1:    7  110:  125
+          98       8:   64    1:    7   33:   47
+          99       1:    7    1:    7  173:  188
+         100       8:   64    8:   64  220:  235
+         101       8:   64    1:    7  642:  657
+         102       1:    7    8:   64  345:  359
+         103       8:   64    8:   64  423:  438
+         104       1:    7    1:    7  220:  235
+         105       1:    7    8:   64  532:  547
+         106       1:    7    8:   64  564:  579
+         107       1:    7    1:    7  126:  141
+         108       8:   64    8:   64  704:  719
+         109       8:   64    1:    7  673:  688
+         110       8:   64    8:   64  845:  860
+         111       8:   64    1:    7  408:  422
+         112       1:    7    1:    7  142:  157
+         113       1:    7    1:    7  673:  688
+         114       1:    7    8:   64  110:  125
+         115       1:    7    8:   64  126:  140
+         116       8:   64    8:   64  204:  219
+         117       8:   64    8:   64  282:  297
+         118       8:   64    1:    7  345:  359
+         119       1:    7    8:   64  391:  406
+         120       1:    7    1:    7  642:  657
+         121       1:    7    8:   64  516:  531
+         122       1:    7    1:    7  704:  719
+         123       1:    7    8:   64  626:  640
+         124       8:   64    8:   64  720:  735
+         125       8:   64    8:   64  751:  766
+         126       1:    7    8:   64  860:  875
+         127       8:   64    1:    7  970:  984
+         128       1:    7    1:    7  595:  610
+         129       8:   64    8:   64   48:   63
+         130       8:   64    1:    7  517:  532
+         131       8:   64    1:    7  955:  969
+         132       1:    7    1:    7  626:  641
+         133       8:   64    1:    7  548:  563
+         134       1:    7    8:   64  330:  344
+         135       8:   64    8:   64  376:  391
+         136       1:    7    1:    7  767:  782
+         137       1:    7    1:    7  798:  813
+         138       8:   64    8:   64  579:  594
+         139       1:    7    8:   64  657:  672
+         140       1:    7    8:   64  720:  734
+         141       8:   64    8:   64  782:  797
+         142       8:   64    1:    7  814:  829
+         143       8:   64    1:    7  455:  469
+         144       1:    7    1:    7  720:  735
+         145       8:   64    1:    7  501:  516
+         146       8:   64    1:    7  158:  172
+         147       8:   64    8:   64  126:  141
+         148       1:    7    1:    7  751:  766
+         149       1:    7    8:   64  282:  297
+         150       8:   64    8:   64  345:  360
+         151       1:    7    8:   64  376:  390
+         152       1:    7    1:    7  548:  563
+         153       8:   64    1:    7  205:  219
+         154       8:   64    8:   64  595:  610
+         155       1:    7    8:   64  641:  656
+         156       1:    7    1:    7  517:  532
+         157       8:   64    1:    7  298:  313
+         158       8:   64    1:    7  220:  234
+         159       1:    7    1:    7  579:  594
+         160       8:   64    8:   64  970:  985
+         161       8:   64    8:   64    1:   16
+         162       8:   64    1:    7   64:   79
+         163       8:   64    1:    7  283:  297
+         164       1:    7    1:    7  361:  375
+         165       8:   64    8:   64  298:  313
+         166       8:   64    1:    7  923:  938
+         167       8:   64    1:    7  908:  922
+         168       1:    7    1:    7  439:  453
+         169       8:   64    1:    7    1:   16
+         170       8:   64    1:    7  330:  344
+         171       8:   64    8:   64  657:  672
+         172       1:    7    1:    7  111:  125
+         173       1:    7    8:   64  766:  781
+         174       1:    7    8:   64  251:  265
+         175       1:    7    1:    7  689:  703
+         176       8:   64    8:   64  954:  969
+         177       8:   64    8:   64   32:   47
+         178       1:    7    1:    7  986: 1000
+         179       1:    7    8:   64  173:  188
+         180       1:    7    8:   64  220:  234
+         181       1:    7    8:   64  266:  281
+         182       8:   64    8:   64  329:  344
+         183       8:   64    1:    7   80:   94
+         184       1:    7    1:    7  158:  172
+         185       8:   64    1:    7  751:  766
+         186       8:   64    1:    7   95:  109
+         187       8:   64    8:   64  626:  641
+         188       1:    7    1:    7   33:   47
+         189       8:   64    8:   64  798:  813
+         190       8:   64    1:    7  845:  859
+         191       1:    7    8:   64  891:  906
+         192       1:    7    1:    7  486:  500
+         193       8:   64    1:    7  235:  250
+         194       8:   64    1:    7  533:  547
+         195       1:    7    1:    7  783:  797
+         196       8:   64    8:   64  236:  250
+         197       8:   64    8:   64  267:  281
+         198       8:   64    1:    7  798:  813
+         199       8:   64    1:    7  595:  609
+         200       1:    7    1:    7  533:  547
+         201       1:    7    8:   64  501:  515
+         202       8:   64    8:   64  611:  625
+         203       1:    7    8:   64  673:  688
+         204       1:    7    1:    7  736:  750
+         205       1:    7    8:   64  782:  797
+         206       1:    7    8:   64  595:  609
+         207       8:   64    8:   64  892:  906
+         208       1:    7    1:    7   64:   78
+         209       8:   64    1:    7  767:  782
+         210       8:   64    1:    7  830:  844
+         211       1:    7    1:    7  283:  297
+         212       8:   64    8:   64  189:  203
+         213       1:    7    8:   64  298:  313
+         214       8:   64    1:    7  580:  594
+         215       8:   64    8:   64  392:  406
+         216       1:    7    1:    7  861:  875
+         217       8:   64    1:    7  251:  266
+         218       1:    7    8:   64  580:  594
+         219       8:   64    8:   64  642:  656
+         220       1:    7    1:    7  908:  922
+         221       8:   64    8:   64  767:  781
+         222       1:    7    8:   64   80:   94
+         223       1:    7    8:   64  907:  922
+         224       1:    7    1:    7  408:  422
+         225       1:    7    1:    7  611:  625
+         226       1:    7    8:   64   95:  109
+         227       8:   64    8:   64  142:  156
+         228       1:    7    8:   64  189:  204
+         229       8:   64    1:    7  267:  282
+         230       8:   64    8:   64  314:  328
+         231       1:    7    1:    7  314:  328
+         232       1:    7    8:   64  470:  484
+         233       8:   64    8:   64  517:  531
+         234       8:   64    1:    7  189:  204
+         235       8:   64    1:    7  470:  484
+         236       1:    7    1:    7  564:  578
+         237       1:    7    8:   64  845:  859
+         238       8:   64    8:   64  861:  875
+         239       1:    7    8:   64  923:  938
+         240       1:    7    1:    7  939:  953
+         241       8:   64    8:   64   17:   31
+         242       8:   64    1:    7  892:  907
+         243       1:    7    1:    7  189:  203
+         244       1:    7    8:   64  205:  219
+         245       8:   64    1:    7  173:  188
+         246       8:   64    8:   64  361:  375
+         247       1:    7    1:    7  236:  250
+         248       1:    7    8:   64  455:  469
+         249       8:   64    1:    7  876:  891
+         250       8:   64    8:   64  564:  578
+         251       1:    7    8:   64  830:  844
+         252       1:    7    1:    7  658:  672
+         253       1:    7    8:   64  235:  250
+         254       8:   64    8:   64  814:  828
+         255       1:    7    8:   64  876:  890
+         256       1:    7    1:    7  814:  828
+New grid distribution:   3
+           1       1:   38   13:   64  392:  406
+           2      39:   64   13:   64  657:  672
+           3       1:   11    1:   12  360:  375
+           4      12:   64    1:   12  219:  234
+           5       1:   38   13:   64  907:  921
+           6      39:   64   13:   64  173:  187
+           7      12:   64    1:   12  407:  422
+           8       1:   11    1:   12  344:  359
+           9       1:   38   13:   64   17:   31
+          10      39:   64   13:   64  798:  812
+          11      12:   64    1:   12  344:  359
+          12       1:   11    1:   12  860:  875
+          13       1:   38   13:   64  517:  531
+          14      39:   64   13:   64  673:  687
+          15       1:   11    1:   12  563:  578
+          16      12:   64    1:   12  938:  953
+          17       1:   36   13:   64  361:  375
+          18      39:   64   13:   64  767:  781
+          19      12:   64    1:   12  157:  172
+          20       1:   11    1:   12  844:  859
+          21       1:   36   13:   64  861:  875
+          22      39:   64   13:   64  923:  937
+          23      12:   64    1:   12  594:  609
+          24       1:   11    1:   12  485:  500
+          25       1:   36   13:   64  986: 1000
+          26      39:   64   13:   64  142:  156
+          27      12:   64    1:   12  563:  578
+          28       1:   11    1:   12   32:   47
+          29       1:   36   13:   64  611:  625
+          30      39:   64   13:   64  642:  656
+          31      12:   64    1:   12  360:  375
+          32       1:   11    1:   12  985: 1000
+          33       1:   36   13:   64  111:  125
+          34      39:   64   13:   64   17:   31
+          35      12:   64    1:   12  141:  156
+          36       1:   11    1:   12  235:  250
+          37       1:   36   13:   64  236:  250
+          38      39:   64   13:   64  267:  281
+          39      12:   64    1:   12  610:  625
+          40       1:   11    1:   12  891:  906
+          41       1:   36   13:   64  736:  750
+          42      39:   64   13:   64  392:  406
+          43      12:   64    1:   12  641:  656
+          44       1:   11    1:   12  313:  328
+          45       1:   36   13:   64  486:  500
+          46      39:   64   13:   64  298:  312
+          47      12:   64    1:   12  657:  672
+          48       1:   11    1:   12   16:   31
+          49      12:   64    1:   12  266:  281
+          50      37:   64   13:   64   79:   94
+          51       1:   38   13:   64  172:  187
+          52       1:   11    1:   12  907:  922
+          53       1:   38   13:   64  251:  266
+          54      37:   64   13:   64  313:  328
+          55      12:   64    1:   12  969:  984
+          56       1:   11    1:   12  219:  234
+          57      12:   64    1:   12   63:   78
+          58      37:   64   13:   64  563:  578
+          59       1:   38   13:   64  626:  641
+          60       1:   11    1:   12  516:  531
+          61       1:   38   13:   64  797:  812
+          62      37:   64   13:   64  829:  844
+          63      12:   64    1:   12   94:  109
+          64       1:   11    1:   12  188:  203
+          65      12:   64    1:   12  782:  797
+          66      37:   64   13:   64  110:  125
+          67       1:   38   13:   64  126:  141
+          68       1:   11    1:   12  969:  984
+          69      12:   64    1:   12  282:  297
+          70       1:   11    1:   12  532:  547
+          71       1:   38   13:   64  376:  391
+          72      37:   64   13:   64  438:  453
+          73      12:   64    1:   12  188:  203
+          74      37:   64   13:   64  610:  625
+          75       1:   38   13:   64  672:  687
+          76       1:   11    1:   12  141:  156
+          77      12:   64    1:   12  766:  781
+          78      37:   64   13:   64  813:  828
+          79       1:   38   13:   64  922:  937
+          80       1:   11    1:   12  110:  125
+          81       1:   38   13:   64   47:   62
+          82      37:   64   13:   64   63:   78
+          83      12:   64    1:   12  532:  547
+          84       1:   11    1:   12  266:  281
+          85       1:   38   13:   64  297:  312
+          86      37:   64   13:   64  360:  375
+          87      12:   64    1:   12   16:   31
+          88       1:   11    1:   12  782:  797
+          89       1:   38   13:   64  501:  516
+          90      37:   64   13:   64  579:  594
+          91      12:   64    1:   12  516:  531
+          92       1:   11    1:   12  657:  672
+          93       1:   38   13:   64  751:  766
+          94      37:   64   13:   64  860:  875
+          95      12:   64    1:   12  735:  750
+          96       1:   11    1:   12  766:  781
+          97       1:   38   13:   64    1:   16
+          98      12:   64    1:   12   32:   47
+          99       1:   11    1:   12  719:  734
+         100      37:   64   13:   64  204:  219
+         101      12:   64    1:   12  907:  922
+         102      37:   64   13:   64  329:  344
+         103       1:   38   13:   64  422:  437
+         104       1:   11    1:   12  688:  703
+         105       1:   38   13:   64  547:  562
+         106      12:   64    1:   12  891:  906
+         107       1:   11    1:   12  735:  750
+         108      37:   64   13:   64  735:  750
+         109      12:   64    1:   12  688:  703
+         110       1:   11    1:   12  391:  406
+         111       1:   38   13:   64  876:  891
+         112      37:   64   13:   64  954:  969
+         113      12:   64    1:   12  719:  734
+         114      37:   64   13:   64   95:  109
+         115       1:   11    1:   12  282:  297
+         116       1:   36   13:   64  204:  219
+         117      12:   64    1:   12  985: 1000
+         118      37:   64   13:   64  345:  359
+         119       1:   11    1:   12  407:  422
+         120       1:   36   13:   64  470:  485
+         121      12:   64    1:   12  844:  859
+         122       1:   36   13:   64  595:  610
+         123       1:   11    1:   12  469:  484
+         124      37:   64   13:   64  688:  703
+         125      12:   64    1:   12  110:  125
+         126      37:   64   13:   64  845:  859
+         127       1:   11    1:   12  610:  625
+         128       1:   36   13:   64  970:  985
+         129      39:   64   13:   64    1:   16
+         130      12:   64    1:   12  438:  453
+         131       1:   11    1:   12   63:   78
+         132       1:   36   13:   64  188:  203
+         133      12:   64    1:   12  313:  328
+         134       1:   36   13:   64  345:  360
+         135       1:   11    1:   12  594:  609
+         136      37:   64   13:   64  454:  469
+         137      12:   64    1:   12  391:  406
+         138       1:   36   13:   64  563:  578
+         139       1:   11    1:   12  813:  828
+         140      37:   64   13:   64  704:  719
+         141      12:   64    1:   12  813:  828
+         142       1:   36   13:   64  845:  860
+         143       1:   11    1:   12  938:  953
+         144      37:   64   13:   64  938:  953
+         145      12:   64    1:   12  485:  500
+         146       1:   11    1:   12  157:  172
+         147      39:   64   13:   64  126:  141
+         148       1:   36   13:   64  220:  235
+         149      12:   64    1:   12  469:  484
+         150       1:   36   13:   64  313:  328
+         151       1:   11    1:   12  641:  656
+         152      37:   64   13:   64  485:  500
+         153      12:   64    1:   12  235:  250
+         154       1:   36   13:   64  579:  594
+         155       1:   11    1:   12   94:  109
+         156      37:   64   13:   64  720:  734
+         157      39:   64   13:   64  751:  766
+         158      12:   64    1:   12  860:  875
+         159       1:   11    1:   12  438:  453
+         160       1:   36   13:   64  938:  953
+         161      12:   64    1:   12   79:   93
+         162       1:   36   13:   64   79:   94
+         163       1:   11    1:   12  954:  968
+         164      37:   64   13:   64  188:  203
+         165      12:   64    1:   12  704:  718
+         166       1:   36   13:   64  329:  344
+         167       1:   11    1:   12  298:  312
+         168      37:   64   13:   64  470:  484
+         169      12:   64    1:   12   48:   62
+         170      37:   64   13:   64  595:  609
+         171       1:   11    1:   12  329:  343
+         172       1:   36   13:   64  704:  719
+         173      12:   64    1:   12    1:   15
+         174       1:   11    1:   12  251:  265
+         175      39:   64   13:   64  907:  922
+         176       1:   36   13:   64  954:  969
+         177      12:   64    1:   12  829:  843
+         178       1:   36   13:   64   95:  110
+         179       1:   11    1:   12  423:  437
+         180      37:   64   13:   64  235:  250
+         181      12:   64    1:   12  923:  937
+         182       1:   11    1:   12  454:  468
+         183      39:   64   13:   64  376:  391
+         184       1:   36   13:   64  454:  469
+         185      39:   64   13:   64  532:  547
+         186      12:   64    1:   12  876:  890
+         187       1:   11    1:   12  376:  390
+         188       1:   36   13:   64  720:  735
+         189      12:   64    1:   12  751:  765
+         190       1:   36   13:   64  829:  844
+         191       1:   11    1:   12   48:   62
+         192      37:   64   13:   64  985: 1000
+         193      12:   64    1:   12  798:  812
+         194       1:   36   13:   64   63:   78
+         195       1:   11    1:   12   79:   93
+         196      37:   64   13:   64  220:  234
+         197      39:   64   13:   64  251:  266
+         198      12:   64    1:   12  251:  265
+         199       1:   11    1:   12    1:   15
+         200       1:   36   13:   64  438:  453
+         201      39:   64   13:   64  501:  516
+         202      12:   64    1:   12  329:  343
+         203       1:   11    1:   12  173:  187
+         204       1:   36   13:   64  688:  703
+         205      12:   64    1:   12  298:  312
+         206       1:   36   13:   64  813:  828
+         207       1:   11    1:   12  204:  218
+         208      37:   64   13:   64  970:  984
+         209       1:   38   13:   64   32:   46
+         210      12:   64    1:   12  501:  515
+         211      39:   64   13:   64  157:  172
+         212       1:   11    1:   12  126:  140
+         213       1:   38   13:   64  282:  296
+         214      12:   64    1:   12  548:  562
+         215      39:   64   13:   64  407:  422
+         216       1:   11    1:   12  751:  765
+         217       1:   38   13:   64  532:  546
+         218      12:   64    1:   12  673:  687
+         219      39:   64   13:   64  626:  641
+         220       1:   11    1:   12  798:  812
+         221       1:   38   13:   64  782:  796
+         222      12:   64    1:   12  626:  640
+         223      39:   64   13:   64  876:  891
+         224       1:   11    1:   12  704:  718
+         225      39:   64   13:   64   32:   47
+         226      12:   64    1:   12  173:  187
+         227       1:   38   13:   64  157:  171
+         228       1:   11    1:   12  876:  890
+         229      39:   64   13:   64  282:  297
+         230      12:   64    1:   12  579:  593
+         231       1:   38   13:   64  407:  421
+         232       1:   11    1:   12  923:  937
+         233      39:   64   13:   64  548:  562
+         234      12:   64    1:   12  454:  468
+         235       1:   38   13:   64  657:  671
+         236       1:   11    1:   12  829:  843
+         237       1:   38   13:   64  767:  781
+         238      12:   64    1:   12  126:  140
+         239      39:   64   13:   64  892:  906
+         240       1:   11    1:   12  548:  562
+         241      39:   64   13:   64   48:   62
+         242      12:   64    1:   12  423:  437
+         243       1:   38   13:   64  142:  156
+         244       1:   11    1:   12  579:  593
+         245       1:   38   13:   64  267:  281
+         246      12:   64    1:   12  204:  218
+         247      39:   64   13:   64  423:  437
+         248       1:   11    1:   12  501:  515
+         249      39:   64   13:   64  517:  531
+         250      12:   64    1:   12  376:  390
+         251       1:   38   13:   64  642:  656
+         252       1:   11    1:   12  673:  687
+         253      39:   64   13:   64  782:  797
+         254      12:   64    1:   12  954:  968
+         255       1:   38   13:   64  892:  906
+         256       1:   11    1:   12  626:  640
+Setting up quadratic distribution...
+ExtMesh (bp) on 0 =    93 x    93 x    47 =      406503
+PhiOnMesh: Number of (b)points on node 0 =                48735
+PhiOnMesh: nlist on node 0 =                53538
+
+stepf: Fermi-Dirac step function
+
+siesta: Program's energy decomposition (eV):
+siesta: Ebs     =    -21945.626519
+siesta: Eions   =     75030.034533
+siesta: Ena     =     16102.721212
+siesta: Ekin    =     30278.934005
+siesta: Enl     =     -2155.541059
+siesta: DEna    =         0.000036
+siesta: DUscf   =         0.000000
+siesta: DUext   =         0.000000
+siesta: Exc     =    -16065.926430
+siesta: eta*DQ  =         0.000000
+siesta: Emadel  =         0.000000
+siesta: Emeta   =         0.000000
+siesta: Emolmec =         0.000000
+siesta: Ekinion =         0.000000
+siesta: Eharris =    -47990.391172
+siesta: Etot    =    -46869.846770
+siesta: FreeEng =    -46869.846770
+
+   scf: iscf   Eharris(eV)      E_KS(eV)   FreeEng(eV)    dDmax  Ef(eV)
+   scf:    1   -47990.3912   -46869.8468   -46869.8468  1.90563 -8.1177
+timer: Routine,Calls,Time,% =    IterSCF     1      23.620  56.70
+   scf:    2   -47955.5489   -47729.9371   -47729.9371  0.25502 -2.8903
+   scf:    3   -47837.5637   -47695.4037   -47695.4037  0.18808 -4.8657
+   scf:    4   -47832.9669   -47802.5051   -47802.5051  0.01857 -5.2971
+   scf:    5   -47832.7570   -47819.3986   -47819.3986  0.00873 -5.3039
+   scf:    6   -47832.5953   -47829.5122   -47829.5122  0.00107 -5.2593
+   scf:    7   -47832.5912   -47830.6101   -47830.6101  0.00060 -5.2558
+   scf:    8   -47832.5895   -47832.1563   -47832.1563  0.00011 -5.2540
+   scf:    9   -47832.5896   -47832.3836   -47832.3836  0.00008 -5.2546
+
+SCF Convergence by dMax criterion
+max |DM_out - DM_in|:     0.00007511
+SCF cycle converged after    9 iterations
+
+Using DM_out to compute the final energy and forces
+
+siesta: E_KS(eV) =           -47832.5896
+
+siesta: E_KS - E_eggbox =    -47832.5896
+
+siesta: Atomic forces (eV/Ang):
+----------------------------------------
+   Tot   -0.000005   -0.000006    0.000000
+----------------------------------------
+   Max    0.724336
+   Res    0.378199    sqrt( Sum f_i^2 / 3N )
+----------------------------------------
+   Max    0.724336    constrained
+
+Stress-tensor-Voigt (kbar):       -0.87       -1.21        2.86        0.67        0.00        0.00
+(Free)E + p*V (eV/cell)   -47854.0167
+Target enthalpy (eV/cell)   -47832.5896
+
+siesta: Program's energy decomposition (eV):
+siesta: Ebs     =    -17366.758375
+siesta: Eions   =     75030.034533
+siesta: Ena     =     16102.721212
+siesta: Ekin    =     35723.176887
+siesta: Enl     =     -6384.452169
+siesta: DEna    =     -1563.287928
+siesta: DUscf   =       200.020271
+siesta: DUext   =         0.000000
+siesta: Exc     =    -16880.733343
+siesta: eta*DQ  =         0.000000
+siesta: Emadel  =         0.000000
+siesta: Emeta   =         0.000000
+siesta: Emolmec =         0.000000
+siesta: Ekinion =         0.000000
+siesta: Eharris =    -47832.589613
+siesta: Etot    =    -47832.589604
+siesta: FreeEng =    -47832.589604
+
+siesta: Final energy (eV):
+siesta:  Band Struct. =  -17366.758375
+siesta:       Kinetic =   35723.176887
+siesta:       Hartree =  163005.550644
+siesta:    Ext. field =       0.000000
+siesta:   Exch.-corr. =  -16880.733343
+siesta:  Ion-electron = -357039.663039
+siesta:       Ion-ion =  127359.079247
+siesta:       Ekinion =       0.000000
+siesta:         Total =  -47832.589604
+
+siesta: Atomic forces (eV/Ang):
+siesta:      1   -0.722059   -0.663999    0.018438
+siesta:      2    0.373377   -0.068229    0.002200
+siesta:      3   -0.025939    0.426789    0.000763
+siesta:      4    0.722059    0.663999   -0.018438
+siesta:      5   -0.373377    0.068229   -0.002200
+siesta:      6    0.025939   -0.426789   -0.000763
+siesta:      7   -0.724336   -0.665731    0.013415
+siesta:      8    0.368112   -0.070601    0.001769
+siesta:      9   -0.027286    0.425970    0.001972
+siesta:     10    0.722324    0.662939    0.040375
+siesta:     11   -0.371114    0.068878    0.002380
+siesta:     12    0.026964   -0.424363    0.000719
+siesta:     13   -0.720834   -0.662335   -0.024738
+siesta:     14    0.373445   -0.068034   -0.002876
+siesta:     15   -0.025849    0.427055   -0.001828
+siesta:     16    0.720580    0.662104   -0.045577
+siesta:     17   -0.369073    0.069711   -0.002485
+siesta:     18    0.027203   -0.424648   -0.000978
+siesta:     19   -0.723719   -0.661361    0.034681
+siesta:     20    0.371833   -0.068340    0.001870
+siesta:     21   -0.026653    0.425454    0.000928
+siesta:     22    0.720627    0.663119    0.008696
+siesta:     23   -0.373502    0.068084    0.000680
+siesta:     24    0.025682   -0.427406    0.000218
+siesta:     25   -0.724231   -0.665858   -0.026716
+siesta:     26    0.368073   -0.069998   -0.001523
+siesta:     27   -0.027259    0.425325   -0.001741
+siesta:     28    0.724231    0.665858    0.026716
+siesta:     29   -0.368073    0.069998    0.001523
+siesta:     30    0.027259   -0.425325    0.001741
+siesta:     31   -0.720627   -0.663119   -0.008696
+siesta:     32    0.373502   -0.068084   -0.000680
+siesta:     33   -0.025682    0.427406   -0.000218
+siesta:     34    0.723719    0.661361   -0.034681
+siesta:     35   -0.371833    0.068340   -0.001870
+siesta:     36    0.026653   -0.425454   -0.000928
+siesta:     37   -0.720580   -0.662104    0.045577
+siesta:     38    0.369073   -0.069711    0.002485
+siesta:     39   -0.027203    0.424648    0.000978
+siesta:     40    0.720834    0.662335    0.024738
+siesta:     41   -0.373445    0.068034    0.002876
+siesta:     42    0.025849   -0.427055    0.001828
+siesta:     43   -0.722324   -0.662939   -0.040375
+siesta:     44    0.371114   -0.068878   -0.002380
+siesta:     45   -0.026964    0.424363   -0.000719
+siesta:     46    0.724336    0.665731   -0.013415
+siesta:     47   -0.368112    0.070601   -0.001769
+siesta:     48    0.027286   -0.425970   -0.001972
+siesta:     49   -0.722059   -0.663999    0.018438
+siesta:     50    0.373377   -0.068229    0.002200
+siesta:     51   -0.025939    0.426789    0.000763
+siesta:     52    0.722059    0.663999   -0.018438
+siesta:     53   -0.373377    0.068229   -0.002200
+siesta:     54    0.025939   -0.426789   -0.000763
+siesta:     55   -0.724336   -0.665731    0.013415
+siesta:     56    0.368112   -0.070601    0.001769
+siesta:     57   -0.027286    0.425970    0.001972
+siesta:     58    0.722324    0.662939    0.040375
+siesta:     59   -0.371114    0.068878    0.002380
+siesta:     60    0.026964   -0.424363    0.000719
+siesta:     61   -0.720834   -0.662335   -0.024738
+siesta:     62    0.373445   -0.068034   -0.002876
+siesta:     63   -0.025849    0.427055   -0.001828
+siesta:     64    0.720580    0.662104   -0.045577
+siesta:     65   -0.369073    0.069711   -0.002485
+siesta:     66    0.027203   -0.424648   -0.000978
+siesta:     67   -0.723719   -0.661361    0.034681
+siesta:     68    0.371833   -0.068340    0.001870
+siesta:     69   -0.026653    0.425454    0.000928
+siesta:     70    0.720627    0.663119    0.008696
+siesta:     71   -0.373502    0.068084    0.000680
+siesta:     72    0.025682   -0.427406    0.000218
+siesta:     73   -0.724231   -0.665858   -0.026716
+siesta:     74    0.368073   -0.069998   -0.001523
+siesta:     75   -0.027259    0.425325   -0.001741
+siesta:     76    0.724231    0.665858    0.026716
+siesta:     77   -0.368073    0.069998    0.001523
+siesta:     78    0.027259   -0.425325    0.001741
+siesta:     79   -0.720627   -0.663119   -0.008696
+siesta:     80    0.373502   -0.068084   -0.000680
+siesta:     81   -0.025682    0.427406   -0.000218
+siesta:     82    0.723719    0.661361   -0.034681
+siesta:     83   -0.371833    0.068340   -0.001870
+siesta:     84    0.026653   -0.425454   -0.000928
+siesta:     85   -0.720580   -0.662104    0.045577
+siesta:     86    0.369073   -0.069711    0.002485
+siesta:     87   -0.027203    0.424648    0.000978
+siesta:     88    0.720834    0.662335    0.024738
+siesta:     89   -0.373445    0.068034    0.002876
+siesta:     90    0.025849   -0.427055    0.001828
+siesta:     91   -0.722324   -0.662939   -0.040375
+siesta:     92    0.371114   -0.068878   -0.002380
+siesta:     93   -0.026964    0.424363   -0.000719
+siesta:     94    0.724336    0.665731   -0.013415
+siesta:     95   -0.368112    0.070601   -0.001769
+siesta:     96    0.027286   -0.425970   -0.001972
+siesta:     97   -0.722059   -0.663999    0.018438
+siesta:     98    0.373377   -0.068229    0.002200
+siesta:     99   -0.025939    0.426789    0.000763
+siesta:    100    0.722059    0.663999   -0.018438
+siesta:    101   -0.373377    0.068229   -0.002200
+siesta:    102    0.025939   -0.426789   -0.000763
+siesta:    103   -0.724336   -0.665731    0.013415
+siesta:    104    0.368112   -0.070601    0.001769
+siesta:    105   -0.027286    0.425970    0.001972
+siesta:    106    0.722324    0.662939    0.040375
+siesta:    107   -0.371114    0.068878    0.002380
+siesta:    108    0.026964   -0.424363    0.000719
+siesta:    109   -0.720834   -0.662335   -0.024738
+siesta:    110    0.373445   -0.068034   -0.002876
+siesta:    111   -0.025849    0.427055   -0.001828
+siesta:    112    0.720580    0.662104   -0.045577
+siesta:    113   -0.369073    0.069711   -0.002485
+siesta:    114    0.027203   -0.424648   -0.000978
+siesta:    115   -0.723719   -0.661361    0.034681
+siesta:    116    0.371833   -0.068340    0.001870
+siesta:    117   -0.026653    0.425454    0.000928
+siesta:    118    0.720627    0.663119    0.008696
+siesta:    119   -0.373502    0.068084    0.000680
+siesta:    120    0.025682   -0.427406    0.000218
+siesta:    121   -0.724231   -0.665858   -0.026716
+siesta:    122    0.368073   -0.069998   -0.001523
+siesta:    123   -0.027259    0.425325   -0.001741
+siesta:    124    0.724231    0.665858    0.026716
+siesta:    125   -0.368073    0.069998    0.001523
+siesta:    126    0.027259   -0.425325    0.001741
+siesta:    127   -0.720627   -0.663119   -0.008696
+siesta:    128    0.373502   -0.068084   -0.000680
+siesta:    129   -0.025682    0.427406   -0.000218
+siesta:    130    0.723719    0.661361   -0.034681
+siesta:    131   -0.371833    0.068340   -0.001870
+siesta:    132    0.026653   -0.425454   -0.000928
+siesta:    133   -0.720580   -0.662104    0.045577
+siesta:    134    0.369073   -0.069711    0.002485
+siesta:    135   -0.027203    0.424648    0.000978
+siesta:    136    0.720834    0.662335    0.024738
+siesta:    137   -0.373445    0.068034    0.002876
+siesta:    138    0.025849   -0.427055    0.001828
+siesta:    139   -0.722324   -0.662939   -0.040375
+siesta:    140    0.371114   -0.068878   -0.002380
+siesta:    141   -0.026964    0.424363   -0.000719
+siesta:    142    0.724336    0.665731   -0.013415
+siesta:    143   -0.368112    0.070601   -0.001769
+siesta:    144    0.027286   -0.425970   -0.001972
+siesta:    145   -0.722059   -0.663999    0.018438
+siesta:    146    0.373377   -0.068229    0.002200
+siesta:    147   -0.025939    0.426789    0.000763
+siesta:    148    0.722059    0.663999   -0.018438
+siesta:    149   -0.373377    0.068229   -0.002200
+siesta:    150    0.025939   -0.426789   -0.000763
+siesta:    151   -0.724336   -0.665731    0.013415
+siesta:    152    0.368112   -0.070601    0.001769
+siesta:    153   -0.027286    0.425970    0.001972
+siesta:    154    0.722324    0.662939    0.040375
+siesta:    155   -0.371114    0.068878    0.002380
+siesta:    156    0.026964   -0.424363    0.000719
+siesta:    157   -0.720834   -0.662335   -0.024738
+siesta:    158    0.373445   -0.068034   -0.002876
+siesta:    159   -0.025849    0.427055   -0.001828
+siesta:    160    0.720580    0.662104   -0.045577
+siesta:    161   -0.369073    0.069711   -0.002485
+siesta:    162    0.027203   -0.424648   -0.000978
+siesta:    163   -0.723719   -0.661361    0.034681
+siesta:    164    0.371833   -0.068340    0.001870
+siesta:    165   -0.026653    0.425454    0.000928
+siesta:    166    0.720627    0.663119    0.008696
+siesta:    167   -0.373502    0.068084    0.000680
+siesta:    168    0.025682   -0.427406    0.000218
+siesta:    169   -0.724231   -0.665858   -0.026716
+siesta:    170    0.368073   -0.069998   -0.001523
+siesta:    171   -0.027259    0.425325   -0.001741
+siesta:    172    0.724231    0.665858    0.026716
+siesta:    173   -0.368073    0.069998    0.001523
+siesta:    174    0.027259   -0.425325    0.001741
+siesta:    175   -0.720627   -0.663119   -0.008696
+siesta:    176    0.373502   -0.068084   -0.000680
+siesta:    177   -0.025682    0.427406   -0.000218
+siesta:    178    0.723719    0.661361   -0.034681
+siesta:    179   -0.371833    0.068340   -0.001870
+siesta:    180    0.026653   -0.425454   -0.000928
+siesta:    181   -0.720580   -0.662104    0.045577
+siesta:    182    0.369073   -0.069711    0.002485
+siesta:    183   -0.027203    0.424648    0.000978
+siesta:    184    0.720834    0.662335    0.024738
+siesta:    185   -0.373445    0.068034    0.002876
+siesta:    186    0.025849   -0.427055    0.001828
+siesta:    187   -0.722324   -0.662939   -0.040375
+siesta:    188    0.371114   -0.068878   -0.002380
+siesta:    189   -0.026964    0.424363   -0.000719
+siesta:    190    0.724336    0.665731   -0.013415
+siesta:    191   -0.368112    0.070601   -0.001769
+siesta:    192    0.027286   -0.425970   -0.001972
+siesta:    193   -0.722059   -0.663999    0.018438
+siesta:    194    0.373377   -0.068229    0.002200
+siesta:    195   -0.025939    0.426789    0.000763
+siesta:    196    0.722059    0.663999   -0.018438
+siesta:    197   -0.373377    0.068229   -0.002200
+siesta:    198    0.025939   -0.426789   -0.000763
+siesta:    199   -0.724336   -0.665731    0.013415
+siesta:    200    0.368112   -0.070601    0.001769
+siesta:    201   -0.027286    0.425970    0.001972
+siesta:    202    0.722324    0.662939    0.040375
+siesta:    203   -0.371114    0.068878    0.002380
+siesta:    204    0.026964   -0.424363    0.000719
+siesta:    205   -0.720834   -0.662335   -0.024738
+siesta:    206    0.373445   -0.068034   -0.002876
+siesta:    207   -0.025849    0.427055   -0.001828
+siesta:    208    0.720580    0.662104   -0.045577
+siesta:    209   -0.369073    0.069711   -0.002485
+siesta:    210    0.027203   -0.424648   -0.000978
+siesta:    211   -0.723719   -0.661361    0.034681
+siesta:    212    0.371833   -0.068340    0.001870
+siesta:    213   -0.026653    0.425454    0.000928
+siesta:    214    0.720627    0.663119    0.008696
+siesta:    215   -0.373502    0.068084    0.000680
+siesta:    216    0.025682   -0.427406    0.000218
+siesta:    217   -0.724231   -0.665858   -0.026716
+siesta:    218    0.368073   -0.069998   -0.001523
+siesta:    219   -0.027259    0.425325   -0.001741
+siesta:    220    0.724231    0.665858    0.026716
+siesta:    221   -0.368073    0.069998    0.001523
+siesta:    222    0.027259   -0.425325    0.001741
+siesta:    223   -0.720627   -0.663119   -0.008696
+siesta:    224    0.373502   -0.068084   -0.000680
+siesta:    225   -0.025682    0.427406   -0.000218
+siesta:    226    0.723719    0.661361   -0.034681
+siesta:    227   -0.371833    0.068340   -0.001870
+siesta:    228    0.026653   -0.425454   -0.000928
+siesta:    229   -0.720580   -0.662104    0.045577
+siesta:    230    0.369073   -0.069711    0.002485
+siesta:    231   -0.027203    0.424648    0.000978
+siesta:    232    0.720834    0.662335    0.024738
+siesta:    233   -0.373445    0.068034    0.002876
+siesta:    234    0.025849   -0.427055    0.001828
+siesta:    235   -0.722324   -0.662939   -0.040375
+siesta:    236    0.371114   -0.068878   -0.002380
+siesta:    237   -0.026964    0.424363   -0.000719
+siesta:    238    0.724336    0.665731   -0.013415
+siesta:    239   -0.368112    0.070601   -0.001769
+siesta:    240    0.027286   -0.425970   -0.001972
+siesta:    241   -0.722059   -0.663999    0.018438
+siesta:    242    0.373377   -0.068229    0.002200
+siesta:    243   -0.025939    0.426789    0.000763
+siesta:    244    0.722059    0.663999   -0.018438
+siesta:    245   -0.373377    0.068229   -0.002200
+siesta:    246    0.025939   -0.426789   -0.000763
+siesta:    247   -0.724336   -0.665731    0.013415
+siesta:    248    0.368112   -0.070601    0.001769
+siesta:    249   -0.027286    0.425970    0.001972
+siesta:    250    0.722324    0.662939    0.040375
+siesta:    251   -0.371114    0.068878    0.002380
+siesta:    252    0.026964   -0.424363    0.000719
+siesta:    253   -0.720834   -0.662335   -0.024738
+siesta:    254    0.373445   -0.068034   -0.002876
+siesta:    255   -0.025849    0.427055   -0.001828
+siesta:    256    0.720580    0.662104   -0.045577
+siesta:    257   -0.369073    0.069711   -0.002485
+siesta:    258    0.027203   -0.424648   -0.000978
+siesta:    259   -0.723719   -0.661361    0.034681
+siesta:    260    0.371833   -0.068340    0.001870
+siesta:    261   -0.026653    0.425454    0.000928
+siesta:    262    0.720627    0.663119    0.008696
+siesta:    263   -0.373502    0.068084    0.000680
+siesta:    264    0.025682   -0.427406    0.000218
+siesta:    265   -0.724231   -0.665858   -0.026716
+siesta:    266    0.368073   -0.069998   -0.001523
+siesta:    267   -0.027259    0.425325   -0.001741
+siesta:    268    0.724231    0.665858    0.026716
+siesta:    269   -0.368073    0.069998    0.001523
+siesta:    270    0.027259   -0.425325    0.001741
+siesta:    271   -0.720627   -0.663119   -0.008696
+siesta:    272    0.373502   -0.068084   -0.000680
+siesta:    273   -0.025682    0.427406   -0.000218
+siesta:    274    0.723719    0.661361   -0.034681
+siesta:    275   -0.371833    0.068340   -0.001870
+siesta:    276    0.026653   -0.425454   -0.000928
+siesta:    277   -0.720580   -0.662104    0.045577
+siesta:    278    0.369073   -0.069711    0.002485
+siesta:    279   -0.027203    0.424648    0.000978
+siesta:    280    0.720834    0.662335    0.024738
+siesta:    281   -0.373445    0.068034    0.002876
+siesta:    282    0.025849   -0.427055    0.001828
+siesta:    283   -0.722324   -0.662939   -0.040375
+siesta:    284    0.371114   -0.068878   -0.002380
+siesta:    285   -0.026964    0.424363   -0.000719
+siesta:    286    0.724336    0.665731   -0.013415
+siesta:    287   -0.368112    0.070601   -0.001769
+siesta:    288    0.027286   -0.425970   -0.001972
+siesta:    289   -0.722059   -0.663999    0.018438
+siesta:    290    0.373377   -0.068229    0.002200
+siesta:    291   -0.025939    0.426789    0.000763
+siesta:    292    0.722059    0.663999   -0.018438
+siesta:    293   -0.373377    0.068229   -0.002200
+siesta:    294    0.025939   -0.426789   -0.000763
+siesta:    295   -0.724336   -0.665731    0.013415
+siesta:    296    0.368112   -0.070601    0.001769
+siesta:    297   -0.027286    0.425970    0.001972
+siesta:    298    0.722324    0.662939    0.040375
+siesta:    299   -0.371114    0.068878    0.002380
+siesta:    300    0.026964   -0.424363    0.000719
+siesta:    301   -0.720834   -0.662335   -0.024738
+siesta:    302    0.373445   -0.068034   -0.002876
+siesta:    303   -0.025849    0.427055   -0.001828
+siesta:    304    0.720580    0.662104   -0.045577
+siesta:    305   -0.369073    0.069711   -0.002485
+siesta:    306    0.027203   -0.424648   -0.000978
+siesta:    307   -0.723719   -0.661361    0.034681
+siesta:    308    0.371833   -0.068340    0.001870
+siesta:    309   -0.026653    0.425454    0.000928
+siesta:    310    0.720627    0.663119    0.008696
+siesta:    311   -0.373502    0.068084    0.000680
+siesta:    312    0.025682   -0.427406    0.000218
+siesta:    313   -0.724231   -0.665858   -0.026716
+siesta:    314    0.368073   -0.069998   -0.001523
+siesta:    315   -0.027259    0.425325   -0.001741
+siesta:    316    0.724231    0.665858    0.026716
+siesta:    317   -0.368073    0.069998    0.001523
+siesta:    318    0.027259   -0.425325    0.001741
+siesta:    319   -0.720627   -0.663119   -0.008696
+siesta:    320    0.373502   -0.068084   -0.000680
+siesta:    321   -0.025682    0.427406   -0.000218
+siesta:    322    0.723719    0.661361   -0.034681
+siesta:    323   -0.371833    0.068340   -0.001870
+siesta:    324    0.026653   -0.425454   -0.000928
+siesta:    325   -0.720580   -0.662104    0.045577
+siesta:    326    0.369073   -0.069711    0.002485
+siesta:    327   -0.027203    0.424648    0.000978
+siesta:    328    0.720834    0.662335    0.024738
+siesta:    329   -0.373445    0.068034    0.002876
+siesta:    330    0.025849   -0.427055    0.001828
+siesta:    331   -0.722324   -0.662939   -0.040375
+siesta:    332    0.371114   -0.068878   -0.002380
+siesta:    333   -0.026964    0.424363   -0.000719
+siesta:    334    0.724336    0.665731   -0.013415
+siesta:    335   -0.368112    0.070601   -0.001769
+siesta:    336    0.027286   -0.425970   -0.001972
+siesta:    337   -0.722059   -0.663999    0.018438
+siesta:    338    0.373377   -0.068229    0.002200
+siesta:    339   -0.025939    0.426789    0.000763
+siesta:    340    0.722059    0.663999   -0.018438
+siesta:    341   -0.373377    0.068229   -0.002200
+siesta:    342    0.025939   -0.426789   -0.000763
+siesta:    343   -0.724336   -0.665731    0.013415
+siesta:    344    0.368112   -0.070601    0.001769
+siesta:    345   -0.027286    0.425970    0.001972
+siesta:    346    0.722324    0.662939    0.040375
+siesta:    347   -0.371114    0.068878    0.002380
+siesta:    348    0.026964   -0.424363    0.000719
+siesta:    349   -0.720834   -0.662335   -0.024738
+siesta:    350    0.373445   -0.068034   -0.002876
+siesta:    351   -0.025849    0.427055   -0.001828
+siesta:    352    0.720580    0.662104   -0.045577
+siesta:    353   -0.369073    0.069711   -0.002485
+siesta:    354    0.027203   -0.424648   -0.000978
+siesta:    355   -0.723719   -0.661361    0.034681
+siesta:    356    0.371833   -0.068340    0.001870
+siesta:    357   -0.026653    0.425454    0.000928
+siesta:    358    0.720627    0.663119    0.008696
+siesta:    359   -0.373502    0.068084    0.000680
+siesta:    360    0.025682   -0.427406    0.000218
+siesta:    361   -0.724231   -0.665858   -0.026716
+siesta:    362    0.368073   -0.069998   -0.001523
+siesta:    363   -0.027259    0.425325   -0.001741
+siesta:    364    0.724231    0.665858    0.026716
+siesta:    365   -0.368073    0.069998    0.001523
+siesta:    366    0.027259   -0.425325    0.001741
+siesta:    367   -0.720627   -0.663119   -0.008696
+siesta:    368    0.373502   -0.068084   -0.000680
+siesta:    369   -0.025682    0.427406   -0.000218
+siesta:    370    0.723719    0.661361   -0.034681
+siesta:    371   -0.371833    0.068340   -0.001870
+siesta:    372    0.026653   -0.425454   -0.000928
+siesta:    373   -0.720580   -0.662104    0.045577
+siesta:    374    0.369073   -0.069711    0.002485
+siesta:    375   -0.027203    0.424648    0.000978
+siesta:    376    0.720834    0.662335    0.024738
+siesta:    377   -0.373445    0.068034    0.002876
+siesta:    378    0.025849   -0.427055    0.001828
+siesta:    379   -0.722324   -0.662939   -0.040375
+siesta:    380    0.371114   -0.068878   -0.002380
+siesta:    381   -0.026964    0.424363   -0.000719
+siesta:    382    0.724336    0.665731   -0.013415
+siesta:    383   -0.368112    0.070601   -0.001769
+siesta:    384    0.027286   -0.425970   -0.001972
+siesta:    385   -0.722059   -0.663999    0.018438
+siesta:    386    0.373377   -0.068229    0.002200
+siesta:    387   -0.025939    0.426789    0.000763
+siesta:    388    0.722059    0.663999   -0.018438
+siesta:    389   -0.373377    0.068229   -0.002200
+siesta:    390    0.025939   -0.426789   -0.000763
+siesta:    391   -0.724336   -0.665731    0.013415
+siesta:    392    0.368112   -0.070601    0.001769
+siesta:    393   -0.027286    0.425970    0.001972
+siesta:    394    0.722324    0.662939    0.040375
+siesta:    395   -0.371114    0.068878    0.002380
+siesta:    396    0.026964   -0.424363    0.000719
+siesta:    397   -0.720834   -0.662335   -0.024738
+siesta:    398    0.373445   -0.068034   -0.002876
+siesta:    399   -0.025849    0.427055   -0.001828
+siesta:    400    0.720580    0.662104   -0.045577
+siesta:    401   -0.369073    0.069711   -0.002485
+siesta:    402    0.027203   -0.424648   -0.000978
+siesta:    403   -0.723719   -0.661361    0.034681
+siesta:    404    0.371833   -0.068340    0.001870
+siesta:    405   -0.026653    0.425454    0.000928
+siesta:    406    0.720627    0.663119    0.008696
+siesta:    407   -0.373502    0.068084    0.000680
+siesta:    408    0.025682   -0.427406    0.000218
+siesta:    409   -0.724231   -0.665858   -0.026716
+siesta:    410    0.368073   -0.069998   -0.001523
+siesta:    411   -0.027259    0.425325   -0.001741
+siesta:    412    0.724231    0.665858    0.026716
+siesta:    413   -0.368073    0.069998    0.001523
+siesta:    414    0.027259   -0.425325    0.001741
+siesta:    415   -0.720627   -0.663119   -0.008696
+siesta:    416    0.373502   -0.068084   -0.000680
+siesta:    417   -0.025682    0.427406   -0.000218
+siesta:    418    0.723719    0.661361   -0.034681
+siesta:    419   -0.371833    0.068340   -0.001870
+siesta:    420    0.026653   -0.425454   -0.000928
+siesta:    421   -0.720580   -0.662104    0.045577
+siesta:    422    0.369073   -0.069711    0.002485
+siesta:    423   -0.027203    0.424648    0.000978
+siesta:    424    0.720834    0.662335    0.024738
+siesta:    425   -0.373445    0.068034    0.002876
+siesta:    426    0.025849   -0.427055    0.001828
+siesta:    427   -0.722324   -0.662939   -0.040375
+siesta:    428    0.371114   -0.068878   -0.002380
+siesta:    429   -0.026964    0.424363   -0.000719
+siesta:    430    0.724336    0.665731   -0.013415
+siesta:    431   -0.368112    0.070601   -0.001769
+siesta:    432    0.027286   -0.425970   -0.001972
+siesta:    433   -0.722059   -0.663999    0.018438
+siesta:    434    0.373377   -0.068229    0.002200
+siesta:    435   -0.025939    0.426789    0.000763
+siesta:    436    0.722059    0.663999   -0.018438
+siesta:    437   -0.373377    0.068229   -0.002200
+siesta:    438    0.025939   -0.426789   -0.000763
+siesta:    439   -0.724336   -0.665731    0.013415
+siesta:    440    0.368112   -0.070601    0.001769
+siesta:    441   -0.027286    0.425970    0.001972
+siesta:    442    0.722324    0.662939    0.040375
+siesta:    443   -0.371114    0.068878    0.002380
+siesta:    444    0.026964   -0.424363    0.000719
+siesta:    445   -0.720834   -0.662335   -0.024738
+siesta:    446    0.373445   -0.068034   -0.002876
+siesta:    447   -0.025849    0.427055   -0.001828
+siesta:    448    0.720580    0.662104   -0.045577
+siesta:    449   -0.369073    0.069711   -0.002485
+siesta:    450    0.027203   -0.424648   -0.000978
+siesta:    451   -0.723719   -0.661361    0.034681
+siesta:    452    0.371833   -0.068340    0.001870
+siesta:    453   -0.026653    0.425454    0.000928
+siesta:    454    0.720627    0.663119    0.008696
+siesta:    455   -0.373502    0.068084    0.000680
+siesta:    456    0.025682   -0.427406    0.000218
+siesta:    457   -0.724231   -0.665858   -0.026716
+siesta:    458    0.368073   -0.069998   -0.001523
+siesta:    459   -0.027259    0.425325   -0.001741
+siesta:    460    0.724231    0.665858    0.026716
+siesta:    461   -0.368073    0.069998    0.001523
+siesta:    462    0.027259   -0.425325    0.001741
+siesta:    463   -0.720627   -0.663119   -0.008696
+siesta:    464    0.373502   -0.068084   -0.000680
+siesta:    465   -0.025682    0.427406   -0.000218
+siesta:    466    0.723719    0.661361   -0.034681
+siesta:    467   -0.371833    0.068340   -0.001870
+siesta:    468    0.026653   -0.425454   -0.000928
+siesta:    469   -0.720580   -0.662104    0.045577
+siesta:    470    0.369073   -0.069711    0.002485
+siesta:    471   -0.027203    0.424648    0.000978
+siesta:    472    0.720834    0.662335    0.024738
+siesta:    473   -0.373445    0.068034    0.002876
+siesta:    474    0.025849   -0.427055    0.001828
+siesta:    475   -0.722324   -0.662939   -0.040375
+siesta:    476    0.371114   -0.068878   -0.002380
+siesta:    477   -0.026964    0.424363   -0.000719
+siesta:    478    0.724336    0.665731   -0.013415
+siesta:    479   -0.368112    0.070601   -0.001769
+siesta:    480    0.027286   -0.425970   -0.001972
+siesta:    481   -0.722059   -0.663999    0.018438
+siesta:    482    0.373377   -0.068229    0.002200
+siesta:    483   -0.025939    0.426789    0.000763
+siesta:    484    0.722059    0.663999   -0.018438
+siesta:    485   -0.373377    0.068229   -0.002200
+siesta:    486    0.025939   -0.426789   -0.000763
+siesta:    487   -0.724336   -0.665731    0.013415
+siesta:    488    0.368112   -0.070601    0.001769
+siesta:    489   -0.027286    0.425970    0.001972
+siesta:    490    0.722324    0.662939    0.040375
+siesta:    491   -0.371114    0.068878    0.002380
+siesta:    492    0.026964   -0.424363    0.000719
+siesta:    493   -0.720834   -0.662335   -0.024738
+siesta:    494    0.373445   -0.068034   -0.002876
+siesta:    495   -0.025849    0.427055   -0.001828
+siesta:    496    0.720580    0.662104   -0.045577
+siesta:    497   -0.369073    0.069711   -0.002485
+siesta:    498    0.027203   -0.424648   -0.000978
+siesta:    499   -0.723719   -0.661361    0.034681
+siesta:    500    0.371833   -0.068340    0.001870
+siesta:    501   -0.026653    0.425454    0.000928
+siesta:    502    0.720627    0.663119    0.008696
+siesta:    503   -0.373502    0.068084    0.000680
+siesta:    504    0.025682   -0.427406    0.000218
+siesta:    505   -0.724231   -0.665858   -0.026716
+siesta:    506    0.368073   -0.069998   -0.001523
+siesta:    507   -0.027259    0.425325   -0.001741
+siesta:    508    0.724231    0.665858    0.026716
+siesta:    509   -0.368073    0.069998    0.001523
+siesta:    510    0.027259   -0.425325    0.001741
+siesta:    511   -0.720627   -0.663119   -0.008696
+siesta:    512    0.373502   -0.068084   -0.000680
+siesta:    513   -0.025682    0.427406   -0.000218
+siesta:    514    0.723719    0.661361   -0.034681
+siesta:    515   -0.371833    0.068340   -0.001870
+siesta:    516    0.026653   -0.425454   -0.000928
+siesta:    517   -0.720580   -0.662104    0.045577
+siesta:    518    0.369073   -0.069711    0.002485
+siesta:    519   -0.027203    0.424648    0.000978
+siesta:    520    0.720834    0.662335    0.024738
+siesta:    521   -0.373445    0.068034    0.002876
+siesta:    522    0.025849   -0.427055    0.001828
+siesta:    523   -0.722324   -0.662939   -0.040375
+siesta:    524    0.371114   -0.068878   -0.002380
+siesta:    525   -0.026964    0.424363   -0.000719
+siesta:    526    0.724336    0.665731   -0.013415
+siesta:    527   -0.368112    0.070601   -0.001769
+siesta:    528    0.027286   -0.425970   -0.001972
+siesta:    529   -0.722059   -0.663999    0.018438
+siesta:    530    0.373377   -0.068229    0.002200
+siesta:    531   -0.025939    0.426789    0.000763
+siesta:    532    0.722059    0.663999   -0.018438
+siesta:    533   -0.373377    0.068229   -0.002200
+siesta:    534    0.025939   -0.426789   -0.000763
+siesta:    535   -0.724336   -0.665731    0.013415
+siesta:    536    0.368112   -0.070601    0.001769
+siesta:    537   -0.027286    0.425970    0.001972
+siesta:    538    0.722324    0.662939    0.040375
+siesta:    539   -0.371114    0.068878    0.002380
+siesta:    540    0.026964   -0.424363    0.000719
+siesta:    541   -0.720834   -0.662335   -0.024738
+siesta:    542    0.373445   -0.068034   -0.002876
+siesta:    543   -0.025849    0.427055   -0.001828
+siesta:    544    0.720580    0.662104   -0.045577
+siesta:    545   -0.369073    0.069711   -0.002485
+siesta:    546    0.027203   -0.424648   -0.000978
+siesta:    547   -0.723719   -0.661361    0.034681
+siesta:    548    0.371833   -0.068340    0.001870
+siesta:    549   -0.026653    0.425454    0.000928
+siesta:    550    0.720627    0.663119    0.008696
+siesta:    551   -0.373502    0.068084    0.000680
+siesta:    552    0.025682   -0.427406    0.000218
+siesta:    553   -0.724231   -0.665858   -0.026716
+siesta:    554    0.368073   -0.069998   -0.001523
+siesta:    555   -0.027259    0.425325   -0.001741
+siesta:    556    0.724231    0.665858    0.026716
+siesta:    557   -0.368073    0.069998    0.001523
+siesta:    558    0.027259   -0.425325    0.001741
+siesta:    559   -0.720627   -0.663119   -0.008696
+siesta:    560    0.373502   -0.068084   -0.000680
+siesta:    561   -0.025682    0.427406   -0.000218
+siesta:    562    0.723719    0.661361   -0.034681
+siesta:    563   -0.371833    0.068340   -0.001870
+siesta:    564    0.026653   -0.425454   -0.000928
+siesta:    565   -0.720580   -0.662104    0.045577
+siesta:    566    0.369073   -0.069711    0.002485
+siesta:    567   -0.027203    0.424648    0.000978
+siesta:    568    0.720834    0.662335    0.024738
+siesta:    569   -0.373445    0.068034    0.002876
+siesta:    570    0.025849   -0.427055    0.001828
+siesta:    571   -0.722324   -0.662939   -0.040375
+siesta:    572    0.371114   -0.068878   -0.002380
+siesta:    573   -0.026964    0.424363   -0.000719
+siesta:    574    0.724336    0.665731   -0.013415
+siesta:    575   -0.368112    0.070601   -0.001769
+siesta:    576    0.027286   -0.425970   -0.001972
+siesta:    577   -0.722059   -0.663999    0.018438
+siesta:    578    0.373377   -0.068229    0.002200
+siesta:    579   -0.025939    0.426789    0.000763
+siesta:    580    0.722059    0.663999   -0.018438
+siesta:    581   -0.373377    0.068229   -0.002200
+siesta:    582    0.025939   -0.426789   -0.000763
+siesta:    583   -0.724336   -0.665731    0.013415
+siesta:    584    0.368112   -0.070601    0.001769
+siesta:    585   -0.027286    0.425970    0.001972
+siesta:    586    0.722324    0.662939    0.040375
+siesta:    587   -0.371114    0.068878    0.002380
+siesta:    588    0.026964   -0.424363    0.000719
+siesta:    589   -0.720834   -0.662335   -0.024738
+siesta:    590    0.373445   -0.068034   -0.002876
+siesta:    591   -0.025849    0.427055   -0.001828
+siesta:    592    0.720580    0.662104   -0.045577
+siesta:    593   -0.369073    0.069711   -0.002485
+siesta:    594    0.027203   -0.424648   -0.000978
+siesta:    595   -0.723719   -0.661361    0.034681
+siesta:    596    0.371833   -0.068340    0.001870
+siesta:    597   -0.026653    0.425454    0.000928
+siesta:    598    0.720627    0.663119    0.008696
+siesta:    599   -0.373502    0.068084    0.000680
+siesta:    600    0.025682   -0.427406    0.000218
+siesta:    601   -0.724231   -0.665858   -0.026716
+siesta:    602    0.368073   -0.069998   -0.001523
+siesta:    603   -0.027259    0.425325   -0.001741
+siesta:    604    0.724231    0.665858    0.026716
+siesta:    605   -0.368073    0.069998    0.001523
+siesta:    606    0.027259   -0.425325    0.001741
+siesta:    607   -0.720627   -0.663119   -0.008696
+siesta:    608    0.373502   -0.068084   -0.000680
+siesta:    609   -0.025682    0.427406   -0.000218
+siesta:    610    0.723719    0.661361   -0.034681
+siesta:    611   -0.371833    0.068340   -0.001870
+siesta:    612    0.026653   -0.425454   -0.000928
+siesta:    613   -0.720580   -0.662104    0.045577
+siesta:    614    0.369073   -0.069711    0.002485
+siesta:    615   -0.027203    0.424648    0.000978
+siesta:    616    0.720834    0.662335    0.024738
+siesta:    617   -0.373445    0.068034    0.002876
+siesta:    618    0.025849   -0.427055    0.001828
+siesta:    619   -0.722324   -0.662939   -0.040375
+siesta:    620    0.371114   -0.068878   -0.002380
+siesta:    621   -0.026964    0.424363   -0.000719
+siesta:    622    0.724336    0.665731   -0.013415
+siesta:    623   -0.368112    0.070601   -0.001769
+siesta:    624    0.027286   -0.425970   -0.001972
+siesta:    625   -0.722059   -0.663999    0.018438
+siesta:    626    0.373377   -0.068229    0.002200
+siesta:    627   -0.025939    0.426789    0.000763
+siesta:    628    0.722059    0.663999   -0.018438
+siesta:    629   -0.373377    0.068229   -0.002200
+siesta:    630    0.025939   -0.426789   -0.000763
+siesta:    631   -0.724336   -0.665731    0.013415
+siesta:    632    0.368112   -0.070601    0.001769
+siesta:    633   -0.027286    0.425970    0.001972
+siesta:    634    0.722324    0.662939    0.040375
+siesta:    635   -0.371114    0.068878    0.002380
+siesta:    636    0.026964   -0.424363    0.000719
+siesta:    637   -0.720834   -0.662335   -0.024738
+siesta:    638    0.373445   -0.068034   -0.002876
+siesta:    639   -0.025849    0.427055   -0.001828
+siesta:    640    0.720580    0.662104   -0.045577
+siesta:    641   -0.369073    0.069711   -0.002485
+siesta:    642    0.027203   -0.424648   -0.000978
+siesta:    643   -0.723719   -0.661361    0.034681
+siesta:    644    0.371833   -0.068340    0.001870
+siesta:    645   -0.026653    0.425454    0.000928
+siesta:    646    0.720627    0.663119    0.008696
+siesta:    647   -0.373502    0.068084    0.000680
+siesta:    648    0.025682   -0.427406    0.000218
+siesta:    649   -0.724231   -0.665858   -0.026716
+siesta:    650    0.368073   -0.069998   -0.001523
+siesta:    651   -0.027259    0.425325   -0.001741
+siesta:    652    0.724231    0.665858    0.026716
+siesta:    653   -0.368073    0.069998    0.001523
+siesta:    654    0.027259   -0.425325    0.001741
+siesta:    655   -0.720627   -0.663119   -0.008696
+siesta:    656    0.373502   -0.068084   -0.000680
+siesta:    657   -0.025682    0.427406   -0.000218
+siesta:    658    0.723719    0.661361   -0.034681
+siesta:    659   -0.371833    0.068340   -0.001870
+siesta:    660    0.026653   -0.425454   -0.000928
+siesta:    661   -0.720580   -0.662104    0.045577
+siesta:    662    0.369073   -0.069711    0.002485
+siesta:    663   -0.027203    0.424648    0.000978
+siesta:    664    0.720834    0.662335    0.024738
+siesta:    665   -0.373445    0.068034    0.002876
+siesta:    666    0.025849   -0.427055    0.001828
+siesta:    667   -0.722324   -0.662939   -0.040375
+siesta:    668    0.371114   -0.068878   -0.002380
+siesta:    669   -0.026964    0.424363   -0.000719
+siesta:    670    0.724336    0.665731   -0.013415
+siesta:    671   -0.368112    0.070601   -0.001769
+siesta:    672    0.027286   -0.425970   -0.001972
+siesta:    673   -0.722059   -0.663999    0.018438
+siesta:    674    0.373377   -0.068229    0.002200
+siesta:    675   -0.025939    0.426789    0.000763
+siesta:    676    0.722059    0.663999   -0.018438
+siesta:    677   -0.373377    0.068229   -0.002200
+siesta:    678    0.025939   -0.426789   -0.000763
+siesta:    679   -0.724336   -0.665731    0.013415
+siesta:    680    0.368112   -0.070601    0.001769
+siesta:    681   -0.027286    0.425970    0.001972
+siesta:    682    0.722324    0.662939    0.040375
+siesta:    683   -0.371114    0.068878    0.002380
+siesta:    684    0.026964   -0.424363    0.000719
+siesta:    685   -0.720834   -0.662335   -0.024738
+siesta:    686    0.373445   -0.068034   -0.002876
+siesta:    687   -0.025849    0.427055   -0.001828
+siesta:    688    0.720580    0.662104   -0.045577
+siesta:    689   -0.369073    0.069711   -0.002485
+siesta:    690    0.027203   -0.424648   -0.000978
+siesta:    691   -0.723719   -0.661361    0.034681
+siesta:    692    0.371833   -0.068340    0.001870
+siesta:    693   -0.026653    0.425454    0.000928
+siesta:    694    0.720627    0.663119    0.008696
+siesta:    695   -0.373502    0.068084    0.000680
+siesta:    696    0.025682   -0.427406    0.000218
+siesta:    697   -0.724231   -0.665858   -0.026716
+siesta:    698    0.368073   -0.069998   -0.001523
+siesta:    699   -0.027259    0.425325   -0.001741
+siesta:    700    0.724231    0.665858    0.026716
+siesta:    701   -0.368073    0.069998    0.001523
+siesta:    702    0.027259   -0.425325    0.001741
+siesta:    703   -0.720627   -0.663119   -0.008696
+siesta:    704    0.373502   -0.068084   -0.000680
+siesta:    705   -0.025682    0.427406   -0.000218
+siesta:    706    0.723719    0.661361   -0.034681
+siesta:    707   -0.371833    0.068340   -0.001870
+siesta:    708    0.026653   -0.425454   -0.000928
+siesta:    709   -0.720580   -0.662104    0.045577
+siesta:    710    0.369073   -0.069711    0.002485
+siesta:    711   -0.027203    0.424648    0.000978
+siesta:    712    0.720834    0.662335    0.024738
+siesta:    713   -0.373445    0.068034    0.002876
+siesta:    714    0.025849   -0.427055    0.001828
+siesta:    715   -0.722324   -0.662939   -0.040375
+siesta:    716    0.371114   -0.068878   -0.002380
+siesta:    717   -0.026964    0.424363   -0.000719
+siesta:    718    0.724336    0.665731   -0.013415
+siesta:    719   -0.368112    0.070601   -0.001769
+siesta:    720    0.027286   -0.425970   -0.001972
+siesta:    721   -0.722059   -0.663999    0.018438
+siesta:    722    0.373377   -0.068229    0.002200
+siesta:    723   -0.025939    0.426789    0.000763
+siesta:    724    0.722059    0.663999   -0.018438
+siesta:    725   -0.373377    0.068229   -0.002200
+siesta:    726    0.025939   -0.426789   -0.000763
+siesta:    727   -0.724336   -0.665731    0.013415
+siesta:    728    0.368112   -0.070601    0.001769
+siesta:    729   -0.027286    0.425970    0.001972
+siesta:    730    0.722324    0.662939    0.040375
+siesta:    731   -0.371114    0.068878    0.002380
+siesta:    732    0.026964   -0.424363    0.000719
+siesta:    733   -0.720834   -0.662335   -0.024738
+siesta:    734    0.373445   -0.068034   -0.002876
+siesta:    735   -0.025849    0.427055   -0.001828
+siesta:    736    0.720580    0.662104   -0.045577
+siesta:    737   -0.369073    0.069711   -0.002485
+siesta:    738    0.027203   -0.424648   -0.000978
+siesta:    739   -0.723719   -0.661361    0.034681
+siesta:    740    0.371833   -0.068340    0.001870
+siesta:    741   -0.026653    0.425454    0.000928
+siesta:    742    0.720627    0.663119    0.008696
+siesta:    743   -0.373502    0.068084    0.000680
+siesta:    744    0.025682   -0.427406    0.000218
+siesta:    745   -0.724231   -0.665858   -0.026716
+siesta:    746    0.368073   -0.069998   -0.001523
+siesta:    747   -0.027259    0.425325   -0.001741
+siesta:    748    0.724231    0.665858    0.026716
+siesta:    749   -0.368073    0.069998    0.001523
+siesta:    750    0.027259   -0.425325    0.001741
+siesta:    751   -0.720627   -0.663119   -0.008696
+siesta:    752    0.373502   -0.068084   -0.000680
+siesta:    753   -0.025682    0.427406   -0.000218
+siesta:    754    0.723719    0.661361   -0.034681
+siesta:    755   -0.371833    0.068340   -0.001870
+siesta:    756    0.026653   -0.425454   -0.000928
+siesta:    757   -0.720580   -0.662104    0.045577
+siesta:    758    0.369073   -0.069711    0.002485
+siesta:    759   -0.027203    0.424648    0.000978
+siesta:    760    0.720834    0.662335    0.024738
+siesta:    761   -0.373445    0.068034    0.002876
+siesta:    762    0.025849   -0.427055    0.001828
+siesta:    763   -0.722324   -0.662939   -0.040375
+siesta:    764    0.371114   -0.068878   -0.002380
+siesta:    765   -0.026964    0.424363   -0.000719
+siesta:    766    0.724336    0.665731   -0.013415
+siesta:    767   -0.368112    0.070601   -0.001769
+siesta:    768    0.027286   -0.425970   -0.001972
+siesta: ----------------------------------------
+siesta:    Tot   -0.000005   -0.000006    0.000000
+
+siesta: Stress tensor (static) (eV/Ang**3):
+siesta:    -0.000542    0.000420   -0.000002
+siesta:     0.000420   -0.000758    0.000001
+siesta:    -0.000002    0.000001    0.001788
+
+siesta: Cell volume =     131686.400000 Ang**3
+
+siesta: Pressure (static):
+siesta:                Solid            Molecule  Units
+siesta:          -0.00000177         -0.00000643  Ry/Bohr**3
+siesta:          -0.00016271         -0.00059065  eV/Ang**3
+siesta:          -0.26069738         -0.94634011  kBar
+(Free)E+ p_basis*V_orbitals  =      -47643.775561
+(Free)Eharris+ p_basis*V_orbitals  =      -47643.775569
+
+siesta: Electric dipole (a.u.)  =    0.000000    0.000000    0.000000
+siesta: Electric dipole (Debye) =    0.000001    0.000001    0.000000
+>> End of run:   8-DEC-2016  11:54:22
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+/home/keceli/scratch2/siesta-qetsc/Obj/siesta on a arch-xl named Q02-I5-J00.vesta.itd with 256 processors, by Unknown Thu Dec  8 11:54:22 2016
+Using Petsc Development GIT revision: v3.7.3-1204-g68f0caa  GIT Date: 2016-08-19 16:41:02 -0500
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           2.356e+02      1.00000   2.356e+02
+Objects:              1.000e+00      1.00000   1.000e+00
+Flops:                0.000e+00      0.00000   0.000e+00  0.000e+00
+Flops/sec:            0.000e+00      0.00000   0.000e+00  0.000e+00
+MPI Messages:         0.000e+00      0.00000   0.000e+00  0.000e+00
+MPI Message Lengths:  0.000e+00      0.00000   0.000e+00  0.000e+00
+MPI Reductions:       1.000e+00      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 2.0550e-04   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 1:     siesta_init: 2.8115e+00   1.2%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 2:   siesta_forces: 1.6409e+01   7.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 3:    siesta_solve: 1.9983e+02  84.8%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+10:     siesta_misc: 1.2709e+01   5.4%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+11:     qetsc_clean: 7.7542e-06   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+12:     siesta_move: 7.8666e-05   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+13: siesta_analysis: 1.0250e-02   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+14:      siesta_end: 3.8162e+00   1.6%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %F - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %F %M %L %R  %T %F %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+
+--- Event Stage 1: siesta_init
+
+
+--- Event Stage 2: siesta_forces
+
+
+--- Event Stage 3: siesta_solve
+
+
+--- Event Stage 4: Unknown
+
+
+--- Event Stage 5: Unknown
+
+
+--- Event Stage 6: Unknown
+
+
+--- Event Stage 7: Unknown
+
+
+--- Event Stage 8: Unknown
+
+
+--- Event Stage 9: Unknown
+
+
+--- Event Stage 10: siesta_misc
+
+
+--- Event Stage 11: qetsc_clean
+
+
+--- Event Stage 12: siesta_move
+
+
+--- Event Stage 13: siesta_analysis
+
+
+--- Event Stage 14: siesta_end
+
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+
+--- Event Stage 1: siesta_init
+
+
+--- Event Stage 2: siesta_forces
+
+
+--- Event Stage 3: siesta_solve
+
+
+--- Event Stage 4: Unknown
+
+
+--- Event Stage 5: Unknown
+
+
+--- Event Stage 6: Unknown
+
+
+--- Event Stage 7: Unknown
+
+
+--- Event Stage 8: Unknown
+
+
+--- Event Stage 9: Unknown
+
+
+--- Event Stage 10: siesta_misc
+
+
+--- Event Stage 11: qetsc_clean
+
+
+--- Event Stage 12: siesta_move
+
+
+--- Event Stage 13: siesta_analysis
+
+
+--- Event Stage 14: siesta_end
+
+              Viewer     1              0            0     0.
+========================================================================================================================
+Average time to get PetscTime(): 1.24e-07
+Average time for MPI_Barrier(): 3.16937e-06
+Average time for zero size MPI_Send(): 1.20408e-05
+#PETSc Option Table entries:
+-eps_interval -2.3,0.
+-eps_krylovschur_detect_zeros 0
+-eps_krylovschur_partitions 1
+-ioptbin 7
+-ioptdensity 0
+-ioptinertia 1
+-ioptleft 2
+-log_view
+-mat_mumps_icntl_23 0
+-mat_mumps_icntl_7 5
+-mat_type mpisbaij
+-roptbuffer 0.01
+-roptdiff 0.02
+-writeeigs 1
+#End of PETSc Option Table entries
+Compiled with FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure options: --known-has-attribute-aligned=1 --download-chaco=0 --download-cmake=0 --download-hypre=0 --download-metis=1 --download-mumps=1 --download-parmetis=1 --download-plapack=0 --download-prometheus=0 --download-ptscotch=1 --download-spai=0 --download-spooles=0 --download-superlu=0 --download-superlu_dist=0 --download-triangle=0 --known-bits-per-byte=8 --known-level1-dcache-assoc=0 --known-level1-dcache-linesize=32 --known-level1-dcache-size=32768 --known-memcmp-ok=1 --known-mpi-c-double-complex=1 --known-mpi-int64_t=1 --known-mpi-long-double=1 --known-mpi-shared-libraries=0 --known-sdot-returns-double=0 --known-sizeof-MPI_Comm=4 --known-sizeof-MPI_Fint=4 --known-sizeof-char=1 --known-sizeof-double=8 --known-sizeof-float=4 --known-sizeof-int=4 --known-sizeof-long-long=8 --known-sizeof-long=8 --known-sizeof-short=2 --known-sizeof-size_t=8 --known-sizeof-void-p=8 --known-snrm2-returns-double=0 --with-batch=1 --with-blacs-include=/soft/libraries/alcf/current/xl/SCALAPACK/ --with-blacs-lib=/soft/libraries/alcf/current/xl/SCALAPACK/lib/libscalapack.a --with-blas-lapack-lib="-L/soft/libraries/alcf/current/xl/LAPACK/lib -llapack -L/soft/libraries/alcf/current/xl/BLAS/lib -lblas" --with-cc=mpixlc_r --with-clib-autodetect=0 --with-cxx=mpixlcxx_r --with-cxxlib-autodetect=0 --with-debugging=0 --with-fc="mpixlf77_r -qnosave" --with-fortran-kernels=1 --with-fortranlib-autodetect=0 --with-is-color-value-type=short --with-scalapack-include=/soft/libraries/alcf/current/xl/SCALAPACK/ --with-scalapack-lib=/soft/libraries/alcf/current/xl/SCALAPACK/lib/libscalapack.a --with-shared-libraries=0 --with-x=0 -COPTFLAGS=" -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction" -CXXOPTFLAGS="  -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction" -FOPTFLAGS=" -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction" LIBS="-lmpichcxx-gcc -lmpichf77-gcc -L/soft/compilers/ibmcmp-feb2015/vacpp/bg/12.1/bglib64 -libmc++ -L/soft/compilers/ibmcmp-feb2015/xlf/bg/14.1/bglib64 -lxlf90_r -lxlomp_ser -lxlfmath" PETSC_ARCH=arch-xl
+-----------------------------------------
+Libraries compiled on Sat Aug 20 04:19:47 2016 on vestalac2 
+Machine characteristics: Linux-2.6.32-573.18.1.el6.ppc64-ppc64-with-redhat-6.7-Santiago
+Using PETSc directory: /home/keceli/scratch2/petsc
+Using PETSc arch: arch-xl
+-----------------------------------------
+
+Using C compiler: mpixlc_r   -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction  ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: mpixlf77_r -qnosave  -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/home/keceli/scratch2/petsc/arch-xl/include -I/home/keceli/scratch2/petsc/include -I/home/keceli/scratch2/petsc/include -I/home/keceli/scratch2/petsc/arch-xl/include -I/bgsys/drivers/V1R2M4/ppc64/comm/include -I/bgsys/drivers/V1R2M4/ppc64/comm/lib/xl -I/bgsys/drivers/V1R2M4/ppc64 -I/bgsys/drivers/V1R2M4/ppc64/comm/sys/include -I/bgsys/drivers/V1R2M4/ppc64/spi/include -I/bgsys/drivers/V1R2M4/ppc64/spi/include/kernel/cnk
+-----------------------------------------
+
+Using C linker: mpixlc_r
+Using Fortran linker: mpixlf77_r -qnosave
+Using libraries: -Wl,-rpath,/home/keceli/scratch2/petsc/arch-xl/lib -L/home/keceli/scratch2/petsc/arch-xl/lib -lpetsc -Wl,-rpath,/home/keceli/scratch2/petsc/arch-xl/lib -L/home/keceli/scratch2/petsc/arch-xl/lib -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -Wl,-rpath,/soft/libraries/alcf/current/xl/SCALAPACK/lib -L/soft/libraries/alcf/current/xl/SCALAPACK/lib -lscalapack -L/soft/libraries/alcf/current/xl/LAPACK/lib -llapack -L/soft/libraries/alcf/current/xl/BLAS/lib -lblas -lparmetis -lmetis -lptesmumps -lptscotch -lptscotcherr -lscotch -lscotcherr -lrt -lm -lpthread -ldl -lmpichcxx-gcc -lmpichf77-gcc -L/soft/compilers/ibmcmp-feb2015/vacpp/bg/12.1/bglib64 -libmc++ -L/soft/compilers/ibmcmp-feb2015/xlf/bg/14.1/bglib64 -lxlf90_r -lxlomp_ser -lxlfmath
+-----------------------------------------
+
