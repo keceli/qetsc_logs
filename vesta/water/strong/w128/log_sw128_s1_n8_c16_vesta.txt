@@ -1,0 +1,2028 @@
+s.subSiesta: Submission time = 17s15m22h
+s.subSiesta: Job name = sw128_s1_n8_c16_vesta
+s.subSiesta: Number of nodes = 8
+s.subSiesta: Number of cores = 128
+s.subSiesta: Number of cores/node = 16
+s.subSiesta: Number of slices = 1
+s.subSiesta: Mapping = ABCDET
+17s15m22h
+-ioptbin 7
+-ioptdensity 0
+-ioptinertia 1
+-ioptleft 2
+-ioptwrite 1
+-roptbuffer 0.1
+-roptdiff 0.05
+# A chain of identical atoms (instead of an xyz file) can be specified with the following options 
+#-N 10 # Number of atoms
+#-Z 8 # Atomic number
+#-c 32 # Maximum number of interactions of an atom
+
+# A petsc matrix (binary) can be given
+#-method file
+#-fA '/Volumes/s/matrices/petscbinary/graphene_xxs_A'
+#-fB '/Volumes/s/matrices/petscbinary/graphene_xxs_B'
+#-scfthresh 1.e-3
+
+#PETSc options
+-mat_type mpisbaij
+-log_view
+#-mat_view
+#-memory_view
+#-mat_mumps_icntl_13 1 #turn off scaLAPACK for matrix inertia
+#-mat_mumps_icntl_24 1 #null pivot row detection for matrix inertia
+#-mat_mumps_icntl_23 0
+#-mat_mumps_icntl_28 1 # serial analysis
+#-mat_mumps_icntl_28 2 #parallel analysis
+#-mat_mumps_icntl_29 1 #ptscotch
+#-mat_mumps_icntl_29 2 #parmetis
+-mat_mumps_icntl_7 5 #metis
+#-malloc_info 
+#-mat_view ::ascii_info 
+#-mat_getrow_uppertriangular 1
+#-st_type sinvert 
+#-st_ksp_type preonly 
+#-st_pc_type cholesky 
+#-st_pc_factor_mat_solver_package mumps 
+
+#SLEPc options
+
+#-eps_krylovschur_partitions 1  
+-eps_interval -2.3,0.
+#-eps_tol  1.e-8
+-eps_krylovschur_detect_zeros 0
+#-eps_purify 1
+SystemName liquid_D2O_128
+SystemLabel D2O_128
+
+#UseTreeTimer .true.
+DM.MixingWeight 0.3
+DM.NumberPulay 3
+
+#SolutionMethod  qetsc #slepc0 for the older method
+SolutionMethod diagon
+BlockSize 23
+WriteDM .false.
+WriteDM.NetCDF .false.
+WriteDMHS.NetCDF .false.
+LongOutput .false.
+
+#MaxSCFIterations 2
+##################################################
+# Do not change below this line                  #
+##################################################
+
+%block SuperCell
+1 0 0
+0 1 0
+0 0 1
+%endblock SuperCell
+
+NumberOfAtoms 384
+NumberOfSpecies 2
+
+xc.functional GGA
+xc.authors PBE 
+MeshCutoff 150.0 Ry
+
+%block ChemicalSpeciesLabel
+  1   8  O
+  2   1  H  
+%endblock ChemicalSpeciesLabel
+
+#%block AtomicMass
+#  2   2.0
+#%endblock AtomicMass
+
+%Block PAO.Basis
+O    3     -0.24233
+n=2   0   2   E    23.36061     3.39721
+     4.50769     2.64066
+     1.00000     1.00000
+n=2   1   2   E     2.78334     5.14253
+     6.14996     2.59356
+     1.00000     1.00000
+n=3   2   1   E    63.98188     0.16104
+     3.54403
+     1.00000
+H    2      0.46527
+n=1   0   2   E    99.93138     2.59932
+     4.20357     1.84463
+     1.00000     1.00000
+n=2   1   1   E    24.56504     2.20231
+     3.52816
+     1.00000
+%EndBlock PAO.Basis
+
+LatticeConstant 15.646046088993955 Ang
+%block LatticeVectors   
+  1.0  0.0  0.0
+  0.0  1.0  0.0
+  0.0  0.0  1.0
+%endblock LatticeVectors   
+
+AtomicCoordinatesFormat NotScaledCartesianAng
+%block AtomicCoordinatesAndAtomicSpecies < coord128.data
+
+Siesta Version: siesta-trunk-492
+Architecture  : powerpc64-unknown-linux-gnu--Xlf
+Compiler flags: mpixlf90_r -I/home/keceli/scratch2/petsc/include -I/home/keceli/scratch2/petssc/arch-xl/include -I/bgsys/drivers/V1R2M4/ppc64/comm/include -I/bgsys/drivers/V1R2M4/ppc64/comm/lib/xl -I/bgsys/drivers/V1R2M4/ppc64 -I/bgsys/drivers/V1R2M4/ppc64/comm/sys/include -I/bgsys/drivers/V1R2M4/ppc64/spi/include -I/bgsys/drivers/V1R2M4/ppc64/spi/include/kernel/cnk -I/home/keceli/scratch2/slepcfork/include -I/home/keceli/scratch2/slepcfork/arch-xl/include
+PP flags      : -WF,-DMPI -WF,-DFC_HAVE_ABORT -WF,-DBSC_CELLXC -WF,-DMPI_TIMING 
+PARALLEL version
+
+* Running on  128 nodes in parallel
+>> Start of run:  20-DEC-2016  22:16:26
+
+                           ***********************       
+                           *  WELCOME TO SIESTA  *       
+                           ***********************       
+WARNING: Siesta is reading its input from file INPUT_DEBUG
+
+reinit: -----------------------------------------------------------------------
+reinit: System Name: liquid_D2O_128
+reinit: -----------------------------------------------------------------------
+reinit: System Label: D2O_128                                                     
+reinit: -----------------------------------------------------------------------
+
+initatom: Reading input for the pseudopotentials and atomic orbitals ----------
+Species number:   1 Atomic number:    8 Label: O
+Species number:   2 Atomic number:    1 Label: H
+ 
+Ground state valence configuration:   2s02  2p04
+Reading pseudopotential information in formatted form from O.psf
+
+Valence configuration for pseudopotential generation:
+2s( 2.00) rc: 1.14
+2p( 4.00) rc: 1.14
+3d( 0.00) rc: 1.14
+4f( 0.00) rc: 1.14
+Ground state valence configuration:   1s01
+Reading pseudopotential information in formatted form from H.psf
+
+Valence configuration for pseudopotential generation:
+1s( 0.60) rc: 1.25
+2p( 0.00) rc: 1.25
+3d( 0.00) rc: 1.25
+4f( 0.00) rc: 1.25
+For O, standard SIESTA heuristics set lmxkb to 3
+ (one more than the basis l, including polarization orbitals).
+Use PS.lmax or PS.KBprojectors blocks to override.
+For H, standard SIESTA heuristics set lmxkb to 2
+ (one more than the basis l, including polarization orbitals).
+Use PS.lmax or PS.KBprojectors blocks to override.
+
+<basis_specs>
+===============================================================================
+O                    Z=   8    Mass=  16.000        Charge=-0.24233    
+Lmxo=2 Lmxkb= 3    BasisType=split      Semic=F
+L=0  Nsemic=0  Cnfigmx=2
+          n=1  nzeta=2  polorb=0
+            splnorm:   0.15000    
+               vcte:    23.361    
+               rinn:    3.3972    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    4.5077      2.6407    
+            lambdas:    1.0000      1.0000    
+L=1  Nsemic=0  Cnfigmx=2
+          n=1  nzeta=2  polorb=0
+            splnorm:   0.15000    
+               vcte:    2.7833    
+               rinn:    5.1425    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    6.1500      2.5936    
+            lambdas:    1.0000      1.0000    
+L=2  Nsemic=0  Cnfigmx=3
+          n=1  nzeta=1  polorb=0
+            splnorm:   0.15000    
+               vcte:    63.982    
+               rinn:   0.16104    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    3.5440    
+            lambdas:    1.0000    
+-------------------------------------------------------------------------------
+L=0  Nkbl=1  erefs: 0.17977+309
+L=1  Nkbl=1  erefs: 0.17977+309
+L=2  Nkbl=1  erefs: 0.17977+309
+L=3  Nkbl=1  erefs: 0.17977+309
+===============================================================================
+</basis_specs>
+
+atom: Called for O                     (Z =   8)
+
+read_vps: Pseudopotential generation method:
+read_vps: ATM3      Troullier-Martins                       
+Total valence charge:    6.00000
+
+read_vps: Pseudopotential includes a core correction:
+read_vps: Pseudo-core for xc-correction
+
+xc_check: Exchange-correlation functional:
+xc_check: GGA Perdew, Burke & Ernzerhof 1996
+V l=0 = -2*Zval/r beyond r=  1.1278
+V l=1 = -2*Zval/r beyond r=  1.1278
+V l=2 = -2*Zval/r beyond r=  1.1278
+V l=3 = -2*Zval/r beyond r=  1.1278
+All V_l potentials equal beyond r=  1.1278
+This should be close to max(r_c) in ps generation
+All pots = -2*Zval/r beyond r=  1.1278
+
+VLOCAL1: 99.0% of the norm of Vloc inside     34.126 Ry
+VLOCAL1: 99.9% of the norm of Vloc inside     77.774 Ry
+atom: Maximum radius for 4*pi*r*r*local-pseudopot. charge    1.37759
+atom: Maximum radius for r*vlocal+2*Zval:    1.18566
+GHOST: No ghost state for L =  0
+GHOST: No ghost state for L =  1
+GHOST: No ghost state for L =  2
+GHOST: No ghost state for L =  3
+
+KBgen: Kleinman-Bylander projectors: 
+   l= 0   rc=  1.262145   el= -1.757696   Ekb=  9.253654   kbcos=  0.328369
+   l= 1   rc=  1.262145   el= -0.664256   Ekb= -7.897175   kbcos= -0.393093
+   l= 2   rc=  1.343567   el=  0.002031   Ekb= -1.922379   kbcos= -0.003517
+   l= 3   rc=  1.394919   el=  0.003153   Ekb= -0.738278   kbcos= -0.000358
+
+KBgen: Total number of  Kleinman-Bylander projectors:   16
+atom: -------------------------------------------------------------------------
+
+atom: SANKEY-TYPE ORBITALS:
+atom: Selected multiple-zeta basis: split     
+
+atom: basis set generated (by rescaling the valence charge)
+atom: for an anion of charge  -0.2423
+
+SPLIT: Orbitals with angular momentum L= 0
+
+SPLIT: Basis orbitals for state 2s
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    4.574469
+                 energy =   -1.754694
+                kinetic =    1.490893
+    potential(screened) =   -3.245588
+       potential(ionic) =  -11.054474
+
+   izeta = 2
+                 rmatch =    2.639108
+              splitnorm =    0.147036
+                 energy =   -1.549986
+                kinetic =    2.329570
+    potential(screened) =   -3.879556
+       potential(ionic) =  -12.328390
+
+SPLIT: Orbitals with angular momentum L= 1
+
+SPLIT: Basis orbitals for state 2p
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    6.174996
+                 energy =   -0.657397
+                kinetic =    4.283704
+    potential(screened) =   -4.941101
+       potential(ionic) =  -12.288569
+
+   izeta = 2
+                 rmatch =    2.639108
+              splitnorm =    0.214885
+                 energy =   -0.410839
+                kinetic =    7.128014
+    potential(screened) =   -7.538853
+       potential(ionic) =  -16.113011
+
+SPLIT: Orbitals with angular momentum L= 2
+
+SPLIT: Basis orbitals for state 3d
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    3.562532
+                 energy =    3.658838
+                kinetic =    6.488135
+    potential(screened) =   -2.829297
+       potential(ionic) =  -10.001422
+atom: Total number of Sankey-type orbitals: 13
+
+atm_pop: Valence configuration (for local Pseudopot. screening):
+ 2s( 2.00)                                                            
+ 2p( 4.00)                                                            
+ 3d( 0.00)                                                            
+Vna: chval, zval:    6.00000   6.00000
+
+Vna:  Cut-off radius for the neutral-atom potential:   6.174996
+comcore: Pseudo-core radius Rcore=  1.377587
+
+atom: _________________________________________________________________________
+
+<basis_specs>
+===============================================================================
+H                    Z=   1    Mass=  1.0100        Charge= 0.46527    
+Lmxo=1 Lmxkb= 2    BasisType=split      Semic=F
+L=0  Nsemic=0  Cnfigmx=1
+          n=1  nzeta=2  polorb=0
+            splnorm:   0.15000    
+               vcte:    99.931    
+               rinn:    2.5993    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    4.2036      1.8446    
+            lambdas:    1.0000      1.0000    
+L=1  Nsemic=0  Cnfigmx=2
+          n=1  nzeta=1  polorb=0
+            splnorm:   0.15000    
+               vcte:    24.565    
+               rinn:    2.2023    
+               qcoe:    0.0000    
+               qyuk:    0.0000    
+               qwid:   0.10000E-01
+                rcs:    3.5282    
+            lambdas:    1.0000    
+-------------------------------------------------------------------------------
+L=0  Nkbl=1  erefs: 0.17977+309
+L=1  Nkbl=1  erefs: 0.17977+309
+L=2  Nkbl=1  erefs: 0.17977+309
+===============================================================================
+</basis_specs>
+
+atom: Called for H                     (Z =   1)
+
+read_vps: Pseudopotential generation method:
+read_vps: ATM 3.2.2 Troullier-Martins                       
+Total valence charge:    0.60000
+
+atom: Pseudopotential generated from an ionic configuration
+atom: with net charge 0.40
+
+xc_check: Exchange-correlation functional:
+xc_check: GGA Perdew, Burke & Ernzerhof 1996
+xc_check: WARNING: Pseudopotential generated with GGA revPBE functional
+V l=0 = -2*Zval/r beyond r=  1.2343
+V l=1 = -2*Zval/r beyond r=  1.2189
+V l=2 = -2*Zval/r beyond r=  1.2189
+All V_l potentials equal beyond r=  1.2343
+This should be close to max(r_c) in ps generation
+All pots = -2*Zval/r beyond r=  1.2343
+
+VLOCAL1: 99.0% of the norm of Vloc inside     28.493 Ry
+VLOCAL1: 99.9% of the norm of Vloc inside     64.935 Ry
+atom: Maximum radius for 4*pi*r*r*local-pseudopot. charge    1.45251
+atom: Maximum radius for r*vlocal+2*Zval:    1.21892
+GHOST: No ghost state for L =  0
+GHOST: No ghost state for L =  1
+GHOST: No ghost state for L =  2
+
+KBgen: Kleinman-Bylander projectors: 
+   l= 0   rc=  1.364359   el= -0.835481   Ekb= -2.050473   kbcos= -0.374935
+   l= 1   rc=  1.434438   el= -0.083696   Ekb= -0.439790   kbcos= -0.040392
+   l= 2   rc=  1.470814   el= -0.018512   Ekb= -0.135383   kbcos= -0.004767
+
+KBgen: Total number of  Kleinman-Bylander projectors:    9
+atom: -------------------------------------------------------------------------
+
+atom: SANKEY-TYPE ORBITALS:
+atom: Selected multiple-zeta basis: split     
+
+atom: basis set generated (by rescaling the valence charge)
+atom: for a cation of charge   0.4653
+
+SPLIT: Orbitals with angular momentum L= 0
+
+SPLIT: Basis orbitals for state 1s
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    4.260636
+                 energy =   -0.844786
+                kinetic =    1.360018
+    potential(screened) =   -2.204804
+       potential(ionic) =   -2.290935
+
+   izeta = 2
+                 rmatch =    1.865767
+              splitnorm =    0.575404
+                 energy =    0.510436
+                kinetic =    4.363202
+    potential(screened) =   -3.852766
+       potential(ionic) =   -3.849391
+
+SPLIT: Orbitals with angular momentum L= 1
+
+SPLIT: Basis orbitals for state 2p
+
+   izeta = 1
+                 lambda =    1.000000
+                     rc =    3.576223
+                 energy =    0.852340
+                kinetic =    2.004908
+    potential(screened) =   -1.152567
+       potential(ionic) =   -1.298457
+atom: Total number of Sankey-type orbitals:  5
+
+atm_pop: Valence configuration (for local Pseudopot. screening):
+ 1s( 1.00)                                                            
+ 2p( 0.00)                                                            
+Vna: chval, zval:    1.00000   1.00000
+
+Vna:  Cut-off radius for the neutral-atom potential:   4.260636
+
+atom: _________________________________________________________________________
+
+prinput: Basis input ----------------------------------------------------------
+
+PAO.BasisType split     
+
+%block ChemicalSpeciesLabel
+    1    8 O                       # Species index, atomic number, species label
+    2    1 H                       # Species index, atomic number, species label
+%endblock ChemicalSpeciesLabel
+
+%block PAO.Basis                 # Define Basis set
+O                     3  -0.242            # Label, l-shells, ionic net charge
+ n=2   0   2                         # n, l, Nzeta 
+   4.574      2.639   
+   1.000      1.000   
+ n=2   1   2                         # n, l, Nzeta 
+   6.175      2.639   
+   1.000      1.000   
+ n=3   2   1                         # n, l, Nzeta 
+   3.563   
+   1.000   
+H                     2   0.465            # Label, l-shells, ionic net charge
+ n=1   0   2                         # n, l, Nzeta 
+   4.261      1.866   
+   1.000      1.000   
+ n=2   1   1                         # n, l, Nzeta 
+   3.576   
+   1.000   
+%endblock PAO.Basis
+
+prinput: ----------------------------------------------------------------------
+
+coor:   Atomic-coordinates input format  =     Cartesian coordinates
+coor:                                          (in Angstroms)
+
+siesta: Atomic coordinates (Bohr) and species
+siesta:     26.49397   0.45353   4.66763  1        1
+siesta:     26.96640   1.47399   3.25033  2        2
+siesta:     25.77587   1.62517   5.85815  2        3
+siesta:     20.33346  14.00288  21.97752  1        4
+siesta:     21.22163  14.47531  20.46574  2        5
+siesta:     18.59491  14.07847  21.50509  2        6
+siesta:     11.07380   3.60938  13.00132  1        7
+siesta:     11.41395   5.36682  12.83125  2        8
+siesta:     11.58403   2.89128  11.43285  2        9
+siesta:     14.09736  13.00132  25.01998  1       10
+siesta:     14.15405  13.00132  26.83412  2       11
+siesta:     13.53044  11.33836  24.56645  2       12
+siesta:     17.17762   8.63605  20.03110  1       13
+siesta:     16.83747   9.24076  18.34925  2       14
+siesta:     18.95396   8.86282  20.23897  2       15
+siesta:     22.75231   1.79524   9.37305  1       16
+siesta:     21.27832   2.30547   8.48487  2       17
+siesta:     23.45151   3.32592  10.03445  2       18
+siesta:     27.17427  25.60580  26.85302  1       19
+siesta:     28.61046  25.54911  27.94906  2       20
+siesta:     27.57112  24.43417  25.53021  2       21
+siesta:     24.09402  25.03888   4.02512  1       22
+siesta:     23.67828  24.96329   2.26767  2       23
+siesta:     24.75542  26.70184   4.28968  2       24
+siesta:     28.81833  16.93195   4.57314  1       25
+siesta:     29.17738  18.65160   4.13850  2       26
+siesta:     29.02620  16.00599   3.04246  2       27
+siesta:      3.17474   7.14317  26.24831  1       28
+siesta:      1.79524   7.97465  25.45462  2       29
+siesta:      4.62983   8.12583  25.81367  2       30
+siesta:      1.56847   2.39995  27.68450  1       31
+siesta:      0.15118   1.90862  26.68294  2       32
+siesta:      2.22988   3.85504  26.85302  2       33
+siesta:     21.97752   5.87705  29.00731  1       34
+siesta:     21.33502   4.25189  28.51598  2       35
+siesta:     21.18384   7.02978  27.87347  2       36
+siesta:      2.81569  25.05778  28.47818  1       37
+siesta:      3.53379  25.98374  29.85768  2       38
+siesta:      3.38261  23.35702  28.74275  2       39
+siesta:      2.05980   4.45976  19.10514  1       40
+siesta:      0.77479   4.66763  17.83902  2       41
+siesta:      3.36371   5.61249  18.61381  2       42
+siesta:      9.12738  25.19006  29.38525  1       43
+siesta:     10.37460  24.79322  28.13803  2       44
+siesta:      7.54001  24.81211  28.59157  2       45
+siesta:     20.99487   3.64717  16.91306  1       46
+siesta:     19.33191   3.02356  17.30990  2       47
+siesta:     21.78855   3.83615  18.51932  2       48
+siesta:      2.04091  15.04223  21.58068  1       49
+siesta:      1.11494  13.51155  21.42950  2       50
+siesta:      2.47554  15.13671  23.33813  2       51
+siesta:     16.47842   9.58092   2.28657  1       52
+siesta:     17.95241   9.54312   3.34482  2       53
+siesta:     16.74298  10.97931   1.19053  2       54
+siesta:     25.90816   8.05024   4.72432  1       55
+siesta:     26.00264   7.02978   6.21720  2       56
+siesta:     26.55066   6.99199   3.40151  2       57
+siesta:     10.56357  15.04223  21.08935  1       58
+siesta:     12.32102  14.72097  21.37281  2       59
+siesta:      9.80768  13.41706  21.08935  2       60
+siesta:      7.97465  10.88483  12.77455  1       61
+siesta:      7.02978   9.93996  11.56513  2       62
+siesta:      7.36993  10.33681  14.38082  2       63
+siesta:      2.30547  13.43596   7.38883  1       64
+siesta:      1.58737  14.41862   6.04713  2       65
+siesta:      2.83459  14.64538   8.61715  2       66
+siesta:     12.66117   3.38261   7.67229  1       67
+siesta:     12.30212   2.05980   6.50066  2       68
+siesta:     12.49109   4.91329   6.70853  2       69
+siesta:     26.55066   6.27389   9.44863  1       70
+siesta:     25.43572   7.59670   9.95886  2       71
+siesta:     28.19473   6.99199   9.59981  2       72
+siesta:      7.89906   4.51645   3.28812  1       73
+siesta:      8.86282   3.19364   4.06291  2       74
+siesta:      6.29279   3.74166   2.91018  2       75
+siesta:     28.85613  22.79011   3.74166  1       76
+siesta:     27.43883  23.79166   4.25189  2       77
+siesta:     30.29232  23.82946   4.08181  2       78
+siesta:     15.38238  23.18695   9.52422  1       79
+siesta:     16.47842  22.63893  10.84703  2       80
+siesta:     16.47842  23.82946   8.23921  2       81
+siesta:     23.64048  15.23120  17.51777  1       82
+siesta:     24.35858  13.64383  17.08313  2       83
+siesta:     24.45307  16.42173  16.42173  2       84
+siesta:     23.45151   9.97776  10.90372  1       85
+siesta:     21.73186   9.46753  11.13049  2       86
+siesta:     23.39482  11.77300  11.01711  2       87
+siesta:     11.01711   5.66918  18.25476  1       88
+siesta:     11.41395   5.40462  16.49732  2       89
+siesta:     11.09270   4.02512  18.97286  2       90
+siesta:     22.35547  25.05778  19.72875  1       91
+siesta:     21.20274  24.71763  21.08935  2       92
+siesta:     23.43261  23.62159  19.67206  2       93
+siesta:     21.76965  16.79967  27.74119  1       94
+siesta:     21.46730  17.95241  26.38059  2       95
+siesta:     22.80900  17.72564  28.89392  2       96
+siesta:     21.59958  19.29411  23.22474  1       97
+siesta:     20.42795  18.14138  22.44996  2       98
+siesta:     23.22474  18.50043  22.99798  2       99
+siesta:     20.22008   7.36993   4.81880  1      100
+siesta:     21.71296   8.22031   5.40462  2      101
+siesta:     20.71141   6.61404   3.25033  2      102
+siesta:     16.42173   1.88973   2.19208  1      103
+siesta:     15.79812   3.17474   1.07714  2      104
+siesta:     14.94774   1.09604   2.85349  2      105
+siesta:      8.46598  10.63916   3.53379  1      106
+siesta:      9.24076  10.97931   1.94642  2      107
+siesta:      8.84392  12.09425   4.55424  2      108
+siesta:     17.10203  15.02333  29.66871  1      109
+siesta:     15.89260  16.04378  28.76164  2      110
+siesta:     18.70830  15.53355  29.02620  2      111
+siesta:      5.78256   4.19519  12.35881  1      112
+siesta:      4.89439   2.60782  12.32102  2      113
+siesta:      7.48332   3.74166  12.73676  2      114
+siesta:     14.04067  22.35547  16.95085  1      115
+siesta:     13.34147  20.74920  16.49732  2      116
+siesta:     14.17295  23.24364  15.38238  2      117
+siesta:      8.42818  16.00599  26.19161  1      118
+siesta:      6.76522  15.32568  26.45618  2      119
+siesta:      9.01400  15.15561  24.69873  2      120
+siesta:     -0.20787  22.35547  23.26254  1      121
+siesta:      1.51178  22.52554  22.77121  2      122
+siesta:     -1.02045  21.63737  21.82635  2      123
+siesta:      1.49288   8.88172   9.33525  1      124
+siesta:      1.92752  10.54468   8.76833  2      125
+siesta:      3.00467   7.91796   9.16518  2      126
+siesta:      4.81880  22.56334   8.10693  1      127
+siesta:      4.83770  20.78700   7.78567  2      128
+siesta:      5.78256  23.26254   6.74632  2      129
+siesta:     16.72408   3.28812  20.10669  1      130
+siesta:     16.62960   5.08337  20.06890  2      131
+siesta:     15.02333   2.72121  19.86103  2      132
+siesta:     29.91438  14.09736  14.75877  1      133
+siesta:     29.08290  12.54779  15.13671  2      134
+siesta:     28.61046  15.34458  14.85325  2      135
+siesta:      8.18252  27.43883  18.78389  1      136
+siesta:      6.40617  27.60891  19.02955  2      137
+siesta:      8.42818  25.71918  18.31145  2      138
+siesta:     27.77899   6.23610  21.73186  1      139
+siesta:     29.21518   5.57469  20.86258  2      140
+siesta:     27.11758   4.83770  22.65783  2      141
+siesta:     29.68761  13.09581   1.07714  1      142
+siesta:     28.15693  12.39661   0.39684  2      143
+siesta:     30.65137  11.65961   1.58737  2      144
+siesta:     19.40750  24.11291  24.01843  1      145
+siesta:     17.87682  24.58535  23.16805  2      146
+siesta:     19.27521  22.33657  24.22630  2      147
+siesta:     23.75387  12.45330   3.68497  1      148
+siesta:     23.79166  13.81390   4.87550  2      149
+siesta:     24.67983  11.13049   4.47865  2      150
+siesta:     22.29878  21.18384   9.01400  1      151
+siesta:     20.93817  20.82479  10.16673  2      152
+siesta:     21.97752  22.88459   8.46598  2      153
+siesta:      6.85971  10.67696  25.98374  1      154
+siesta:      7.23765  10.31791  24.26409  2      155
+siesta:      8.06913   9.71320  26.92861  2      156
+siesta:     13.13360  18.44373  28.89392  1      157
+siesta:     11.50844  18.34925  28.11914  2      158
+siesta:     12.98242  19.76654  30.12225  2      159
+siesta:     26.19161   2.75900  25.09557  1      160
+siesta:     24.45307   3.23143  24.90660  2      161
+siesta:     26.49397   1.62517  23.71607  2      162
+siesta:      8.46598  22.33657   4.53534  1      163
+siesta:      7.86126  20.80589   3.76056  2      164
+siesta:      8.22031  23.60269   3.26923  2      165
+siesta:     25.37903  10.71475  16.27055  1      166
+siesta:     24.45307   9.67540  17.42328  2      167
+siesta:     24.81211  10.18563  14.62649  2      168
+siesta:     20.50354   0.94486  23.43261  1      169
+siesta:     19.97441   1.02045  25.15226  2      170
+siesta:     19.10514   1.58737  22.48775  2      171
+siesta:     14.02177   7.88016  24.11291  1      172
+siesta:     15.04223   8.50377  22.75231  2      173
+siesta:     13.36037   6.31169  23.50820  2      174
+siesta:     11.71631  17.83902  16.93195  1      175
+siesta:     10.96042  17.36659  18.51932  2      176
+siesta:     10.60137  17.15872  15.68473  2      177
+siesta:     17.65005   4.08181   8.08803  1      178
+siesta:     17.97130   5.32903   6.80302  2      179
+siesta:     15.85481   4.08181   8.25811  2      180
+siesta:      6.51956  17.83902   2.72121  1      181
+siesta:      5.65028  16.28945   3.04246  2      182
+siesta:      5.97154  18.33035   1.07714  2      183
+siesta:     18.57602  20.69251  13.19029  1      184
+siesta:     18.25476  19.50198  14.51310  2      185
+siesta:     18.57602  22.29878  14.02177  2      186
+siesta:      3.42041  26.90971   4.25189  1      187
+siesta:      4.38417  28.30811   4.89439  2      188
+siesta:      2.04091  26.73964   5.40462  2      189
+siesta:     29.19628  28.76164  14.77766  1      190
+siesta:     28.13803  27.34435  14.49421  2      191
+siesta:     30.21673  28.30811  16.19496  2      192
+siesta:     12.73676  26.24831  13.19029  1      193
+siesta:     13.60603  27.83568  13.11470  2      194
+siesta:     13.03912  25.49242  11.56513  2      195
+siesta:     26.26720  24.86881  12.83125  1      196
+siesta:     24.62314  24.47196  12.18874  2      197
+siesta:     27.36325  23.71607  11.96197  2      198
+siesta:     11.24387  13.56824  29.70651  1      199
+siesta:     12.50999  14.85325  29.91438  2      200
+siesta:     10.05335  14.30523  28.55377  2      201
+siesta:     22.58224  24.33968  28.49708  1      202
+siesta:     21.37281  24.35858  27.13648  2      203
+siesta:     24.15071  24.77432  27.70340  2      204
+siesta:     11.82969   0.90707  20.59802  1      205
+siesta:     11.30057   0.96376  22.33657  2      206
+siesta:     10.73365  -0.32125  19.82323  2      207
+siesta:      2.66451   4.34637   3.57158  1      208
+siesta:      2.34326   6.10382   3.72276  2      209
+siesta:      2.38106   3.96843   1.83304  2      210
+siesta:     28.96951  18.34925  27.59001  1      211
+siesta:     28.04355  18.51932  26.04044  2      212
+siesta:     27.76009  18.67050  28.87503  2      213
+siesta:      7.76678  25.64359  11.73520  1      214
+siesta:      9.16518  26.32390  12.64227  2      215
+siesta:      8.16362  23.88615  11.54623  2      216
+siesta:     21.33502  26.60735  10.48798  1      217
+siesta:     21.37281  26.66405  12.28322  2      218
+siesta:     22.22319  28.08134   9.95886  2      219
+siesta:      4.83770  10.43129  17.66895  1      220
+siesta:      4.30858  12.15094  17.70674  2      221
+siesta:      3.45820   9.54312  16.89416  2      222
+siesta:      6.84081   7.82347   8.69274  1      223
+siesta:      6.55735   6.33059   9.65650  2      224
+siesta:      7.40773   7.21876   7.08648  2      225
+siesta:     17.04534  10.56357  15.36348  1      226
+siesta:     18.46263   9.69430  14.64538  2      227
+siesta:     15.62804   9.99666  14.39972  2      228
+siesta:     26.43728  28.11914  21.73186  1      229
+siesta:     26.39948  27.74119  23.48931  2      230
+siesta:     24.92550  27.36325  21.07045  2      231
+siesta:     20.40905   1.05825  28.81833  1      232
+siesta:     19.19963   1.53068  30.08445  2      233
+siesta:     20.54133  -0.73699  28.96951  2      234
+siesta:      9.78879  14.73987   6.16051  1      235
+siesta:      9.46753  16.02488   4.93219  2      236
+siesta:     11.56513  14.89105   6.50066  2      237
+siesta:     24.49086  19.29411   1.28501  1      238
+siesta:     23.92394  18.42484   2.77790  2      239
+siesta:     24.58535  21.03266   1.79524  2      240
+siesta:     24.37748  16.51621   7.16206  1      241
+siesta:     26.07823  16.74298   6.55735  2      242
+siesta:     23.71607  18.19807   7.31324  2      243
+siesta:     15.15561  25.53021  21.63737  1      244
+siesta:     14.75877  27.28766  21.35391  2      245
+siesta:     15.21230  24.81211  19.97441  2      246
+siesta:      3.26923  14.89105  26.55066  1      247
+siesta:      2.68341  13.19029  26.58846  2      248
+siesta:      2.11649  15.79812  27.57112  2      249
+siesta:      0.86927   7.99354  15.09892  1      250
+siesta:      1.20943   8.73054  13.47375  2      251
+siesta:     -0.83148   7.44552  15.00443  2      252
+siesta:      9.03289   6.42507  28.25142  1      253
+siesta:      8.29590   5.99043  29.83879  2      254
+siesta:     10.80924   6.21720  28.49708  2      255
+siesta:     29.17738  11.18718  24.15071  1      256
+siesta:     28.47818   9.82658  23.18695  2      257
+siesta:     27.98686  11.47064  25.47352  2      258
+siesta:     10.88483  26.15382   7.69119  1      259
+siesta:     10.60137  24.39637   7.40773  2      260
+siesta:      9.88327  26.53177   9.16518  2      261
+siesta:     19.74765   9.88327  25.88926  1      262
+siesta:     19.06734  11.31946  25.01998  2      263
+siesta:     21.03266  10.56357  26.94751  2      264
+siesta:      4.00622  20.01221  28.44039  1      265
+siesta:      4.96998  18.99176  27.28766  2      266
+siesta:      2.28657  19.70985  27.98686  2      267
+siesta:     18.40594  24.47196   5.36682  1      268
+siesta:     20.08780  23.82946   5.21565  2      269
+siesta:     18.10358  25.32234   3.77945  2      270
+siesta:     26.62625  18.10358  14.28634  1      271
+siesta:     27.81678  19.29411  13.60603  2      272
+siesta:     25.62470  17.61225  12.86904  2      273
+siesta:      5.17785  28.87503  24.90660  1      274
+siesta:      3.93063  28.28921  23.73497  2      275
+siesta:      4.21409  29.61202  26.24831  2      276
+siesta:      2.94797  20.65471  17.06423  1      277
+siesta:      3.91173  21.33502  18.42484  2      278
+siesta:      3.55269  18.95396  16.87526  2      279
+siesta:      0.88817  21.37281  12.16984  1      280
+siesta:      1.90862  22.29878  10.99821  2      281
+siesta:      1.70075  21.61848  13.75721  2      282
+siesta:      3.72276  17.61225  10.11004  1      283
+siesta:      5.17785  17.36659  11.16829  2      284
+siesta:      2.41885  18.14138  11.22498  2      285
+siesta:      9.42974   2.58893  24.71763  1      286
+siesta:      8.08803   1.37950  24.75542  2      287
+siesta:      8.88172   3.89284  25.85146  2      288
+siesta:      8.86282  20.69251  11.11159  1      289
+siesta:      7.69119  20.69251   9.75099  2      290
+siesta:      8.65495  19.04845  11.86748  2      291
+siesta:     12.32102   8.03134   5.51800  1      292
+siesta:     13.51155   8.27700   4.17630  2      293
+siesta:     10.84703   8.91951   4.95108  2      294
+siesta:      9.01400  20.67361  22.14760  1      295
+siesta:      8.65495  21.80745  20.78700  2      296
+siesta:      9.16518  19.04845  21.35391  2      297
+siesta:     16.93195   0.52912  12.71786  1      298
+siesta:     16.70519   2.02201  11.71631  2      299
+siesta:     18.00910  -0.52912  11.71631  2      300
+siesta:      9.27856   9.59981  20.93817  1      301
+siesta:      7.55891   9.84548  20.40905  2      302
+siesta:      9.76989   8.05024  20.12559  2      303
+siesta:      3.15584   9.58092   3.38261  1      304
+siesta:      2.66451   9.90217   5.10226  2      305
+siesta:      4.85660  10.20453   3.26923  2      306
+siesta:     13.85170  21.58068   4.04402  1      307
+siesta:     15.25010  22.33657   4.87550  2      308
+siesta:     12.39661  22.39326   4.76211  2      309
+siesta:     26.02154  17.00754  21.80745  1      310
+siesta:     27.62781  16.21386  22.09091  2      311
+siesta:     25.41683  16.27055  20.27677  2      312
+siesta:     26.58846  21.86414  18.25476  1      313
+siesta:     26.70184  20.29567  17.36659  2      314
+siesta:     26.55066  23.11136  16.95085  2      315
+siesta:      2.21098  28.74275  20.10669  1      316
+siesta:      0.43464  28.55377  20.44684  2      317
+siesta:      2.49444  30.51909  20.23897  2      318
+siesta:     11.73520  23.28144  25.60580  1      319
+siesta:     10.75255  22.07201  24.67983  2      320
+siesta:     12.88794  23.98063  24.37748  2      321
+siesta:     25.22785  11.58403  28.17583  1      322
+siesta:     24.62314  13.26588  28.00575  2      323
+siesta:     24.45307  10.96042  29.66871  2      324
+siesta:     27.00420   3.77945  16.32724  1      325
+siesta:     27.98686   2.72121  15.25010  2      326
+siesta:     25.32234   3.70386  15.64694  2      327
+siesta:     14.30523   6.25500  28.83723  1      328
+siesta:     15.19340   7.52111  29.76320  2      329
+siesta:     14.15405   6.93530  27.17427  2      330
+siesta:      4.93219  24.26409  21.05156  1      331
+siesta:      3.85504  25.70029  20.76810  2      332
+siesta:      5.95264  24.73652  22.44996  2      333
+siesta:     17.72564  18.08469   4.06291  1      334
+siesta:     17.53667  16.98864   2.62672  2      335
+siesta:     16.45952  19.35080   3.83615  2      336
+siesta:     18.06579  14.68318  12.85014  1      337
+siesta:     17.47997  13.43596  14.02177  2      338
+siesta:     17.02644  14.45641  11.37616  2      339
+siesta:      5.61249   1.24722   6.87861  1      340
+siesta:      4.89439   2.81569   6.31169  2      341
+siesta:      4.72432   0.85038   8.39039  2      342
+siesta:      4.34637  15.85481  16.96975  1      343
+siesta:      3.70386  15.83591  18.67050  2      344
+siesta:      3.04246  15.13671  15.96819  2      345
+siesta:     12.45330   8.97620  12.33992  1      346
+siesta:     10.84703   9.73209  12.66117  2      347
+siesta:     12.69896   9.18407  10.56357  2      348
+siesta:     22.37437   9.14628  19.86103  1      349
+siesta:     22.43106  10.37460  21.20274  2      350
+siesta:     23.43261   7.80457  20.42795  2      351
+siesta:     14.62649  15.96819   8.40928  1      352
+siesta:     13.09581  16.79967   8.90061  2      353
+siesta:     15.38238  17.08313   7.21876  2      354
+siesta:      0.01890  27.23096   8.12583  1      355
+siesta:      0.94486  28.17583   9.35415  2      356
+siesta:     -0.96376  28.47818   7.23765  2      357
+siesta:      8.82502  22.63893  17.02644  1      358
+siesta:      8.48487  22.97908  15.28789  2      359
+siesta:     10.60137  22.86570  17.19651  2      360
+siesta:     15.81701  10.62027   8.01244  1      361
+siesta:     14.58869   9.95886   6.85971  2      362
+siesta:     15.81701  12.39661   7.72898  2      363
+siesta:     11.50844  29.47974   4.15740  1      364
+siesta:     10.97931  28.78054   2.57003  2      365
+siesta:     11.01711  28.25142   5.38572  2      366
+siesta:     19.38860  25.56800  15.51466  1      367
+siesta:     20.18228  25.39793  17.12093  2      368
+siesta:     19.12404  27.34435  15.32568  2      369
+siesta:     23.26254  15.04223  11.75410  1      370
+siesta:     21.56178  15.17451  12.32102  2      371
+siesta:     23.16805  15.30679   9.95886  2      372
+siesta:     19.10514   7.84237  10.99821  1      373
+siesta:     18.67050   6.40617   9.97776  2      374
+siesta:     18.16028   9.20297  10.28011  2      375
+siesta:     26.62625   4.04402   1.28501  1      376
+siesta:     24.92550   4.08181   0.66140  2      377
+siesta:     27.60891   3.32592  -0.05669  2      378
+siesta:      3.32592  29.34746  11.67851  1      379
+siesta:      4.64873  28.19473  12.15094  2      380
+siesta:      1.88973  28.81833  12.64227  2      381
+siesta:      8.10693  16.10047  13.19029  1      382
+siesta:      6.97309  16.51621  14.53200  2      383
+siesta:      8.06913  14.28634  13.13360  2      384
+
+siesta: System type = bulk      
+
+initatomlists: Number of atoms, orbitals, and projectors:    384  2944  4352
+
+siesta: ******************** Simulation parameters ****************************
+siesta:
+siesta: The following are some of the parameters of the simulation.
+siesta: A complete list of the parameters used, including default values,
+siesta: can be found in file out.fdf
+siesta:
+redata: Non-Collinear-spin run           =     F
+redata: SpinPolarized (Up/Down) run      =     F
+redata: Number of spin components        =     1
+redata: Long output                      =     F
+redata: Number of Atomic Species         =        2
+redata: Charge density info will appear in .RHO file
+redata: Write Mulliken Pop.              =     NO
+redata: Mesh Cutoff                      =   150.0000  Ry
+redata: Net charge of the system         =     0.0000 |e|
+redata: Min. number of SCF Iter          =        0
+redata: Max. number of SCF Iter          =       50
+redata: Mix DM or H after convergence    =     F
+redata: Recompute H after scf cycle      =     F
+redata: Performing Pulay mixing using    =     3 iterations
+redata: Mix DM in first SCF step ?       =     F
+redata: Write Pulay info on disk?        =     F
+redata: Discard 1st Pulay DM after  kick =     F
+redata: New DM Mixing Weight             =     0.3000
+redata: New DM Occupancy tolerance       = 0.000000000001
+redata: No kicks to SCF
+redata: DM Mixing Weight for Kicks       =     0.5000
+redata: DM Tolerance for SCF             =     0.000100
+redata: Require (free) Energy convergence in SCF =     F
+redata: DM (free)Energy tolerance for SCF =     0.000010 eV
+redata: Require Harris convergence for SCF =     F
+redata: DM Harris energy tolerance for SCF =     0.000010 eV
+redata: Using Saved Data (generic)   =     F
+redata: Use continuation files for DM    =     F
+redata: Neglect nonoverlap interactions  =     F
+redata: Method of Calculation            =     Diagonalization
+redata: Divide and Conquer               =     T
+redata: Electronic Temperature           =     0.0019  Ry
+redata: Fix the spin of the system       =     F
+redata: Dynamics option                  =     Single-point calculation
+redata: ***********************************************************************
+Total number of electrons:  1024.000000
+Total ionic charge:  1024.000000
+
+* ProcessorY, Blocksize:    8  23
+
+
+* Orbital distribution balance (max,min):    23    23
+
+ Kpoints in:  1 . Kpoints trimmed:  1
+
+siesta: k-grid: Number of k-points =     1
+siesta: k-grid: Cutoff (effective) =     7.823 Ang
+siesta: k-grid: Supercell and displacements
+siesta: k-grid:    1   0   0      0.000
+siesta: k-grid:    0   1   0      0.000
+siesta: k-grid:    0   0   1      0.000
+
+                     ====================================
+                        Single-point calculation
+                     ====================================
+
+outcell: Unit cell vectors (Ang):
+       15.646046    0.000000    0.000000
+        0.000000   15.646046    0.000000
+        0.000000    0.000000   15.646046
+
+outcell: Cell vector modules (Ang)   :   15.646046   15.646046   15.646046
+outcell: Cell angles (23,13,12) (deg):     90.0000     90.0000     90.0000
+outcell: Cell volume (Ang**3)        :   3830.1327
+New_DM. Step:     1
+Initializing Density Matrix...
+New grid distribution:   1
+           1       1:   60    1:    8    1:    4
+           2       1:   60    1:    8    5:    8
+           3       1:   60    1:    8    9:   12
+           4       1:   60    1:    8   13:   16
+           5       1:   60    1:    8   17:   20
+           6       1:   60    1:    8   21:   24
+           7       1:   60    1:    8   25:   28
+           8       1:   60    1:    8   29:   32
+           9       1:   60    1:    8   33:   36
+          10       1:   60    1:    8   37:   40
+          11       1:   60    1:    8   41:   44
+          12       1:   60    1:    8   45:   48
+          13       1:   60    1:    8   49:   51
+          14       1:   60    1:    8   52:   54
+          15       1:   60    1:    8   55:   57
+          16       1:   60    1:    8   58:   60
+          17       1:   60    9:   16    1:    4
+          18       1:   60    9:   16    5:    8
+          19       1:   60    9:   16    9:   12
+          20       1:   60    9:   16   13:   16
+          21       1:   60    9:   16   17:   20
+          22       1:   60    9:   16   21:   24
+          23       1:   60    9:   16   25:   28
+          24       1:   60    9:   16   29:   32
+          25       1:   60    9:   16   33:   36
+          26       1:   60    9:   16   37:   40
+          27       1:   60    9:   16   41:   44
+          28       1:   60    9:   16   45:   48
+          29       1:   60    9:   16   49:   51
+          30       1:   60    9:   16   52:   54
+          31       1:   60    9:   16   55:   57
+          32       1:   60    9:   16   58:   60
+          33       1:   60   17:   24    1:    4
+          34       1:   60   17:   24    5:    8
+          35       1:   60   17:   24    9:   12
+          36       1:   60   17:   24   13:   16
+          37       1:   60   17:   24   17:   20
+          38       1:   60   17:   24   21:   24
+          39       1:   60   17:   24   25:   28
+          40       1:   60   17:   24   29:   32
+          41       1:   60   17:   24   33:   36
+          42       1:   60   17:   24   37:   40
+          43       1:   60   17:   24   41:   44
+          44       1:   60   17:   24   45:   48
+          45       1:   60   17:   24   49:   51
+          46       1:   60   17:   24   52:   54
+          47       1:   60   17:   24   55:   57
+          48       1:   60   17:   24   58:   60
+          49       1:   60   25:   32    1:    4
+          50       1:   60   25:   32    5:    8
+          51       1:   60   25:   32    9:   12
+          52       1:   60   25:   32   13:   16
+          53       1:   60   25:   32   17:   20
+          54       1:   60   25:   32   21:   24
+          55       1:   60   25:   32   25:   28
+          56       1:   60   25:   32   29:   32
+          57       1:   60   25:   32   33:   36
+          58       1:   60   25:   32   37:   40
+          59       1:   60   25:   32   41:   44
+          60       1:   60   25:   32   45:   48
+          61       1:   60   25:   32   49:   51
+          62       1:   60   25:   32   52:   54
+          63       1:   60   25:   32   55:   57
+          64       1:   60   25:   32   58:   60
+          65       1:   60   33:   39    1:    4
+          66       1:   60   33:   39    5:    8
+          67       1:   60   33:   39    9:   12
+          68       1:   60   33:   39   13:   16
+          69       1:   60   33:   39   17:   20
+          70       1:   60   33:   39   21:   24
+          71       1:   60   33:   39   25:   28
+          72       1:   60   33:   39   29:   32
+          73       1:   60   33:   39   33:   36
+          74       1:   60   33:   39   37:   40
+          75       1:   60   33:   39   41:   44
+          76       1:   60   33:   39   45:   48
+          77       1:   60   33:   39   49:   51
+          78       1:   60   33:   39   52:   54
+          79       1:   60   33:   39   55:   57
+          80       1:   60   33:   39   58:   60
+          81       1:   60   40:   46    1:    4
+          82       1:   60   40:   46    5:    8
+          83       1:   60   40:   46    9:   12
+          84       1:   60   40:   46   13:   16
+          85       1:   60   40:   46   17:   20
+          86       1:   60   40:   46   21:   24
+          87       1:   60   40:   46   25:   28
+          88       1:   60   40:   46   29:   32
+          89       1:   60   40:   46   33:   36
+          90       1:   60   40:   46   37:   40
+          91       1:   60   40:   46   41:   44
+          92       1:   60   40:   46   45:   48
+          93       1:   60   40:   46   49:   51
+          94       1:   60   40:   46   52:   54
+          95       1:   60   40:   46   55:   57
+          96       1:   60   40:   46   58:   60
+          97       1:   60   47:   53    1:    4
+          98       1:   60   47:   53    5:    8
+          99       1:   60   47:   53    9:   12
+         100       1:   60   47:   53   13:   16
+         101       1:   60   47:   53   17:   20
+         102       1:   60   47:   53   21:   24
+         103       1:   60   47:   53   25:   28
+         104       1:   60   47:   53   29:   32
+         105       1:   60   47:   53   33:   36
+         106       1:   60   47:   53   37:   40
+         107       1:   60   47:   53   41:   44
+         108       1:   60   47:   53   45:   48
+         109       1:   60   47:   53   49:   51
+         110       1:   60   47:   53   52:   54
+         111       1:   60   47:   53   55:   57
+         112       1:   60   47:   53   58:   60
+         113       1:   60   54:   60    1:    4
+         114       1:   60   54:   60    5:    8
+         115       1:   60   54:   60    9:   12
+         116       1:   60   54:   60   13:   16
+         117       1:   60   54:   60   17:   20
+         118       1:   60   54:   60   21:   24
+         119       1:   60   54:   60   25:   28
+         120       1:   60   54:   60   29:   32
+         121       1:   60   54:   60   33:   36
+         122       1:   60   54:   60   37:   40
+         123       1:   60   54:   60   41:   44
+         124       1:   60   54:   60   45:   48
+         125       1:   60   54:   60   49:   51
+         126       1:   60   54:   60   52:   54
+         127       1:   60   54:   60   55:   57
+         128       1:   60   54:   60   58:   60
+
+InitMesh: MESH =   120 x   120 x   120 =     1728000
+InitMesh: (bp) =    60 x    60 x    60 =      216000
+InitMesh: Mesh cutoff (required, used) =   150.000   162.575 Ry
+ExtMesh (bp) on 0 =   112 x    60 x    56 =      376320
+New grid distribution:   2
+           1       1:   16    1:   16   29:   37
+           2      30:   45    1:   15    1:    7
+           3      46:   60    1:   15    8:   14
+           4       1:   16   18:   30   47:   53
+           5       1:   15    1:   15   14:   20
+           6       1:   15    1:   15   21:   28
+           7       1:   13   30:   46   23:   28
+           8      31:   46    1:   17   29:   38
+           9      17:   30    1:   16   29:   39
+          10      30:   43   17:   29   22:   28
+          11      31:   46    1:   17   39:   44
+          12       1:   15    1:   17   47:   53
+          13       1:   16    1:   16   38:   46
+          14       1:   15    1:   15    1:    7
+          15       1:   15    1:   17   54:   60
+          16      30:   43   17:   29   15:   21
+          17      47:   60    1:   17   37:   44
+          18      46:   60    1:   15    1:    7
+          19      30:   45    1:   15    8:   14
+          20       1:   15    1:   15    8:   13
+          21      43:   60    1:   16   15:   20
+          22      43:   60    1:   16   21:   28
+          23       1:   16   16:   29    1:    7
+          24      17:   29   16:   29    1:    7
+          25      16:   29    1:   15   21:   28
+          26      30:   45   16:   29    1:    7
+          27      17:   30   18:   30   47:   53
+          28      31:   47    1:   16   45:   53
+          29      16:   30    1:   17   47:   53
+          30      17:   30    1:   16   40:   46
+          31      31:   47    1:   16   54:   60
+          32       1:   15   47:   60   16:   21
+          33      29:   45   30:   45   22:   28
+          34      16:   29    1:   15    1:    8
+          35      30:   45   16:   29    8:   14
+          36      16:   29   16:   29   14:   20
+          37      44:   60   17:   29   15:   22
+          38      16:   29   16:   29   21:   28
+          39      44:   60   17:   29   23:   28
+          40      14:   30   17:   30   29:   38
+          41       1:   15   47:   60   22:   28
+          42       1:   13   17:   30   37:   46
+          43      30:   42    1:   16   15:   20
+          44      44:   60   17:   30   45:   53
+          45      44:   60   47:   60   37:   44
+          46      16:   29    1:   15   14:   20
+          47      16:   30    1:   17   54:   60
+          48      17:   30   18:   30   54:   60
+          49      44:   60   47:   60   29:   36
+          50      48:   60    1:   16   45:   52
+          51      46:   60   16:   29    8:   14
+          52       1:   16   16:   29    8:   13
+          53      29:   45   30:   45   15:   21
+          54       1:   15   16:   29   21:   28
+          55       1:   15   16:   29   14:   20
+          56      47:   60   18:   30   29:   35
+          57      47:   60    1:   17   29:   36
+          58      48:   60    1:   16   53:   60
+          59      16:   28   47:   60   16:   21
+          60      47:   60   31:   44   45:   52
+          61      14:   30   17:   30   39:   46
+          62      46:   60   16:   29    1:    7
+          63      44:   60   17:   30   54:   60
+          64       1:   13   31:   44   29:   34
+          65       1:   15   30:   45    1:    7
+          66      31:   43   17:   30   45:   52
+          67      29:   46   30:   43    7:   14
+          68      47:   60   30:   43    8:   14
+          69      14:   28   30:   46   16:   22
+          70       1:   13   30:   46   16:   22
+          71      46:   60   30:   45   23:   28
+          72      28:   50   31:   46   29:   35
+          73      14:   27   31:   44   29:   35
+          74      28:   50   31:   46   36:   44
+          75      14:   27   31:   44   36:   43
+          76       1:   13   31:   44   44:   53
+          77      28:   46   31:   44   45:   53
+          78       1:   13   31:   44   54:   60
+          79      28:   46   31:   44   54:   60
+          80      47:   60   31:   44   53:   60
+          81      29:   46   30:   43    1:    6
+          82      47:   60   30:   43    1:    7
+          83       1:   15   30:   45    8:   15
+          84      16:   28   30:   45    8:   15
+          85      46:   60   30:   45   15:   22
+          86      30:   42    1:   16   21:   28
+          87      14:   28   30:   46   23:   28
+          88      51:   60   31:   46   29:   35
+          89      31:   46   18:   30   37:   44
+          90      31:   43   17:   30   53:   60
+          91      51:   60   31:   46   36:   44
+          92      14:   27   31:   44   44:   53
+          93      15:   28   46:   60    1:    9
+          94      31:   46   18:   30   29:   36
+          95       1:   16   18:   30   54:   60
+          96      14:   27   31:   44   54:   60
+          97      29:   47   44:   60    1:    8
+          98       1:   14   46:   60    1:    9
+          99      48:   60   44:   60    8:   14
+         100       1:   14   46:   60   10:   15
+         101      29:   43   46:   60   15:   22
+         102      16:   28   47:   60   22:   28
+         103      44:   60   46:   60   23:   28
+         104       1:   15   45:   60   29:   37
+         105      16:   27   45:   60   29:   36
+         106      28:   43   47:   60   36:   44
+         107       1:   15   45:   60   38:   43
+         108      13:   27   45:   60   44:   50
+         109       1:   12   45:   60   44:   51
+         110      28:   47   45:   60   51:   60
+         111       1:   12   45:   60   52:   60
+         112      17:   29   16:   29    8:   13
+         113      48:   60   45:   60   53:   60
+         114      48:   60   44:   60    1:    7
+         115      29:   47   44:   60    9:   14
+         116      15:   28   46:   60   10:   15
+         117      44:   60   46:   60   15:   22
+         118       1:   13   31:   44   35:   43
+         119      29:   43   46:   60   23:   28
+         120      28:   43   47:   60   29:   35
+         121      47:   60   18:   30   36:   44
+         122       1:   13   17:   30   29:   36
+         123      16:   27   45:   60   37:   43
+         124      28:   47   45:   60   45:   50
+         125      48:   60   45:   60   45:   52
+         126      13:   27   45:   60   51:   60
+         127      16:   28   30:   45    1:    7
+         128      16:   29    1:   15    9:   13
+New grid distribution:   3
+           1      31:   45    1:   15   31:   38
+           2       1:   15   46:   60   24:   30
+           3      31:   45    1:   15    9:   15
+           4       1:   15    1:   15   16:   23
+           5      31:   45    1:   15   16:   23
+           6      46:   60   46:   60   39:   45
+           7      46:   60   31:   45    9:   15
+           8       1:   15    1:   15   31:   38
+           9      16:   30   16:   30   16:   23
+          10      31:   45   46:   60   39:   45
+          11       1:   15    1:   15   39:   45
+          12       1:   15    1:   15   46:   53
+          13      16:   30    1:   15   46:   53
+          14      31:   45    1:   15   46:   53
+          15      46:   60    1:   15   54:   60
+          16      31:   45    1:   15   39:   45
+          17      46:   60   46:   60   16:   23
+          18       1:   15   16:   30    1:    8
+          19      16:   30    1:   15    9:   15
+          20      46:   60   16:   30    9:   15
+          21      46:   60   16:   30   16:   23
+          22       1:   15    1:   15    9:   15
+          23      46:   60    1:   15    9:   15
+          24      46:   60    1:   15   31:   38
+          25      16:   30    1:   15   31:   38
+          26       1:   15    1:   15   24:   30
+          27      46:   60    1:   15   39:   45
+          28      46:   60    1:   15   46:   53
+          29      46:   60   46:   60    1:    8
+          30      16:   30    1:   15   16:   23
+          31      16:   30   31:   45   54:   60
+          32      31:   45    1:   15   54:   60
+          33      46:   60   46:   60   46:   53
+          34      46:   60   16:   30    1:    8
+          35       1:   15   16:   30    9:   15
+          36      31:   45   16:   30    9:   15
+          37       1:   15   16:   30   16:   23
+          38      46:   60   16:   30   24:   30
+          39       1:   15   16:   30   24:   30
+          40      31:   45   16:   30   31:   38
+          41      16:   30   16:   30   31:   38
+          42       1:   15   46:   60   54:   60
+          43      31:   45   16:   30   39:   45
+          44      31:   45   16:   30   46:   53
+          45       1:   15   16:   30   46:   53
+          46       1:   15   31:   45   16:   23
+          47      31:   45   16:   30   54:   60
+          48      16:   30   16:   30   54:   60
+          49      46:   60   46:   60   31:   38
+          50      16:   30   16:   30    1:    8
+          51      16:   30    1:   15   24:   30
+          52      31:   45   31:   45    9:   15
+          53      31:   45   31:   45   16:   23
+          54       1:   15   31:   45   24:   30
+          55      16:   30   16:   30   24:   30
+          56      46:   60   16:   30   31:   38
+          57       1:   15   16:   30   31:   38
+          58       1:   15   31:   45   54:   60
+          59      46:   60   16:   30   39:   45
+          60      46:   60   16:   30   46:   53
+          61      16:   30   16:   30   46:   53
+          62      16:   30    1:   15    1:    8
+          63      46:   60   16:   30   54:   60
+          64      16:   30   16:   30   39:   45
+          65      46:   60   31:   45    1:    8
+          66      16:   30   31:   45    1:    8
+          67      31:   45   31:   45   39:   45
+          68      16:   30   31:   45    9:   15
+          69      16:   30   31:   45   16:   23
+          70      46:   60   31:   45   39:   45
+          71      16:   30   31:   45   24:   30
+          72       1:   15   31:   45   31:   38
+          73      46:   60   31:   45   31:   38
+          74       1:   15   16:   30   39:   45
+          75      16:   30   31:   45   39:   45
+          76      31:   45   31:   45   46:   53
+          77      16:   30   31:   45   46:   53
+          78       1:   15    1:   15    1:    8
+          79      31:   45   31:   45   54:   60
+          80      46:   60    1:   15   24:   30
+          81      31:   45   31:   45    1:    8
+          82       1:   15   31:   45    1:    8
+          83      16:   30   46:   60   54:   60
+          84      31:   45   46:   60    9:   15
+          85      46:   60   31:   45   16:   23
+          86      16:   30   16:   30    9:   15
+          87      16:   30   46:   60   24:   30
+          88      16:   30   31:   45   31:   38
+          89      31:   45   31:   45   31:   38
+          90      16:   30    1:   15   39:   45
+          91       1:   15   31:   45   39:   45
+          92       1:   15   31:   45   46:   53
+          93      46:   60   31:   45   46:   53
+          94      46:   60    1:   15   16:   23
+          95      46:   60   31:   45   54:   60
+          96      31:   45   16:   30   24:   30
+          97      31:   45   46:   60    1:    8
+          98       1:   15   46:   60    1:    8
+          99      46:   60   31:   45   24:   30
+         100       1:   15   46:   60    9:   15
+         101       1:   15   46:   60   16:   23
+         102      31:   45   31:   45   24:   30
+         103      31:   45   46:   60   24:   30
+         104       1:   15   46:   60   31:   38
+         105      31:   45   46:   60   31:   38
+         106      46:   60    1:   15    1:    8
+         107      16:   30   46:   60   39:   45
+         108      31:   45    1:   15   24:   30
+         109       1:   15   46:   60   46:   53
+         110      31:   45   16:   30    1:    8
+         111      31:   45   46:   60   54:   60
+         112       1:   15   16:   30   54:   60
+         113      31:   45    1:   15    1:    8
+         114       1:   15   31:   45    9:   15
+         115      16:   30   46:   60    9:   15
+         116      31:   45   46:   60   16:   23
+         117      16:   30   46:   60   16:   23
+         118      31:   45   16:   30   16:   23
+         119      46:   60   46:   60    9:   15
+         120      46:   60   46:   60   24:   30
+         121      16:   30   46:   60   31:   38
+         122       1:   15    1:   15   54:   60
+         123       1:   15   46:   60   39:   45
+         124      16:   30   46:   60   46:   53
+         125      31:   45   46:   60   46:   53
+         126      16:   30   46:   60    1:    8
+         127      46:   60   46:   60   54:   60
+         128      16:   30    1:   15   54:   60
+Setting up quadratic distribution...
+ExtMesh (bp) on 0 =    68 x    68 x    61 =      282064
+PhiOnMesh: Number of (b)points on node 0 =                 2304
+PhiOnMesh: nlist on node 0 =                74057
+
+stepf: Fermi-Dirac step function
+QETSC: SCF iter time=   8.030
+
+siesta: Program's energy decomposition (eV):
+siesta: Ebs     =    -19717.145141
+siesta: Eions   =    104429.373288
+siesta: Ena     =     25111.247127
+siesta: Ekin    =     39771.655038
+siesta: Enl     =     -5671.889728
+siesta: DEna    =         0.000020
+siesta: DUscf   =         0.000000
+siesta: DUext   =         0.000000
+siesta: Exc     =    -14272.759880
+siesta: eta*DQ  =         0.000000
+siesta: Emadel  =         0.000000
+siesta: Emeta   =         0.000000
+siesta: Emolmec =         0.000000
+siesta: Ekinion =         0.000000
+siesta: Eharris =    -60791.143089
+siesta: Etot    =    -59491.120711
+siesta: FreeEng =    -59491.120711
+
+   scf: iscf   Eharris(eV)      E_KS(eV)   FreeEng(eV)    dDmax  Ef(eV)
+   scf:    1   -60791.1431   -59491.1207   -59491.1207  1.01963 -3.1108
+timer: Routine,Calls,Time,% =    IterSCF     1       9.030  32.03
+QETSC: SCF iter time=   7.760
+   scf:    2   -61465.7931   -59391.3189   -59391.3189  2.41554  1.5006
+QETSC: SCF iter time=   7.760
+   scf:    3   -60208.6925   -59760.1173   -59760.1173  0.45838  0.1330
+QETSC: SCF iter time=   7.750
+   scf:    4   -60203.7169   -59966.3149   -59966.3149  0.28078  0.4824
+QETSC: SCF iter time=   7.750
+   scf:    5   -60202.5478   -60217.1351   -60217.1351  0.03760  0.2298
+QETSC: SCF iter time=   7.760
+   scf:    6   -60202.4007   -60204.4150   -60204.4150  0.01913  0.2335
+QETSC: SCF iter time=   7.750
+   scf:    7   -60202.3917   -60203.8591   -60203.8591  0.01196  0.2533
+QETSC: SCF iter time=   7.760
+   scf:    8   -60202.3901   -60204.1013   -60204.1013  0.00318  0.2749
+QETSC: SCF iter time=   7.760
+   scf:    9   -60202.3895   -60203.7847   -60203.7847  0.00154  0.2718
+QETSC: SCF iter time=   7.750
+   scf:   10   -60202.3893   -60203.1825   -60203.1825  0.00037  0.2679
+QETSC: SCF iter time=   7.750
+   scf:   11   -60202.3893   -60202.8375   -60202.8375  0.00024  0.2676
+QETSC: SCF iter time=   7.750
+   scf:   12   -60202.3893   -60202.5628   -60202.5628  0.00017  0.2676
+QETSC: SCF iter time=   7.760
+   scf:   13   -60202.3893   -60202.3636   -60202.3636  0.00004  0.2679
+
+SCF Convergence by dMax criterion
+max |DM_out - DM_in|:     0.00003769
+SCF cycle converged after   13 iterations
+
+Using DM_out to compute the final energy and forces
+
+siesta: E_KS(eV) =           -60202.3893
+
+siesta: E_KS - E_eggbox =    -60202.3893
+
+siesta: Atomic forces (eV/Ang):
+----------------------------------------
+   Tot    0.138956   -0.065836    0.070294
+----------------------------------------
+   Max    2.472826
+   Res    0.810578    sqrt( Sum f_i^2 / 3N )
+----------------------------------------
+   Max    2.472826    constrained
+
+Stress-tensor-Voigt (kbar):      -47.72      -51.14      -49.48       -2.94       -0.02       -0.78
+(Free)E + p*V (eV/cell)   -60084.1809
+Target enthalpy (eV/cell)   -60202.3893
+QETSC: MD step time= 134.010
+
+siesta: Program's energy decomposition (eV):
+siesta: Ebs     =    -15023.840005
+siesta: Eions   =    104429.373288
+siesta: Ena     =     25111.247127
+siesta: Ekin    =     45103.612512
+siesta: Enl     =     -7805.277184
+siesta: DEna    =     -3341.329454
+siesta: DUscf   =       334.289116
+siesta: DUext   =         0.000000
+siesta: Exc     =    -15175.558131
+siesta: eta*DQ  =         0.000000
+siesta: Emadel  =         0.000000
+siesta: Emeta   =         0.000000
+siesta: Emolmec =         0.000000
+siesta: Ekinion =         0.000000
+siesta: Eharris =    -60202.389303
+siesta: Etot    =    -60202.389302
+siesta: FreeEng =    -60202.389302
+
+siesta: Final energy (eV):
+siesta:  Band Struct. =  -15023.840005
+siesta:       Kinetic =   45103.612512
+siesta:       Hartree =   30356.603639
+siesta:    Ext. field =       0.000000
+siesta:   Exch.-corr. =  -15175.558131
+siesta:  Ion-electron = -101503.268071
+siesta:       Ion-ion =  -18983.779251
+siesta:       Ekinion =       0.000000
+siesta:         Total =  -60202.389302
+
+siesta: Atomic forces (eV/Ang):
+siesta:      1   -0.175613   -1.777014    1.264726
+siesta:      2    0.203232    0.964418   -0.867967
+siesta:      3   -0.415922    0.320355    0.383387
+siesta:      4    0.299901   -0.097492    0.741436
+siesta:      5    0.545530    0.270360   -0.915666
+siesta:      6   -0.939602   -0.165025   -0.235261
+siesta:      7   -0.814822   -0.999157    1.542597
+siesta:      8    0.496663    1.556528   -0.600002
+siesta:      9    0.418370   -0.250133   -1.292169
+siesta:     10    0.594568    0.988990   -1.029637
+siesta:     11   -0.200925   -0.142278    0.551609
+siesta:     12   -0.376043   -0.825814    0.084220
+siesta:     13   -1.371097   -0.589935    1.257173
+siesta:     14   -0.192392    0.460781   -1.036215
+siesta:     15    1.265663   -0.030046    0.082492
+siesta:     16    0.861101   -0.845992   -0.023507
+siesta:     17   -1.280454    0.441142   -0.566153
+siesta:     18    0.568875    0.661386    0.310626
+siesta:     19   -1.481645    0.999958   -0.195750
+siesta:     20    1.257812   -0.138468    0.674193
+siesta:     21    0.738317   -0.867957   -0.831384
+siesta:     22   -0.238224   -1.254234    1.066797
+siesta:     23   -0.495587    0.144155   -1.266690
+siesta:     24    0.371686    1.388475    0.188086
+siesta:     25    0.009139    0.087361    1.296566
+siesta:     26    0.173846    1.263097   -0.011212
+siesta:     27    0.000996   -1.219028   -1.212549
+siesta:     28   -0.444373   -1.753993    0.651250
+siesta:     29   -0.902485    0.688630   -0.474491
+siesta:     30    0.953306    0.790302    0.077506
+siesta:     31    0.246501   -1.263925    1.267090
+siesta:     32   -0.807968   -0.237292   -0.479517
+siesta:     33    0.650895    1.680846   -0.660867
+siesta:     34    0.673096    0.163450    0.973903
+siesta:     35   -0.321811   -0.962081   -0.205581
+siesta:     36   -0.599037    0.710617   -0.761355
+siesta:     37   -0.476997    0.594892   -0.808464
+siesta:     38   -0.001591    0.584319    1.044696
+siesta:     39    0.199708   -0.922902   -0.001119
+siesta:     40    0.260684   -0.763141    0.754149
+siesta:     41   -0.511455   -0.004093   -0.815471
+siesta:     42    0.606064    0.398890   -0.188900
+siesta:     43   -0.755265    0.659290    2.002410
+siesta:     44    0.878616   -0.556826   -1.196565
+siesta:     45   -0.487676    0.145234   -0.460305
+siesta:     46    0.763240    0.202598   -1.158960
+siesta:     47   -0.685750   -0.124268    0.305650
+siesta:     48    0.187115   -0.114299    0.806403
+siesta:     49    0.119373    1.252364   -1.817673
+siesta:     50   -0.539944   -1.132477    0.234837
+siesta:     51    0.463922    0.067268    1.354102
+siesta:     52   -1.124591   -0.413855    0.018830
+siesta:     53    0.965758   -0.455827    0.784961
+siesta:     54    0.022750    1.345074   -0.736308
+siesta:     55   -0.439887    1.060526   -0.574673
+siesta:     56    0.367646   -0.573883    1.384403
+siesta:     57    0.283323   -0.590506   -0.809499
+siesta:     58   -0.429983    1.694445    0.127712
+siesta:     59    0.730465   -0.229352    0.461291
+siesta:     60   -0.385829   -1.680611   -0.333125
+siesta:     61    0.611359    1.266954    0.386995
+siesta:     62   -0.478713   -0.602818   -1.321114
+siesta:     63   -0.680587   -0.307857    1.363605
+siesta:     64    0.273579   -1.637600   -0.349309
+siesta:     65   -0.653001    0.598546   -0.450749
+siesta:     66    0.440807    1.201324    0.862721
+siesta:     67    0.317878    0.042654    1.838093
+siesta:     68   -0.087005   -0.831610   -0.849902
+siesta:     69   -0.448517    1.132609   -0.528138
+siesta:     70   -0.624886   -2.199726   -0.405318
+siesta:     71   -0.901342    1.317489    0.525729
+siesta:     72    1.365008    0.659422   -0.065100
+siesta:     73    0.159606    0.877620   -0.115255
+siesta:     74    0.591050   -0.776150    0.212723
+siesta:     75   -0.741580   -0.001830    0.167005
+siesta:     76    0.343258   -1.411309   -0.467638
+siesta:     77   -1.026641    0.444094    0.282374
+siesta:     78    0.799765    0.290616    0.061058
+siesta:     79   -1.457107    0.041265    0.063773
+siesta:     80    0.598976   -0.697042    0.659278
+siesta:     81    0.702854    0.565621   -0.617102
+siesta:     82   -1.206729    1.320523    1.617944
+siesta:     83    0.622815   -1.882256   -0.724632
+siesta:     84    0.180814    0.646973   -0.561353
+siesta:     85    1.655934   -0.763849    0.194684
+siesta:     86   -1.304772   -1.109602   -0.064312
+siesta:     87    0.327340    1.738253    0.160979
+siesta:     88   -0.021090    1.471298   -0.219805
+siesta:     89    0.043393   -0.136921   -0.328651
+siesta:     90   -0.045150   -1.684300    0.796158
+siesta:     91   -0.046972    1.445587   -0.827247
+siesta:     92   -0.602352   -0.195894    1.326210
+siesta:     93    0.899755   -1.326525   -0.223105
+siesta:     94   -0.784997   -2.189921    0.063469
+siesta:     95   -0.144400    0.638279   -1.103705
+siesta:     96    0.444466    0.912631    0.750399
+siesta:     97   -0.827676    1.051913    0.368412
+siesta:     98   -0.140645   -0.551777   -0.164193
+siesta:     99    0.905914   -0.411292   -0.245853
+siesta:    100   -0.987465    0.038537    0.685012
+siesta:    101    0.729128    0.310651    0.137307
+siesta:    102    0.440877   -0.425676   -1.022708
+siesta:    103    1.286131    0.134648    0.099902
+siesta:    104   -0.630392    0.852015   -0.695725
+siesta:    105   -0.990375   -0.645317    0.592760
+siesta:    106   -1.287836   -1.677656    0.495952
+siesta:    107    0.731355    0.542997   -1.095541
+siesta:    108    0.350799    1.287821    0.647251
+siesta:    109   -0.951087   -1.189901    0.664892
+siesta:    110   -0.373727    0.642223   -0.242294
+siesta:    111    1.671951    0.458855   -0.825065
+siesta:    112   -0.686978    1.462908   -0.230560
+siesta:    113   -0.723145   -0.669645   -0.087928
+siesta:    114    1.566715   -0.275179    0.372481
+siesta:    115    0.511449    0.935319    1.051324
+siesta:    116   -0.437553   -1.577252    0.038342
+siesta:    117    0.119421    0.905651   -0.823504
+siesta:    118    0.481396    0.993601    0.713818
+siesta:    119   -1.020429   -0.532179    0.116301
+siesta:    120    0.506767   -0.105389   -0.737931
+siesta:    121   -0.742164    0.028224    1.315772
+siesta:    122    1.311277    0.281534   -0.299677
+siesta:    123   -0.671670   -0.332134   -1.206262
+siesta:    124   -1.154143   -1.067383    1.022119
+siesta:    125    0.009305    1.518941   -0.519539
+siesta:    126    1.137240   -0.488390   -0.141298
+siesta:    127   -0.749613    0.223784    1.364371
+siesta:    128   -0.469870   -0.958088   -0.270031
+siesta:    129    0.467973    0.481959   -0.904937
+siesta:    130    0.900016   -1.333626    0.135928
+siesta:    131    0.120336    1.668516   -0.069618
+siesta:    132   -0.976987   -0.573874   -0.028993
+siesta:    133    1.292298   -0.218513   -0.346981
+siesta:    134   -0.527675   -1.183901    0.311192
+siesta:    135   -0.944269    1.101303   -0.158882
+siesta:    136    0.926024    1.855002    0.056481
+siesta:    137   -0.632852    0.154972    0.101104
+siesta:    138   -0.057461   -1.531487   -0.522289
+siesta:    139   -1.069107    2.130505   -0.017903
+siesta:    140    1.124927   -0.268178   -0.526487
+siesta:    141   -0.325553   -0.623318    1.026695
+siesta:    142    0.014317    1.595892   -0.354487
+siesta:    143   -0.900421   -0.225042   -0.329308
+siesta:    144    0.996547   -1.145919    0.743932
+siesta:    145    1.186970    0.697080    0.520966
+siesta:    146   -1.290672    0.721331   -0.338014
+siesta:    147    0.243719   -1.328896   -0.001792
+siesta:    148   -0.955133    0.308002   -1.247053
+siesta:    149   -0.144217    0.946889    0.586889
+siesta:    150    0.868261   -1.199284    0.481112
+siesta:    151    0.773609   -0.580915   -0.449919
+siesta:    152   -0.595899   -0.229065    0.674827
+siesta:    153    0.052150    0.733812    0.027651
+siesta:    154   -1.181032    1.031871    0.360289
+siesta:    155    0.836654   -0.314394   -1.160199
+siesta:    156    0.741640   -0.957857    0.524746
+siesta:    157    0.789026   -0.664687   -0.090511
+siesta:    158   -0.868851   -0.013774   -0.689819
+siesta:    159    0.193748    0.765979    0.701982
+siesta:    160    0.785083    0.571179    0.759089
+siesta:    161   -0.965348   -0.134181    0.070828
+siesta:    162   -0.331263   -1.067970   -0.909815
+siesta:    163    0.571941    0.207239    1.097079
+siesta:    164   -0.291035   -0.862330   -0.156371
+siesta:    165    0.165425    0.857267   -1.062817
+siesta:    166    1.372527    0.681989   -0.551665
+siesta:    167   -0.701855   -0.437086    0.894616
+siesta:    168   -0.383440   -0.090135   -1.092506
+siesta:    169    1.311537   -0.226525   -0.581886
+siesta:    170   -0.310923    0.007861    1.203999
+siesta:    171   -0.915470    0.494957   -0.700993
+siesta:    172   -0.659279    0.188792    0.975601
+siesta:    173    1.061938    0.141681   -1.064906
+siesta:    174   -0.490283   -0.647041   -0.445895
+siesta:    175    1.082783    0.542303   -0.074585
+siesta:    176   -0.108916   -0.464138    0.416586
+siesta:    177   -0.492820   -0.410837   -0.831862
+siesta:    178    1.602212   -0.285935    0.642016
+siesta:    179    0.538469    0.383996   -0.949804
+siesta:    180   -1.740029   -0.569927   -0.168062
+siesta:    181    1.161674   -0.120648    1.234799
+siesta:    182   -0.440239   -0.626589    0.290949
+siesta:    183   -0.786741    0.548066   -1.016071
+siesta:    184    0.192351   -0.204132   -1.003964
+siesta:    185   -0.243492   -0.707248    0.250368
+siesta:    186    0.280287    1.131521    0.720633
+siesta:    187    0.699981   -1.167720   -2.034667
+siesta:    188    0.447454    0.854631    0.556325
+siesta:    189   -0.766277    0.271082    1.215707
+siesta:    190    0.621525    1.217342   -0.293499
+siesta:    191   -1.433284   -1.345833   -0.627059
+siesta:    192    0.572475   -0.038013    1.091911
+siesta:    193   -0.906992   -0.417543    0.938140
+siesta:    194    0.768220    0.856842    0.041128
+siesta:    195    0.625532   -0.482385   -0.992091
+siesta:    196    0.278792    0.381973    1.105649
+siesta:    197   -0.897370    0.031641   -0.436591
+siesta:    198    0.727021   -0.469459   -0.384484
+siesta:    199    0.475165   -1.563520    0.965391
+siesta:    200    0.187964    0.660944    0.317892
+siesta:    201   -0.694579    0.614892   -0.985015
+siesta:    202   -0.924461   -0.167336    1.240251
+siesta:    203   -0.691517   -0.000683   -0.543876
+siesta:    204    1.430740    0.430318   -0.452266
+siesta:    205    1.666953    0.384234   -0.543665
+siesta:    206   -0.399420    0.533246    0.861693
+siesta:    207   -0.974095   -0.664532   -0.559974
+siesta:    208    0.303460   -1.552822    0.939408
+siesta:    209    0.059420    1.603875   -0.158321
+siesta:    210   -0.457409   -0.350574   -1.059985
+siesta:    211    0.918704   -0.517614   -0.467201
+siesta:    212   -0.191734    0.298886   -0.693009
+siesta:    213   -1.176525    0.328276    1.238031
+siesta:    214   -1.613897    1.316052   -0.210415
+siesta:    215    1.313741    0.467143    0.994385
+siesta:    216    0.058989   -1.299224   -0.108679
+siesta:    217   -0.851837   -1.394918   -0.747968
+siesta:    218   -0.029393   -0.141527    1.267595
+siesta:    219    0.728417    1.262863   -0.330009
+siesta:    220    1.282150   -0.868359    0.355723
+siesta:    221   -0.108487    1.185622   -0.005095
+siesta:    222   -0.976807   -0.547123   -0.376992
+siesta:    223   -0.301214    1.380589   -0.053183
+siesta:    224   -0.201569   -1.662178    1.125169
+siesta:    225    0.297640   -0.189180   -1.033099
+siesta:    226    0.180448    0.631383    1.272746
+siesta:    227    0.556786   -0.707533   -0.528268
+siesta:    228   -1.273734   -0.590868   -0.879180
+siesta:    229    1.345172    1.087859   -0.644173
+siesta:    230    0.057016   -0.727820    1.346290
+siesta:    231   -1.126139   -0.429043   -0.574822
+siesta:    232    0.906581    0.459014   -0.967490
+siesta:    233   -1.168664   -0.120674    0.930290
+siesta:    234    0.351463   -0.919290    0.009379
+siesta:    235   -0.659208   -0.418718    0.607832
+siesta:    236   -0.286651    0.739924   -0.768233
+siesta:    237    0.928695   -0.152041    0.115021
+siesta:    238    0.682983   -0.247863   -0.048451
+siesta:    239   -0.062244   -0.395696    0.663569
+siesta:    240   -0.058331    0.762384   -0.043938
+siesta:    241   -0.724974   -0.769183   -0.246612
+siesta:    242    1.195292   -0.052707   -0.441606
+siesta:    243   -0.645800    1.137654    0.327909
+siesta:    244    0.051018   -0.110561    0.711103
+siesta:    245   -0.257031    0.661722   -0.010917
+siesta:    246   -0.220482   -0.651402   -0.951102
+siesta:    247    1.581078    0.304916   -1.171395
+siesta:    248   -0.196404   -1.201923    0.294438
+siesta:    249   -1.366301    0.631296    0.963804
+siesta:    250    1.451863    0.543994    0.571660
+siesta:    251    0.166873    0.042360   -1.070711
+siesta:    252   -1.489507   -0.534638    0.164976
+siesta:    253   -0.913811    0.888933   -1.842350
+siesta:    254   -0.274088   -0.511748    1.385262
+siesta:    255    1.427459   -0.097253    0.548662
+siesta:    256    1.121462    0.567206   -0.401083
+siesta:    257   -0.491481   -1.222194   -0.578122
+siesta:    258   -0.912028    0.047722    0.917443
+siesta:    259    0.879035    0.822852   -0.504561
+siesta:    260   -0.304608   -0.872319   -0.169781
+siesta:    261   -0.870404    0.029489    0.484365
+siesta:    262   -0.312402   -1.230426   -0.072065
+siesta:    263   -0.286541    0.582908   -0.301516
+siesta:    264    0.864801    0.785187    0.423009
+siesta:    265    1.735465    0.514973    0.630751
+siesta:    266    0.383537   -0.001336   -0.823204
+siesta:    267   -1.693368   -0.343214   -0.324402
+siesta:    268   -1.025279    0.153302   -0.012129
+siesta:    269    0.971374   -0.235035   -0.167821
+siesta:    270    0.017656    0.212670   -0.092192
+siesta:    271    0.557102    0.020169    1.205264
+siesta:    272    0.624432    0.699767   -0.418450
+siesta:    273   -1.195422   -0.713728   -1.096553
+siesta:    274    1.340428   -0.152945   -0.308791
+siesta:    275   -0.545872   -0.059843   -0.481372
+siesta:    276   -0.705529    0.347046    0.826697
+siesta:    277   -1.094174    0.923224   -0.928518
+siesta:    278    0.608686    0.720723    0.763954
+siesta:    279    0.403434   -0.958546   -0.064636
+siesta:    280   -1.353615   -0.480208   -0.318675
+siesta:    281    0.648711    0.472627   -1.138898
+siesta:    282    0.788752    0.177190    1.670248
+siesta:    283    0.590168   -0.678132   -1.314728
+siesta:    284    0.646287   -0.405862    0.360037
+siesta:    285   -1.017797    0.735039    0.665159
+siesta:    286    1.055890   -0.178995   -0.649215
+siesta:    287   -1.014042   -0.838903   -0.071658
+siesta:    288   -0.102010    0.922556    0.827571
+siesta:    289    1.147637    0.596598    0.562535
+siesta:    290   -0.938063    0.304068   -1.049613
+siesta:    291    0.238673   -0.670395    0.340074
+siesta:    292    0.926081   -0.923219    1.219333
+siesta:    293    0.716251    0.070018   -1.109081
+siesta:    294   -1.523495    0.625860   -0.660851
+siesta:    295   -0.001374   -0.126000    0.869735
+siesta:    296   -0.293699    0.455679   -0.820512
+siesta:    297    0.059077   -0.583253    0.027476
+siesta:    298   -0.653953   -0.316983    0.990651
+siesta:    299    0.120155    0.540047   -0.296736
+siesta:    300    0.538496   -0.462430   -0.754063
+siesta:    301   -0.282220    1.505542    1.226482
+siesta:    302   -0.705724   -0.076132   -0.716520
+siesta:    303    0.552267   -0.963730   -0.735229
+siesta:    304   -1.127414   -0.448896   -0.546337
+siesta:    305   -0.143989    0.371985    0.583727
+siesta:    306    1.276875    0.096495    0.018643
+siesta:    307   -0.514585   -0.737482   -0.977185
+siesta:    308    1.189777    0.824471    0.638605
+siesta:    309   -0.844742   -0.000297    0.031322
+siesta:    310    0.134558    0.855870    1.327203
+siesta:    311    0.829298   -0.225554    0.112855
+siesta:    312   -0.723639   -0.618641   -1.384045
+siesta:    313   -0.191035    0.372105    1.445114
+siesta:    314   -0.073750   -0.726644   -0.432157
+siesta:    315    0.032602    0.628935   -0.911854
+siesta:    316    0.452092   -1.297795   -0.283255
+siesta:    317   -1.215826   -0.306904    0.338710
+siesta:    318    0.325691    1.468874   -0.212997
+siesta:    319    0.555966    0.604669    0.925069
+siesta:    320   -0.538071   -0.674057   -0.753156
+siesta:    321    0.324202    0.229197   -0.425000
+siesta:    322    1.004821   -0.844176   -1.549534
+siesta:    323   -0.758035    1.365873   -0.025039
+siesta:    324   -0.547131   -0.178134    1.450900
+siesta:    325    0.114350    1.142708    0.707854
+siesta:    326    0.334904   -1.072452   -0.698601
+siesta:    327   -0.711124   -0.091994   -0.129656
+siesta:    328   -0.882188   -1.955583    0.701663
+siesta:    329    0.778865    0.901838    0.903277
+siesta:    330    0.442440    0.467285   -1.420781
+siesta:    331   -0.794315   -1.417883   -0.486671
+siesta:    332   -0.533094    0.673058   -0.127491
+siesta:    333    0.662382    0.268295    1.031823
+siesta:    334    0.867066    0.157819    1.585466
+siesta:    335   -0.219961   -0.811478   -0.757245
+siesta:    336   -0.597228    0.413648   -0.249244
+siesta:    337    0.908353    1.335615   -0.526377
+siesta:    338   -0.272840   -0.901974    0.812322
+siesta:    339   -0.417264    0.324504   -0.463658
+siesta:    340    1.090170   -0.280711   -0.628027
+siesta:    341   -0.505466    0.487532   -0.373302
+siesta:    342   -0.600398   -0.305140    1.070198
+siesta:    343    2.472826    0.665977   -0.005247
+siesta:    344   -0.502621   -0.078830    1.356808
+siesta:    345   -1.875654   -0.793778   -1.062614
+siesta:    346    1.773312   -1.205871    0.918801
+siesta:    347   -1.405642    0.770944    0.160728
+siesta:    348    0.406084    0.191735   -0.941596
+siesta:    349   -0.572737    0.100220   -0.374429
+siesta:    350   -0.050348    0.579891    0.567605
+siesta:    351    0.736602   -0.965632    0.570558
+siesta:    352   -0.287616   -1.309356    0.492024
+siesta:    353   -0.459021    0.535418    0.620225
+siesta:    354    1.062915    0.929949   -1.169946
+siesta:    355   -0.420542   -1.048030   -0.325047
+siesta:    356    0.739698    0.370697    0.489040
+siesta:    357   -0.600736    0.507902   -0.589294
+siesta:    358   -1.521051   -0.064855    0.928908
+siesta:    359   -0.308087    0.108992   -0.898238
+siesta:    360    1.876729   -0.041597   -0.066543
+siesta:    361    1.080338   -0.284569    1.155356
+siesta:    362   -0.901325   -0.534710   -0.563191
+siesta:    363   -0.107378    1.213542   -0.120958
+siesta:    364    0.655814    1.569210   -1.229701
+siesta:    365   -0.354419   -0.258064   -0.719491
+siesta:    366   -0.397158   -1.494371    1.306226
+siesta:    367   -0.634450   -0.513860   -1.503634
+siesta:    368    1.130567   -0.238527    1.455098
+siesta:    369   -0.469901    0.918949    0.001200
+siesta:    370    1.364260   -0.295412    0.604650
+siesta:    371   -1.784762    0.043232    0.676602
+siesta:    372    0.386492    0.463017   -1.105297
+siesta:    373    0.777301    0.820224    1.962907
+siesta:    374   -0.334833   -1.282567   -0.608600
+siesta:    375   -0.956574    0.648240   -0.841543
+siesta:    376    0.509174    0.214457    0.777949
+siesta:    377   -0.791699    0.275985   -0.470267
+siesta:    378    0.612776   -0.009045   -0.758654
+siesta:    379    1.220165    0.716471   -1.161151
+siesta:    380    0.756563   -0.859258   -0.112560
+siesta:    381   -1.444194   -0.075470    1.260912
+siesta:    382    0.553663    1.175768   -0.461625
+siesta:    383   -0.818472    0.046302    1.199915
+siesta:    384    0.028848   -1.430432   -0.456183
+siesta: ----------------------------------------
+siesta:    Tot    0.138956   -0.065836    0.070294
+
+siesta: Stress tensor (static) (eV/Ang**3):
+siesta:    -0.029787   -0.001837   -0.000488
+siesta:    -0.001837   -0.031920   -0.000014
+siesta:    -0.000488   -0.000014   -0.030882
+
+siesta: Cell volume =       3830.132654 Ang**3
+
+siesta: Pressure (static):
+siesta:                Solid            Molecule  Units
+siesta:           0.00033613          0.00005830  Ry/Bohr**3
+siesta:           0.03086275          0.00535334  eV/Ang**3
+siesta:          49.44811831          8.57709111  kBar
+(Free)E+ p_basis*V_orbitals  =      -60135.710895
+(Free)Eharris+ p_basis*V_orbitals  =      -60135.710896
+>> End of run:  20-DEC-2016  22:18:46
+************************************************************************************************************************
+***             WIDEN YOUR WINDOW TO 120 CHARACTERS.  Use 'enscript -r -fCourier9' to print this document            ***
+************************************************************************************************************************
+
+---------------------------------------------- PETSc Performance Summary: ----------------------------------------------
+
+/home/keceli/scratch2/siesta-qetsc/Obj/siesta on a arch-xl named Q02-I1-J00.vesta.itd with 128 processors, by Unknown Tue Dec 20 22:18:46 2016
+Using Petsc Development GIT revision: v3.7.3-1204-g68f0caa  GIT Date: 2016-08-19 16:41:02 -0500
+
+                         Max       Max/Min        Avg      Total 
+Time (sec):           1.396e+02      1.00000   1.396e+02
+Objects:              1.000e+00      1.00000   1.000e+00
+Flops:                0.000e+00      0.00000   0.000e+00  0.000e+00
+Flops/sec:            0.000e+00      0.00000   0.000e+00  0.000e+00
+MPI Messages:         0.000e+00      0.00000   0.000e+00  0.000e+00
+MPI Message Lengths:  0.000e+00      0.00000   0.000e+00  0.000e+00
+MPI Reductions:       1.000e+00      1.00000
+
+Flop counting convention: 1 flop = 1 real number operation of type (multiply/divide/add/subtract)
+                            e.g., VecAXPY() for real vectors of length N --> 2N flops
+                            and VecAXPY() for complex vectors of length N --> 8N flops
+
+Summary of Stages:   ----- Time ------  ----- Flops -----  --- Messages ---  -- Message Lengths --  -- Reductions --
+                        Avg     %Total     Avg     %Total   counts   %Total     Avg         %Total   counts   %Total 
+ 0:      Main Stage: 1.9960e-04   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 1:     siesta_init: 4.1634e+00   3.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 2:   siesta_forces: 1.6215e+01  11.6%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+ 3:    siesta_solve: 1.0095e+02  72.3%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+10:     siesta_misc: 1.6836e+01  12.1%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+11:     siesta_move: 1.1036e-01   0.1%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+12: siesta_analysis: 1.8224e-02   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+13:     qetsc_clean: 3.6176e-06   0.0%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+14:      siesta_end: 1.2689e+00   0.9%  0.0000e+00   0.0%  0.000e+00   0.0%  0.000e+00        0.0%  0.000e+00   0.0% 
+
+------------------------------------------------------------------------------------------------------------------------
+See the 'Profiling' chapter of the users' manual for details on interpreting output.
+Phase summary info:
+   Count: number of times phase was executed
+   Time and Flops: Max - maximum over all processors
+                   Ratio - ratio of maximum to minimum over all processors
+   Mess: number of messages sent
+   Avg. len: average message length (bytes)
+   Reduct: number of global reductions
+   Global: entire computation
+   Stage: stages of a computation. Set stages with PetscLogStagePush() and PetscLogStagePop().
+      %T - percent time in this phase         %F - percent flops in this phase
+      %M - percent messages in this phase     %L - percent message lengths in this phase
+      %R - percent reductions in this phase
+   Total Mflop/s: 10e-6 * (sum of flops over all processors)/(max time over all processors)
+------------------------------------------------------------------------------------------------------------------------
+Event                Count      Time (sec)     Flops                             --- Global ---  --- Stage ---   Total
+                   Max Ratio  Max     Ratio   Max  Ratio  Mess   Avg len Reduct  %T %F %M %L %R  %T %F %M %L %R Mflop/s
+------------------------------------------------------------------------------------------------------------------------
+
+--- Event Stage 0: Main Stage
+
+
+--- Event Stage 1: siesta_init
+
+
+--- Event Stage 2: siesta_forces
+
+
+--- Event Stage 3: siesta_solve
+
+
+--- Event Stage 4: Unknown
+
+
+--- Event Stage 5: Unknown
+
+
+--- Event Stage 6: Unknown
+
+
+--- Event Stage 7: Unknown
+
+
+--- Event Stage 8: Unknown
+
+
+--- Event Stage 9: Unknown
+
+
+--- Event Stage 10: siesta_misc
+
+
+--- Event Stage 11: siesta_move
+
+
+--- Event Stage 12: siesta_analysis
+
+
+--- Event Stage 13: qetsc_clean
+
+
+--- Event Stage 14: siesta_end
+
+------------------------------------------------------------------------------------------------------------------------
+
+Memory usage is given in bytes:
+
+Object Type          Creations   Destructions     Memory  Descendants' Mem.
+Reports information only for process 0.
+
+--- Event Stage 0: Main Stage
+
+
+--- Event Stage 1: siesta_init
+
+
+--- Event Stage 2: siesta_forces
+
+
+--- Event Stage 3: siesta_solve
+
+
+--- Event Stage 4: Unknown
+
+
+--- Event Stage 5: Unknown
+
+
+--- Event Stage 6: Unknown
+
+
+--- Event Stage 7: Unknown
+
+
+--- Event Stage 8: Unknown
+
+
+--- Event Stage 9: Unknown
+
+
+--- Event Stage 10: siesta_misc
+
+
+--- Event Stage 11: siesta_move
+
+
+--- Event Stage 12: siesta_analysis
+
+
+--- Event Stage 13: qetsc_clean
+
+
+--- Event Stage 14: siesta_end
+
+              Viewer     1              0            0     0.
+========================================================================================================================
+Average time to get PetscTime(): 1.38125e-07
+Average time for MPI_Barrier(): 2.985e-06
+Average time for zero size MPI_Send(): 1.11857e-05
+#PETSc Option Table entries:
+-eps_interval -2.3,0.
+-eps_krylovschur_detect_zeros 0
+-eps_krylovschur_partitions 1
+-ioptbin 7
+-ioptdensity 0
+-ioptinertia 1
+-ioptleft 2
+-ioptwrite 1
+-log_view
+-mat_mumps_icntl_7 5
+-mat_type mpisbaij
+-roptbuffer 0.1
+-roptdiff 0.05
+#End of PETSc Option Table entries
+Compiled with FORTRAN kernels
+Compiled with full precision matrices (default)
+sizeof(short) 2 sizeof(int) 4 sizeof(long) 8 sizeof(void*) 8 sizeof(PetscScalar) 8 sizeof(PetscInt) 4
+Configure options: --known-has-attribute-aligned=1 --download-chaco=0 --download-cmake=0 --download-hypre=0 --download-metis=1 --download-mumps=1 --download-parmetis=1 --download-plapack=0 --download-prometheus=0 --download-ptscotch=1 --download-spai=0 --download-spooles=0 --download-superlu=0 --download-superlu_dist=0 --download-triangle=0 --known-bits-per-byte=8 --known-level1-dcache-assoc=0 --known-level1-dcache-linesize=32 --known-level1-dcache-size=32768 --known-memcmp-ok=1 --known-mpi-c-double-complex=1 --known-mpi-int64_t=1 --known-mpi-long-double=1 --known-mpi-shared-libraries=0 --known-sdot-returns-double=0 --known-sizeof-MPI_Comm=4 --known-sizeof-MPI_Fint=4 --known-sizeof-char=1 --known-sizeof-double=8 --known-sizeof-float=4 --known-sizeof-int=4 --known-sizeof-long-long=8 --known-sizeof-long=8 --known-sizeof-short=2 --known-sizeof-size_t=8 --known-sizeof-void-p=8 --known-snrm2-returns-double=0 --with-batch=1 --with-blacs-include=/soft/libraries/alcf/current/xl/SCALAPACK/ --with-blacs-lib=/soft/libraries/alcf/current/xl/SCALAPACK/lib/libscalapack.a --with-blas-lapack-lib="-L/soft/libraries/alcf/current/xl/LAPACK/lib -llapack -L/soft/libraries/alcf/current/xl/BLAS/lib -lblas" --with-cc=mpixlc_r --with-clib-autodetect=0 --with-cxx=mpixlcxx_r --with-cxxlib-autodetect=0 --with-debugging=0 --with-fc="mpixlf77_r -qnosave" --with-fortran-kernels=1 --with-fortranlib-autodetect=0 --with-is-color-value-type=short --with-scalapack-include=/soft/libraries/alcf/current/xl/SCALAPACK/ --with-scalapack-lib=/soft/libraries/alcf/current/xl/SCALAPACK/lib/libscalapack.a --with-shared-libraries=0 --with-x=0 -COPTFLAGS=" -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction" -CXXOPTFLAGS="  -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction" -FOPTFLAGS=" -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction" LIBS="-lmpichcxx-gcc -lmpichf77-gcc -L/soft/compilers/ibmcmp-feb2015/vacpp/bg/12.1/bglib64 -libmc++ -L/soft/compilers/ibmcmp-feb2015/xlf/bg/14.1/bglib64 -lxlf90_r -lxlomp_ser -lxlfmath" PETSC_ARCH=arch-xl
+-----------------------------------------
+Libraries compiled on Sat Aug 20 04:19:47 2016 on vestalac2 
+Machine characteristics: Linux-2.6.32-573.18.1.el6.ppc64-ppc64-with-redhat-6.7-Santiago
+Using PETSc directory: /home/keceli/scratch2/petsc
+Using PETSc arch: arch-xl
+-----------------------------------------
+
+Using C compiler: mpixlc_r   -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction  ${COPTFLAGS} ${CFLAGS}
+Using Fortran compiler: mpixlf77_r -qnosave  -g -O3 -qhot=level=0 -qsimd=auto -qmaxmem=-1 -qstrict -qstrict_induction   ${FOPTFLAGS} ${FFLAGS} 
+-----------------------------------------
+
+Using include paths: -I/home/keceli/scratch2/petsc/arch-xl/include -I/home/keceli/scratch2/petsc/include -I/home/keceli/scratch2/petsc/include -I/home/keceli/scratch2/petsc/arch-xl/include -I/bgsys/drivers/V1R2M4/ppc64/comm/include -I/bgsys/drivers/V1R2M4/ppc64/comm/lib/xl -I/bgsys/drivers/V1R2M4/ppc64 -I/bgsys/drivers/V1R2M4/ppc64/comm/sys/include -I/bgsys/drivers/V1R2M4/ppc64/spi/include -I/bgsys/drivers/V1R2M4/ppc64/spi/include/kernel/cnk
+-----------------------------------------
+
+Using C linker: mpixlc_r
+Using Fortran linker: mpixlf77_r -qnosave
+Using libraries: -Wl,-rpath,/home/keceli/scratch2/petsc/arch-xl/lib -L/home/keceli/scratch2/petsc/arch-xl/lib -lpetsc -Wl,-rpath,/home/keceli/scratch2/petsc/arch-xl/lib -L/home/keceli/scratch2/petsc/arch-xl/lib -lcmumps -ldmumps -lsmumps -lzmumps -lmumps_common -lpord -Wl,-rpath,/soft/libraries/alcf/current/xl/SCALAPACK/lib -L/soft/libraries/alcf/current/xl/SCALAPACK/lib -lscalapack -L/soft/libraries/alcf/current/xl/LAPACK/lib -llapack -L/soft/libraries/alcf/current/xl/BLAS/lib -lblas -lparmetis -lmetis -lptesmumps -lptscotch -lptscotcherr -lscotch -lscotcherr -lrt -lm -lpthread -ldl -lmpichcxx-gcc -lmpichf77-gcc -L/soft/compilers/ibmcmp-feb2015/vacpp/bg/12.1/bglib64 -libmc++ -L/soft/compilers/ibmcmp-feb2015/xlf/bg/14.1/bglib64 -lxlf90_r -lxlomp_ser -lxlfmath
+-----------------------------------------
+
